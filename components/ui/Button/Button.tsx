@@ -9,7 +9,7 @@ import { ThreeDots } from 'react-loading-icons';
 
 const Button: React.FC<button> = ({
   buttonStyle = 'primary',
-  onDark = true,
+  onDark = false,
   className,
   disabled,
   text,

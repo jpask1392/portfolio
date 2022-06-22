@@ -2,8 +2,6 @@ import CustomImage from '@/components/ui/Image/Image';
 import RichText from '@/components/ui/RichText';
 import cn from 'classnames';
 import useSWR from 'swr';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
 import ProductTile from '@/components/ecommerce/ProductTile';
 import Slideshow from '@/components/ui/Slideshow';
@@ -34,10 +32,13 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    console.log(data)
     // render the loaded collection
     if (data) setCollection(data);
   }, [data])
+
+  useEffect(() => {
+    console.log(error)
+  }, [error])
 
   return (
     <div className={cn(className, "overflow-hidden")} ref={containerRef}>

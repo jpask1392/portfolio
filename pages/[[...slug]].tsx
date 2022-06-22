@@ -19,8 +19,8 @@ export default function Page({
   global: Story | undefined
 }) {
   // use the preview variable to enable the bridge only in preview mode
-  const enableBridge = preview;
-  // const enableBridge = true; // load the storyblok bridge everywhere
+  // const enableBridge = preview;
+  const enableBridge = true; // load the storyblok bridge everywhere
 
   story = useStoryblok(story, enableBridge);
 

@@ -1,4 +1,4 @@
-
+import cn from 'classnames';
 import ProductTile from '@/components/ecommerce/ProductTile';
 import Slideshow from '@/components/ui/Slideshow';
 import { useEffect, useState } from 'react';
@@ -40,11 +40,11 @@ const FeaturedProducts: React.FC<Props> = ({
   }, [productID, collectionHandle])
 
   return (
-    <div className={`${className} w-full`}>
+    <div className={cn(className, "w-full")}>
       <Slideshow
         showSlides={{
-          sm: 1.8,
-          lg: 2.5,
+          sm: 2,
+          lg: 2,
           xl: 3,
         }} 
         spaceBetween={40}

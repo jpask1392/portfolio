@@ -102,7 +102,8 @@ module.exports = {
     ringOffsetColor: 'red',
     extend: {
       colors: {
-        primary: '#0075FF',
+        primary: '#EDE6DB',
+        secondary: "#72605B",
         black: '#050505',
         gray2: '#303030',
         gray3: '#161616',

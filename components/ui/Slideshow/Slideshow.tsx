@@ -5,7 +5,7 @@ import { SbEditableContent } from "@/types/storyBlok";
 import cn from "classnames";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SwiperOptions, Navigation, A11y, Scrollbar } from 'swiper';
+import { SwiperOptions, Navigation, A11y } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -40,7 +40,7 @@ const Slideshow: React.FC<Props> = ({
   const scrollBarRef = useRef(null);
 
   const navigationArrowClasses = cn([
-    "bg-white",
+    "bg-secondary",
     "rounded-full",
     "aspect-square",
     "pointer-events-auto",
@@ -74,13 +74,14 @@ const Slideshow: React.FC<Props> = ({
 
   return (
     <div
-      className={`${className} ui-slideshow w-full`}
+      className={cn(className, "ui-slideshow w-full")}
     >
       <Swiper
+        className="px-8"
         threshold={10}
-        modules={[Navigation, A11y, Scrollbar]}
+        modules={[Navigation, A11y]}
         draggable={true}
-        scrollbar={{ draggable: false }}
+        // scrollbar={{ draggable: false }}
         enabled={children.length > 1}
         slidesPerView={showSlides.sm || 1}
         spaceBetween={spaceBetween > 30 ? 22 : spaceBetween}
@@ -115,18 +116,18 @@ const Slideshow: React.FC<Props> = ({
         }
 
 
-        <div className="container -ml-8 absolute top-1/2 transform -translate-y-1/2 z-10 pointer-events-none hidden lg:flex justify-between">
-          <button ref={navigationPrevRef} className={navigationArrowClasses}>
+        <div className="w-full absolute top-1/2 transform -translate-y-1/2 z-10 pointer-events-none hidden lg:flex justify-between">
+          <button ref={navigationPrevRef} className={cn(navigationArrowClasses, "-translate-x-1/2")}>
             <SlideArrow direction="previous" className="text-black" />
           </button>
-          <button ref={navigationNextRef} className={navigationArrowClasses}>
+          <button ref={navigationNextRef} className={cn(navigationArrowClasses, "translate-x-1/2")}>
             <SlideArrow direction="next" className="text-black" />
           </button>
         </div>
 
-        <div className="container -ml-8 mt-10">
+        {/* <div className="container -ml-8 mt-10">
           <div ref={scrollBarRef} className="scrollbar" />
-        </div>
+        </div> */}
      </Swiper>
     </div>
   )

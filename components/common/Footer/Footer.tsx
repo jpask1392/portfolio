@@ -36,12 +36,13 @@ const Footer: React.FC<Props> = ({
           <div className="w-full flex flex-wrap">
 
             {/* Logo column */}
-            <div className="hidden md:block w-1/3 lg:w-1/4">
+            {/* <div className="hidden md:block w-1/3 lg:w-1/4">
               <Logo className="fill-current h-7" />
-            </div>
+            </div> */}
 
             {/* navigation primary */}
             <div className="w-full md:w-2/3 lg:w-3/4 primary-nav flex flex-wrap justify-between space-y-4 md:space-y-0">
+              
               {
                 menuOne.map((item, i) => {
                   return (
@@ -84,6 +85,7 @@ const Footer: React.FC<Props> = ({
 
           {/* secondary navigation */}
           <div className="hidden md:flex w-full flex-wrap mt-16">
+            
             <div className="w-1/2 lg:w-1/4 relative">
               <div>
                 <ul className="flex space-x-3">
@@ -98,14 +100,13 @@ const Footer: React.FC<Props> = ({
                   }
                 </ul>
               </div>
-
-              <div className="absolute left-0 top-full text-xs mt-4 lg:pr-8">
-                ©2022 ODYN. All Rights Reserved.
-                Privacy Notice  /   Do Not Sell My Personal Information
-                Cookie Notice  /  Accessibility Statement
-              </div>
             </div>
             <div className="w-3/4">
+              <FooterNewsletter 
+                newsletterTitle={newsletterTitle}
+                newsletterText={newsletterText}
+              />
+
               <ul className="hidden lg:flex space-x-16">
                 {
                   menuThree.map((item, i) => {
@@ -122,27 +123,6 @@ const Footer: React.FC<Props> = ({
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Newsletter sign up */}
-      <div className="flex flex-wrap w-full xl:w-1/4">
-        <FooterNewsletter 
-          image={newsletterImage}
-          newsletterTitle={newsletterTitle}
-          newsletterText={newsletterText}
-        />
-      </div>
-
-      {/* Mobile content only */}
-      <div className="sm:hidden order-3 text-center pt-12 pb-6 px-7">
-        <div className="mb-11">
-          <Logo className="text-white fill-current w-40 mx-auto"/>
-        </div>
-        <p>
-          ©2022 ODYN. All Rights Reserved.
-          Privacy Notice  /   Do Not Sell My Personal Information
-          Cookie Notice  /  Accessibility Statement
-        </p>
       </div>
     </footer>
   );

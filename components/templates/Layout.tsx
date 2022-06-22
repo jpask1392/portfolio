@@ -87,7 +87,7 @@ const Layout: React.FC<Props> = ({
         "right-cart" : UI.cartActive
       })}>
         
-        {
+        {/* {
           navProps.announcementDisplay ? (
             <Announcement 
               announcementLink={navProps.announcementLink}
@@ -95,11 +95,9 @@ const Layout: React.FC<Props> = ({
               announcementTitle={navProps.announcementTitle}
             />
           ) : null
-        }
+        } */}
 
         <main className="debug-screens flex items-start">
-          <SideNavigation {...sideNavigationProps} />
-
           <div className="main-wrapper">
             <Navigation {...navProps} />
 

@@ -57,10 +57,7 @@ const Container: React.FC<ContainerProps> = ({
       className={rootClassName}
       {...sbEditable}
     >
-      <div className={cn({
-        'lg:pr-16 xl:pr-24' : !extendRight && contained,
-        'md:pl-16 xl:pl-24' : contained,
-      })}>
+      <div>
         {/* { 
           backgroundMedia && (
             <BackgroundMedia

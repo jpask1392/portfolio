@@ -39,15 +39,14 @@ const Navigation: React.FC<NavProps> = ({
   
   return (
     <header 
-      
       id="primary-header"
       className={cn(className, [
+        "bg-primary",
         "h-16 xl:h-28",
         "border-b border-gray2",
         "z-20",
         "sticky",
         "top-0",
-        "bg-black"
       ])}
     >
       <nav 
@@ -124,7 +123,7 @@ const Navigation: React.FC<NavProps> = ({
         <Link href={'/' + ctaLink?.cached_url}>
           <a 
             aria-label={ctaText}
-            className="font-medium text-base h-full hidden md:flex items-center border-l border-gray2 px-8 xl:px-14 ml-4 xl:ml-14"
+            className="font-medium text-base h-full hidden md:flex items-center px-8 xl:px-14 ml-4 xl:ml-14"
           >
             {ctaText}
           </a>

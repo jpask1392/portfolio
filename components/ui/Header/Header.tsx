@@ -29,7 +29,7 @@ const Header: React.FC<Props> = ({
   children,
   text,
   mobile_text,
-  color = 'white',
+  color = 'black',
   size,
   sbEditable,
 }) => {

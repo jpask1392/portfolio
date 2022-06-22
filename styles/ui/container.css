@@ -1,7 +1,3 @@
 .section {
   @apply relative z-0;
-
-  &:not(.has-bg) {
-    @apply bg-black;
-  }
 }

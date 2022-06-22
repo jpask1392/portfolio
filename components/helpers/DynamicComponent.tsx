@@ -17,6 +17,8 @@ import Image from "@/components/ui/Image";
 import Header from "@/components/ui/Header";
 import Slideshow from "@/components/ui/Slideshow";
 import Accordion from "@/components/ui/Accordion";
+import Tabs from "@/components/ui/Tabs";
+import Marquee from "@/components/ui/Marquee";
 
 import HeroVideo from "@/components/modules/HeroVideo";
 import HeroImage from "@/components/modules/HeroImage";
@@ -59,6 +61,8 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     column: Column,
     header: Header,
     grid: Grid,
+    tabs: Tabs,
+    marquee: Marquee,
     'rich-text': RichText,
     'button-group': ButtonGroup,
     button: Button,

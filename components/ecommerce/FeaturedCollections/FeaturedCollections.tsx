@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import useSWR from 'swr';
 import FeaturedCollectionTile from './FeaturedCollectionTile';
 import { gsap } from 'gsap';
@@ -7,11 +8,15 @@ import { useEffect, useRef, useState } from 'react';
 interface Props {
   className?: string
   collectionNames?: string
+  tilesPerRow?: string
+  tileStyle?: "primary" | "secondary"
 }
 
 const FeaturedCollections: React.FC<Props> = ({ 
   className,
   collectionNames = '',
+  tilesPerRow = '2',
+  tileStyle = 'primary',
 }) => {
   const [ collections, setCollections ] = useState<any[]>([null, null, null]);
   const containerRef = useRef(null);
@@ -65,11 +70,18 @@ const FeaturedCollections: React.FC<Props> = ({
 
   return (
     <div className={className} ref={containerRef}>
-      <div className="flex flex-wrap -mx-2 -mb-4">
+      <div className="flex flex-wrap -mx-4 -mb-8">
         {
           collections?.map((collection, i) => 
-            <div key={i} className="collection-item-wrapper w-full lg:w-1/3 px-2 pb-4">
-              <FeaturedCollectionTile collection={collection} />
+            <div key={i} className={cn("collection-item-wrapper px-4 pb-8", {
+              "w-full md:w-1/2" : tilesPerRow === '2',
+              "w-full md:w-1/3" : tilesPerRow === '3',
+              "w-full md:w-1/4" : tilesPerRow === '4'
+            })}>
+              <FeaturedCollectionTile 
+                collection={collection} 
+                tileStyle={tileStyle}
+              />
             </div>
           )
         }

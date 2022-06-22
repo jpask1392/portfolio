@@ -8,22 +8,20 @@
     inline-flex
     justify-center
     items-center
-    rounded-full
     uppercase
     font-bold
-    py-3
-    md:py-5
-    xl:py-6
+    font-header
+    py-2.5
     px-12
     md:px-4
-    leading-none
-    tracking-widest
+    leading-tight
+    /* tracking-widest */
     transition-colors
     duration-300;
 }
 
 .button.primary {
-  @apply bg-primary border border-primary text-white;
+  @apply bg-primary border border-primary text-secondary;
 
   &:hover {
     @apply bg-black border-black;

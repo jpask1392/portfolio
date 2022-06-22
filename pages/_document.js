@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <link rel="stylesheet" href="https://use.typekit.net/han0zyr.css"></link>
+        <link rel="stylesheet" href="https://use.typekit.net/dmn6gns.css" />
       </Head>
       <body>
         <Main />

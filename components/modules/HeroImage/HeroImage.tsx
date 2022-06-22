@@ -36,7 +36,7 @@ const Hero: React.FC<Props> = ({
 
         {
           (TopBlockComponent || BottomBlockComponent) && (
-            <div className="pt-12">
+            <div className="pt-40">
               <Container el="div">
                 <div className="w-full h-full flex flex-col" style={{ maxWidth: 940 }}>
                   { TopBlockComponent && <TopBlockComponent /> }
@@ -57,7 +57,7 @@ const Hero: React.FC<Props> = ({
 
         {/* Image Block */}
         <div className={cn([
-          "lg:absolute inset-0 py-8 lg:py-0 z-0"
+          "absolute inset-0 py-8 lg:py-0 z-0"
         ])}>
           <div className="h-full w-screen">
             <CustomImage 
@@ -78,6 +78,12 @@ const Hero: React.FC<Props> = ({
             </Container>
           )
         }
+
+        <div className="bg-secondary absolute left-0 right-0 bottom-0 flex justify-center">
+          <div className="py-3">
+            As seen on 
+          </div>
+        </div>
       </div>
     </section>
   )

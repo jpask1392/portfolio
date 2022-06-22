@@ -10,6 +10,7 @@ import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEff
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
+import Button from '@/components/ui/Button';
 
 interface Props {
   className?: string
@@ -65,12 +66,12 @@ const ProductTile: React.FC<Props> = ({
 
       <Link href={`/product${product?.path || '/'}`}>
         <a aria-label={`Go to ${product?.title} page`}>
-          <div className="aspect-[77/100] bg-gray3 relative overflow-hidden">
+          <div className="aspect-square bg-secondary relative overflow-hidden">
             <div className="w-full h-full" ref={imageRef}>
               <CustomImage 
                 image={product?.images[0]} 
                 layout="fill" 
-                objectFit="contain"
+                objectFit="cover"
               />
             </div>
 
@@ -78,7 +79,7 @@ const ProductTile: React.FC<Props> = ({
               animate ? (
                 <span 
                   ref={hoverEffectRef}
-                  className="absolute inset-0 bg-black z-10"
+                  className="absolute inset-0 bg-primary z-10"
                 />
               ) : null
             }
@@ -96,22 +97,36 @@ const ProductTile: React.FC<Props> = ({
             >
               { product?.title || <Skeleton width="33%" /> }
             </Header>
+
             {
-              product?.subtitle ? (
-                <span>
-                  <Header
-                    tag="h4"
-                    size="h5" 
-                    className="mt-2.5 text-fadedText"
-                  >
-                    { product.subtitle }
-                  </Header>
-                </span>
-              ) : null
+              product ? (
+                <Price
+                  originalPrice={(
+                    product.variants[0].compare_at_price && 
+                    product.variants[0].compare_at_price > product.variants[0].price
+                  )
+                    ? product.variants[0].compare_at_price
+                    : product.variants[0].price
+                  }
+                  salePrice={(
+                    product.variants[0].compare_at_price && 
+                    product.variants[0].compare_at_price > product.variants[0].price
+                  )
+                    ? product.variants[0].price
+                    : product.variants[0].compare_at_price || 0
+                  }
+                />
+              ) : <Skeleton />
             }
+
+            <Button 
+              text="ADD TO CART"
+              className="mt-2.5"
+            />
+            
           </div>
 
-          {
+          {/* {
             product && product.options?.length ? (
               <span className="variations text-fadedText md:mb-0 w-full md:w-auto">
                 {
@@ -133,31 +148,8 @@ const ProductTile: React.FC<Props> = ({
                 }            
               </span>
             ) : null
-          }
+          } */}
           
-        </div>
-
-        <div className="flex mt-6 md:mt-10">
-          {
-            product ? (
-              <Price
-                originalPrice={(
-                  product.variants[0].compare_at_price && 
-                  product.variants[0].compare_at_price > product.variants[0].price
-                )
-                  ? product.variants[0].compare_at_price
-                  : product.variants[0].price
-                }
-                salePrice={(
-                  product.variants[0].compare_at_price && 
-                  product.variants[0].compare_at_price > product.variants[0].price
-                )
-                  ? product.variants[0].price
-                  : product.variants[0].compare_at_price || 0
-                }
-              />
-            ) : <Skeleton />
-          }
         </div>
       </div>
     </article>

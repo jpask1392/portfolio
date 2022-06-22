@@ -1,5 +1,6 @@
 .text-display {
-  @apply 
+  @apply
+    uppercase
     font-bold
     leading-none
     text-11xl 
@@ -9,7 +10,9 @@
 
 h1,
 .h1 {
-  @apply 
+  @apply
+    uppercase
+    font-header
     font-bold
     leading-none
     text-7xl 
@@ -20,6 +23,7 @@ h1,
 h2,
 .h2 {
   @apply
+    uppercase
     font-header
     font-bold
     leading-none
@@ -32,6 +36,7 @@ h2,
 h3,
 .h3 {
   @apply 
+    uppercase
     font-header
     font-bold
     leading-tighter

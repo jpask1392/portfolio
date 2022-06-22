@@ -13,6 +13,7 @@
 @import 'ui/grid';
 @import 'ui/column';
 @import 'ui/slideshow';
+@import 'ui/marquee';
 @import 'ui/skeleton';
 @import 'ui/mega-menu';
 @import 'ui/inputs';

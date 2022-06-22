@@ -50,7 +50,7 @@ const Navigation: React.FC<NavProps> = ({
       ])}
     >
       <nav 
-        className="h-full lg:px-4 mx-auto flex justify-end relative" 
+        className="h-full lg:px-4 max-w-screen-2xl mx-auto flex justify-end relative" 
         role="navigation"
       >
 

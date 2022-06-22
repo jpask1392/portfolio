@@ -18,10 +18,14 @@ const getCollectionByHandle = async (
         reverse: reverse,
       }
     });
-  
-    return normalizeCollection(data.collectionByHandle);
+    
+    if (data.collectionByHandle) {
+      return normalizeCollection(data.collectionByHandle);
+    } else {
+      return null;
+    }
   } catch (err) {
-    console.warn("err:", err.graphQLErrors);
+    console.warn("err:", err);
     return null;
   }
 }

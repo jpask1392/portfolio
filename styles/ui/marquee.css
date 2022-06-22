@@ -1,0 +1,11 @@
+.ui-marquee .marquee-container {
+  .marquee > * {
+    /* @apply inline-flex; */
+  }
+
+  .marquee:not(:last-of-type) > *::after {
+    content: "";
+
+    @apply inline-block mx-8 w-4 h-4 bg-current rounded-full;
+  }
+}

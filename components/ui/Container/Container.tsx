@@ -37,7 +37,6 @@ const Container: React.FC<ContainerProps> = ({
   sbEditable,
 }) => {
   const rootClassName = cn(className, {
-    "ml-auto md:-ml-16 xl:-ml-24": el !== 'div',
     'section': el === 'section',
     'mt-i-0': clearMargin.includes('top'),
     'mb-i-0': clearMargin.includes('bottom'),

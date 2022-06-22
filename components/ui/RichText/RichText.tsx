@@ -1,8 +1,8 @@
 import { SbEditableContent } from "@/types/storyBlok";
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import { render } from "storyblok-rich-text-react-renderer";
-import cn from "classnames";
 import { renderOptions } from "utils/constants";
+import cn from "classnames";
 import {useLayoutEffect, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";

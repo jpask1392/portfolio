@@ -1,6 +1,6 @@
 {
   "title": "Home",
-  "titleTemplate": "%s - Odyn Storefront",
+  "titleTemplate": "%s - Valentino Storefront",
   "description": "Next.js Commerce - https://www.nextjs.org/commerce",
   "openGraph": {
     "title": "ACME Storefront | Powered by Next.js Commerce",

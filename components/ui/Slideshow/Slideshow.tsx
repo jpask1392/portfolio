@@ -5,10 +5,9 @@ import { SbEditableContent } from "@/types/storyBlok";
 import cn from "classnames";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SwiperOptions, Navigation, A11y } from 'swiper';
+import { SwiperOptions, Navigation, A11y, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import { useRef } from "react";
 import { ReactNode, Component } from 'react';
 
@@ -28,8 +27,8 @@ const Slideshow: React.FC<Props> = ({
   effect = 'slide',
   showSlides = {
     sm: 1,
-    md: 1,
-    lg: 1
+    lg: 1,
+    xl: 1
   },
   children,
   className,
@@ -38,6 +37,7 @@ const Slideshow: React.FC<Props> = ({
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
   const scrollBarRef = useRef(null);
+  const paginationContainerRef = useRef(null);
 
   const navigationArrowClasses = cn([
     "bg-secondary",
@@ -52,7 +52,7 @@ const Slideshow: React.FC<Props> = ({
   const handleRefConnection = (swiper: any) => {
     const { 
       navigation = false, 
-      scrollbar = false, 
+      pagination = false, 
     } = swiper.params;
 
     if (typeof navigation === 'object') {
@@ -63,12 +63,12 @@ const Slideshow: React.FC<Props> = ({
       swiper.navigation.update();
     }
 
-    if (typeof scrollbar === 'object') {
-      scrollbar.el = scrollBarRef.current;
-      scrollbar.draggable = true;
+    if (typeof pagination === 'object') {
+      pagination.el = paginationContainerRef.current;
+      pagination.clickable = true;
 
-      swiper.scrollbar.init();
-      swiper.scrollbar.updateSize();
+      // swiper.pagination.init();
+      swiper.pagination.update();
     }
   }
 
@@ -77,11 +77,9 @@ const Slideshow: React.FC<Props> = ({
       className={cn(className, "ui-slideshow w-full")}
     >
       <Swiper
-        className="px-8"
         threshold={10}
-        modules={[Navigation, A11y]}
+        modules={[Navigation, A11y, Pagination]}
         draggable={true}
-        // scrollbar={{ draggable: false }}
         enabled={children.length > 1}
         slidesPerView={showSlides.sm || 1}
         spaceBetween={spaceBetween > 30 ? 22 : spaceBetween}
@@ -93,10 +91,12 @@ const Slideshow: React.FC<Props> = ({
             spaceBetween: spaceBetween,
           },
           1024: {
-            slidesPerView: showSlides.lg
+            slidesPerView: showSlides.lg,
+            spaceBetween: spaceBetween,
           },
           1440: {
-            slidesPerView: showSlides.xl
+            slidesPerView: showSlides.xl,
+            spaceBetween: spaceBetween,
           }
         }}
       >
@@ -115,19 +115,18 @@ const Slideshow: React.FC<Props> = ({
           })
         }
 
-
-        <div className="w-full absolute top-1/2 transform -translate-y-1/2 z-10 pointer-events-none hidden lg:flex justify-between">
-          <button ref={navigationPrevRef} className={cn(navigationArrowClasses, "-translate-x-1/2")}>
-            <SlideArrow direction="previous" className="text-black" />
+        <div className="absolute top-1/2 inset-x-0 transform -translate-y-1/2 z-10 pointer-events-none hidden lg:flex justify-between">
+          <button ref={navigationPrevRef} className={cn(navigationArrowClasses)}>
+            <SlideArrow direction="previous" className="text-white" />
           </button>
-          <button ref={navigationNextRef} className={cn(navigationArrowClasses, "translate-x-1/2")}>
-            <SlideArrow direction="next" className="text-black" />
+          <button ref={navigationNextRef} className={cn(navigationArrowClasses)}>
+            <SlideArrow direction="next" className="text-white" />
           </button>
         </div>
 
-        {/* <div className="container -ml-8 mt-10">
-          <div ref={scrollBarRef} className="scrollbar" />
-        </div> */}
+        <div className="container mt-12">
+          <div ref={paginationContainerRef} className="pagination-container" />
+        </div>
      </Swiper>
     </div>
   )

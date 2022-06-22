@@ -25,7 +25,7 @@ const FeaturedProducts: React.FC<Props> = ({
         const res = await fetch(`/api/catalog/collections?handle=${encodeURIComponent(collectionHandle)}`);
         const collection = await res.json();
 
-        setProducts(collection.products);
+        setProducts(collection?.products || []);
       }
 
       /**
@@ -47,7 +47,7 @@ const FeaturedProducts: React.FC<Props> = ({
           lg: 2,
           xl: 3,
         }} 
-        spaceBetween={40}
+        spaceBetween={90}
       >
         {
           products.map((product: any, i: number) => 

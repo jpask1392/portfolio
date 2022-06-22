@@ -75,8 +75,8 @@ module.exports = {
       padding: '2rem',
     },
     fontFamily: {
-      header: "'neue-haas-grotesk-display', serif",
-      sans: "'neue-haas-grotesk-display', serif",
+      header: "'source-code-pro', monospace",
+      sans: "'hind', sans-serif",
     },
     fontSize: {
       'tiny': '.68rem', // 11px

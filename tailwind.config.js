@@ -80,23 +80,23 @@ module.exports = {
     },
     fontSize: {
       'tiny': '.68rem', // 11px
-      'xs': '.75rem', // 12px
+      'xs': '.75rem', // 12px - YES
       'sm': '.875rem', // 14px
-      'base': '1rem', // 16px - base (tablet paragraph)
+      'base': '1rem', // 16px - base  - YES
       'lg': '1.125rem', // 18px
-      'xl': '1.25rem', // 20px
-      '2xl': '1.375rem', // 22px
-      '3xl': '1.5rem', // 24px
-      '4xl': '1.625rem', // 26px
-      '5xl': '1.75rem', // 28px
+      'xl': '1.25rem', // 20px  - YES
+      '2xl': '1.375rem', // 22px  - YES
+      '3xl': '1.5rem', // 24px 
+      '4xl': '1.625rem', // 26px  - YES
+      '5xl': '1.6875rem', // 27px - YES
       '6xl': '1.875rem', // 30px
       '7xl': '2rem', // 32px
       '8xl': '2.375rem', // 38px
-      '9xl': '2.875rem', // 46px
-      '10xl': '3rem', // 48px
-      '11xl': '3.75rem', // 60px
-      '12xl': '4.5rem', // 72px
-      '13xl': '6.25rem', // 100px
+      '9xl': '2.75rem', // 44px - YES
+      '10xl': '3.125rem', // 50px - YES
+      '11xl': '4rem', // 64px - YES
+      '12xl': '5.5625rem', // 89px - YES
+      '13xl': '7.875rem', // 126px - YES
     },
     ringColor: 'red',
     ringOffsetColor: 'red',
@@ -104,7 +104,9 @@ module.exports = {
       colors: {
         primary: '#EDE6DB',
         secondary: "#72605B",
-        black: '#050505',
+        secondaryLight: "#A59082",
+        tertiary: "#EBBFBB",
+        black: '#282828',
         gray2: '#303030',
         gray3: '#161616',
         grayLight: '#E9E9E9',

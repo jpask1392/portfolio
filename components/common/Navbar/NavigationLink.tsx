@@ -37,14 +37,14 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
 
   const navLinkClasses = cn("text-base w-full", {
     "text-secondary active" : router.asPath === cached_url,
-    "uppercase lg:capitalize font-bold lg:font-medium tracking-wide" : topLevel,
-    "flex" : subItems.length
+    "font-header uppercase font-bold text-4xl" : topLevel,
+    "flex items-center" : subItems.length
   })
 
   return (
     <span
       className={cn(className, "flex flex-wrap items-center h-full", {
-        "py-4 has-effect" : topLevel,
+        "has-effect" : topLevel,
         "border-b lg:border-transparent" : hoverLink && topLevel,
         "border-b border-white lg:border-transparent" : !hoverLink && topLevel,
       })}
@@ -70,11 +70,12 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
         }
 
         {
-          topLevel && (
-            <span 
-              className="h-1 w-0 bg-primary block absolute left-0 -bottom-2 nav-link-effect"
+          topLevel && subItems.length ? (
+            <DynamicIcon 
+              type="chevronDown"
+              className="ml-2"
             />
-          )
+          ) : null
         }
       </StoryBlokLink>
 

@@ -57,10 +57,9 @@ const Column: React.FC<Props> = ({
       className={colClassNames}
       {...sbEditable}
       role="presentation"
+      style={style}
     >
-      <div style={style}>
-        {children}
-      </div>
+      {children}
     </div>
   )
 }

@@ -3,7 +3,7 @@
 
   @apply 
     w-full
-    text-sm
+    text-xl
     text-center
     inline-flex
     justify-center
@@ -24,7 +24,7 @@
   @apply bg-primary border border-primary text-secondary;
 
   &:hover {
-    @apply bg-black border-black;
+    @apply bg-secondary border-secondary text-primary;
   }
 }
 

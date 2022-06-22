@@ -42,8 +42,8 @@ const Navigation: React.FC<NavProps> = ({
       id="primary-header"
       className={cn(className, [
         "bg-primary",
-        "h-16 xl:h-28",
-        "border-b border-gray2",
+        "h-12",
+        // "border-b border-tertiary",
         "z-20",
         "sticky",
         "top-0",
@@ -71,12 +71,12 @@ const Navigation: React.FC<NavProps> = ({
 
         {/* Flexs size */}
         <div className="h-full flex-1 hidden lg:block">
-          <ul className="h-full flex">
+          <ul className="h-full flex text-secondary">
           {
             navigationList.map((link: any, i: number) => {
               return (
                 <li key={i} className="mx-5 m-px h-full">
-                  <NavigationLink nav_link={link} topLevel={true} hasMegaMenu={true} />
+                  <NavigationLink nav_link={link} topLevel hasMegaMenu={true} />
                 </li>
               )
             })

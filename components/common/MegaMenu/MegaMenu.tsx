@@ -100,15 +100,7 @@ const MegaMenu: React.FC<Props> = ({
           }
         </div>
 
-        <div className="w-1/3">
-          <div className="h-full aspect-square xl:aspect-[4/3] bg-gray-800">
-            <CustomImage 
-              image={menuImage} 
-              layout="fill" 
-              objectFit="cover"
-            />
-          </div>
-        </div>
+      
       </div>
     </div>
   )

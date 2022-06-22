@@ -19,19 +19,21 @@ import Slideshow from "@/components/ui/Slideshow";
 import Accordion from "@/components/ui/Accordion";
 import Tabs from "@/components/ui/Tabs";
 import Marquee from "@/components/ui/Marquee";
+import { Input } from "@/components/ui/Inputs";
 
 import HeroVideo from "@/components/modules/HeroVideo";
 import HeroImage from "@/components/modules/HeroImage";
 import HeroSplit from "@/components/modules/HeroSplit";
-import FeaturedCollections from "@/components/ecommerce/FeaturedCollections";
-import FeaturedProducts from "@/components/ecommerce/FeaturedProducts";
 import TextImage from "@/components/modules/TextImage";
 import ThreeItemGrid from "@/components/modules/ThreeItemGrid";
 import ImmortalTools from "@/components/modules/ImmortalTools";
 import ContactForm from "@/components/modules/ContactForm";
 import SplitTiledImage from "@/components/modules/SplitTiledImage";
 import Form from "@/components/modules/Form";
-import { Input } from "@/components/ui/Inputs";
+
+import FeaturedCollections from "@/components/ecommerce/FeaturedCollections";
+import FeaturedProducts from "@/components/ecommerce/FeaturedProducts";
+import FeaturedCollectionWithProducts from "@/components/ecommerce/FeaturedCollectionWithProducts";
 
 // helper
 import WithStoryBlok from '@/components/helpers/WithStoryBlok';
@@ -69,10 +71,10 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     image: Image,
     slideshow: Slideshow,
     accordion: Accordion,
-    
     splitTiledImage: SplitTiledImage,
     form: Form,
     formInput: Input,
+    featuredCollectionWithProducts: FeaturedCollectionWithProducts,
   };
 
   if (typeof Components[blok.component] !== "undefined") {

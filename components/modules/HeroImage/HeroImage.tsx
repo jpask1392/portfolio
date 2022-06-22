@@ -5,19 +5,22 @@ import { ReactNode, Component } from 'react';
 import { useRef } from 'react';
 import CustomImage from '@/components/ui/Image';
 import type { storyBlokImage } from '@/types/storyBlok';
+// import MediaCoverage from '';
 
 interface Props {
   className?: string
   TopBlockComponent?: ReactNode | Component | any
   BottomBlockComponent?: ReactNode | Component | any
   image: storyBlokImage
+  asSeenOn: storyBlokImage
 }
 
 const Hero: React.FC<Props> = ({ 
   className,
   TopBlockComponent,
   BottomBlockComponent,
-  image
+  image,
+  asSeenOn
  }) => {
 
   const heroClassNames = cn(className, [
@@ -79,11 +82,23 @@ const Hero: React.FC<Props> = ({
           )
         }
 
-        <div className="bg-secondary absolute left-0 right-0 bottom-0 flex justify-center">
-          <div className="py-3">
-            As seen on 
-          </div>
-        </div>
+        {
+          asSeenOn ? (
+            <div className="bg-secondaryLight absolute left-0 right-0 bottom-0 flex justify-center">
+              <div className="py-3 container">
+                <div className="flex items-center mx-auto max-w-screen-lg">
+                  <h3 className="text-secondary text-4xl mr-12 shrink-0">As Seen on</h3>
+                  <div>
+                    <CustomImage 
+                      image={asSeenOn} 
+                      preload
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : null
+        }
       </div>
     </section>
   )

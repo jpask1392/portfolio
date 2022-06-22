@@ -69,7 +69,7 @@ const FeaturedCollections: React.FC<Props> = ({
   }, [])
 
   return (
-    <div className={className} ref={containerRef}>
+    <div className={cn(className, "overflow-hidden")} ref={containerRef}>
       <div className="flex flex-wrap -mx-4 -mb-8">
         {
           collections?.map((collection, i) => 

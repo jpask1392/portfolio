@@ -1,0 +1,5 @@
+.mega-menu {
+  .link:hover .animate {
+    @apply w-full;
+  }
+}

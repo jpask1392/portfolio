@@ -1,0 +1,33 @@
+.featured-collection-tile {
+  h3 {
+    @apply transition-all duration-300;
+
+    @screen md {
+      margin-bottom: -60px;
+    }
+  }
+
+  .bg-image > div {
+    transition: transform 10s;
+  }
+
+  &:hover .bg-image > div {
+    transform: scale(1.2);
+  }
+
+  .animate-btn {
+    @apply
+      transition-opacity
+      duration-100
+      md:opacity-0
+      mt-2;
+  }
+
+  &:hover .animate-btn {
+    @apply transition-opacity delay-100 duration-500 opacity-100;
+  }
+
+  &:hover h3 {
+    @apply mb-0;
+  }
+}

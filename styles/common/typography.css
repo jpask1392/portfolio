@@ -1,0 +1,100 @@
+.text-display {
+  @apply 
+    font-bold
+    leading-none
+    text-11xl 
+    md:text-12xl
+    xl:text-13xl;
+}
+
+h1,
+.h1 {
+  @apply 
+    font-bold
+    leading-none
+    text-7xl 
+    md:text-9xl
+    xl:text-12xl;
+}
+
+h2,
+.h2 {
+  @apply
+    font-header
+    font-bold
+    leading-none
+    tracking-narrow
+    text-3xl
+    md:text-9xl
+    xl:text-12xl;
+}
+
+h3,
+.h3 {
+  @apply 
+    font-header
+    font-bold
+    leading-tighter
+    tracking-snug
+    text-xl
+    md:text-8xl
+    xl:text-10xl;
+}
+
+h4,
+.h4 {
+  @apply 
+    text-lg
+    md:text-4xl
+    xl:text-7xl
+    leading-none;
+}
+
+h5,
+.h5,
+.subtitle {
+  @apply 
+    text-lg
+    md:text-xl
+    xl:text-5xl;
+}
+
+p,
+.p,
+ul,
+.ul {
+  letter-spacing: 0.01em;
+
+  @apply 
+    text-base
+    md:text-lg
+    xl:text-3xl;
+
+  &:last-of-type {
+    @apply mb-0;
+  }
+}
+
+.p-secondary {
+  @apply 
+    text-sm
+    md:text-base
+    xl:text-2xl;
+}
+
+.p-tertiary {
+  @apply 
+    text-xs
+    md:text-sm
+    xl:text-base;
+}
+
+.caption {
+  @apply
+    uppercase
+    font-bold
+    tracking-widest
+    text-xs
+    md:text-xs
+    xl:text-sm;
+}

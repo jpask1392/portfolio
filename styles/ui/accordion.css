@@ -1,0 +1,26 @@
+.ui-accordion {
+  .content {
+    transition: all 1s;
+    overflow: hidden;
+
+    &[data-state="open"] {
+      animation-duration: 0.3s;
+      animation-name: slidein;
+    }
+
+    &[data-state="closed"] {
+      animation-duration: 0.3s;
+      animation-name: slideout;
+    }
+  }
+}
+
+@keyframes slidein {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes slideout {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}

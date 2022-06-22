@@ -1,0 +1,30 @@
+.column > div {
+  max-width: var(--max-width-base);
+
+  @screen md {
+    max-width: var(--max-width-md);
+  }
+
+  @screen lg {
+    max-width: var(--max-width-lg);
+  }
+
+  @screen xl {
+    max-width: var(--max-width-xl);
+  }
+
+  @screen 2xl {
+    max-width: var(--max-width-xxl);
+  }
+}
+
+.extend-to-edge {
+  @apply overflow-hidden;
+
+  width: calc(100% + 2rem);
+
+  @screen md {
+    /* width: calc(((100vw - var(--container-size)) / 2) + var(--container-size) - 2rem); */
+    width: calc(50vw + 50%);
+  }
+}

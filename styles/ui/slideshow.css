@@ -1,0 +1,12 @@
+.scrollbar {
+  @apply bg-red-100 w-full h-px;
+
+  .swiper-scrollbar-drag {
+    @apply bg-primary h-full;
+  }
+}
+
+.swiper-button-disabled {
+  @apply opacity-0;
+}
+

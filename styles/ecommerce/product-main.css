@@ -1,0 +1,11 @@
+.product-description {
+  @apply mt-12 md:mt-16;
+
+  p {
+    @apply p-secondary;
+  }
+
+  ul {
+    @apply list-disc pl-8;
+  }
+}

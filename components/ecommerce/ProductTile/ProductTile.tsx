@@ -1,3 +1,4 @@
+import AddToCartButton from '@/components/ecommerce/AddToCartButton';
 import Header from '@/components/ui/Header';
 import cn from 'classnames';
 import CustomImage from '@/components/ui/Image';
@@ -89,11 +90,11 @@ const ProductTile: React.FC<Props> = ({
 
       <div className="mt-6">
         <div className="flex justify-between flex-wrap">
-          <div className="order-1 md:order-none">
+          <div className="w-full">
             <Header
               tag="h3"
               size="h4" 
-              className="subtitle font-bold w-full"
+              className="font-bold w-full mb-2"
             >
               { product?.title || <Skeleton width="33%" /> }
             </Header>
@@ -119,9 +120,15 @@ const ProductTile: React.FC<Props> = ({
               ) : <Skeleton />
             }
 
-            <Button 
-              text="ADD TO CART"
-              className="mt-2.5"
+            <AddToCartButton 
+              buttonText="ADD TO CART"
+              className="mt-2.5 !max-w-none w-full"
+              variants={[
+                {
+                  variantId: product?.variants[0].id,
+                  quantity: 1,
+                }
+              ]}
             />
             
           </div>

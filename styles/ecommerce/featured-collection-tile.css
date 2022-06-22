@@ -1,10 +1,10 @@
 .featured-collection-tile {
-  h3 {
+  .animate-up {
     @apply transition-all duration-300;
-
+      
     @screen md {
       margin-bottom: -60px;
-    }
+    } 
   }
 
   .bg-image > div {
@@ -27,7 +27,7 @@
     @apply transition-opacity delay-100 duration-500 opacity-100;
   }
 
-  &:hover h3 {
+  &:hover .animate-up {
     @apply mb-0;
   }
 }

@@ -21,7 +21,14 @@ const checkoutAddItem = async ({
     return normalizeCart(data.checkoutLineItemsAdd.checkout);
 
   } catch (err) {
-    console.log(err)
+    console.error(err);
+    return err;
+
+    if ('graphQLErrors' in err) {
+      return {
+        graphErrors: err.graphQLErrors
+      }
+    }
   }
 }
 

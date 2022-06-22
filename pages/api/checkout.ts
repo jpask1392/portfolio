@@ -34,10 +34,18 @@ export default async function collections(req: any, res: any) {
 
     // add items to checkout object
     if (action === 'add') {
-      checkout = await checkoutAddItem({
+      let addRequest = await checkoutAddItem({
         checkoutId: body.checkoutId,
         lineItems: body.formData
       });
+
+      // check if Apollo throws an error
+      if ('graphQLErrors' in addRequest) {
+        res.status(500).json({message: addRequest.graphQLErrors});
+        return; // kill
+      }
+
+      checkout = addRequest;
     }
 
     // remove items from checkout object

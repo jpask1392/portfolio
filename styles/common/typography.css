@@ -1,5 +1,6 @@
 .text-display {
   @apply
+    font-header
     uppercase
     font-bold
     leading-none
@@ -8,8 +9,8 @@
     xl:text-13xl;
 }
 
-h1,
-.h1 {
+h1:not(.text-display),
+.h1:not(.text-display) {
   @apply
     uppercase
     font-header
@@ -30,7 +31,7 @@ h2,
     tracking-narrow
     text-3xl
     md:text-9xl
-    xl:text-12xl;
+    xl:text-11xl;
 }
 
 h3,
@@ -49,21 +50,22 @@ h3,
 h4,
 .h4 {
   @apply 
-    text-lg
+    /* text-lg */
     md:text-4xl
-    xl:text-7xl
+    xl:text-4xl
     leading-none;
 }
 
-h5,
+/* h5,
 .h5,
 .subtitle {
   @apply 
     text-lg
     md:text-xl
     xl:text-5xl;
-}
+} */
 
+/* Body defined as H6 in typography guide */
 p,
 .p,
 ul,
@@ -71,9 +73,7 @@ ul,
   letter-spacing: 0.01em;
 
   @apply 
-    text-base
-    md:text-lg
-    xl:text-3xl;
+    text-xl;
 
   &:last-of-type {
     @apply mb-0;

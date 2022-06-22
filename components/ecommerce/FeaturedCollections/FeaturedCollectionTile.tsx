@@ -15,13 +15,18 @@ const FeaturedCollectionTile: React.FC<Props> = ({
 }) => {
   return (
     <article className="featured-collection-tile">
-      <div className="aspect-square bg-gray3 text-white h-full flex items-center relative">
+      <div className="aspect-square bg-gray3 text-white h-full flex items-end relative">
         {
           tileStyle === "primary" ? (
-            <div className="p-4 text-center w-full relative z-10">
-              <h3 className={`font-bold relative z-10 ${collection ? 'h3' : ''}`}>
-                {collection?.title || <Skeleton count={2} />}
-              </h3>
+            <div className="pb-24 pl-24 w-full relative z-10">
+              <div className="animate-up">
+                <h3 className={`font-bold relative z-10 ${collection ? 'h3' : ''}`}>
+                  {collection?.title || <Skeleton count={2} />}
+                </h3>
+                <p className="uppercase">
+                  THE KOLINSKY BRUSh KIT & SINGLE BRUSHES
+                </p>
+              </div>
               <div className="animate-btn">
                 <Button 
                   text="Gear Up"

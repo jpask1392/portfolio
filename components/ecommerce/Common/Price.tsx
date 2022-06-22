@@ -18,7 +18,7 @@ const Price: React.FC<Props> = ({
   showDiscountPercentage = true,
   stackItems = false,
   align = "left",
-  size = "subtitle",
+  size,
 }) => {
 
   const calcDiscountPercentage = (full: number, discount: number) => {
@@ -44,7 +44,7 @@ const Price: React.FC<Props> = ({
         ) : null
       }
 
-      <p className={cn([[size]], " font-bold")}>
+      <p className={cn([[size]])}>
         {
           (salePrice && salePrice < originalPrice)
             ? formatMoney(salePrice)

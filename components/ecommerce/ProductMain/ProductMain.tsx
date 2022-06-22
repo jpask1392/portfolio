@@ -110,7 +110,6 @@ const ProductMain: React.FC<Props> = ({
                     style: "error"
                   });
                 }
-
               }}/>
             </div>
           </div>

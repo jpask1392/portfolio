@@ -86,7 +86,6 @@ const GallerySlider = ({ product } : { product: Product }) => {
     >
         {
           product.images.map((image: storyBlokImage, i: number) => {
-            console.log(product)
             return (
               <SwiperSlide key={`${product.id}_${i}`} className="bg-gray3">
                 <CustomImage image={image} />

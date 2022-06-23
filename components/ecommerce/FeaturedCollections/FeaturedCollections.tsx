@@ -4,6 +4,7 @@ import FeaturedCollectionTile from './FeaturedCollectionTile';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
+import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 
 interface Props {
   className?: string
@@ -20,6 +21,7 @@ const FeaturedCollections: React.FC<Props> = ({
 }) => {
   const [ collections, setCollections ] = useState<any[]>([null, null, null]);
   const containerRef = useRef(null);
+  const { scroll } = useSmoothScrollContext();
 
   const queryNames = collectionNames.split(',');
   let queryString = "";
@@ -51,9 +53,14 @@ const FeaturedCollections: React.FC<Props> = ({
           trigger: containerRef.current,
           start: 'top center+=63px',
           markers: false,
+          scroller: "[data-scroll-container]",
         },
       });
 
+      /**
+       * TODO: change this to a ref list
+       *  - this is causing a flash when another section is placed after it
+       */
       tl.fromTo('.collection-item-wrapper', { 
         opacity: 0,
         y: 50,
@@ -66,7 +73,7 @@ const FeaturedCollections: React.FC<Props> = ({
         
       });
     }
-  }, [])
+  }, [scroll])
 
   return (
     <div 

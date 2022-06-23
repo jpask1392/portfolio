@@ -5,6 +5,7 @@ import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
 import { H1, H2, H3, H4 } from '@/components/ui/Typography';
 import cn from "classnames";
 import { JSXElementConstructor, useEffect, useLayoutEffect, useRef } from 'react';
+import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
@@ -33,6 +34,8 @@ const Header: React.FC<Props> = ({
   size,
   sbEditable,
 }) => {
+  const { scroll } = useSmoothScrollContext();
+
   const componentsMap: {
     [P in Variant]: React.ComponentType<any> | string
   } = {
@@ -57,6 +60,7 @@ const Header: React.FC<Props> = ({
           trigger: componentRef.current,
           start: 'top bottom-=100',
           markers: false,
+          scroller: "[data-scroll-container]",
         },
       });
 
@@ -75,7 +79,7 @@ const Header: React.FC<Props> = ({
         });
       }
     }
-  }, [componentRef])
+  }, [componentRef, scroll])
 
   const nodeResolver = (child: any) => {
     return Array.isArray(child) 

@@ -97,17 +97,19 @@ const Layout: React.FC<Props> = ({
           ) : null
         }
 
-        <main className="debug-screens flex items-start">
-          <div className="main-wrapper">
-            <Navigation {...navProps} />
+        <div data-scroll-section>
+          <main className="debug-screens flex items-start">
+            <div className="main-wrapper">
+              <Navigation {...navProps} />
 
-            {/* children will be pulled from storyblok */}
-            {children}
-          </div>
+              {/* children will be pulled from storyblok */}
+              {children}
+            </div>
 
-        </main>
+          </main>
 
-        <Footer {...footerProps} />
+          <Footer {...footerProps} />
+        </div>
         <CartDrawer />
       </div>
 

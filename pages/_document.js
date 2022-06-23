@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel="stylesheet" href="https://use.typekit.net/dmn6gns.css" />
       </Head>
-      <body>
+      <body data-scroll-container>
         <Main />
         <NextScript />
       </body>

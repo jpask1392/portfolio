@@ -44,7 +44,7 @@ const Hero: React.FC<Props> = ({
             <div className="w-full pb-44 xl:pt-40">
               <Container el="div">
                 <div className="w-full h-full flex flex-col" style={{ maxWidth: 940 }}>
-                  { TopBlockComponent && <TopBlockComponent /> }
+                  { TopBlockComponent && <div data-scroll data-scroll-speed="-1"><TopBlockComponent /></div> }
 
                   {
                     BottomBlockComponent && (
@@ -64,13 +64,13 @@ const Hero: React.FC<Props> = ({
         <div className={cn([
           "absolute inset-0 py-0 z-0"
         ])}>
-          <div className="h-full w-screen">
+          <div className="h-full w-screen relative">
             {/* 
               TODO: Move this into a separate repsonsive image component and make resuable
             */}
 
             <CustomImage
-              className={cn({
+              className={cn("h-full w-full", {
                 "hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
                 "xl:block" : imageMobile && imageMobile.id,
                 // "xl:block" : imageTablet && imageTablet.id,
@@ -84,7 +84,7 @@ const Hero: React.FC<Props> = ({
             {
               imageTablet?.id ? (
                 <CustomImage
-                  className={cn("xl:block", {
+                  className={cn("xl:block h-full w-full", {
                     "hidden" : imageMobile && imageMobile.id,
                   })}
                   image={imageTablet} 
@@ -98,8 +98,8 @@ const Hero: React.FC<Props> = ({
             {
               imageMobile?.id ? (
                 <CustomImage
-                  className={cn({
-                    "xl:hidden" : imageTablet && imageTablet.id,
+                  className={cn("h-full w-full", {
+                    "xl:!hidden" : imageTablet && imageTablet.id,
                     // ":hidden" : !imageTablet || imageTablet && !imageTablet.id,
                   })}
                   image={imageMobile} 

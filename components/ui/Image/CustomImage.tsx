@@ -66,8 +66,12 @@ const CustomImage: React.FC<Props> = ({
   if (!image.filename) return null;
 
   return (
-    <div className={cn(className, "text-[0]")}>
+    <ConditionalWrapper
+      layout={layout}
+      className={className}
+    >
       <NextImage
+        className={className}
         src={image.filename}
         alt={image.alt || 'Image'}
         width={layout != 'fill' ? dimensions.width : undefined}
@@ -78,8 +82,20 @@ const CustomImage: React.FC<Props> = ({
         layout={layout}
         objectFit={objectFit}
       />
-    </div>
+    </ConditionalWrapper>
   );
 };
 
 export default CustomImage;
+
+const ConditionalWrapper = ({children, layout, className} : {children: any, layout?: any, className?: any}) => {
+  if (layout === "fill") {
+    return children;
+  } else {
+    return (
+      <div className={cn(className, "text-[0] relative")}>
+        {children}
+      </div>
+    )
+  }
+}

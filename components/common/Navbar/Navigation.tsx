@@ -39,7 +39,9 @@ const Navigation: React.FC<NavProps> = ({
   const { UI, setUI } = useUIContext();
   
   return (
-    <header 
+    <header
+      // data-scroll-sticky
+      // data-scroll-target="[data-scroll-container]"
       id="primary-header"
       className={cn(className, [
         "bg-primary",

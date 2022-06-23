@@ -1,3 +1,4 @@
+import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 import AddToCartButton from '@/components/ecommerce/AddToCartButton';
 import Header from '@/components/ui/Header';
 import cn from 'classnames';
@@ -11,7 +12,6 @@ import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEff
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
-import Button from '@/components/ui/Button';
 
 interface Props {
   className?: string
@@ -24,18 +24,20 @@ const ProductTile: React.FC<Props> = ({
   className,
   animate
 }) => {
+  const { scroll } = useSmoothScrollContext();
   const hoverEffectRef = useRef(null);
   const articleRef = useRef(null);
   const imageRef = useRef(null);
   const tl = useRef<any>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (hoverEffectRef && animate) {
+    if (hoverEffectRef && imageRef && animate) {
       tl.current = gsap.timeline({
         scrollTrigger: {
           trigger: articleRef.current,
           start: 'center bottom-=100',
           markers: false,
+          scroller: "[data-scroll-container]",
         },
       });
 
@@ -46,15 +48,21 @@ const ProductTile: React.FC<Props> = ({
         ease: CustomEase.create("custom", "0.5,0,0,1"),
       })
 
-      tl.current.from(imageRef.current, {
+      tl.current.fromTo(imageRef.current, {
         yPercent: 20,
         opacity: 0,
         duration: 1,
         scale: 1.2,
         ease: CustomEase.create("custom", "0.5,0,0,1"),
+      }, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 1,
+        scale: 1,
+        ease: CustomEase.create("custom", "0.5,0,0,1"),
       }, "-=0.8")
     }
-  }, [])
+  }, [scroll, imageRef])
 
   return (
     <article 
@@ -68,7 +76,7 @@ const ProductTile: React.FC<Props> = ({
       <Link href={`/product${product?.path || '/'}`}>
         <a aria-label={`Go to ${product?.title} page`}>
           <div className="aspect-square bg-secondary relative overflow-hidden">
-            <div className="w-full h-full" ref={imageRef}>
+            <div className="w-full h-full relative" ref={imageRef}>
               <CustomImage 
                 image={product?.images[0]} 
                 layout="fill" 

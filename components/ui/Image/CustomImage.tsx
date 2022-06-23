@@ -66,7 +66,7 @@ const CustomImage: React.FC<Props> = ({
   if (!image.filename) return null;
 
   return (
-    <div className={className}>
+    <div className={cn(className, "text-[0]")}>
       <NextImage
         src={image.filename}
         alt={image.alt || 'Image'}

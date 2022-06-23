@@ -44,29 +44,29 @@ const FeaturedCollections: React.FC<Props> = ({
     if (data) setCollections(data);
   }, [data])
 
-  // useEffect(() => {
-  //   if (containerRef?.current) {
-  //     const tl = gsap.timeline({
-  //       scrollTrigger: {
-  //         trigger: containerRef.current,
-  //         start: 'top center+=63px',
-  //         markers: false,
-  //       },
-  //     });
+  useEffect(() => {
+    if (containerRef?.current) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top center+=63px',
+          markers: false,
+        },
+      });
 
-  //     tl.fromTo('.collection-item-wrapper', { 
-  //       opacity: 0,
-  //       y: 50,
-  //     }, {
-  //       opacity: 1,
-  //       y: 0,
-  //       stagger: 0.15,
-  //       duration: 0.9,
-  //       ease: "power4.out",
+      tl.fromTo('.collection-item-wrapper', { 
+        opacity: 0,
+        y: 50,
+      }, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.9,
+        ease: "power4.out",
         
-  //     });
-  //   }
-  // }, [])
+      });
+    }
+  }, [])
 
   return (
     <div 

@@ -9,10 +9,11 @@ const SearchBar = () => {
           <input 
             id="search-bar"
             type="search"
-            className="flex bg-gray2 rounded-full items-center relative pr-8 pl-3 py-2 w-36 xl:w-60"
+            placeholder="Search for something"
+            className="flex bg-transparent items-center relative pr-8 py-1 w-36 xl:w-60 border-b border-black"
           />
           <button type="submit" className="block">
-            <span className="absolute right-3 opacity-70 text-white top-1/2 transform -translate-y-1/2">
+            <span className="absolute right-3 opacity-70 top-1/2 transform -translate-y-1/2">
               <DynamicIcon type="search" />
             </span>
           </button>

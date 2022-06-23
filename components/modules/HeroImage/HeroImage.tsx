@@ -11,6 +11,8 @@ interface Props {
   TopBlockComponent?: ReactNode | Component | any
   BottomBlockComponent?: ReactNode | Component | any
   image: storyBlokImage
+  imageTablet: storyBlokImage
+  imageMobile: storyBlokImage
   asSeenOn: storyBlokImage
 }
 
@@ -19,7 +21,9 @@ const Hero: React.FC<Props> = ({
   TopBlockComponent,
   BottomBlockComponent,
   image,
-  asSeenOn
+  imageTablet,
+  imageMobile,
+  asSeenOn,
  }) => {
 
   const heroClassNames = cn(className, [
@@ -61,12 +65,50 @@ const Hero: React.FC<Props> = ({
           "absolute inset-0 py-0 z-0"
         ])}>
           <div className="h-full w-screen">
-            <CustomImage 
+            {/* 
+              TODO: Move this into a separate repsonsive image component and make resuable
+            */}
+
+            <CustomImage
+              className={cn({
+                "hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
+                "xl:block" : imageMobile && imageMobile.id,
+                // "xl:block" : imageTablet && imageTablet.id,
+              })}
               image={image} 
               layout="fill" 
               objectFit="cover" 
               preload
             />
+
+            {
+              imageTablet?.id ? (
+                <CustomImage
+                  className={cn("xl:block", {
+                    "hidden" : imageMobile && imageMobile.id,
+                  })}
+                  image={imageTablet} 
+                  layout="fill" 
+                  objectFit="cover" 
+                  preload
+                />
+              ) : null
+            }
+
+            {
+              imageMobile?.id ? (
+                <CustomImage
+                  className={cn({
+                    "xl:hidden" : imageTablet && imageTablet.id,
+                    // ":hidden" : !imageTablet || imageTablet && !imageTablet.id,
+                  })}
+                  image={imageMobile} 
+                  layout="fill" 
+                  objectFit="cover" 
+                  preload
+                />
+              ) : null
+            }
           </div>
         </div>
 

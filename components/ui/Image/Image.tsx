@@ -14,6 +14,7 @@ interface Props {
   layout?: 'fill' | undefined
   objectFit?: 'contain' | 'cover' | undefined
   pin?: boolean
+  alignOverlayContent?: any
   sbEditable?: SbEditableContent
 }
 
@@ -27,6 +28,8 @@ const CustomImage: React.FC<Props> = ({
   className,
   pin,
   sbEditable,
+  children,
+  alignOverlayContent,
 }) => {
   const tl = useRef<any>(null);
   const containerRef = useRef<null | HTMLDivElement>(null);
@@ -59,6 +62,10 @@ const CustomImage: React.FC<Props> = ({
     }
   }, [pin]);
 
+  /**
+   * TODO: replace with a standard image placeholder when an image doesnt exist
+   * 
+   */
   if (!image?.filename) return (
     <div className="bg-gray-300 aspect-video flex justify-center items-center text-gray-800">
       Image does not exist
@@ -123,6 +130,16 @@ const CustomImage: React.FC<Props> = ({
                 layout={layout}
                 objectFit={objectFit}
               />
+
+              {/* Overlay content */}
+              <div className={cn("absolute p-20 xl:p-24", {
+                "bottom-0 right-0 text-right" : alignOverlayContent === "bottom-right",
+                "bottom-0 left-0" : alignOverlayContent === "bottom-left",
+                "top-0 right-0 text-right" : alignOverlayContent === "top-right",
+                "top-0 left-0" : alignOverlayContent === "top-left",
+              })}>
+                {children}
+              </div>
             </div>
           </>
         )

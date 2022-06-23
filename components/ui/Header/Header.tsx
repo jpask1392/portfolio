@@ -84,7 +84,7 @@ const Header: React.FC<Props> = ({
           child.map((el, i) => {
             if (typeof el === 'string') {
               return (
-                <span key={i} className="overflow-hidden inline-block pb-2 -mb-2">
+                <span key={i} className="overflow-hidden pb-2 -mb-2">
                   <span className="animate inline-block" dangerouslySetInnerHTML={{__html: el}} />
                 </span>
               )

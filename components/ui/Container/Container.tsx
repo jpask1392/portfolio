@@ -57,8 +57,8 @@ const Container: React.FC<ContainerProps> = ({
       {...sbEditable}
     >
       <div>
-        {/* { 
-          backgroundMedia && (
+        { 
+          backgroundMedia && backgroundMedia.id && (
             <BackgroundMedia
               image={backgroundMedia}
               bgColor={backgroundColor}
@@ -66,7 +66,7 @@ const Container: React.FC<ContainerProps> = ({
               priority
             />
           )
-        } */}
+        }
         <div className={`w-full max-w-screen-${maxWidth} mx-auto relative z-10`}>
           <div className={cn({
             'container overflow-hidden md:overflow-visible' : contained && !extendRight,

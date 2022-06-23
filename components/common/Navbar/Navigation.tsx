@@ -50,11 +50,11 @@ const Navigation: React.FC<NavProps> = ({
       ])}
     >
       <nav 
-        className="h-full px-8 xl:px-4 max-w-screen-2xl mx-auto flex justify-end relative" 
+        className="h-full px-8 max-w-screen-2xl mx-auto flex justify-end relative" 
         role="navigation"
       >
 
-        <div className="xl:hidden absolute top-full w-full inset-x-0 mt-px">
+        <div className="xl:hidden absolute top-full left-0 pointer-events-none">
           <MobileMenu 
             menu={navigationList} 
             active={active}
@@ -76,7 +76,7 @@ const Navigation: React.FC<NavProps> = ({
         <button
           aria-label="Navigation Menu"
           onClick={() => setActive(!active)}
-          className="xl:hidden h-full bg-primary aspect-square ml-4 md:ml-0 flex items-center flex-1"
+          className="xl:hidden h-full bg-primary aspect-square flex items-center flex-1"
         >
           <Hamburger size={25}/>
         </button>
@@ -87,7 +87,7 @@ const Navigation: React.FC<NavProps> = ({
           {
             navigationList.map((link: any, i: number) => {
               return (
-                <li key={i} className="mx-5 m-px h-full">
+                <li key={i} className="mx-5 h-full first:ml-0">
                   <NavigationLink nav_link={link} topLevel hasMegaMenu={true} />
                 </li>
               )
@@ -135,7 +135,7 @@ const Navigation: React.FC<NavProps> = ({
         <Link href={'/' + ctaLink?.cached_url}>
           <a 
             aria-label={ctaText}
-            className="font-medium text-base h-full hidden xl:flex items-center px-8 xl:px-14 ml-4 xl:ml-14 uppercase font-header"
+            className="font-medium text-base md:text-4xl h-full hidden xl:flex items-center px-8 xl:px-14 uppercase font-header text-secondary"
           >
             {ctaText}
           </a>

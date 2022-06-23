@@ -35,19 +35,16 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
   const handleOnMouseOver = () => topLevel && setHoverLink(true);
   const handleOnMouseLeave = () => topLevel && setHoverLink(false);
 
-  const navLinkClasses = cn("text-base w-full", {
+  const navLinkClasses = cn("text-base md:text-4xl w-full ", {
     "text-secondary active" : router.asPath === cached_url,
-    "font-header uppercase font-bold text-4xl" : topLevel,
-    "flex items-center" : subItems.length
+    "font-header uppercase font-bold text-base md:text-4xl" : topLevel,
+    "flex items-center" : subItems.length,
+    "py-4 md:py-7 px-8 xl:p-0 border-b border-secondaryLight xl:border-none" : subItems.length || topLevel && !subItems.length,
   })
 
   return (
     <span
-      className={cn(className, "flex flex-wrap items-center h-full", {
-        "has-effect" : topLevel,
-        "border-b lg:border-transparent" : hoverLink && topLevel,
-        "border-b border-white lg:border-transparent" : !hoverLink && topLevel,
-      })}
+      className={cn(className, "flex flex-wrap items-center h-full text-secondary")}
       onMouseOver={handleOnMouseOver}
       onMouseLeave={handleOnMouseLeave}
     >
@@ -87,12 +84,14 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
 
       {
         subItems.length && !hasMegaMenu ? (
-          <ul className="w-full pl-6 mt-4">
+          <ul className="w-full">
             {
               subItems.map((item, i) => {
                 return (
-                  <li className="py-1.5" key={i}>
-                    <NavigationLink nav_link={item} />
+                  <li className={cn("", navLinkClasses)} key={i}>
+                    <NavigationLink 
+                      nav_link={item} 
+                    />
                   </li>
                 )
               })

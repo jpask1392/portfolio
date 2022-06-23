@@ -1,6 +1,7 @@
-
+import CustomImage from '@/components/ui/Image';
 import Image from 'next/image';
 import type { storyBlokImage } from '@/types/storyBlok';
+
 
 interface BackgroundMediaProps {
   image: storyBlokImage
@@ -23,12 +24,11 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
           style={{ opacity: (backgroundOverlay > 1) ? 1 : backgroundOverlay }}
         />
 
-        <Image
-          src={image.filename}
-          alt={image.alt}
+        <CustomImage
+          image={image}
           layout="fill"
           objectFit="cover"
-          priority={priority}
+          preload={priority}
         />
       </div>
     </div>

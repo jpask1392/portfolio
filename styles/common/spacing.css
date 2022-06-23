@@ -47,11 +47,12 @@
 
 
 .ui-header + .ui-header,
+.ui-header + .ui-btn-group,
 .ui-richtext + .ui-richtext,
 .ui-richtext + .ui-btn-group,
 .ui-image + .ui-richtext,
 .ui-image + .ui-header {
-  @apply mt-10;
+  @apply mt-4;
 }
 
 .ui-header + .ui-slideshow,

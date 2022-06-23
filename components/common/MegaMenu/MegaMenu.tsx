@@ -22,13 +22,6 @@ const MegaMenu: React.FC<Props> = ({
 }) => {
   const tl = useRef<any>(null);
   const megaMenuRef = useRef<any>(null);
-  const [ menuImage, setMenuImage ] = useState<undefined | storyBlokImage>();
-
-  const handleLinkHover = (menuItem: navLink) => {
-    if (menuItem.image) {
-      setMenuImage(menuItem.image);
-    }
-  }
 
   useEffect(() => {
     if (megaMenuRef.current) {
@@ -59,35 +52,25 @@ const MegaMenu: React.FC<Props> = ({
 
   return (
     <div 
-      className={cn(className, "mega-menu absolute top-full bg-black mt-px inset-x-0")}
+      className={cn(className, "mega-menu absolute top-full bg-secondary inset-x-0 text-white w-screen left-1/2 -translate-x-1/2")}
       ref={megaMenuRef}
     >
-      <div className="flex">
-        <div className="flex-1 p-16">
+      <div className="px-8 max-w-screen-2xl mx-auto">
+        <div className="py-10">
           {
             item && (
               <div className="inline-block">
-                <h4 className="caption mb-8">
-                  {item.name}
-                </h4>
-                <ul className={cn({
-                  "lg:columns-2 gap-0" : item.subItems.length > 5
-                })}>
+                <ul className="flex flex-nowrap space-x-10 overflow-auto">
                   {
                     item.subItems.map((subItem, i) => {
                       return (
                         <li 
                           key={i} 
-                          className="mb-5 link leading-none opacity-0"
-                          onMouseOver={() => handleLinkHover(subItem)}
+                          className="opacity-0 flex-shrink-0 link"
                         >
                           <Link href={"/" + subItem.link.cached_url}>
-                            <a>
-                              <span className="text-lg border-b border-gray2 relative">
-                                {subItem.name}
-
-                                <span className="animate bg-primary absolute left-0 -bottom-px w-0 h-px transition-all" />
-                              </span>
+                            <a className="text-base uppercase">
+                              {subItem.name}
                             </a>
                           </Link>
                         </li>

@@ -58,7 +58,7 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
             : null
           }
         </div>
-        <div className="w-full xl:w-7/12 px-8">
+        <div className="w-full xl:w-7/12 md:px-8">
           <RichText 
             text={title}
             className="mt-5 mb-3"
@@ -67,7 +67,7 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
           <Slideshow
             className="xl:pr-16"
             showSlides={{
-              sm: 1,
+              sm: 2,
               lg: 3,
               xl: 2,
             }} 

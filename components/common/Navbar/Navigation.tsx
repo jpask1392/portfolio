@@ -50,16 +50,16 @@ const Navigation: React.FC<NavProps> = ({
       ])}
     >
       <nav 
-        className="h-full lg:px-4 max-w-screen-2xl mx-auto flex justify-end relative" 
+        className="h-full xl:px-4 max-w-screen-2xl mx-auto flex justify-end relative" 
         role="navigation"
       >
 
-        <div className="lg:hidden absolute top-full w-full inset-x-0 mt-px">
+        <div className="xl:hidden absolute top-full w-full inset-x-0 mt-px">
           { active && <MobileMenu menu={navigationList} /> }
         </div>
 
         {/* Logo - visible mobile only */}
-        {/* <div className="lg:hidden flex-1 pl-5 flex items-center">
+        {/* <div className="xl:hidden flex-1 pl-5 flex items-center">
           <div className="text-white">
             <Link href="/">
               <a aria-label="Company logo">
@@ -73,13 +73,13 @@ const Navigation: React.FC<NavProps> = ({
         <button
           aria-label="Navigation Menu"
           onClick={() => setActive(!active)}
-          className="lg:hidden h-full bg-primary aspect-square ml-4 md:ml-0 flex items-center flex-1"
+          className="xl:hidden h-full bg-primary aspect-square ml-4 md:ml-0 flex items-center flex-1"
         >
           <Hamburger size={25}/>
         </button>
 
         {/* Flexs size */}
-        <div className="h-full flex-1 hidden lg:block">
+        <div className="h-full flex-1 hidden xl:block">
           <ul className="h-full flex text-secondary">
           {
             navigationList.map((link: any, i: number) => {

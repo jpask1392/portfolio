@@ -85,7 +85,7 @@ const Hero: React.FC<Props> = ({
             <div className="bg-secondaryLight absolute left-0 right-0 bottom-0 flex justify-center">
               <div className="py-3 container">
                 <div className="flex items-center mx-auto max-w-screen-lg">
-                  <h3 className="text-secondary text-4xl mr-12 shrink-0">As Seen on</h3>
+                  <h3 className="text-secondary text-xs md:text-4xl mr-4 md:mr-12 shrink-0">As Seen on</h3>
                   <div>
                     <CustomImage 
                       image={asSeenOn} 

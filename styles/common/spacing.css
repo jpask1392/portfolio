@@ -1,11 +1,11 @@
 :root {
-  --section-spacing: 2.3rem;
-  --n-section-spacing: -2.3rem;
+  --section-spacing: 1.75rem;
+  --n-section-spacing: -1.75rem;
 
-  /* @screen md {
-    --section-spacing: 8rem;
-    --n-section-spacing: -8rem;
-  } */
+  @screen md {
+    --section-spacing: 2.3rem;
+    --n-section-spacing: -2.3rem;
+  }
 
   /* @screen xl {
     --section-spacing: 12.5rem;

@@ -60,7 +60,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
         tileStyle === "secondary" ? (
           <div className="p-4 text-center w-full relative z-10">
             <Link href={'collection/' + collection?.handle}>
-              <a className="font-header font-xl uppercase underline text-secondary">
+              <a className="font-header text-xs xl:text-xl uppercase underline text-secondary">
                 {collection?.title || <Skeleton count={2} />}
               </a>
             </Link>

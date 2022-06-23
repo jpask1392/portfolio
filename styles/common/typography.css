@@ -4,7 +4,7 @@
     uppercase
     font-bold
     leading-none
-    text-11xl 
+    text-10xl 
     md:text-12xl
     xl:text-13xl;
 }
@@ -29,7 +29,7 @@ h2,
     font-bold
     leading-none
     tracking-narrow
-    text-3xl
+    text-5xl
     md:text-9xl
     xl:text-11xl;
 }
@@ -50,7 +50,7 @@ h3,
 h4,
 .h4 {
   @apply 
-    /* text-lg */
+    text-base
     md:text-2xl
     xl:text-4xl
     leading-none;

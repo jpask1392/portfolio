@@ -126,7 +126,7 @@ const Slideshow: React.FC<Props> = ({
           </button>
         </div>
 
-        <div className="container mt-12">
+        <div className="container mt-4 md:mt-12">
           <div ref={paginationContainerRef} className="pagination-container" />
         </div>
      </Swiper>

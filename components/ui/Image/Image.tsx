@@ -8,6 +8,8 @@ import { gsap } from 'gsap';
 
 interface Props {
   image: storyBlokImage | undefined
+  imageTablet?: storyBlokImage | undefined
+  imageMobile?: storyBlokImage | undefined
   maxWidth?: number
   preload?: boolean
   align?: 'center' | 'start' | 'end'

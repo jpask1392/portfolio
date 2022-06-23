@@ -16,7 +16,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
 }) => {
   return (
     <article className="featured-collection-tile">
-      <div className={cn("bg-gray3 text-white h-full flex items-end relative", {
+      <div className={cn("text-white h-full flex items-end relative", {
         "aspect-square": tileStyle === "primary",
         "aspect-[14/16]": tileStyle === "secondary"
       })}>

@@ -13,7 +13,7 @@ import Grid from "@/components/ui/Grid";
 import RichText from "@/components/ui/RichText";
 import ButtonGroup from "@/components/ui/ButtonGroup";
 import Button from "@/components/ui/Button";
-import Image from "@/components/ui/Image";
+import { ImageModule } from "@/components/ui/Image";
 import Header from "@/components/ui/Header";
 import Slideshow from "@/components/ui/Slideshow";
 import Accordion from "@/components/ui/Accordion";
@@ -68,7 +68,7 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     'rich-text': RichText,
     'button-group': ButtonGroup,
     button: Button,
-    image: Image,
+    image: ImageModule,
     slideshow: Slideshow,
     accordion: Accordion,
     splitTiledImage: SplitTiledImage,

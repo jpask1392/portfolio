@@ -1,3 +1,4 @@
+import CustomImage from "@/components/ui/Image";
 import { SbEditableContent } from "@/types/storyBlok";
 import NextImage from 'next/image';
 import cn from "classnames";
@@ -18,8 +19,10 @@ interface Props {
   sbEditable?: SbEditableContent
 }
 
-const CustomImage: React.FC<Props> = ({
+const ImageModule: React.FC<Props> = ({
   image,
+  imageTablet,
+  imageMobile,
   maxWidth,
   align = 'start',
   preload,
@@ -72,20 +75,6 @@ const CustomImage: React.FC<Props> = ({
     </div>
   )
 
-  const dimensions = {
-    width: 0,
-    height: 0
-  }
-
-  if (image.width || image.height) {
-    dimensions['width'] = image.width || 0;
-    dimensions['height'] = image.height || 0;
-  } else {
-    // storyblok solution
-    dimensions['width'] = parseInt(image.filename?.split('/')[5].split('x')[0]);
-    dimensions['height'] = parseInt(image.filename?.split('/')[5].split('x')[1]);
-  }
-
   const containerClasses = cn(className, [
     'relative ui-image',
     { 
@@ -95,19 +84,6 @@ const CustomImage: React.FC<Props> = ({
       'h-full' : layout === 'fill',
     }
   ]);
-
-  const dataBlurURL = () => {
-    if (image.filename.includes('storyblok')) {
-      return `${image.filename}/m/10x10`;
-    }
-
-    if (image.filename.includes('shopify')) {
-      return image.thumbnail_url;
-    }
-
-    return '/';
-  }
-
 
   return (
     <div
@@ -119,17 +95,46 @@ const CustomImage: React.FC<Props> = ({
         image.filename && (
           <>
             <div className={`relative z-10 flex justify-${align} h-full`} ref={containerRef}>
-              <NextImage
-                src={image.filename}
-                alt={image.alt || 'Image'}
-                width={layout != 'fill' ? dimensions.width : undefined}
-                height={layout != 'fill' ? dimensions.height : undefined}
-                placeholder="blur"
-                blurDataURL={dataBlurURL()}
-                priority={preload}
+              <CustomImage
+                className={cn({
+                  "hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
+                  // "lg:block" : imageMobile && imageMobile.id,
+                  "lg:block" : imageTablet && imageTablet.id,
+                })}
+                image={image}
+                preload={preload}
                 layout={layout}
                 objectFit={objectFit}
               />
+
+              {
+                imageTablet?.id ? (
+                  <CustomImage
+                    className={cn("md:block lg:hidden", {
+                      "hidden" : imageMobile && imageMobile.id,
+                    })}
+                    image={imageTablet}
+                    preload={preload}
+                    layout={layout}
+                    objectFit={objectFit}
+                  />
+                ) : null
+              }
+{/* 
+              {
+                imageMobile?.id ? (
+                  <CustomImage
+                    className={cn({
+                      "xl:hidden" : imageTablet && imageTablet.id,
+                      // ":hidden" : !imageTablet || imageTablet && !imageTablet.id,
+                    })}
+                    image={imageMobile} 
+                    layout="fill" 
+                    objectFit="cover" 
+                    preload
+                  />
+                ) : null
+              } */}
 
               {/* Overlay content */}
               <div className={cn("absolute p-20 xl:p-24", {
@@ -148,4 +153,4 @@ const CustomImage: React.FC<Props> = ({
   );
 };
 
-export default CustomImage;
+export default ImageModule;

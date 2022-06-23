@@ -20,6 +20,8 @@ const FeaturedProducts: React.FC<Props> = ({
     (async () => {
       /**
        * Get collection from Shopify API
+       * 
+       * - TODO: Use SWR for this call
        */
       if (collectionHandle && !productID) {
         const res = await fetch(`/api/catalog/collections?handle=${encodeURIComponent(collectionHandle)}`);

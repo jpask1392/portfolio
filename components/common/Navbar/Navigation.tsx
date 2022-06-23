@@ -50,12 +50,15 @@ const Navigation: React.FC<NavProps> = ({
       ])}
     >
       <nav 
-        className="h-full xl:px-4 max-w-screen-2xl mx-auto flex justify-end relative" 
+        className="h-full px-8 xl:px-4 max-w-screen-2xl mx-auto flex justify-end relative" 
         role="navigation"
       >
 
         <div className="xl:hidden absolute top-full w-full inset-x-0 mt-px">
-          { active && <MobileMenu menu={navigationList} /> }
+          <MobileMenu 
+            menu={navigationList} 
+            active={active}
+          /> 
         </div>
 
         {/* Logo - visible mobile only */}
@@ -132,7 +135,7 @@ const Navigation: React.FC<NavProps> = ({
         <Link href={'/' + ctaLink?.cached_url}>
           <a 
             aria-label={ctaText}
-            className="font-medium text-base h-full hidden md:flex items-center px-8 xl:px-14 ml-4 xl:ml-14"
+            className="font-medium text-base h-full hidden xl:flex items-center px-8 xl:px-14 ml-4 xl:ml-14 uppercase font-header"
           >
             {ctaText}
           </a>

@@ -13,17 +13,21 @@ const FooterNewsletter: React.FC<Props> = ({
   return (
     <Form 
       action="newsletter"
-    >
-      <div className="w-full relative h-14">
+    > 
+      <div className="mb-2 flex">
+        <p className="text-base font-medium text-secondaryLight mr-5">{newsletterTitle}</p>
+        <p className="text-base font-medium text-secondaryLight">{newsletterText}</p>
+      </div>
+      <div className="w-full relative h-7">
         <input 
           type="text" 
-          className="bg-gray2 w-full rounded-full absolute inset-0 pl-5 pr-20" 
-          placeholder="Email Address" 
+          className="bg-transparent w-full absolute inset-0 pr-20 border-b border-secondaryLight" 
+          placeholder="Email" 
         />
         <input 
           type="submit" 
-          value="Sign up"
-          className="absolute z-10 right-5 top-1/2 tranform -translate-y-1/2 font-medium text-fadedText cursor-pointer"
+          value="Subscribe"
+          className="absolute z-10 right-0 top-1/2 tranform -translate-y-1/2 font-medium text-fadedText cursor-pointer underline"
         />
       </div>
     </Form>

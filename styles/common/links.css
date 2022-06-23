@@ -31,10 +31,10 @@
 }
 
 .button.on-dark {
-  @apply bg-primary;
+  @apply bg-secondary text-white;
 
   &:hover {
-    @apply bg-white border-white text-primary;
+    @apply bg-secondaryLight border-secondaryLight text-primary;
   }
 }
 

@@ -52,7 +52,7 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
       onMouseLeave={handleOnMouseLeave}
     >
       <StoryBlokLink
-        classes={navLinkClasses}
+        className={navLinkClasses}
         sbLink={link}
       >
         <span className="flex-1">{name}</span>

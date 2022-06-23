@@ -64,7 +64,7 @@ const CartDrawer: React.FC<Props> = () => {
       "w-full",
       "max-w-cart",
       "h-screen",
-      "bg-black",
+      "bg-primary",
       "z-50",
       "inset-y-0",
       "transition-all",
@@ -103,7 +103,7 @@ const CartDrawer: React.FC<Props> = () => {
               }
             </ul>
           ) : (
-            <p>Your cart is current empty.</p>
+            <p>Your cart is currently empty.</p>
           )
         }
         </div>
@@ -148,7 +148,7 @@ const CartDrawer: React.FC<Props> = () => {
           </div>
           
           <ButtonGroup className='px-10 space-y-4 space-x-0'>
-            <Button text="Apply Discount ('TEST')" ajaxClick={async (e) => {
+            {/* <Button text="Apply Discount ('TEST')" ajaxClick={async (e) => {
                 try {
                   const res = await fetch(`/api/checkout?action=applyDiscount`, {
                     'method': 'POST',
@@ -181,10 +181,12 @@ const CartDrawer: React.FC<Props> = () => {
                 }
 
               }} 
-            />
+            /> */}
             <Button 
               text="Checkout"
               link={{url: cart?.url}}
+              className="!max-w-none"
+              onDark
             />
           </ButtonGroup>
         </div>

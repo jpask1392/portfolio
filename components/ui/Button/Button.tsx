@@ -43,7 +43,7 @@ const Button: React.FC<button> = ({
     <>
       <StoryBlokLink 
         sbLink={isSubmit ? false : link}
-        classes={cn({
+        className={cn({
           "pointer-events-none" : loading,
           "md:w-full" : buttonStyle !== 'link'
         })}

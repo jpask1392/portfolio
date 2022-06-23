@@ -42,7 +42,7 @@ const Navigation: React.FC<NavProps> = ({
       id="primary-header"
       className={cn(className, [
         "bg-primary",
-        "h-12",
+        "h-20 xl:h-12",
         // "border-b border-tertiary",
         "z-20",
         "sticky",
@@ -59,7 +59,7 @@ const Navigation: React.FC<NavProps> = ({
         </div>
 
         {/* Logo - visible mobile only */}
-        <div className="lg:hidden flex-1 pl-5 flex items-center">
+        {/* <div className="lg:hidden flex-1 pl-5 flex items-center">
           <div className="text-white">
             <Link href="/">
               <a aria-label="Company logo">
@@ -67,7 +67,16 @@ const Navigation: React.FC<NavProps> = ({
               </a>
             </Link>
           </div>
-        </div>
+        </div> */}
+
+        {/* mobile Menu */}
+        <button
+          aria-label="Navigation Menu"
+          onClick={() => setActive(!active)}
+          className="lg:hidden h-full bg-primary aspect-square ml-4 md:ml-0 flex items-center flex-1"
+        >
+          <Hamburger size={25}/>
+        </button>
 
         {/* Flexs size */}
         <div className="h-full flex-1 hidden lg:block">
@@ -128,15 +137,6 @@ const Navigation: React.FC<NavProps> = ({
             {ctaText}
           </a>
         </Link>
-
-        {/* mobile Menu */}
-        <button
-          aria-label="Navigation Menu"
-          onClick={() => setActive(!active)}
-          className="lg:hidden h-full bg-primary aspect-square ml-4 md:ml-0 flex items-center justify-center"
-        >
-          <Hamburger size={16}/>
-        </button>
       </nav>
     </header>
   );

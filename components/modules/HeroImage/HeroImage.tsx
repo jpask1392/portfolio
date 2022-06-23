@@ -5,7 +5,6 @@ import { ReactNode, Component } from 'react';
 import { useRef } from 'react';
 import CustomImage from '@/components/ui/Image';
 import type { storyBlokImage } from '@/types/storyBlok';
-// import MediaCoverage from '';
 
 interface Props {
   className?: string
@@ -25,21 +24,20 @@ const Hero: React.FC<Props> = ({
 
   const heroClassNames = cn(className, [
     "hero",
-    "lg:h-[90vh]",
+    "h-[90vh]",
     "relative",
     "overflow-hidden",
   ], {});
 
   const headerRef = useRef<null | HTMLElement>(null);
-  const scrollerRef = useRef<null | HTMLDivElement>(null);
 
   return (
     <section className={heroClassNames} ref={headerRef}>
-      <div ref={scrollerRef} className="h-full">
+      <div className="h-full flex items-end xl:items-start">
 
         {
           (TopBlockComponent || BottomBlockComponent) && (
-            <div className="pt-40">
+            <div className="w-full pb-44 xl:pt-40">
               <Container el="div">
                 <div className="w-full h-full flex flex-col" style={{ maxWidth: 940 }}>
                   { TopBlockComponent && <TopBlockComponent /> }
@@ -60,7 +58,7 @@ const Hero: React.FC<Props> = ({
 
         {/* Image Block */}
         <div className={cn([
-          "absolute inset-0 py-8 lg:py-0 z-0"
+          "absolute inset-0 py-0 z-0"
         ])}>
           <div className="h-full w-screen">
             <CustomImage 

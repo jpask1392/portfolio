@@ -50,7 +50,6 @@ const Slideshow: React.FC<Props> = ({
   ])
 
   const handleRefConnection = (swiper: any) => {
-    console.log(children)
     const { 
       navigation = false, 
       pagination = false, 
@@ -89,13 +88,13 @@ const Slideshow: React.FC<Props> = ({
         // onBeforeInit={handleRefConnection}
         onBreakpoint={handleRefConnection}
         breakpoints={{
-          640: {
-            slidesPerView: showSlides.sm,
-            spaceBetween: spaceBetween,
-          },
-          1024: {
+          // 640: {
+          //   slidesPerView: showSlides.sm,
+          //   spaceBetween: spaceBetween,
+          // },
+          768: {
             slidesPerView: showSlides.lg,
-            spaceBetween: spaceBetween,
+            spaceBetween: spaceBetween === 90 ? 50 : spaceBetween,
           },
           1440: {
             slidesPerView: showSlides.xl,
@@ -118,7 +117,7 @@ const Slideshow: React.FC<Props> = ({
           })
         }
 
-        <div className="absolute top-1/2 inset-x-0 transform -translate-y-1/2 z-10 pointer-events-none hidden lg:flex justify-between">
+        <div className="absolute top-1/2 inset-x-0 transform -translate-y-1/2 z-10 pointer-events-none hidden xl:flex justify-between">
           <button ref={navigationPrevRef} className={cn(navigationArrowClasses)}>
             <SlideArrow direction="previous" className="text-white" />
           </button>

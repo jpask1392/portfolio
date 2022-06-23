@@ -43,7 +43,7 @@ h3,
     leading-tighter
     tracking-snug
     text-xl
-    md:text-8xl
+    md:text-5xl
     xl:text-10xl;
 }
 
@@ -51,7 +51,7 @@ h4,
 .h4 {
   @apply 
     /* text-lg */
-    md:text-4xl
+    md:text-2xl
     xl:text-4xl
     leading-none;
 }

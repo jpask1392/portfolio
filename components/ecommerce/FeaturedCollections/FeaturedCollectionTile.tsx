@@ -22,7 +22,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
       })}>
         {
           tileStyle === "primary" ? (
-            <div className="pb-24 pl-24 w-full relative z-10">
+            <div className="pb-12 pl-12 xl:pb-24 xl:pl-24 w-full relative z-10">
               <div className="animate-up">
                 <h3 className={`font-bold relative z-10 ${collection ? 'h3' : ''}`}>
                   {collection?.title || <Skeleton count={2} />}

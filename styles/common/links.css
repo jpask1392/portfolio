@@ -3,7 +3,8 @@
 
   @apply 
     w-full
-    text-xl
+    text-base
+    xl:text-xl
     text-center
     inline-flex
     justify-center

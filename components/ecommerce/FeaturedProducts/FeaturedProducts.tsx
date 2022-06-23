@@ -44,7 +44,7 @@ const FeaturedProducts: React.FC<Props> = ({
       <Slideshow
         showSlides={{
           sm: 2,
-          lg: 2,
+          lg: 3,
           xl: 3,
         }} 
         spaceBetween={90}

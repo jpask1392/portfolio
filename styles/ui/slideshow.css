@@ -10,10 +10,10 @@
 }
 
 .swiper-pagination-bullets {
-  @apply flex justify-center space-x-6;
+  @apply flex justify-center space-x-3 xl:space-x-6;
 
   .swiper-pagination-bullet {
-    @apply w-4 h-4 opacity-30 bg-secondary rounded-full;
+    @apply w-2.5 h-2.5 xl:w-4 xl:h-4 opacity-30 bg-secondary rounded-full;
 
     &.swiper-pagination-bullet-active {
       @apply opacity-100;

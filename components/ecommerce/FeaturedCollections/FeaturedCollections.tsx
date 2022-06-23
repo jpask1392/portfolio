@@ -74,9 +74,9 @@ const FeaturedCollections: React.FC<Props> = ({
         {
           collections?.map((collection, i) => 
             <div key={i} className={cn("collection-item-wrapper px-4 pb-8", {
-              "w-full md:w-1/2" : tilesPerRow === '2',
+              "w-full xl:w-1/2" : tilesPerRow === '2',
               "w-full md:w-1/3" : tilesPerRow === '3',
-              "w-full md:w-1/4" : tilesPerRow === '4'
+              "w-full md:w-1/2 xl:w-1/4" : tilesPerRow === '4'
             })}>
               <FeaturedCollectionTile 
                 collection={collection} 

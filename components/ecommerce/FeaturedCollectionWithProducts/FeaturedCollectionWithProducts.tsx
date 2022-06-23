@@ -38,37 +38,37 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
 
   return (
     <div className={cn(className, "overflow-hidden")}>
-      <div className="flex -mx-8">
-        <div className="w-5/12 px-8">
+      <div className="container xl:max-w-none xl:px-0 xl:w-auto flex xl:-mx-8">
+        <div className="hidden xl:block w-5/12 px-8">
           {
             collection ?
-            <div className="h-full relative">
-              <CustomImage 
-                image={collection.image}
-                objectFit="cover"
-                layout="fill"
-              /> 
-              <div className="absolute inset-x-0 bottom-12 z-10 px-16">
-                <Button 
-                  text="Shop All Acrylic"
-                  className="!max-w-none"
-                />
-              </div>
-            </div> 
+              <div className="hidden xl:block h-full relative">
+                <CustomImage 
+                  image={collection.image}
+                  objectFit="cover"
+                  layout="fill"
+                /> 
+                <div className="absolute inset-x-0 bottom-12 z-10 px-16">
+                  <Button 
+                    text="Shop All Acrylic"
+                    className="!max-w-none"
+                  />
+                </div>
+              </div> 
             : null
           }
         </div>
-        <div className="w-7/12 px-8">
+        <div className="w-full xl:w-7/12 px-8">
           <RichText 
             text={title}
             className="mt-5 mb-3"
           />
 
           <Slideshow
-            className="pr-16"
+            className="xl:pr-16"
             showSlides={{
               sm: 1,
-              lg: 2,
+              lg: 3,
               xl: 2,
             }} 
             spaceBetween={90}

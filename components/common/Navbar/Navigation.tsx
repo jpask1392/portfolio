@@ -1,3 +1,4 @@
+import CustomImage from "@/components/ui/Image";
 import Logo from "@/components/ui/Logo";
 import cn from "classnames";
 import DynamicIcon from "@/components/icons/DynamicIcon";
@@ -61,17 +62,6 @@ const Navigation: React.FC<NavProps> = ({
           /> 
         </div>
 
-        {/* Logo - visible mobile only */}
-        {/* <div className="xl:hidden flex-1 pl-5 flex items-center">
-          <div className="text-white">
-            <Link href="/">
-              <a aria-label="Company logo">
-                <Logo className="fill-current h-3" />
-              </a>
-            </Link>
-          </div>
-        </div> */}
-
         {/* mobile Menu */}
         <button
           aria-label="Navigation Menu"
@@ -80,6 +70,17 @@ const Navigation: React.FC<NavProps> = ({
         >
           <Hamburger size={25}/>
         </button>
+
+        {/* Logo */}
+        <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+          <div className="text-secondary">
+            <Link href="/">
+              <a aria-label="Company logo">
+                <Logo className="fill-current h-10" />
+              </a>
+            </Link>
+          </div>
+        </div>
 
         {/* Flexs size */}
         <div className="h-full flex-1 hidden xl:block">

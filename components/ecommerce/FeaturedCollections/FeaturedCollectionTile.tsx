@@ -1,8 +1,9 @@
+import cn from 'classnames';
 import CustomImage from '@/components/ui/Image';
 import Button from "@/components/ui/Button";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
-import Link from 'next/link'
+import Link from 'next/link';
 
 interface Props {
   collection: any,
@@ -15,7 +16,10 @@ const FeaturedCollectionTile: React.FC<Props> = ({
 }) => {
   return (
     <article className="featured-collection-tile">
-      <div className="aspect-square bg-gray3 text-white h-full flex items-end relative">
+      <div className={cn("bg-gray3 text-white h-full flex items-end relative", {
+        "aspect-square": tileStyle === "primary",
+        "aspect-[14/16]": tileStyle === "secondary"
+      })}>
         {
           tileStyle === "primary" ? (
             <div className="pb-24 pl-24 w-full relative z-10">
@@ -23,7 +27,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
                 <h3 className={`font-bold relative z-10 ${collection ? 'h3' : ''}`}>
                   {collection?.title || <Skeleton count={2} />}
                 </h3>
-                <p className="uppercase">
+                <p className="uppercase font-medium">
                   THE KOLINSKY BRUSh KIT & SINGLE BRUSHES
                 </p>
               </div>

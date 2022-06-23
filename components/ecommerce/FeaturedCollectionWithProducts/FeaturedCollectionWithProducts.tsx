@@ -1,3 +1,4 @@
+import Button from '@/components/ui/Button';
 import CustomImage from '@/components/ui/Image/Image';
 import RichText from '@/components/ui/RichText';
 import cn from 'classnames';
@@ -17,8 +18,7 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
   collectionHandle,
   title
 }) => {
-  const [ collection, setCollection ] = useState<any>({ products: [] });
-  const containerRef = useRef(null);
+  const [ collection, setCollection ] = useState<any>({ products: [null, null, null, null] });
 
   /**
    * Using an SWR (stale-while-revalidate) hook here 
@@ -36,31 +36,36 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
     if (data) setCollection(data);
   }, [data])
 
-  useEffect(() => {
-    console.log(error)
-  }, [error])
-
   return (
-    <div className={cn(className, "overflow-hidden")} ref={containerRef}>
+    <div className={cn(className, "overflow-hidden")}>
       <div className="flex -mx-8">
         <div className="w-5/12 px-8">
           {
-            collection ? 
+            collection ?
+            <div className="h-full relative">
               <CustomImage 
                 image={collection.image}
                 objectFit="cover"
                 layout="fill"
               /> 
+              <div className="absolute inset-x-0 bottom-12 z-10 px-16">
+                <Button 
+                  text="Shop All Acrylic"
+                  className="!max-w-none"
+                />
+              </div>
+            </div> 
             : null
           }
         </div>
         <div className="w-7/12 px-8">
           <RichText 
             text={title}
-            className="mt-4 mb-3"
+            className="mt-5 mb-3"
           />
 
           <Slideshow
+            className="pr-16"
             showSlides={{
               sm: 1,
               lg: 2,

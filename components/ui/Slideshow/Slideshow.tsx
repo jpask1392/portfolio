@@ -50,6 +50,7 @@ const Slideshow: React.FC<Props> = ({
   ])
 
   const handleRefConnection = (swiper: any) => {
+    console.log(children)
     const { 
       navigation = false, 
       pagination = false, 
@@ -76,6 +77,7 @@ const Slideshow: React.FC<Props> = ({
     <div
       className={cn(className, "ui-slideshow w-full")}
     >
+      
       <Swiper
         threshold={10}
         modules={[Navigation, A11y, Pagination]}
@@ -83,7 +85,8 @@ const Slideshow: React.FC<Props> = ({
         enabled={children.length > 1}
         slidesPerView={showSlides.sm || 1}
         spaceBetween={spaceBetween > 30 ? 22 : spaceBetween}
-        onBeforeInit={handleRefConnection}
+        onSwiper={handleRefConnection}
+        // onBeforeInit={handleRefConnection}
         onBreakpoint={handleRefConnection}
         breakpoints={{
           640: {

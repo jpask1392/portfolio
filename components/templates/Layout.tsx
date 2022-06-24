@@ -100,7 +100,9 @@ const Layout: React.FC<Props> = ({
         <Navigation {...navProps} />
 
         <div data-scroll-section>
-          <main className="debug-screens flex items-start">
+          <main className={cn("flex items-start", {
+            "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
+          })}>
             <div className="main-wrapper">
 
               {/* children will be pulled from storyblok */}

@@ -45,6 +45,7 @@ const CustomTabs: React.FC<Props> = ({
               >
                 <Header
                   tag="h3"
+                  size="h3"
                 >
                   {item.title}
                 </Header>

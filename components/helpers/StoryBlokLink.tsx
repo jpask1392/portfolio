@@ -31,7 +31,7 @@ const StoryBlokLink: React.FC<Props> = ({
       {
         (!url.match(/^(https?:)?\/\//) && linktype !== 'email') ? (
           <NextLink href={cached_url ? '/' + cached_url + (anchor ? `#${anchor}` : '') : '/'}>
-            <a className={className} aria-label={`Link to ${cached_url}`}>
+            <a className={className + " transition-opacity hover:opacity-70"} aria-label={`Link to ${cached_url}`}>
               {children}
             </a>
           </NextLink>

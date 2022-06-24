@@ -1,3 +1,4 @@
+import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import CustomImage from "@/components/ui/Image";
 import { SbEditableContent } from "@/types/storyBlok";
 import NextImage from 'next/image';
@@ -5,6 +6,7 @@ import cn from "classnames";
 import type { storyBlokImage } from '@/types/storyBlok';
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from 'gsap';
+import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 
 interface Props {
   image: storyBlokImage | undefined
@@ -16,7 +18,7 @@ interface Props {
   className?: string
   layout?: 'fill' | undefined
   objectFit?: 'contain' | 'cover' | undefined
-  pin?: boolean
+  animate?: boolean
   alignOverlayContent?: any
   sbEditable?: SbEditableContent
 }
@@ -31,33 +33,31 @@ const ImageModule: React.FC<Props> = ({
   layout,
   objectFit,
   className,
-  pin,
+  animate,
   sbEditable,
   children,
   alignOverlayContent,
 }) => {
   const tl = useRef<any>(null);
   const containerRef = useRef<null | HTMLDivElement>(null);
-  const canUseDOM = typeof window !== 'undefined';
-  const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
+  const imageContainerRef = useRef<null | HTMLDivElement>(null);
+  const { scroll } = useSmoothScrollContext();
 
   useIsomorphicLayoutEffect(() => {
-    if (pin && containerRef?.current) {
+    if (scroll && animate) {
       tl.current = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: `top top+=${document.getElementById('primary-header')?.clientHeight}`,
+          trigger: imageContainerRef.current,
           scrub: 1,
-          pin: true,
-          pinSpacing: false,
           markers: false,
+          scroller: "[data-scroll-container]",
         }
       });
 
-      tl.current.fromTo(containerRef.current, {
-        opacity: 0.6,
+      tl.current.fromTo(imageContainerRef.current, {
+        scale: 1.2,
       }, {
-        opacity: 1,
+        scale: 1,
       })
 
       return () => {
@@ -65,7 +65,7 @@ const ImageModule: React.FC<Props> = ({
         tl.current.kill();
       }
     }
-  }, [pin]);
+  }, [scroll]);
 
   /**
    * TODO: replace with a standard image placeholder when an image doesnt exist
@@ -96,58 +96,64 @@ const ImageModule: React.FC<Props> = ({
       {
         image.filename && (
           <>
-            <div className={`relative z-10 flex justify-${align} h-full`} ref={containerRef}>
-              <CustomImage
-                className={cn({
-                  "!hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
-                  // "lg:block" : imageMobile && imageMobile.id,
-                  "lg:!block" : imageTablet && imageTablet.id,
-                })}
-                image={image}
-                preload={preload}
-                layout={layout}
-                objectFit={objectFit}
-              />
+            <div className={`z-10 flex justify-${align} h-full overflow-hidden`} ref={containerRef}>
+              <div className="relative inset-0 w-full h-full" ref={imageContainerRef}>
+                <CustomImage
+                  className={cn({
+                    "!hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
+                    // "lg:block" : imageMobile && imageMobile.id,
+                    "lg:!block" : imageTablet && imageTablet.id,
+                  })}
+                  image={image}
+                  preload={preload}
+                  layout={layout}
+                  objectFit={objectFit}
+                />
+
+                {
+                  imageTablet?.id ? (
+                    <CustomImage
+                      className={cn("md:!block lg:!hidden", {
+                        "!hidden" : imageMobile && imageMobile.id,
+                      })}
+                      image={imageTablet}
+                      preload={preload}
+                      layout={layout}
+                      objectFit={objectFit}
+                    />
+                  ) : null
+                }
+
+                {/* 
+                  {
+                    imageMobile?.id ? (
+                      <CustomImage
+                        className={cn({
+                          "xl:hidden" : imageTablet && imageTablet.id,
+                          // ":hidden" : !imageTablet || imageTablet && !imageTablet.id,
+                        })}
+                        image={imageMobile} 
+                        layout="fill" 
+                        objectFit="cover" 
+                        preload
+                      />
+                    ) : null
+                  } 
+                */}
+              </div>
 
               {
-                imageTablet?.id ? (
-                  <CustomImage
-                    className={cn("md:!block lg:!hidden", {
-                      "!hidden" : imageMobile && imageMobile.id,
-                    })}
-                    image={imageTablet}
-                    preload={preload}
-                    layout={layout}
-                    objectFit={objectFit}
-                  />
+                children ? (
+                  <div className={cn("absolute p-10 lg:p-20 xl:p-24 text-primary uppercase", {
+                    "bottom-0 right-0 text-right" : alignOverlayContent === "bottom-right",
+                    "bottom-0 left-0" : alignOverlayContent === "bottom-left",
+                    "top-0 right-0 text-right" : alignOverlayContent === "top-right",
+                    "top-0 left-0" : alignOverlayContent === "top-left",
+                  })}>
+                    {children}
+                  </div>
                 ) : null
               }
-
-            {/* 
-              {
-                imageMobile?.id ? (
-                  <CustomImage
-                    className={cn({
-                      "xl:hidden" : imageTablet && imageTablet.id,
-                      // ":hidden" : !imageTablet || imageTablet && !imageTablet.id,
-                    })}
-                    image={imageMobile} 
-                    layout="fill" 
-                    objectFit="cover" 
-                    preload
-                  />
-                ) : null
-              } */}
-
-              {/* Overlay content */}
-              <div className={cn("absolute p-10 lg:p-20 xl:p-24 text-primary uppercase", {
-                "bottom-0 right-0 text-right" : alignOverlayContent === "bottom-right",
-                "bottom-0 left-0" : alignOverlayContent === "bottom-left",
-                "top-0 right-0 text-right" : alignOverlayContent === "top-right",
-                "top-0 left-0" : alignOverlayContent === "top-left",
-              })}>
-                {children}
-              </div>
             </div>
           </>
         )

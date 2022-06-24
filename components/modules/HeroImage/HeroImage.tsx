@@ -2,9 +2,11 @@
 import cn from 'classnames';
 import Container from "@/components/ui/Container";
 import { ReactNode, Component } from 'react';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import CustomImage from '@/components/ui/Image';
 import type { storyBlokImage } from '@/types/storyBlok';
+import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
+import { gsap } from 'gsap';
 
 interface Props {
   className?: string
@@ -25,26 +27,41 @@ const Hero: React.FC<Props> = ({
   imageMobile,
   asSeenOn,
  }) => {
-
-  const heroClassNames = cn(className, [
-    "hero",
-    "h-[90vh] xl:h-auto xl:aspect-video",
-    "relative",
-    "overflow-hidden",
-  ], {});
-
   const headerRef = useRef<null | HTMLElement>(null);
+  const contentRef = useRef<any>(null);
+  const { scroll } = useSmoothScrollContext();
+
+  useEffect(() => {
+    if (scroll) {
+      const tl = gsap.timeline({});
+
+      tl.fromTo(contentRef.current, { 
+        opacity: 0,
+        y: 100,
+      }, {
+        opacity: 1,
+        y: 0,
+        // stagger: 0.15,
+        duration: 0.9,
+        ease: "power4.out",
+        delay: 0.4,
+      });
+    }
+  }, [scroll])
 
   return (
-    <section className={heroClassNames} ref={headerRef}>
-      <div className="h-full flex items-end xl:items-start">
+    <section className="hero overflow-hidden" ref={headerRef}>
+      <div className="flex items-end xl:items-start max-h-[90vh] relative h-[90vh] xl:h-auto xl:aspect-video min-w-[100vw]">
 
         {
           (TopBlockComponent || BottomBlockComponent) && (
-            <div className="w-full pb-44 xl:pt-40">
+            <div 
+              className="w-full pb-44 xl:pt-40 opacity-0 z-10"
+              ref={contentRef}
+            >
               <Container el="div">
                 <div className="w-full h-full flex flex-col" style={{ maxWidth: 940 }}>
-                  { TopBlockComponent && <div data-scroll data-scroll-speed="-1"><TopBlockComponent /></div> }
+                  { TopBlockComponent && <div data-scroll data-scroll-speed="0"><TopBlockComponent /></div> }
 
                   {
                     BottomBlockComponent && (
@@ -64,7 +81,7 @@ const Hero: React.FC<Props> = ({
         <div className={cn([
           "absolute inset-0 py-0 z-0"
         ])}>
-          <div className="h-full w-screen relative">
+          <div className="h-full w-screen relative" data-scroll data-scroll-speed="-1">
             {/* 
               TODO: Move this into a separate repsonsive image component and make resuable
             */}

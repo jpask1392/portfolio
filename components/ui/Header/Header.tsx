@@ -19,6 +19,7 @@ interface Props {
   text?: string
   mobile_text?: string
   sbEditable?: SbEditableContent
+  disableAnimation?: boolean
 }
 
 type Variant = 'h1' | 'h2' | 'h3' | 'h4';
@@ -33,6 +34,7 @@ const Header: React.FC<Props> = ({
   color = 'black',
   size,
   sbEditable,
+  disableAnimation = false
 }) => {
   const { scroll } = useSmoothScrollContext();
 
@@ -54,7 +56,7 @@ const Header: React.FC<Props> = ({
   const componentRef = useRef<null | HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (scroll) {
+    if (scroll && !disableAnimation) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,

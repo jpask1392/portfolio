@@ -20,8 +20,10 @@ const FeaturedCollections: React.FC<Props> = ({
   tileStyle = 'primary',
 }) => {
   const [ collections, setCollections ] = useState<any[]>([...Array(parseInt(tilesPerRow))].map(() => null));
-  const containerRef = useRef(null);
   const { scroll } = useSmoothScrollContext();
+
+  const containerRef = useRef<any>(null);
+  const itemsRef = useRef<any>([])
 
   const queryNames = collectionNames.split(',');
   let queryString = "";
@@ -46,6 +48,11 @@ const FeaturedCollections: React.FC<Props> = ({
     if (data) setCollections(data);
   }, [data])
 
+  // update pointers to refs
+  useEffect(() => {    
+    itemsRef.current = itemsRef.current.slice(0, collections.length);
+ }, [collections]);
+
   useEffect(() => {
     if (scroll) {
       const tl = gsap.timeline({
@@ -57,23 +64,23 @@ const FeaturedCollections: React.FC<Props> = ({
         },
       });
 
-      /**
-       * TODO: change this to a ref list
-       *  - this is causing a flash when another section is placed after it
-       */
-      tl.fromTo('.collection-item-wrapper', { 
-        opacity: 0,
-        y: 50,
-      }, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.15,
-        duration: 0.9,
-        ease: "power4.out",
-        
-      });
+      collections.map((item, i) => {
+        if (!item) return;
+
+        tl.fromTo(itemsRef.current[i], { 
+          opacity: 0,
+          y: 100,
+        }, {
+          opacity: 1,
+          y: 0,
+          // stagger: 0.15,
+          duration: 0.9,
+          ease: "power4.out",
+        }, "-=0.75");
+      })
+      
     }
-  }, [scroll])
+  }, [scroll, collections])
 
   return (
     <div 
@@ -83,11 +90,15 @@ const FeaturedCollections: React.FC<Props> = ({
       <div className="flex flex-wrap -mx-2.5 md:-mx-4 -mb-4 md:-mb-8">
         {
           collections?.map((collection, i) => 
-            <div key={i} className={cn("collection-item-wrapper pb-4 md:pb-8", {
+            <div 
+              key={i}
+              ref={el => (itemsRef.current[i] = el)}
+              className={cn("collection-item-wrapper pb-4 md:pb-8", {
               "w-full lg:w-1/2 px-5 py-8 lg:px-4 odd:bg-primary lg:odd:bg-transparent" : tilesPerRow === '2',
               "w-full md:w-1/3" : tilesPerRow === '3',
               "w-1/2 lg:w-1/4 px-2.5 md:px-4" : tilesPerRow === '4'
-            })}>
+             })}
+            >
               <FeaturedCollectionTile 
                 collection={collection} 
                 tileStyle={tileStyle}

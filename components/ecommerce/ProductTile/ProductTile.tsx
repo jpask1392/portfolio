@@ -92,7 +92,7 @@ const ProductTile: React.FC<Props> = ({
       className={cn("relative group", className)}
       ref={articleRef}
       data-scroll
-      data-scroll-speed={`${index ? index*0.5 : 0}`}
+      // data-scroll-speed={`${index ? index*0.5 : 0}`}
     >
       <div className="absolute top-3 left-3">
         { product?.tags.length ? <InfoPill name={product?.tags}/> : null }

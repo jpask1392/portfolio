@@ -46,9 +46,10 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
               <div className="hidden xl:block h-full relative">
                 <CustomImage 
                   image={collection.image}
+                  // image={null}
                   objectFit="cover"
                   layout="fill"
-                /> 
+                />
                 <div className="absolute inset-x-0 bottom-12 z-10 px-16">
                   <Button 
                     text="Shop All Acrylic"

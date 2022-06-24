@@ -19,7 +19,7 @@ const FeaturedCollections: React.FC<Props> = ({
   tilesPerRow = '2',
   tileStyle = 'primary',
 }) => {
-  const [ collections, setCollections ] = useState<any[]>([null, null, null]);
+  const [ collections, setCollections ] = useState<any[]>([...Array(parseInt(tilesPerRow))].map(() => null));
   const containerRef = useRef(null);
   const { scroll } = useSmoothScrollContext();
 

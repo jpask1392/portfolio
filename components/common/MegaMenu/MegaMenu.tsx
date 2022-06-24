@@ -26,15 +26,17 @@ const MegaMenu: React.FC<Props> = ({
   // visible = true
   const tl = useRef<any>(null);
   const megaMenuRef = useRef<any>(null);
+  // const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    
     if (megaMenuRef.current) {
       tl.current = gsap.timeline({
         paused: true
       });
 
-      tl.current.from(megaMenuRef.current, {
-        autoAlpha: 0
+      tl.current.to(megaMenuRef.current, {
+        autoAlpha: 1
       })
 
       /**
@@ -59,9 +61,9 @@ const MegaMenu: React.FC<Props> = ({
 
   return (
     <div 
-      className={cn(className, "mega-menu absolute top-full inset-x-0 text-primary w-screen left-1/2 -translate-x-1/2", {
+      className={cn(className, "invisible mega-menu absolute top-full inset-x-0 text-primary w-screen left-1/2 -translate-x-1/2", {
         "bg-red-100" : style === "large",
-        "bg-secondary" : style === "narrow"
+        "bg-secondary" : style === "narrow",
       })}
       ref={megaMenuRef}
     >

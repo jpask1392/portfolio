@@ -23,7 +23,8 @@ interface Props {
 const ProductTile: React.FC<Props> = ({ 
   product,
   className,
-  animate
+  animate,
+  index
 }) => {
   const { scroll } = useSmoothScrollContext();
   const hoverEffectRef = useRef(null);
@@ -80,6 +81,8 @@ const ProductTile: React.FC<Props> = ({
     <article 
       className={cn("relative group", className)}
       ref={articleRef}
+      data-scroll
+      data-scroll-speed={`${index*0.5}`}
     >
       <div className="absolute top-3 left-3">
         { product?.tags.length ? <InfoPill name={product?.tags}/> : null }

@@ -57,6 +57,7 @@ const FeaturedProducts: React.FC<Props> = ({
               product={product} 
               key={i}
               animate
+              index={i}
             />
           )
         }

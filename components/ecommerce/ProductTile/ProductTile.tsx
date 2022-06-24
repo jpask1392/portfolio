@@ -180,9 +180,10 @@ const ProductTile: React.FC<Props> = ({
                       <div className="flex md:block text-sm mt-2">
                         {  
                           product.options?.map((option: any) => {
-                            return option.values.map((color: string) => {
+                            return option.values.map((color: string, i: number) => {
                               return (
                                 <span 
+                                  key={i}
                                   className="w-4 h-4 rounded-full border-black border inline-block mr-2 cursor-pointer"
                                   style={{
                                     background: colorMap[color]

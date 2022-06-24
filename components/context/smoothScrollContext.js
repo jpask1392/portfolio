@@ -55,15 +55,12 @@ export const SmoothScrollProvider = ({ children, options }) => {
            * 
            */
           ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-          setTimeout(() => {
-            ScrollTrigger.refresh();
-          }, 1000)
+          ScrollTrigger.refresh();
 
           // add resize to remove on cleanup
           resize = () => {
-            setTimeout(() => {
-              ScrollTrigger.refresh();
-            }, 1000)
+            console.log('refresh')
+            ScrollTrigger.refresh();
           }
 
           window.addEventListener("resize", resize);
@@ -73,6 +70,11 @@ export const SmoothScrollProvider = ({ children, options }) => {
           throw Error(`[SmoothScrollProvider]: ${error}`)
         }
       })()
+    } else {
+      // trigger a resize
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 1000)
     }
 
     return () => {

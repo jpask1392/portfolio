@@ -1,4 +1,5 @@
 import { SbEditableContent } from "@/types/storyBlok";
+import Image from "next/image";
 
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
@@ -20,6 +21,7 @@ interface Props {
   mobile_text?: string
   sbEditable?: SbEditableContent
   disableAnimation?: boolean
+  decoration?: string | "squiggle"
 }
 
 type Variant = 'h1' | 'h2' | 'h3' | 'h4';
@@ -34,7 +36,8 @@ const Header: React.FC<Props> = ({
   color = 'black',
   size,
   sbEditable,
-  disableAnimation = false
+  disableAnimation = false,
+  decoration
 }) => {
   const { scroll } = useSmoothScrollContext();
 
@@ -106,7 +109,7 @@ const Header: React.FC<Props> = ({
   return (
     <div 
       ref={componentRef}
-      className={cn(className, "ui-header", {
+      className={cn(className, "ui-header relative", {
         [`text-${align}`] : align,
         [`text-${color}`] : color,
       })} 
@@ -128,7 +131,22 @@ const Header: React.FC<Props> = ({
 
         {
           !mobile_text && text ? (
-            render(text, { nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver } }) 
+            <>
+              {
+                decoration === "squiggle" ? (
+                  <div className="absolute bottom-1/2 w-full left-1/3 ml-5">
+                    <Image 
+                      src='/squiggle.png'
+                      width={1036}
+                      height={222}
+                      className="absolute left-full"
+                    />
+                  </div>
+                ) : null
+              }
+              {render(text, { nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver } }) }
+            </>
+            
           ) : children
         }
       </Component>

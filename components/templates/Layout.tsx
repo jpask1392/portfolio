@@ -103,7 +103,7 @@ const Layout: React.FC<Props> = ({
           <main className={cn("flex items-start", {
             "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
           })}>
-            <div className="main-wrapper">
+            <div className="main-wrapper overflow-hidden">
 
               {/* children will be pulled from storyblok */}
               {children}

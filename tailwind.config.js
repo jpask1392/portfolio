@@ -98,8 +98,6 @@ module.exports = {
       '12xl': '5.5625rem', // 89px - YES
       '13xl': '7.875rem', // 126px - YES
     },
-    ringColor: 'red',
-    ringOffsetColor: 'red',
     extend: {
       colors: {
         primary: '#EDE6DB',

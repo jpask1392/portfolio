@@ -81,7 +81,7 @@ const Hero: React.FC<Props> = ({
         <div className={cn([
           "absolute inset-0 py-0 z-0"
         ])}>
-          <div className="h-full w-screen relative" data-scroll data-scroll-speed="-1">
+          <div className="h-full w-screen relative" data-scroll data-scroll-speed="0.5">
             {/* 
               TODO: Move this into a separate repsonsive image component and make resuable
             */}

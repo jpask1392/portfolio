@@ -22,8 +22,8 @@ const Footer: React.FC<Props> = ({
   newsletterText,
 }) => {
   return (
-    <footer className={cn(className, "bg-primary pt-8 pb-10 md:pb-16")}>
-      <div className="container">
+    <footer className={cn(className, "bg-primary pt-8 pb-10 md:pb-16 mt-14")}>
+      <div className="max-w-screen-2xl px-5 mx-auto">
         <div className="w-full flex flex-wrap">
 
           {/* navigation primary */}

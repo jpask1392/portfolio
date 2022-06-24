@@ -23,16 +23,16 @@ const FooterNewsletter: React.FC<Props> = ({
         </p>
       </div>
 
-      <div className="w-full relative h-7 text-xs md:text-base xl:text-xl font-sans">
+      <div className="w-full relative text-xs md:text-base xl:text-xl font-sans">
         <input 
           type="text" 
-          className="bg-transparent w-full absolute inset-0 pr-20 border-b border-secondaryLight placeholder-secondary" 
+          className="bg-transparent w-full inset-0 pr-20 border-b border-secondaryLight placeholder-secondaryLight focus:outline-none focus:ring ring-offset-8 ring-offset-primary" 
           placeholder="Email" 
         />
         <input 
           type="submit" 
           value="Subscribe"
-          className="absolute z-10 right-0 top-1/2 tranform -translate-y-1/2 font-medium text-secondary cursor-pointer underline"
+          className="absolute z-10 right-0 bottom-0 font-medium text-secondary cursor-pointer underline leading-relaxed	"
         />
       </div>
       {/* Mobile only */}

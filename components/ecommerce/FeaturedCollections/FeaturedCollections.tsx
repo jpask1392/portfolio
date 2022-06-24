@@ -93,8 +93,8 @@ const FeaturedCollections: React.FC<Props> = ({
             <div 
               key={i}
               ref={el => (itemsRef.current[i] = el)}
-              className={cn("collection-item-wrapper pb-4 md:pb-8", {
-              "w-full lg:w-1/2 px-5 py-8 lg:px-4 odd:bg-primary lg:odd:bg-transparent" : tilesPerRow === '2',
+              className={cn("collection-item-wrapper pb-8", {
+              "w-full lg:w-1/2 px-8 md:px-12 py-8 lg:px-4 odd:bg-primary lg:odd:bg-transparent last:pb-0" : tilesPerRow === '2',
               "w-full md:w-1/3" : tilesPerRow === '3',
               "w-1/2 lg:w-1/4 px-2.5 md:px-4" : tilesPerRow === '4'
              })}

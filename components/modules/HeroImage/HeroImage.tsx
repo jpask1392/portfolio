@@ -28,7 +28,7 @@ const Hero: React.FC<Props> = ({
 
   const heroClassNames = cn(className, [
     "hero",
-    "h-[90vh] lg:h-auto lg:aspect-video",
+    "h-[90vh] xl:h-auto xl:aspect-video",
     "relative",
     "overflow-hidden",
   ], {});
@@ -71,9 +71,9 @@ const Hero: React.FC<Props> = ({
 
             <CustomImage
               className={cn("h-full w-full", {
-                "hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
-                "xl:block" : imageMobile && imageMobile.id,
-                // "xl:block" : imageTablet && imageTablet.id,
+                "!hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
+                // "xl:!block" : imageMobile && imageMobile.id,
+                "xl:!block" : imageTablet && imageTablet.id,
               })}
               image={image} 
               layout="fill" 
@@ -84,7 +84,7 @@ const Hero: React.FC<Props> = ({
             {
               imageTablet?.id ? (
                 <CustomImage
-                  className={cn("xl:block h-full w-full", {
+                  className={cn("md:!block xl:!hidden h-full w-full", {
                     "hidden" : imageMobile && imageMobile.id,
                   })}
                   image={imageTablet} 
@@ -95,7 +95,7 @@ const Hero: React.FC<Props> = ({
               ) : null
             }
 
-            {
+            {/* {
               imageMobile?.id ? (
                 <CustomImage
                   className={cn("h-full w-full", {
@@ -108,7 +108,7 @@ const Hero: React.FC<Props> = ({
                   preload
                 />
               ) : null
-            }
+            } */}
           </div>
         </div>
 

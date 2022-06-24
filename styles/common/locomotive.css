@@ -64,3 +64,11 @@ html.has-scroll-dragging {
   [data-scroll-direction="horizontal"] .c-scrollbar_thumb {
     right: auto;
     bottom: 0; }
+
+.c-scrollbar {
+  @apply z-50 bg-primary border-l border-black;
+
+  .c-scrollbar_thumb {
+    @apply bg-secondary opacity-100;
+  }
+}

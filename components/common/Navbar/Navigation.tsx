@@ -67,10 +67,17 @@ const Navigation: React.FC<NavProps> = ({
         {/* mobile Menu */}
         <button
           aria-label="Navigation Menu"
-          onClick={() => setActive(!active)}
           className="xl:hidden h-full bg-primary aspect-square flex items-center flex-1"
         >
-          <Hamburger size={25}/>
+          <Hamburger 
+            size={30} 
+            rounded
+            color="#72605B"
+            distance="sm"
+            onToggle={toggled => {
+              setActive(toggled)
+            }}
+          />
         </button>
 
         {/* Logo */}

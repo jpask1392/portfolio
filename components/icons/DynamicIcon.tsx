@@ -23,6 +23,7 @@ import CaretBackCircle from "./CaretBackCircle";
 import CaretDownCircle from "./CaretDownCircle";
 import ChevronBack from "./ChevronBack";
 import ChevronDown from "./ChevronDown";
+import ChevronRight from "./ChevronRight";
 import Close from "./Close";
 import Heart from "./Heart";
 import HelpCircle from "./HelpCircle";
@@ -62,6 +63,7 @@ const Components: {
   caretDownCircle: CaretDownCircle,
   chevronBack: ChevronBack,
   chevronDown: ChevronDown,
+  chevronRight: ChevronRight,
   close: Close,
   heart: Heart,
   helpCircle: HelpCircle,

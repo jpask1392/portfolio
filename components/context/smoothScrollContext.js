@@ -59,7 +59,6 @@ export const SmoothScrollProvider = ({ children, options }) => {
 
           // add resize to remove on cleanup
           resize = () => {
-            console.log('refresh')
             ScrollTrigger.refresh();
           }
 

@@ -1,8 +1,10 @@
 import cn from "classnames";
 import useVisibleWindowHeight from '@/components/hooks/useVisibleWindowHeight';
 import Button from '@/components/ui/Button';
-import NavigationLink from './NavigationLink';
+import MobileNavigationLink from './MobileNavigationLink';
 import type { navLink } from '@/types/navigation';
+import { useEffect } from "react";
+import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 
 interface Props {
   menu: navLink[]
@@ -16,6 +18,19 @@ const MobileMenu: React.FC<Props> = ({
   // hook takes into account change in announcement bar.
   const visibleWindowHeight = useVisibleWindowHeight();
 
+  const { scroll } : { scroll: any } = useSmoothScrollContext();
+
+  useEffect(() => {
+    if (active) {
+      // disable scroll
+      scroll?.stop();
+    }
+
+    if (!active) {
+      scroll?.start();
+    }
+  }, [scroll, active])
+
   return (
     <div 
       className={cn("bg-primary w-full max-w-[275px] md:max-w-[520px] border-b-4 transition-all pointer-events-auto", {
@@ -24,22 +39,19 @@ const MobileMenu: React.FC<Props> = ({
       })}
       style={{ height: visibleWindowHeight + "px" }}
     >
-      
-        <ul className="w-full overflow-auto h-full">
-          {
-            menu.map((link, i) => {
-              return (
-                <li key={i}>
-                  <NavigationLink 
-                    nav_link={link}
-                    topLevel={true}
-                  />
-                </li>
-              )
-            })
-          }
-        </ul>
-      
+      <ul className="w-full h-full">
+        {
+          menu.map((link, i) => {
+            return (
+              <li key={i}>
+                <MobileNavigationLink 
+                  nav_link={link}
+                />
+              </li>
+            )
+          })
+        }
+      </ul>
     </div> 
   )
 }

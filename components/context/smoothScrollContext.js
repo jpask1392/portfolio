@@ -55,7 +55,9 @@ export const SmoothScrollProvider = ({ children, options }) => {
            * 
            */
           ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-          ScrollTrigger.refresh();
+          setTimeout(() => {
+            ScrollTrigger.refresh();
+          }, 1000)
 
           // add resize to remove on cleanup
           resize = () => {
@@ -74,6 +76,10 @@ export const SmoothScrollProvider = ({ children, options }) => {
     }
 
     return () => {
+      /**
+        TODO: For some reason this is running straight awy
+         - I Know this is going to cause issues on page changes
+      */
       // scroll && scroll.destroy()
       // window.removeEventListener("resize", resize);
       // window.removeEventListener("focus", resize);

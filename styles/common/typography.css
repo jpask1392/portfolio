@@ -103,3 +103,7 @@ ul,
     md:text-xs
     xl:text-sm;
 }
+
+.text-highlight {
+  @apply text-secondary;
+}

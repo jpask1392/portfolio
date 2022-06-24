@@ -59,7 +59,7 @@ const Slideshow: React.FC<Props> = ({
       navigation.prevEl = navigationPrevRef.current;
       navigation.nextEl = navigationNextRef.current;
 
-      swiper.navigation.init();
+      // swiper.navigation.init();
       swiper.navigation.update();
     }
 
@@ -119,10 +119,10 @@ const Slideshow: React.FC<Props> = ({
 
         <div className="absolute top-1/2 inset-x-0 transform -translate-y-1/2 z-10 pointer-events-none hidden xl:flex justify-between">
           <button ref={navigationPrevRef} className={cn(navigationArrowClasses)}>
-            <SlideArrow direction="previous" className="text-white" />
+            <SlideArrow direction="previous" className="text-primary" />
           </button>
           <button ref={navigationNextRef} className={cn(navigationArrowClasses)}>
-            <SlideArrow direction="next" className="text-white" />
+            <SlideArrow direction="next" className="text-primary" />
           </button>
         </div>
 

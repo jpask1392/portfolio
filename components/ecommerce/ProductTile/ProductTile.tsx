@@ -1,3 +1,4 @@
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 import AddToCartButton from '@/components/ecommerce/AddToCartButton';
 import Header from '@/components/ui/Header';
@@ -9,7 +10,7 @@ import { Price } from "@/components/ecommerce/Common";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
 
@@ -31,14 +32,11 @@ const ProductTile: React.FC<Props> = ({
   const tl = useRef<any>(null);
 
   useIsomorphicLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     if (hoverEffectRef && imageRef && animate) {
       tl.current = gsap.timeline({
-        scrollTrigger: {
-          trigger: articleRef.current,
-          start: 'center bottom-=100',
-          markers: false,
-          scroller: "[data-scroll-container]",
-        },
+        paused: true,
       });
 
       tl.current.to(hoverEffectRef.current, {
@@ -62,7 +60,21 @@ const ProductTile: React.FC<Props> = ({
         ease: CustomEase.create("custom", "0.5,0,0,1"),
       }, "-=0.8")
     }
-  }, [scroll, imageRef])
+  }, [])
+
+  useEffect(() => {
+    if (product) {
+      ScrollTrigger.create({
+        trigger: articleRef.current,
+        start: 'center bottom-=100',
+        markers: false,
+        scroller: "[data-scroll-container]",
+        onEnter: () => {
+          tl.current.play();
+        }
+      });
+    }
+  }, [product, scroll])
 
   return (
     <article 
@@ -77,11 +89,15 @@ const ProductTile: React.FC<Props> = ({
         <a aria-label={`Go to ${product?.title} page`}>
           <div className="aspect-square bg-secondary relative overflow-hidden">
             <div className="w-full h-full relative" ref={imageRef}>
-              <CustomImage 
-                image={product?.images[0]} 
-                layout="fill" 
-                objectFit="cover"
-              />
+              {
+                product ? (
+                  <CustomImage 
+                    image={product?.images[0]} 
+                    layout="fill" 
+                    objectFit="cover"
+                  />   
+                ) : null
+              }
             </div>
 
             {

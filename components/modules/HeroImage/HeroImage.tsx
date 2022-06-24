@@ -28,7 +28,7 @@ const Hero: React.FC<Props> = ({
 
   const heroClassNames = cn(className, [
     "hero",
-    "h-[90vh]",
+    "h-[90vh] lg:h-auto lg:aspect-video",
     "relative",
     "overflow-hidden",
   ], {});

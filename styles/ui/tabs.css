@@ -1,0 +1,10 @@
+.ui-tabs .tab-item::after {
+  content: "";
+
+  @apply absolute w-0 h-0.5 bg-black left-1/2 -translate-x-1/2 transition-all;
+}
+
+.ui-tabs .tab-item:hover::after,
+.ui-tabs .tab-item.active::after  {
+  @apply w-full;
+}

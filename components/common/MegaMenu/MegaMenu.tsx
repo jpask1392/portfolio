@@ -52,15 +52,15 @@ const MegaMenu: React.FC<Props> = ({
 
   return (
     <div 
-      className={cn(className, "mega-menu absolute top-full bg-secondary inset-x-0 text-white w-screen left-1/2 -translate-x-1/2")}
+      className={cn(className, "mega-menu absolute top-full bg-secondary inset-x-0 text-primary w-screen left-1/2 -translate-x-1/2")}
       ref={megaMenuRef}
     >
       <div className="px-8 max-w-screen-2xl mx-auto">
         <div className="py-10">
           {
             item && (
-              <div className="inline-block">
-                <ul className="flex flex-nowrap space-x-10 overflow-auto">
+              <div className="">
+                <ul className="flex flex-nowrap space-x-10 overflow-auto justify-between">
                   {
                     item.subItems.map((subItem, i) => {
                       return (

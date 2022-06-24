@@ -8,4 +8,8 @@
 
     @apply inline-block mx-8 w-4 h-4 bg-current rounded-full;
   }
+
+  h3 {
+    @apply flex items-center whitespace-pre;
+  }
 }

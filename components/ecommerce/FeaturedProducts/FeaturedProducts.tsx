@@ -21,7 +21,7 @@ const FeaturedProducts: React.FC<Props> = ({
       /**
        * Get collection from Shopify API
        * 
-       * - TODO: Use SWR for this call
+       * - TODO: Stop re-running after tab container changes
        */
       if (collectionHandle && !productID) {
         const res = await fetch(`/api/catalog/collections?handle=${encodeURIComponent(collectionHandle)}`);

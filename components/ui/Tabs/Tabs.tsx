@@ -39,9 +39,8 @@ const CustomTabs: React.FC<Props> = ({
               <Tabs.Trigger 
                 key={"trigger_" + item._uid}
                 value={item._uid}
-                className={cn("border-b-2 pb-2.5", {
-                  "border-black" : item._uid === active,
-                  "border-transparent" : item._uid !== active
+                className={cn("tab-item relative", {
+                  "active" : item._uid === active,
                 })}
               >
                 <Header

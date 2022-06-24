@@ -14,7 +14,7 @@ interface Props {
   className?: string
   tag?: Variant
   align?: 'left' | 'center' | 'right'
-  color?: 'primary' | 'white' | 'black'
+  color?: 'primary' | 'white' | 'black' | 'secondary'
   size?: 'h1' | 'h2' | 'h3' | 'h4' | string
   text?: string
   mobile_text?: string

@@ -1,11 +1,11 @@
 import Button from '@/components/ui/Button';
 import CustomImage from '@/components/ui/Image/Image';
-import RichText from '@/components/ui/RichText';
 import cn from 'classnames';
 import useSWR from 'swr';
 import { useEffect, useRef, useState } from 'react';
 import ProductTile from '@/components/ecommerce/ProductTile';
 import Slideshow from '@/components/ui/Slideshow';
+import Header from '@/components/ui/Header';
 
 interface Props {
   className?: string
@@ -59,10 +59,15 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
           }
         </div>
         <div className="w-full xl:w-7/12 md:px-8">
-          <RichText 
-            text={title}
-            className="mt-5 mb-3 text-center xl:text-left"
-          />
+          <div className="flex items-center">
+            <Header 
+              text={title}
+              className="mt-5 mb-3 text-center xl:text-left"
+              color="secondary"
+            />
+            <span className="ml-10">image</span>
+            <span className="ml-10">(WORTH THE HYPE)</span>
+          </div>
 
           <Slideshow
             className="xl:pr-16"

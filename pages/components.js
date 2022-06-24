@@ -102,31 +102,31 @@ export default function StaticAbout() {
         textColor="text-black"
       >
         <Grid>
-          <div><div className="bg-gray-300 text-white text-center p-4">Hey</div></div>
-          <div><div className="bg-gray-300 text-white text-center p-4">Hey</div></div>
-          <div><div className="bg-gray-300 text-white text-center p-4">Hey</div></div>
+          <div><div className="bg-gray-300 text-primary text-center p-4">Hey</div></div>
+          <div><div className="bg-gray-300 text-primary text-center p-4">Hey</div></div>
+          <div><div className="bg-gray-300 text-primary text-center p-4">Hey</div></div>
         </Grid>
         <Grid layout='D'>
           <Column>
             <Grid layout='B'>
-              <Column><div className="bg-gray-500 text-white text-center p-4">1</div></Column>
-              <Column><div className="bg-gray-500 text-white text-center p-4">1</div></Column>
-              <Column><div className="bg-gray-500 text-white text-center p-4">1</div></Column>
+              <Column><div className="bg-gray-500 text-primary text-center p-4">1</div></Column>
+              <Column><div className="bg-gray-500 text-primary text-center p-4">1</div></Column>
+              <Column><div className="bg-gray-500 text-primary text-center p-4">1</div></Column>
             </Grid>
           </Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">B</div></Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">C</div></Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">D</div></Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">E</div></Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">F</div></Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">G</div></Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">H</div></Column>
-          <Column><div className="bg-gray-900 text-white text-center p-4">H</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">B</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">C</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">D</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">E</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">F</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">G</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">H</div></Column>
+          <Column><div className="bg-gray-900 text-primary text-center p-4">H</div></Column>
           <Column>
             <Grid layout='C'>
-              <Column><div className="bg-gray-500 text-white text-center p-4">1</div></Column>
-              <Column><div className="bg-gray-500 text-white text-center p-4">1</div></Column>
-              <Column><div className="bg-gray-500 text-white text-center p-4">1</div></Column>
+              <Column><div className="bg-gray-500 text-primary text-center p-4">1</div></Column>
+              <Column><div className="bg-gray-500 text-primary text-center p-4">1</div></Column>
+              <Column><div className="bg-gray-500 text-primary text-center p-4">1</div></Column>
             </Grid>
           </Column>
         </Grid> 

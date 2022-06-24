@@ -114,7 +114,7 @@ const Navigation: React.FC<NavProps> = ({
                 ...UI,
                 cartActive: !UI.cartActive,
               })}>
-                <DynamicIcon type="cart" />
+                <DynamicIcon type="cart" className="h-7" />
                 <span className="absolute -top-2 right-2">
                   <CountBubble />
                 </span>
@@ -138,7 +138,7 @@ const Navigation: React.FC<NavProps> = ({
         <Link href={'/' + ctaLink?.cached_url}>
           <a 
             aria-label={ctaText}
-            className="font-medium text-base md:text-4xl h-full hidden xl:flex items-center px-8 xl:px-14 uppercase font-header text-secondary"
+            className="font-medium text-base md:text-4xl h-full hidden xl:flex items-center pl-8 xl:pl-14 uppercase font-header text-secondary"
           >
             {ctaText}
           </a>

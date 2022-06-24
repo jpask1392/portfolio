@@ -20,7 +20,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
 
   return (
     <article className={moduleClassNames}>
-      <div className="bg-gray3 text-white h-full flex items-end">
+      <div className="bg-gray3 text-primary h-full flex items-end">
         <div className="absolute inset-0 z-0">
           <CustomImage image={collection.image} layout="fill" objectFit="cover"/>
         </div>

@@ -19,6 +19,7 @@
 @import 'ui/mega-menu';
 @import 'ui/inputs';
 @import 'ui/accordion';
+@import 'ui/tabs';
 
 @import 'ecommerce/collection';
 @import 'ecommerce/product-main';

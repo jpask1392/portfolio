@@ -19,7 +19,7 @@ const SearchBar = () => {
           </button>
         </div> */}
 
-        <span className="xl:hidden">
+        <span>
           <DynamicIcon type="search"  className="h-7" />
         </span>
       </form>

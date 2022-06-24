@@ -18,7 +18,7 @@ const MobileMenu: React.FC<Props> = ({
 
   return (
     <div 
-      className={cn("bg-primary w-full max-w-[520px] border-b-4 transition-all pointer-events-auto", {
+      className={cn("bg-primary w-full max-w-[275px] md:max-w-[520px] border-b-4 transition-all pointer-events-auto", {
         "translate-x-0" : active,
         "-translate-x-full" : !active
       })}

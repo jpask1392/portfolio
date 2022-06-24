@@ -12,7 +12,7 @@ const Marquee: React.FC<Props> = ({
   repeat = '2',
 }) => {
   return (
-    <div className="py-8 ui-marquee">
+    <div className="pb-8 ui-marquee">
       <FastMarquee 
         className="overflow-y-hidden"
         gradient={false}

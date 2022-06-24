@@ -95,11 +95,11 @@ const Hero: React.FC<Props> = ({
               ) : null
             }
 
-            {/* {
+            {
               imageMobile?.id ? (
                 <CustomImage
                   className={cn("h-full w-full", {
-                    "xl:!hidden" : imageTablet && imageTablet.id,
+                    "lg:!hidden" : imageTablet && imageTablet.id,
                     // ":hidden" : !imageTablet || imageTablet && !imageTablet.id,
                   })}
                   image={imageMobile} 
@@ -108,7 +108,7 @@ const Hero: React.FC<Props> = ({
                   preload
                 />
               ) : null
-            } */}
+            }
           </div>
         </div>
 

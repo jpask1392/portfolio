@@ -23,7 +23,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
         {
           tileStyle === "primary" ? (
             <div className="pb-12 pl-12 xl:pb-24 xl:pl-24 w-full relative z-10">
-              <div className="animate-up">
+              <div>
                 <h3 className={`font-bold relative z-10 ${collection ? 'h3' : ''}`}>
                   {collection?.title || <Skeleton count={2} />}
                 </h3>
@@ -31,7 +31,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
                   THE KOLINSKY BRUSh KIT & SINGLE BRUSHES
                 </p>
               </div>
-              <div className="animate-btn">
+              <div>
                 <Button 
                   text="Gear Up"
                   link={{

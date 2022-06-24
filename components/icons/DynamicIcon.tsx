@@ -34,6 +34,9 @@ import Star from "./Star";
 import AnnouncementArrow from "./AnnouncementArrow";
 import TogglePlusMinus from "./TogglePlusMinus";
 import Drops from "./Drops";
+import TikTok from "./TikTok";
+import Youtube from "./Youtube";
+import Twitter from "./Twitter";
 
 type Variant = string;
 
@@ -69,6 +72,9 @@ const Components: {
   star: Star,
   togglePlusMinus: TogglePlusMinus,
   drops: Drops,
+  tiktok: TikTok,
+  youtube: Youtube,
+  twitter: Twitter,
 };
 
 interface Props {

@@ -54,7 +54,7 @@ const Header: React.FC<Props> = ({
   const componentRef = useRef<null | HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (componentRef.current != null) {
+    if (scroll) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,
@@ -79,7 +79,7 @@ const Header: React.FC<Props> = ({
         });
       }
     }
-  }, [componentRef, scroll])
+  }, [scroll])
 
   const nodeResolver = (child: any) => {
     return Array.isArray(child) 

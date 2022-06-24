@@ -1,11 +1,8 @@
 import StoryBlokLink from "@/components/helpers/StoryBlokLink";
 import FooterNewsletter from "./FooterNewsletter";
-import Logo from "@/components/ui/Logo";
 import cn from 'classnames';
-import FooterLink from './FooterLink';
 import DynamicIcon from '@/components/icons/DynamicIcon';
 import { navLink } from "@/types/navigation";
-import type { storyBlokImage } from "@/types/storyBlok";
 
 interface Props {
   className?: string,
@@ -40,10 +37,11 @@ const Footer: React.FC<Props> = ({
                       className="md:[&:nth-child(3)]:hidden xl:[&:nth-child(3)]:block md:mr-8 xl:mr-20 last:mr-0"
                     >
                       <StoryBlokLink
-                        className="text-base xl:text-4xl uppercase font-header text-secondary block"
+                        className="text-base xl:text-4xl uppercase font-header text-secondary flex items-center"
                         sbLink={item.link}
                       >
-                        {item.name}
+                        <span>{item.name}</span> 
+                        <span className="ml-5"><DynamicIcon type="togglePlusMinus" open={false}/></span>
                       </StoryBlokLink>
                     </li>
                   )
@@ -75,12 +73,29 @@ const Footer: React.FC<Props> = ({
             <ul className="w-full flex flex-wrap justify-between md:block">
               {
                 menuTwo.map((item, i) => (
-                  <li key={i} className="text-right">
+                  <li key={i} className="text-right xl:mb-4">
                     <StoryBlokLink
-                      className="text-xs lg:text-base text-secondary block"
+                      className="text-xs lg:text-base xl:text-xl text-secondary block"
                       sbLink={item.link}
                     >
                       {item.name}
+                    </StoryBlokLink>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div className="w-full">
+             <ul className="inline-flex space-x-9">
+              {
+                socials?.map((social, i) => (
+                  <li key={i} className={`icon-${social.name}`}>
+                    <StoryBlokLink sbLink={social.link}>
+                      <DynamicIcon 
+                        type={social['icon']} 
+                        className="text-secondary mx-auto h-6 w-6"
+                      />
                     </StoryBlokLink>
                   </li>
                 ))

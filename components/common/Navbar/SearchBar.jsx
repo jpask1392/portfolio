@@ -4,7 +4,7 @@ const SearchBar = () => {
   return (
     <div>
       <form action="">
-        <div className="relative hidden xl:block">
+        <div className="relative">
           <label htmlFor="search-bar" className="hidden">Search bar</label>
           <input 
             id="search-bar"
@@ -19,9 +19,9 @@ const SearchBar = () => {
           </button>
         </div>
 
-        <span className="xl:hidden">
+        {/* <span className="xl:hidden">
           <DynamicIcon type="search" />
-        </span>
+        </span> */}
       </form>
     </div>
   )

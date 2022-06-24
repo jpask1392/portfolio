@@ -7,11 +7,11 @@
     } 
   }
 
-  .bg-image > div > span {
+  .bg-image img {
     transition: transform 10s;
   }
 
-  &:hover .bg-image > div > span {
+  &:hover .bg-image img {
     transform: scale(1.2);
   }
 

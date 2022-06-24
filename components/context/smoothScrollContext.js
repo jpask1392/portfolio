@@ -55,7 +55,8 @@ export const SmoothScrollProvider = ({ children, options }) => {
             ScrollTrigger.refresh();
           }
 
-          window.addEventListener("resize", resize)
+          window.addEventListener("resize", resize);
+          window.addEventListener("focus", resize);
 
         } catch (error) {
           throw Error(`[SmoothScrollProvider]: ${error}`)
@@ -65,7 +66,8 @@ export const SmoothScrollProvider = ({ children, options }) => {
 
     return () => {
       scroll && scroll.destroy()
-      window.removeEventListener("resize", resize)
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("focus", resize);
     }
   }, [scroll])
 

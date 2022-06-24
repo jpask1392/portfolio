@@ -28,7 +28,17 @@ const FeaturedCollectionTile: React.FC<Props> = ({
                   {collection?.title || <Skeleton count={2} />}
                 </h3>
                 <p className="uppercase font-medium">
-                  THE KOLINSKY BRUSh KIT & SINGLE BRUSHES
+                  {/* 
+                    TODO: Move this text into a Shopify metadata field -
+                      This is just a temporary solution for demo.
+                  */}
+                  {
+                    collection?.title === "Tools" ? (
+                      "CLIPPERS & NIPPERS & PUSHERS & MORE"
+                    ) : (
+                      "THE KOLINSKY BRUSh KIT & SINGLE BRUSHES"
+                    )
+                  }
                 </p>
               </div>
               <div className="mt-5">

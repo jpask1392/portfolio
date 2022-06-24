@@ -66,8 +66,8 @@ const MegaMenu: React.FC<Props> = ({
       ref={megaMenuRef}
     >
       <div className={cn({
-        "px-8 max-w-screen-2xl mx-auto" : style === "narrow",
-        "px-8 py-14 max-w-screen-xl mx-auto" : style === "large"
+        "px-5 max-w-screen-2xl mx-auto" : style === "narrow",
+        "px-5 py-14 max-w-screen-xl mx-auto" : style === "large"
       })}>
         <div className="py-10">
           {

@@ -22,7 +22,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
       })}>
         {
           tileStyle === "primary" ? (
-            <div className="pb-12 pl-12 xl:pb-24 xl:pl-24 w-full relative z-10">
+            <div className="p-10 md:p-12 xl:pb-24 xl:pl-24 w-full relative z-10">
               <div>
                 <h3 className={`font-bold relative z-10 h2`}>
                   {collection?.title || <Skeleton count={2} />}
@@ -68,7 +68,7 @@ const FeaturedCollectionTile: React.FC<Props> = ({
 
       {
         tileStyle === "secondary" ? (
-          <div className="p-4 text-center w-full relative z-10">
+          <div className="p-2 md:p-4 pb-0 text-center w-full relative z-10">
             <Link href={'collection/' + collection?.handle}>
               <a className="font-header text-xs xl:text-xl uppercase underline text-secondary">
                 {collection?.title || <Skeleton count={2} />}

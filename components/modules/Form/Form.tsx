@@ -116,7 +116,7 @@ const Form: React.FC<Props> = ({
         action={action}
         onSubmit={handleSubmit}
         className={cn({
-          "py-10 md:py-20 lg:py-32 px-8 md:px-16 xl:px-24 2xl:px-32" : stylePreset === "contactForm"
+          "py-10 md:py-20 lg:py-32 px-5 md:px-16 xl:px-24 2xl:px-32" : stylePreset === "contactForm"
         })}
         noValidate
       >

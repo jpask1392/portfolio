@@ -49,7 +49,7 @@
   @apply lg:-mx-8 flex-wrap lg:flex-nowrap;
 
   & > div {
-    @apply w-full lg:w-1/2 lg:px-8 flex-shrink-0;
+    @apply w-full lg:w-1/2 lg:px-5 flex-shrink-0;
   }
 
   & > div:nth-child(2n + 0) {

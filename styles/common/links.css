@@ -2,7 +2,7 @@
   max-width: 260px;
 
   @apply 
-    w-full
+    md:w-full
     text-base
     xl:text-xl
     text-center

@@ -72,7 +72,8 @@ ul,
   letter-spacing: 0.01em;
 
   @apply 
-    text-xl;
+    text-base
+    md:text-xl;
 
   &:last-of-type {
     @apply mb-0;

@@ -53,11 +53,11 @@ const Navigation: React.FC<NavProps> = ({
       ])}
     >
       <nav 
-        className="h-full px-8 max-w-screen-2xl mx-auto flex justify-end relative" 
+        className="h-full px-5 max-w-screen-2xl mx-auto flex justify-end relative" 
         role="navigation"
       >
 
-        <div className="xl:hidden absolute top-full left-0 pointer-events-none">
+        <div className="xl:hidden absolute top-full left-0 pointer-events-none w-full">
           <MobileMenu 
             menu={navigationList} 
             active={active}
@@ -104,17 +104,17 @@ const Navigation: React.FC<NavProps> = ({
         </div>
 
         {/*  Action items  */}
-        <div className="flex items-center">
+        <div className="flex items-center text-secondary">
           {
             actionItems?.includes('search') ? (
-              <div className="px-4">
+              <div className="px-2 md:px-4">
                 <SearchBar />
               </div>
             ) : null
           }
           {
             actionItems?.includes('cart') ? (
-              <button className="px-4 relative" onClick={() => setUI({
+              <button className="px-2 md:px-4 relative" onClick={() => setUI({
                 ...UI,
                 cartActive: !UI.cartActive,
               })}>
@@ -127,7 +127,7 @@ const Navigation: React.FC<NavProps> = ({
           }
           {
             actionItems?.includes('account') ? (
-              <div className="px-4">
+              <div className="px-2 md:px-4">
                 <Link href={'/account'}>
                   <a aria-label="Account Page Icon">
                     <DynamicIcon type="account" />

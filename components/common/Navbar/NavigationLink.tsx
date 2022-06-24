@@ -42,7 +42,7 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
     "text-secondary active" : router.asPath === cached_url,
     "font-header uppercase font-bold text-base md:text-4xl" : topLevel,
     "flex items-center" : subItems.length,
-    "py-4 md:py-7 px-8 xl:p-0 border-b border-secondaryLight xl:border-none" : subItems.length || topLevel && !subItems.length,
+    "py-4 md:py-7 px-5 xl:p-0 border-b border-secondaryLight xl:border-none" : subItems.length || topLevel && !subItems.length,
     "text-secondary": topLevel || withMegaMenuStyle === "large",
     "uppercase text-base" : withMegaMenuStyle,
     "text-base md:text-4xl w-full" : !withMegaMenuStyle,

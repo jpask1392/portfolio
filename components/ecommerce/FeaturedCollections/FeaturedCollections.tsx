@@ -80,11 +80,11 @@ const FeaturedCollections: React.FC<Props> = ({
       className={cn(className, "overflow-hidden")} 
       ref={containerRef}
     >
-      <div className="flex flex-wrap -mx-2.5 md:-mx-4 -mb-8">
+      <div className="flex flex-wrap -mx-2.5 md:-mx-4 -mb-4 md:-mb-8">
         {
           collections?.map((collection, i) => 
-            <div key={i} className={cn("collection-item-wrapper pb-8", {
-              "w-full lg:w-1/2 px-8 py-8 lg:px-4 odd:bg-primary lg:odd:bg-transparent" : tilesPerRow === '2',
+            <div key={i} className={cn("collection-item-wrapper pb-4 md:pb-8", {
+              "w-full lg:w-1/2 px-5 py-8 lg:px-4 odd:bg-primary lg:odd:bg-transparent" : tilesPerRow === '2',
               "w-full md:w-1/3" : tilesPerRow === '3',
               "w-1/2 lg:w-1/4 px-2.5 md:px-4" : tilesPerRow === '4'
             })}>

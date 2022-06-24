@@ -22,7 +22,7 @@ const Footer: React.FC<Props> = ({
   newsletterText,
 }) => {
   return (
-    <footer className={cn(className, "bg-primary pt-8 pb-16")}>
+    <footer className={cn(className, "bg-primary pt-8 pb-10 md:pb-16")}>
       <div className="container">
         <div className="w-full flex flex-wrap">
 
@@ -50,18 +50,6 @@ const Footer: React.FC<Props> = ({
                 })
               }
             </ul>
-
-            {/* <ul className="inline-flex space-x-3">
-              {
-                socials?.map((social, i) => (
-                  <li key={i} className="bg-white h-full w-16 text-center rounded-full py-2">
-                    <StoryBlokLink sbLink={social.link}>
-                      <DynamicIcon type={social['icon']} className="text-primary mx-auto"/>
-                    </StoryBlokLink>
-                  </li>
-                ))
-              }
-            </ul> */}
           </div>
 
           <div className="order-1 md:order-none w-full md:w-auto">
@@ -71,7 +59,7 @@ const Footer: React.FC<Props> = ({
             />
           </div>
 
-          <div className="order-2 md:order-none flex-1 md:ml-8">
+          <div className="order-4 md:order-none flex-1 md:ml-8">
             <ul className="w-full flex flex-wrap justify-between md:block">
               {
                 menuTwo.map((item, i) => (
@@ -88,15 +76,15 @@ const Footer: React.FC<Props> = ({
             </ul>
           </div>
 
-          <div className="w-full">
-            <ul className="inline-flex space-x-9">
+          <div className="order-3 md:order-none w-full mb-4 md:mb-0">
+            <ul className="inline-flex space-x-5 md:space-x-9">
               {
                 socials?.map((social, i) => (
                   <li key={i} className={`icon-${social.name}`}>
                     <StoryBlokLink sbLink={social.link}>
                       <DynamicIcon 
                         type={social['icon']} 
-                        className="text-secondary mx-auto h-6 w-6"
+                        className="text-secondary mx-auto h-3 w-3 md:h-6 md:w-6"
                       />
                     </StoryBlokLink>
                   </li>

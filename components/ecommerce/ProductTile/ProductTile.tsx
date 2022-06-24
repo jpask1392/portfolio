@@ -124,7 +124,7 @@ const ProductTile: React.FC<Props> = ({
         </a>
       </Link>
 
-      <div className="mt-6">
+      <div className="mt-2 md:mt-6">
         <div className="flex justify-between flex-wrap">
           <div className="w-full">
             <Header

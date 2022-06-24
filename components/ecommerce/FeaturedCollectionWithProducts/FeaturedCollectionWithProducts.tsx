@@ -40,7 +40,7 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
   return (
     <div className={cn(className, "overflow-hidden")}>
       <div className="container xl:max-w-none xl:px-0 xl:w-auto flex xl:-mx-8">
-        <div className="hidden xl:block w-5/12 px-8">
+        <div className="hidden xl:block w-5/12 px-5">
           {
             collection ?
               <div className="hidden xl:block h-full relative">
@@ -59,17 +59,17 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
             : null
           }
         </div>
-        <div className="w-full xl:w-7/12 md:px-8">
-          <div className="flex items-center group">
+        <div className="w-full xl:w-7/12 md:px-5">
+          <div className="flex items-center flex-wrap group text-center xl:text-left mb-2">
             <Header 
               text={title}
-              className="mt-5 mb-3 text-center xl:text-left"
+              className="mt-5 md:mb-3 w-full md:w-auto"
               color="secondary"
             />
-            <span className="ml-10">
+            <span className="hidden md:inline-block ml-10">
               <DynamicIcon type="drops" className="w-16 text-secondaryLight"/>
             </span>
-            <span className="ml-10 text-xl translate-x-10 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+            <span className="md:ml-10 text-base md:text-xl md:translate-x-10 md:opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all w-full md:w-auto text-secondary">
               ( WORTH THE HYPE )
             </span>
           </div>

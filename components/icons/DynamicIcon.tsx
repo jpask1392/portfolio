@@ -34,7 +34,7 @@ import Star from "./Star";
 import AnnouncementArrow from "./AnnouncementArrow";
 import TogglePlusMinus from "./TogglePlusMinus";
 import Drops from "./Drops";
-import TikTok from "./TikTok";
+import TikTok from "./Tiktok";
 import Youtube from "./Youtube";
 import Twitter from "./Twitter";
 

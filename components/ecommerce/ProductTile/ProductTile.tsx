@@ -33,6 +33,15 @@ const ProductTile: React.FC<Props> = ({
   const imageRef = useRef(null);
   const tl = useRef<any>(null);
 
+  const colorMap: any = {
+    Brown: "#72605B",
+    Blue: "#6166D3",
+    Green: "#70A35D",
+    Yellow: "#EFD66E",
+    Red: "#D6613E",
+    Pink: "#EBBFBB"
+  }
+
   useIsomorphicLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -68,7 +77,7 @@ const ProductTile: React.FC<Props> = ({
     if (product) {
       ScrollTrigger.create({
         trigger: articleRef.current,
-        start: 'center bottom-=100',
+        start: 'center bottom-=50',
         markers: false,
         scroller: "[data-scroll-container]",
         onEnter: () => {
@@ -90,8 +99,8 @@ const ProductTile: React.FC<Props> = ({
       </div>
 
       <Link href={`/product${product?.path || '/'}`}>
-        <a aria-label={`Go to ${product?.title} page`}>
-          <div className="aspect-square bg-secondary relative overflow-hidden">
+        <a aria-label={`Go to ${product?.title || "product"} page`}>
+          <div className="aspect-square  relative overflow-hidden">
             <div className="w-full h-full relative" ref={imageRef}>
               <div className="">                
                 {
@@ -120,7 +129,7 @@ const ProductTile: React.FC<Props> = ({
               animate ? (
                 <span 
                   ref={hoverEffectRef}
-                  className="absolute inset-0 bg-primary z-10"
+                  className="absolute inset-0 z-10"
                 />
               ) : null
             }
@@ -131,33 +140,65 @@ const ProductTile: React.FC<Props> = ({
       <div className="mt-2 md:mt-6">
         <div className="flex justify-between flex-wrap">
           <div className="w-full">
-            <Header
-              tag="h3"
-              size="h4" 
-              className="font-bold w-full mb-2"
-            >
-              { product?.title || <Skeleton width="33%" /> }
-            </Header>
+            <div>
+              <Header
+                tag="h3"
+                size="h4" 
+                className="font-bold w-full mb-2"
+              >
+                { product?.title || <Skeleton width="33%" /> }
+              </Header>
 
+              {
+                product ? (
+                  <Price
+                    originalPrice={(
+                      product.variants[0].compare_at_price && 
+                      product.variants[0].compare_at_price > product.variants[0].price
+                    )
+                      ? product.variants[0].compare_at_price
+                      : product.variants[0].price
+                    }
+                    salePrice={(
+                      product.variants[0].compare_at_price && 
+                      product.variants[0].compare_at_price > product.variants[0].price
+                    )
+                      ? product.variants[0].price
+                      : product.variants[0].compare_at_price || 0
+                    }
+                  />
+                ) : <Skeleton />
+              }
+            </div>
+
+            
             {
-              product ? (
-                <Price
-                  originalPrice={(
-                    product.variants[0].compare_at_price && 
-                    product.variants[0].compare_at_price > product.variants[0].price
-                  )
-                    ? product.variants[0].compare_at_price
-                    : product.variants[0].price
-                  }
-                  salePrice={(
-                    product.variants[0].compare_at_price && 
-                    product.variants[0].compare_at_price > product.variants[0].price
-                  )
-                    ? product.variants[0].price
-                    : product.variants[0].compare_at_price || 0
-                  }
-                />
-              ) : <Skeleton />
+              product && product.options?.length ? (
+                <div className="variations text-fadedText md:mb-0 w-full md:w-auto">
+                  {
+                    product ? (
+                      <div className="flex md:block text-sm mt-2">
+                        {  
+                          product.options?.map((option: any) => {
+                            return option.values.map((color: string) => {
+                              return (
+                                <span 
+                                  className="w-4 h-4 rounded-full border-black border inline-block mr-2 cursor-pointer"
+                                  style={{
+                                    background: colorMap[color]
+                                  }}
+                                />
+                              )
+                            })
+                          })
+                        }
+                      </div>
+                    ) : (
+                      <Skeleton />
+                    )
+                  }            
+                </div>
+              ) : null
             }
 
             <AddToCartButton 
@@ -172,31 +213,6 @@ const ProductTile: React.FC<Props> = ({
             />
             
           </div>
-
-          {/* {
-            product && product.options?.length ? (
-              <span className="variations text-fadedText md:mb-0 w-full md:w-auto">
-                {
-                  product ? (
-                    <ul className="flex md:block text-sm">
-                      {  
-                        product.options?.map((option: any) => {
-                          return (
-                            <li className="whitespace-nowrap mr-2 md:mr-0" key={option.id}>
-                              {`${option.values.length} ${option.name}s`}
-                            </li>
-                          )
-                        })
-                      }
-                    </ul>
-                  ) : (
-                    <Skeleton />
-                  )
-                }            
-              </span>
-            ) : null
-          } */}
-          
         </div>
       </div>
     </article>

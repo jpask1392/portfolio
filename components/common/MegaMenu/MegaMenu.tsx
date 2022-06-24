@@ -62,7 +62,7 @@ const MegaMenu: React.FC<Props> = ({
   return (
     <div 
       className={cn(className, "invisible mega-menu absolute top-full inset-x-0 text-primary w-screen left-1/2 -translate-x-1/2", {
-        "bg-red-100" : style === "large",
+        "bg-primary" : style === "large",
         "bg-secondary" : style === "narrow",
       })}
       ref={megaMenuRef}

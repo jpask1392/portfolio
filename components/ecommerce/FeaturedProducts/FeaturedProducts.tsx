@@ -44,12 +44,12 @@ const FeaturedProducts: React.FC<Props> = ({
   return (
     <div className={cn(className, "w-full")}>
       <Slideshow
+        spaceBetween={90}
         showSlides={{
           sm: 2,
           lg: 3,
           xl: 3,
         }} 
-        spaceBetween={90}
       >
         {
           products.map((product: any, i: number) => 

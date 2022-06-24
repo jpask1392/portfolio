@@ -32,12 +32,19 @@ export const SmoothScrollProvider = ({ children, options }) => {
 
           ScrollTrigger.scrollerProxy(".has-scroll-smooth [data-scroll-container]", {
             scrollTop(value) {
-              return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
+              return arguments.length 
+                ? locoScroll.scrollTo(value, 0, 0) 
+                : locoScroll.scroll.instance.scroll.y;
             }, 
             getBoundingClientRect() {
-              return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+              return {
+                top: 0, 
+                left: 0, 
+                width: window.innerWidth, 
+                height: window.innerHeight
+              };
             },
-            pinType: document.querySelector("[data-scroll-container]").style.transform ? "transform" : "fixed"
+            // pinType: document.querySelector("[data-scroll-container]").style.transform ? "transform" : "fixed"
           });
 
           // set the state
@@ -46,13 +53,15 @@ export const SmoothScrollProvider = ({ children, options }) => {
           /**
            * If adding the event listener here, will need to remove on cleanup
            * 
-           * ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
            */
+          ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
           ScrollTrigger.refresh();
 
           // add resize to remove on cleanup
           resize = () => {
-            ScrollTrigger.refresh();
+            setTimeout(() => {
+              ScrollTrigger.refresh();
+            }, 1000)
           }
 
           window.addEventListener("resize", resize);
@@ -65,9 +74,9 @@ export const SmoothScrollProvider = ({ children, options }) => {
     }
 
     return () => {
-      scroll && scroll.destroy()
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("focus", resize);
+      // scroll && scroll.destroy()
+      // window.removeEventListener("resize", resize);
+      // window.removeEventListener("focus", resize);
     }
   }, [scroll])
 

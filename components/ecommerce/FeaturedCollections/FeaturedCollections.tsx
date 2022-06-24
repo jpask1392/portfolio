@@ -47,7 +47,7 @@ const FeaturedCollections: React.FC<Props> = ({
   }, [data])
 
   useEffect(() => {
-    if (containerRef?.current) {
+    if (scroll) {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,

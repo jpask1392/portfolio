@@ -91,7 +91,11 @@ const Navigation: React.FC<NavProps> = ({
             navigationList.map((link: any, i: number) => {
               return (
                 <li key={i} className="mx-5 h-full first:ml-0">
-                  <NavigationLink nav_link={link} topLevel hasMegaMenu={true} />
+                  <NavigationLink 
+                    nav_link={link} 
+                    topLevel
+                    // hasMegaMenu={true} 
+                  />
                 </li>
               )
             })

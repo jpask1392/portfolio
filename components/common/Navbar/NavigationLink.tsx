@@ -13,18 +13,21 @@ interface NavigationLinkProps {
   nav_link: navLink
   topLevel?: boolean
   hasMegaMenu?: boolean
+  withMegaMenuStyle?: string
 }
 
 const NavigationLink: React.FC<NavigationLinkProps> = ({ 
   nav_link, 
   className,
   topLevel = false,
-  hasMegaMenu = false
+  withMegaMenuStyle,
 }) => {
   const {
     name,
     link,
     subItems,
+    megaMenuStyle,
+    hasMegaMenu
   } = nav_link;
 
   const { cached_url } = link;
@@ -32,19 +35,23 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
   const router = useRouter();
   const [ hoverLink, setHoverLink ] = useState<boolean>(false);
 
-  const handleOnMouseOver = () => topLevel && setHoverLink(true);
-  const handleOnMouseLeave = () => topLevel && setHoverLink(false);
+  const handleOnMouseOver = () => setHoverLink(true);
+  const handleOnMouseLeave = () => setHoverLink(false);
 
-  const navLinkClasses = cn("text-base md:text-4xl w-full ", {
+  const navLinkClasses = cn("", {
     "text-secondary active" : router.asPath === cached_url,
     "font-header uppercase font-bold text-base md:text-4xl" : topLevel,
     "flex items-center" : subItems.length,
     "py-4 md:py-7 px-8 xl:p-0 border-b border-secondaryLight xl:border-none" : subItems.length || topLevel && !subItems.length,
+    "text-secondary": topLevel || withMegaMenuStyle === "large",
+    "uppercase text-base" : withMegaMenuStyle,
+    "text-base md:text-4xl w-full" : !withMegaMenuStyle,
+    "text-white" : withMegaMenuStyle === "narrow",
   })
 
   return (
     <span
-      className={cn(className, "flex flex-wrap items-center h-full text-secondary")}
+      className={cn(className, "flex flex-wrap items-center h-full")}
       onMouseOver={handleOnMouseOver}
       onMouseLeave={handleOnMouseLeave}
     >
@@ -78,7 +85,11 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
 
       {
         subItems.length && hasMegaMenu ? (
-          <MegaMenu item={nav_link} visible={hoverLink} />
+          <MegaMenu 
+            item={nav_link} 
+            visible={hoverLink} 
+            style={megaMenuStyle}
+          />
         ) : null
       }
 

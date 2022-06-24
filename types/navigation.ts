@@ -8,4 +8,6 @@ export type navLink = {
   link: storyBlokLink,
   subItems: navLink[],
   image?: storyBlokImage,
+  megaMenuStyle?: string
+  hasMegaMenu?: boolean
 }

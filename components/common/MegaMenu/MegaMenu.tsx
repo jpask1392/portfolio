@@ -5,11 +5,13 @@ import type { navLink } from "@/types/navigation";
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import NavigationLink from '../Navbar/NavigationLink';
 
 interface Props {
   className?: string
   item?: navLink
   visible?: boolean
+  style?: string
 }
 
 // TODO: Make sure this is not visible when the page loads
@@ -18,8 +20,10 @@ interface Props {
 const MegaMenu: React.FC<Props> = ({ 
   className,
   item,
-  visible = false
+  visible = false,
+  style
 }) => {
+  // visible = true
   const tl = useRef<any>(null);
   const megaMenuRef = useRef<any>(null);
 
@@ -33,10 +37,13 @@ const MegaMenu: React.FC<Props> = ({
         autoAlpha: 0
       })
 
-      tl.current.to('.link', {
-        opacity: 1,
-        stagger: 0.05
-      }, "<")
+      /**
+       * TODO: Use a ref here instead of css selector
+       */
+      // tl.current.to('.link', {
+      //   opacity: 1,
+      //   stagger: 0.05
+      // }, "<")
     }
 
     return () => {
@@ -52,33 +59,44 @@ const MegaMenu: React.FC<Props> = ({
 
   return (
     <div 
-      className={cn(className, "mega-menu absolute top-full bg-secondary inset-x-0 text-primary w-screen left-1/2 -translate-x-1/2")}
+      className={cn(className, "mega-menu absolute top-full inset-x-0 text-primary w-screen left-1/2 -translate-x-1/2", {
+        "bg-red-100" : style === "large",
+        "bg-secondary" : style === "narrow"
+      })}
       ref={megaMenuRef}
     >
-      <div className="px-8 max-w-screen-2xl mx-auto">
+      <div className={cn({
+        "px-8 max-w-screen-2xl mx-auto" : style === "narrow",
+        "px-8 py-14 max-w-screen-xl mx-auto" : style === "large"
+      })}>
         <div className="py-10">
           {
             item && (
-              <div className="">
-                <ul className="flex flex-nowrap space-x-10 overflow-auto justify-between">
-                  {
-                    item.subItems.map((subItem, i) => {
-                      return (
-                        <li 
-                          key={i} 
-                          className="opacity-0 flex-shrink-0 link"
-                        >
-                          <Link href={"/" + subItem.link.cached_url}>
-                            <a className="text-base uppercase">
-                              {subItem.name}
-                            </a>
-                          </Link>
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
-              </div>
+              <ul className={cn({
+                "flex flex-nowrap space-x-10 overflow-auto justify-between" : style === "narrow",
+                "grid grid-cols-3 gap-6" : style === "large"
+              })}>
+                {
+                  item.subItems.map((subItem, i) => {
+                    return (
+                      <li 
+                        key={i} 
+                        className="opacity-100 flex-shrink-0 link"
+                      >
+                        <NavigationLink 
+                          nav_link={subItem}
+                          withMegaMenuStyle={style}
+                        />
+                        {/* <Link href={"/" + subItem.link.cached_url}>
+                          <a className="text-base uppercase">
+                            {subItem.name}
+                          </a>
+                        </Link> */}
+                      </li>
+                    )
+                  })
+                }
+              </ul>
             )
           }
         </div>

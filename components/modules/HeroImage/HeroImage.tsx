@@ -51,7 +51,7 @@ const Hero: React.FC<Props> = ({
 
   return (
     <section className="hero overflow-hidden" ref={headerRef}>
-      <div className="flex items-end xl:items-start max-h-[90vh] relative h-[90vh] xl:h-auto xl:aspect-video min-w-[100vw]">
+      <div className="flex items-end xl:items-start relative h-[90vh] xl:h-auto xl:aspect-video max-h-[90vh] min-w-[100vw]">
 
         {
           (TopBlockComponent || BottomBlockComponent) && (

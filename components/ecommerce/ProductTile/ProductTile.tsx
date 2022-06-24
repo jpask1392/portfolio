@@ -10,9 +10,10 @@ import { Price } from "@/components/ecommerce/Common";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css';
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
+import { VariantSelector } from '@/components/ecommerce/Common';
 
 interface Props {
   className?: string
@@ -33,14 +34,7 @@ const ProductTile: React.FC<Props> = ({
   const imageRef = useRef(null);
   const tl = useRef<any>(null);
 
-  const colorMap: any = {
-    Brown: "#72605B",
-    Blue: "#6166D3",
-    Green: "#70A35D",
-    Yellow: "#EFD66E",
-    Red: "#D6613E",
-    Pink: "#EBBFBB"
-  }
+  const [ selectedVariant, setSelectedVariant ] = useState<any | boolean>(false);
 
   useIsomorphicLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -85,7 +79,7 @@ const ProductTile: React.FC<Props> = ({
         }
       });
     }
-  }, [product, scroll])
+  }, [product, scroll]);
 
   return (
     <article 
@@ -174,30 +168,11 @@ const ProductTile: React.FC<Props> = ({
             
             {
               product && product.options?.length ? (
-                <div className="variations text-fadedText md:mb-0 w-full md:w-auto">
-                  {
-                    product ? (
-                      <div className="flex md:block text-sm mt-2">
-                        {  
-                          product.options?.map((option: any) => {
-                            return option.values.map((color: string, i: number) => {
-                              return (
-                                <span 
-                                  key={i}
-                                  className="w-4 h-4 rounded-full border-black border inline-block mr-2 cursor-pointer"
-                                  style={{
-                                    background: colorMap[color]
-                                  }}
-                                />
-                              )
-                            })
-                          })
-                        }
-                      </div>
-                    ) : (
-                      <Skeleton />
-                    )
-                  }            
+                <div className="mt-2">
+                  <VariantSelector 
+                    product={product}
+                    onVariantChange={setSelectedVariant}
+                  />
                 </div>
               ) : null
             }
@@ -207,7 +182,7 @@ const ProductTile: React.FC<Props> = ({
               className="mt-2.5 !max-w-none w-full"
               variants={[
                 {
-                  variantId: product?.variants[0].id,
+                  variantId: selectedVariant.id,
                   quantity: 1,
                 }
               ]}

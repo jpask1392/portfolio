@@ -29,7 +29,6 @@ const ProductMain: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    console.log(selectedVariant.description)
     setFormData((prevState: any) => ({...prevState, variantId: selectedVariant.id }))
   }, [selectedVariant])
 

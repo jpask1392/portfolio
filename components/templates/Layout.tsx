@@ -97,10 +97,11 @@ const Layout: React.FC<Props> = ({
           ) : null
         }
 
+        <Navigation {...navProps} />
+
         <div data-scroll-section>
           <main className="debug-screens flex items-start">
             <div className="main-wrapper">
-              <Navigation {...navProps} />
 
               {/* children will be pulled from storyblok */}
               {children}

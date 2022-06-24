@@ -41,7 +41,9 @@ const Footer: React.FC<Props> = ({
                         sbLink={item.link}
                       >
                         <span>{item.name}</span> 
-                        <span className="ml-5"><DynamicIcon type="togglePlusMinus" open={false}/></span>
+                        <span className="ml-5">
+                          <DynamicIcon type="togglePlusMinus" open={false}/>
+                        </span>
                       </StoryBlokLink>
                     </li>
                   )
@@ -87,7 +89,7 @@ const Footer: React.FC<Props> = ({
           </div>
 
           <div className="w-full">
-             <ul className="inline-flex space-x-9">
+            <ul className="inline-flex space-x-9">
               {
                 socials?.map((social, i) => (
                   <li key={i} className={`icon-${social.name}`}>

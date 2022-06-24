@@ -26,7 +26,7 @@ const FooterNewsletter: React.FC<Props> = ({
       <div className="w-full relative h-7 text-base xl:text-xl font-sans">
         <input 
           type="text" 
-          className="bg-transparent w-full absolute inset-0 pr-20 border-b border-secondaryLight" 
+          className="bg-transparent w-full absolute inset-0 pr-20 border-b border-secondaryLight placeholder-secondary" 
           placeholder="Email" 
         />
         <input 

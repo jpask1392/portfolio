@@ -78,7 +78,7 @@ const ProductTile: React.FC<Props> = ({
 
   return (
     <article 
-      className={cn("relative", className)}
+      className={cn("relative group", className)}
       ref={articleRef}
     >
       <div className="absolute top-3 left-3">
@@ -89,15 +89,27 @@ const ProductTile: React.FC<Props> = ({
         <a aria-label={`Go to ${product?.title} page`}>
           <div className="aspect-square bg-secondary relative overflow-hidden">
             <div className="w-full h-full relative" ref={imageRef}>
-              {
-                product ? (
+              <div className="">                
+                {
+                  product?.images.length > 1 ? (
+                    <CustomImage 
+                      image={product?.images[1]} 
+                      layout="fill" 
+                      objectFit="cover"
+                    />
+                  ) : null
+                }
+
+                <div className={cn({
+                  "group-hover:opacity-0 transition-opacity duration-300" : product?.images.length > 1
+                })}>
                   <CustomImage 
                     image={product?.images[0]} 
                     layout="fill" 
                     objectFit="cover"
-                  />   
-                ) : null
-              }
+                  />
+                </div>
+              </div>
             </div>
 
             {

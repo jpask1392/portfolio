@@ -52,13 +52,13 @@
 .ui-richtext + .ui-btn-group,
 .ui-image + .ui-richtext,
 .ui-image + .ui-header {
-  @apply mt-4;
+  @apply mt-5;
 }
 
 .ui-header + .ui-slideshow,
 .ui-header + .ui-richtext,
 .ui-slideshow + .ui-btn-group {
-  @apply mt-7;
+  @apply mt-0;
 }
 
 .ui-header + .ui-grid {

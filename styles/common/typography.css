@@ -27,8 +27,7 @@ h2,
     uppercase
     font-header
     font-bold
-    leading-none
-    tracking-narrow
+    leading-tight
     text-5xl
     md:text-9xl
     xl:text-11xl;

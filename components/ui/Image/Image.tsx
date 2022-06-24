@@ -139,7 +139,7 @@ const ImageModule: React.FC<Props> = ({
               } */}
 
               {/* Overlay content */}
-              <div className={cn("absolute p-20 xl:p-24", {
+              <div className={cn("absolute p-20 xl:p-24 text-primary uppercase", {
                 "bottom-0 right-0 text-right" : alignOverlayContent === "bottom-right",
                 "bottom-0 left-0" : alignOverlayContent === "bottom-left",
                 "top-0 right-0 text-right" : alignOverlayContent === "top-right",

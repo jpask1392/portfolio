@@ -1,3 +1,4 @@
+import DynamicIcon from '@/components/icons/DynamicIcon';
 import Button from '@/components/ui/Button';
 import CustomImage from '@/components/ui/Image/Image';
 import cn from 'classnames';
@@ -59,14 +60,18 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
           }
         </div>
         <div className="w-full xl:w-7/12 md:px-8">
-          <div className="flex items-center">
+          <div className="flex items-center group">
             <Header 
               text={title}
               className="mt-5 mb-3 text-center xl:text-left"
               color="secondary"
             />
-            <span className="ml-10">image</span>
-            <span className="ml-10">(WORTH THE HYPE)</span>
+            <span className="ml-10">
+              <DynamicIcon type="drops" className="w-16 text-secondaryLight"/>
+            </span>
+            <span className="ml-10 text-xl translate-x-10 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+              ( WORTH THE HYPE )
+            </span>
           </div>
 
           <Slideshow

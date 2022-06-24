@@ -1,4 +1,4 @@
-import FastMarquee from "react-fast-marquee";
+import Ticker from 'react-ticker';
 import { render } from "storyblok-rich-text-react-renderer";
 import { renderOptions } from "utils/constants";
 
@@ -13,12 +13,12 @@ const Marquee: React.FC<Props> = ({
 }) => {
   return (
     <div className="pb-8 ui-marquee">
-      <FastMarquee 
-        className="overflow-y-hidden"
-        gradient={false}
-      >
-        {[...Array(parseInt(repeat))].map(() => render(text, renderOptions))}
-      </FastMarquee>
+      <Ticker speed={15}>
+        {({ index }) => (
+          <>{render(text, renderOptions)}</>
+        )}
+    </Ticker>
+      
     </div>
   )
 }

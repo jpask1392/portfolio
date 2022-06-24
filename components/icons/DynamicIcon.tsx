@@ -33,6 +33,7 @@ import Checkmark from "./Checkmark";
 import Star from "./Star";
 import AnnouncementArrow from "./AnnouncementArrow";
 import TogglePlusMinus from "./TogglePlusMinus";
+import Drops from "./Drops";
 
 type Variant = string;
 
@@ -67,6 +68,7 @@ const Components: {
   checkmark: Checkmark,
   star: Star,
   togglePlusMinus: TogglePlusMinus,
+  drops: Drops,
 };
 
 interface Props {

@@ -21,6 +21,12 @@
   }
 }
 
+.swiper-nav-container {
+  @apply absolute inset-x-0 transform -translate-y-1/2 z-10 pointer-events-none hidden xl:flex justify-between top-0;
+
+  margin-top: calc(((100% / var(--slides-per-view-xl)) - (var(--slides-spaceBetween) * (var(--slides-per-view-xl) - 1))) / 2);
+}
+
 /* TODO: make this as per the slideshow settings passed */
 .swiper:not(.swiper-initialized) {
   .swiper-wrapper .swiper-slide {

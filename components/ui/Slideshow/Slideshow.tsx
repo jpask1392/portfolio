@@ -72,9 +72,17 @@ const Slideshow: React.FC<Props> = ({
     }
   }
 
+  const style = {
+    ["--slides-per-view-base" as any]: showSlides.sm,
+    ["--slides-per-view-lg" as any]: showSlides.lg,
+    ["--slides-per-view-xl" as any]: showSlides.xl,
+    ["--slides-spaceBetween" as any]: (spaceBetween > 30 ? 22 : spaceBetween) + "px",
+  } as React.CSSProperties;
+
   return (
     <div
       className={cn(className, "ui-slideshow w-full")}
+      style={style}
     >
       
       <Swiper
@@ -88,10 +96,6 @@ const Slideshow: React.FC<Props> = ({
         // onBeforeInit={handleRefConnection}
         onBreakpoint={handleRefConnection}
         breakpoints={{
-          // 640: {
-          //   slidesPerView: showSlides.sm,
-          //   spaceBetween: spaceBetween,
-          // },
           768: {
             slidesPerView: showSlides.lg,
             spaceBetween: spaceBetween === 90 ? 50 : spaceBetween,
@@ -117,7 +121,7 @@ const Slideshow: React.FC<Props> = ({
           })
         }
 
-        <div className="absolute top-1/2 inset-x-0 transform -translate-y-1/2 z-10 pointer-events-none hidden xl:flex justify-between">
+        <div className="swiper-nav-container">
           <button ref={navigationPrevRef} className={cn(navigationArrowClasses)}>
             <SlideArrow direction="previous" className="text-primary" />
           </button>

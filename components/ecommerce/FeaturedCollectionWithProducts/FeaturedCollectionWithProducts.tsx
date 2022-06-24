@@ -60,8 +60,8 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
             : null
           }
         </div>
-        <div className="w-full xl:w-7/12 lg:px-5">
-          <div className="flex items-center flex-wrap group text-center xl:text-left mb-5">
+        <div className="w-full xl:w-7/12 lg:px-5 group">
+          <div className="flex items-center flex-wrap text-center xl:text-left mb-5">
             <Header 
               text={title}
               className="mt-5 lg:mb-3 w-full lg:w-auto"

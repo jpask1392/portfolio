@@ -2,7 +2,7 @@
   h3::after {
     content: "";
 
-    @apply inline-block mx-4 md:mx-8 w-2 h-2 md:w-4 md:h-4 bg-current rounded-full;
+    @apply inline-block mx-4 md:mx-8 w-2 h-2 lg:w-4 lg:h-4 bg-current rounded-full;
   }
 
   h3 {

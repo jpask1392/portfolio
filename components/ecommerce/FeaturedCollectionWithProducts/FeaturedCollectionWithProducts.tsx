@@ -59,17 +59,17 @@ const FeaturedCollectionWithProducts: React.FC<Props> = ({
             : null
           }
         </div>
-        <div className="w-full xl:w-7/12 md:px-5">
-          <div className="flex items-center flex-wrap group text-center xl:text-left mb-2">
+        <div className="w-full xl:w-7/12 lg:px-5">
+          <div className="flex items-center flex-wrap group text-center xl:text-left mb-5">
             <Header 
               text={title}
-              className="mt-5 md:mb-3 w-full md:w-auto"
+              className="mt-5 lg:mb-3 w-full lg:w-auto"
               color="secondary"
             />
-            <span className="hidden md:inline-block ml-10">
+            <span className="hidden lg:inline-block ml-10">
               <DynamicIcon type="drops" className="w-16 text-secondaryLight"/>
             </span>
-            <span className="md:ml-10 text-base md:text-xl md:translate-x-10 md:opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all w-full md:w-auto text-secondary">
+            <span className="lg:ml-10 text-base lg:text-xl lg:translate-x-10 lg:opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all w-full lg:w-auto text-secondary">
               ( WORTH THE HYPE )
             </span>
           </div>

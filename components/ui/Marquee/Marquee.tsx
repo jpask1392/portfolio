@@ -12,7 +12,7 @@ const Marquee: React.FC<Props> = ({
   repeat = '2',
 }) => {
   return (
-    <div className="pb-8 ui-marquee">
+    <div className="pb-5 lg:pb-8 ui-marquee">
       <Ticker speed={15}>
         {({ index }) => (
           <>{render(text, renderOptions)}</>

@@ -36,7 +36,7 @@ const FooterNewsletter: React.FC<Props> = ({
         />
       </div>
       {/* Mobile only */}
-      <p className="text-xs font-medium text-secondaryLight mt-1">
+      <p className="md:hidden text-xs font-medium text-secondaryLight mt-1">
         {newsletterText}
       </p>
     </Form>

@@ -76,15 +76,15 @@ const Footer: React.FC<Props> = ({
             </ul>
           </div>
 
-          <div className="order-3 md:order-none w-full mb-4 md:mb-0">
-            <ul className="inline-flex space-x-5 md:space-x-9">
+          <div className="order-3 md:order-none w-full mb-4 lg:mb-0">
+            <ul className="inline-flex space-x-5 lg:space-x-9 -translate-y-full lg:-translate-y-0">
               {
                 socials?.map((social, i) => (
                   <li key={i} className={`icon-${social.name}`}>
                     <StoryBlokLink sbLink={social.link}>
                       <DynamicIcon 
                         type={social['icon']} 
-                        className="text-secondary mx-auto h-3 w-3 md:h-6 md:w-6"
+                        className="text-secondary mx-auto h-3 w-3 lg:h-6 lg:w-6"
                       />
                     </StoryBlokLink>
                   </li>

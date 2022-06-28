@@ -1,3 +1,4 @@
+import { useGlobalContext } from "../context/globalContext";
 import Head from "@/components/common/Head";
 import Navigation from "@/components/common/Navbar";
 import SideNavigation from "@/components/common/SideNavigation";
@@ -9,6 +10,7 @@ import { useStoryblok } from "../../utils/storyblok";
 import CartDrawer from "@/components/ecommerce/CartDrawer";
 import { useUIContext } from "@/components/context/uiContext";
 import cn from 'classnames';
+
 
 // import and register gsap with plugins
 import { gsap } from 'gsap';
@@ -42,6 +44,7 @@ const Layout: React.FC<Props> = ({
 }) => {
   const [ toasts, addToast ] = useToast();
   const { UI, setUI } = useUIContext();
+  const pageData = useGlobalContext();
 
   // use hook for live update connection in StoryBlok
   global = useStoryblok(global, editMode);
@@ -83,7 +86,7 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <Head seo={false} />
-      <div className={cn("relative right-0 transition-all duration-700", {
+      <div className={cn(`slug-${pageData.story.slug} relative right-0 transition-all duration-700`, {
         "right-cart" : UI.cartActive
       })}>
         

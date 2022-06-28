@@ -9,7 +9,6 @@
     xl:text-13xl;
 }
 
-h1:not(.text-display),
 .h1:not(.text-display) {
   @apply
     uppercase
@@ -21,8 +20,8 @@ h1:not(.text-display),
     xl:text-12xl;
 }
 
-h2,
-.h2 {
+.h2,
+h2 {
   @apply
     uppercase
     font-header
@@ -33,8 +32,8 @@ h2,
     xl:text-11xl;
 }
 
-h3,
-.h3 {
+.h3,
+h3:not([class]) {
   @apply 
     uppercase
     font-header
@@ -46,8 +45,8 @@ h3,
     xl:text-9xl;
 }
 
-h4,
-.h4 {
+.h4,
+h4 {
   @apply 
     text-base
     md:text-2xl
@@ -69,11 +68,10 @@ p,
 .p,
 ul,
 .ul {
-  letter-spacing: 0.01em;
-
   @apply 
     text-base
-    md:text-xl;
+    md:text-xl
+    leading-relaxed;
 
   &:last-of-type {
     @apply mb-0;

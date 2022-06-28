@@ -6,7 +6,7 @@ import { SmoothScrollProvider } from './smoothScrollContext';
 export const DefaultLayout = ({ children, pageProps }) => {
   return (
     <GlobalContextProvider 
-      globalData={pageProps.global}
+      pageData={pageProps}
     >
       <UIContextProvider>
         <CartContextProvider>

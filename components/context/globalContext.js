@@ -2,9 +2,9 @@ import { createContext, useContext } from 'react';
 
 const GlobalContext = createContext();
 
-export function GlobalContextProvider({ children, globalData }) {
+export function GlobalContextProvider({ children, pageData }) {
   return (
-    <GlobalContext.Provider value={globalData}>
+    <GlobalContext.Provider value={pageData}>
       {children}
     </GlobalContext.Provider>
   );

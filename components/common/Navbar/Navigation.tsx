@@ -125,7 +125,7 @@ const Navigation: React.FC<NavProps> = ({
                 ...UI,
                 cartActive: !UI.cartActive,
               })}>
-                <DynamicIcon type="cart" className="h-7" />
+                <DynamicIcon type="cart" className="h-9" />
                 <span className="absolute -top-2 right-2">
                   <CountBubble />
                 </span>

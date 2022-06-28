@@ -69,11 +69,12 @@
   @apply mt-12 md:mt-24;
 }
 
-.mega-menu.opacity-1 {
-  @screen xl {
-    left: calc(47px - ((100vw - 100%) / 2));
-    width: calc(100vw - 6rem);
-  }
+.ui-grid + .column {
+  @apply mt-12 md:mt-24;
+}
+
+.ui-header + .ui-richtext {
+  @apply mt-12;
 }
 
 /*

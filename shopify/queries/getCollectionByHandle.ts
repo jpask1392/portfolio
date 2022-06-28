@@ -4,7 +4,7 @@ import { productDetailsFragment } from "./fragments";
 const getCollectionByHandle = gql`
   query getCollectionByHandle(
     $handle: String!
-    $product_filters: [ProductFilter!]
+    $productFilters: [ProductFilter!]
     $sortKey: ProductCollectionSortKeys
     $reverse: Boolean
   ) {
@@ -26,7 +26,7 @@ const getCollectionByHandle = gql`
       }
       products(
         first: 200
-        filters: $product_filters
+        filters: $productFilters
         sortKey: $sortKey
         reverse: $reverse
       ) {

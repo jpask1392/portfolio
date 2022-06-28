@@ -75,7 +75,7 @@ const ProductTile: React.FC<Props> = ({
         markers: false,
         scroller: "[data-scroll-container]",
         onEnter: () => {
-          tl.current.play();
+          tl.current?.play();
         }
       });
     }

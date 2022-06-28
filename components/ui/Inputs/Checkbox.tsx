@@ -25,7 +25,7 @@ const Checkbox: React.FC<Props> = ({
   const checkBoxStyles = cn("block border rounded-md flex justify-center items-center", {
     "bg-primary" : style === "sideLabel" && checked,
     "border-primary" : checked,
-    "border-white" : !checked,
+    "border-black" : !checked,
     "h-6 w-6" : style === "sideLabel",
     "p-2 w-full" : style === "radio",
     "opacity-30" : disabled

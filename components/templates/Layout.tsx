@@ -86,7 +86,7 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <Head seo={false} />
-      <div className={cn(`slug-${pageData.story.slug} relative right-0 transition-all duration-700`, {
+      <div className={cn(`slug-${pageData.story?.slug || ''} relative right-0 transition-all duration-700`, {
         "right-cart" : UI.cartActive
       })}>
         

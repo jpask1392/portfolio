@@ -13,7 +13,7 @@ const getCollectionByHandle = async (
       query: GET_COLLECTION_BY_HANDLE,
       variables: {
         handle: handle,
-        product_filters: product_filters,
+        productFilters: product_filters,
         sortKey: sortKey,
         reverse: reverse,
       }

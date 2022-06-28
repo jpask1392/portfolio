@@ -39,7 +39,7 @@ export default async function collections(req: any, res: any) {
       if (data) {
         res.status(200).json(data);
       } else {
-        res.status(404);  
+        res.status(404).json({message: "Could not find collection"});  
       }
     
     } catch (err) {

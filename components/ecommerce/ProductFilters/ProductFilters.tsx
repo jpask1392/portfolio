@@ -55,7 +55,9 @@ const ProductFilters: React.FC<Props> = ({
    * Update filters if sortkey changes
    */
   useEffect(() => {
-    setActiveFilters({...activeFilters, sortKey})
+    if (didMountRef.current) {
+      setActiveFilters({...activeFilters, sortKey})
+    }
   }, [sortKey])
 
   /**

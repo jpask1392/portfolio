@@ -46,7 +46,7 @@ const Navigation: React.FC<NavProps> = ({
       className={cn(className, [
         "bg-primary",
         "h-20 xl:h-12",
-        // "border-b border-tertiary",
+        "border-b border-secondaryLight",
         "z-20",
         "sticky",
         "top-0",
@@ -101,7 +101,6 @@ const Navigation: React.FC<NavProps> = ({
                   <NavigationLink 
                     nav_link={link} 
                     topLevel
-                    // hasMegaMenu={true} 
                   />
                 </li>
               )

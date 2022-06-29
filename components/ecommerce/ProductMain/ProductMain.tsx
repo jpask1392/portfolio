@@ -1,4 +1,4 @@
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import AddToCartButton from '@/components/ecommerce/AddToCartButton';
 import useCart from '@/components/hooks/useCart';
 import { useEffect, useState } from 'react';
 import Button from '@/components/ui/Button';
@@ -33,95 +33,58 @@ const ProductMain: React.FC<Props> = ({
   }, [selectedVariant])
 
   return (
-    <div className="flex flex-wrap -mx-3 xl:-mx-5">
-      {/* detail content - small devices only */}
-      <div className="mb-10 lg:hidden px-3 w-full">
-        <PrimaryDetail 
-          product={product}
-          selectedVariant={selectedVariant}
-        />
-      </div>
-
-      <div className="w-full lg:w-6/12 xl:w-7/12 px-3 xl:px-5">
+    <div className="flex flex-wrap -mx-3 xl:-mx-10">
+      <div className="w-full lg:w-6/12 xl:w-7/12 px-3 xl:px-10">
         { product.images.length ? <Gallery product={product} /> : null }
       </div>
 
-      <div className="w-full lg:w-6/12 xl:w-5/12 px-3 xl:px-5 mt-20 md:mt-0">
-        <div className="sticky top-36">
-          <div className="hidden lg:block">
-            <Breadcrumbs />
-            <PrimaryDetail 
-              product={product}
-              selectedVariant={selectedVariant}
-            />
-          </div>
+      <div className="w-full lg:w-6/12 xl:w-5/12 px-3 xl:px-10 mt-2 ld:mt-0">
+        <div className="">
+          <PrimaryDetail 
+            product={product}
+            selectedVariant={selectedVariant}
+          />
 
           <div className={cn({
-            "mt-20 lg:mt-6 mb-12" : product.variants.length > 1
+            "mt-4" : product.variants.length > 1
           })}>
             <VariantSelector 
               product={product}
               onVariantChange={setSelectedVariant}
+              displaySelected
             />
           </div>
 
-          <div className="mt-16">
-            <p className="caption w-full">Quantity</p>
-            <div className="flex space-x-4 md:space-x-8 mt-4">
-              <div className="w-8/12" style={{ maxWidth: 240 }}>
-                <Quantity 
-                  onChange={(quantity) => setFormData({...formData, quantity: quantity})} 
-                />
-              </div>
-              <Button text="Add to cart" ajaxClick={async (e) => {
-                try {
-                  const res = await fetch(`/api/checkout?action=add`, {
-                    'method': 'POST',
-                    'body': JSON.stringify({
-                      checkoutId: cart?.id,
-                      formData: [ formData ],
-                    })
-                  });
-
-                  if (res.status === 500) {
-                    throw new Error("Error");
-                  }
-
-                  const checkout = await res.json();
-
-                  setCart(checkout)
-
-                  // add user feedback
-                  addToast({
-                    message: "Product Added To Cart",
-                    style: "success"
-                  });
-
-                  // show cart drawer
-                  setUI({
-                    ...UI,
-                    cartActive: true
-                  })
-
-                } catch(err) {
-                  addToast({
-                    message: "Something went wrong",
-                    style: "error"
-                  });
-                }
-              }}/>
-            </div>
-          </div>
-
           {/* Product Description - Full */}
-          <div className="product-description">
-            <div dangerouslySetInnerHTML={{
+          <div className="product-description mt-7">
+            <div className="p" dangerouslySetInnerHTML={{
               __html: selectedVariant.description || product.descriptionHtml
             }} />
 
             <div className="mt-8">
               {/* Children is the additional content */}
               {children}
+            </div>
+          </div>
+
+          <div className="mt-7">
+            <div className="flex space-x-4 md:space-x-8 mt-4">
+              <div className="">
+                <Quantity 
+                  onChange={(quantity) => setFormData({...formData, quantity: quantity})} 
+                />
+              </div>
+
+              <AddToCartButton 
+                buttonText="Add to cart"
+                className="flex-1 !max-w-none"
+                variants={[
+                  {
+                    variantId: selectedVariant.id,
+                    quantity: 1,
+                  }
+                ]}
+              />
             </div>
           </div>
         </div>

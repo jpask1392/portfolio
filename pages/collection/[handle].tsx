@@ -141,11 +141,11 @@ export default function Collection({
           maxWidth="2xl" 
         >
           <div 
-            className={cn("xl:ml-[16rem] 2xl:max-w-[calc(100% - 16rem)] 2xl:ml-[15%] 2xl:max-w-[calc(100% - 15%)] transition-opacity py-24", {
+            className={cn("xl:ml-[16rem] 2xl:max-w-[calc(100% - 16rem)] 2xl:ml-[15%] 2xl:max-w-[calc(100% - 15%)] transition-opacity py-14 xl:py-24", {
               "opacity-20" : loading
             })}
           >
-            <div className={cn("grid gap-x-28 gap-y-20 grid-cols-3")}>
+            <div className={cn("grid gap-x-8 md:gap-x-14 xl:gap-x-28 gap-y-12 md:gap-y-20 grid-cols-2 md:grid-cols-3")}>
               {
                 collection && collection.products ? (
                   collection.products.map((product: any, i: number) => 

@@ -51,18 +51,15 @@ const Quantity: React.FC<Props> = ({
         ref={inputRef}
         name="quantity"
         min={1}
+        max={999}
         type="number"
         onChange={handleOnChange}
         defaultValue={1} 
         className={cn([
-          "absolute",
           "text-center",
           "bg-transparent",
-          "inset-0",
           "appearance-none",
-          "border border-white",
-          "rounded-full",
-          "py-3 md:py-5 xl:py-6",
+          "border",
           "px-10"
          ])}
       />

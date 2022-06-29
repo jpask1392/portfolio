@@ -1,7 +1,9 @@
 .product-description {
-  @apply mt-12 md:mt-16;
-
   ul {
     @apply list-disc pl-8;
   }
+}
+
+.swiper-slide-thumb-active {
+  @apply border-black border-2;
 }

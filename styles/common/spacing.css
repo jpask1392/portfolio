@@ -73,19 +73,40 @@
   @apply mt-12 md:mt-24;
 }
 
-.ui-header + .ui-richtext {
+.ui-header + .ui-richtext,
+.ui-header + .ui-accordion {
   @apply mt-12;
 }
 
-/*
-.column + .column {
-  @apply mt-10;
+.ui-richtext {
+  p + p {
+    @apply mt-4;
+  }
 
-  @screen md {
-    @apply mt-0;
+  h4 + p {
+    @apply mt-4
+  }
+
+  p + h4,
+  ul + h4,
+  ol + h4, {
+    @apply mt-8
+  }
+
+  ul {
+    @apply list-disc pl-4;
+  }
+
+  ol {
+    @apply list-decimal pl-4;
+  }
+
+  ul + p,
+  h4 + ul,
+  h4 + ol {
+    @apply mt-4
   }
 }
-*/
 
 section ul:not(.no-gap) {
   li:not(:last-of-type) {

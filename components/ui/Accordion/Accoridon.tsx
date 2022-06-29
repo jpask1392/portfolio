@@ -25,7 +25,7 @@ const CustomAccordion: React.FC<Props> = ({
 
   return (
     <Accordion.Root
-      className={cn(className, "ui-accordion")}
+      className={cn(className, "ui-accordion px-12")}
       collapsible={true}
       type="single"
       onValueChange={handleValueChange}
@@ -44,10 +44,11 @@ const CustomAccordion: React.FC<Props> = ({
                     "flex",
                     "w-full",
                     "border-b",
-                    "border-gray2",
+                    "border-secondaryLight",
                     "py-4",
                     "justify-between",
-                    "items-center"
+                    "items-center",
+                    "text-secondary"
                   ])}>
                   <H4 className="font-medium">
                     {item.header}

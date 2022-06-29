@@ -8,7 +8,7 @@ interface Props {
   stackItems?: boolean
   showDiscountPercentage?: boolean
   align?: 'left' | 'center' | 'right'
-  size?: 'subtitle' | 'text-base'
+  size?: string
 }
 
 const Price: React.FC<Props> = ({

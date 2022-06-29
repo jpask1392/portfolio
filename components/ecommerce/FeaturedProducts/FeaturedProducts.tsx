@@ -7,12 +7,22 @@ interface Props {
   className?: string
   collectionHandle?: string
   productID?: string
+  showSlides?: {
+    sm: number,
+    lg: number,
+    xl: number,
+  }
 }
 
 const FeaturedProducts: React.FC<Props> = ({ 
   className,
   collectionHandle,
   productID,
+  showSlides = {
+    sm: 2,
+    lg: 3,
+    xl: 3,
+  }
  }) => {
   const [products, setProducts] = useState([null, null, null, null]);
 
@@ -45,11 +55,7 @@ const FeaturedProducts: React.FC<Props> = ({
     <div className={cn(className, "w-full")}>
       <Slideshow
         spaceBetween={90}
-        showSlides={{
-          sm: 2,
-          lg: 3,
-          xl: 3,
-        }} 
+        showSlides={showSlides} 
       >
         {
           products.map((product: any, i: number) => 

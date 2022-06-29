@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState, useContext } from 'react';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useRouter } from "next/router";
+
 
 export const SmoothScrollContext = createContext({
   scroll: null,
@@ -11,7 +13,23 @@ export function useSmoothScrollContext() {
 }
 
 export const SmoothScrollProvider = ({ children, options }) => {
-  const [scroll, setScroll] = useState(null)
+  const [scroll, setScroll] = useState(null);
+  const router = useRouter()
+
+  /**
+   * Reset the scroll container on route change
+   */
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      scroll && scroll.destroy();
+      setScroll(null);
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -69,25 +87,23 @@ export const SmoothScrollProvider = ({ children, options }) => {
           throw Error(`[SmoothScrollProvider]: ${error}`)
         }
       })()
-    } else {
-      // trigger a resize
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-      }, 1000)
     }
 
     return () => {
-      /**
-        TODO: For some reason this is running straight awy
-         - I Know this is going to cause issues on page changes
-      */
-      // scroll && scroll.destroy()
-      // window.removeEventListener("resize", resize);
-      // window.removeEventListener("focus", resize);
+      if (scroll) {
+        scroll && scroll.destroy()
+        // setScroll(null);
+        window.removeEventListener("resize", resize);
+        window.removeEventListener("focus", resize);
+      }
     }
   }, [scroll])
 
-  return <SmoothScrollContext.Provider value={{ scroll, gsap, ScrollTrigger }}>{children}</SmoothScrollContext.Provider>
+  return (
+    <SmoothScrollContext.Provider 
+      value={{ scroll, gsap, ScrollTrigger }}
+    >{children}</SmoothScrollContext.Provider>
+  )
 }
 
 SmoothScrollContext.displayName = 'SmoothScrollContext'

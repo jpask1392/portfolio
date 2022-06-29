@@ -57,14 +57,13 @@ const Hero: React.FC<Props> = ({
     <section className="hero overflow-hidden" ref={headerRef}>
       <div className={cn("flex relative min-w-[100vw]", {
         "h-[90vh] xl:h-auto xl:aspect-video max-h-[90vh] items-end xl:items-start " : style === "fullHeight",
-        "aspect-[9/2] items-center" : style === "narrow"
+        "aspect-[9/4] md:aspect-[9/3] xl:aspect-[9/2] items-end xl:items-center pb-8" : style === "narrow"
       })}>
 
         {
           TopBlockComponent ? (
             <div 
               className={cn("w-full opacity-0 z-10", {
-                "" : style === "narrow",
                 "pb-44 xl:pt-40" : style === "fullHeight"
               })}
               ref={contentRef}
@@ -143,17 +142,7 @@ const Hero: React.FC<Props> = ({
         </div>
 
         {
-          BottomBlockComponent && (
-            <Container el="div">
-              <div className="mt-auto pb-8 xl:pl-6 lg:hidden">
-                <BottomBlockComponent />
-              </div>
-            </Container>
-          )
-        }
-
-        {
-          asSeenOn ? (
+          asSeenOn && asSeenOn.id ? (
             <div className="bg-secondaryLight absolute left-0 right-0 bottom-0 flex justify-center">
               <div className="py-3 container">
                 <div className="flex items-center mx-auto max-w-screen-lg">

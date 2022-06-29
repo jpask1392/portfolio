@@ -5,11 +5,13 @@ import cn from "classnames";
 interface Props {
   product: any
   onVariantChange: any
+  displaySelected?: boolean
 }
 
 const VariantSelector: React.FC<Props> = ({
   product,
   onVariantChange,
+  displaySelected,
 }) => {
   let {
     variants,
@@ -73,26 +75,40 @@ const VariantSelector: React.FC<Props> = ({
   }, [selectedOptions, variants])
 
   return (
-    <div className="variants">
+    <div className="variants flex items-center">
       {
         Array.isArray(options) && options.map((option, index) => {
           if (option.name.toLowerCase() === "color") {
             return (
-              option.values.map((color: string, i: number) => {
-                return (
-                  <span 
-                    key={i}
-                    onClick={() => updateOption(color, `option${index + 1}`)}
-                    className={cn("w-2.5 h-2.5 md:w-4 md:h-4 rounded-full inline-block mr-2 cursor-pointer transition-opacity", {
-                      "border-black border opacity-100" : selectedVariant.name === color,
-                      "opacity-30 hover:opacity-100" : selectedVariant.name !== color
-                    })}
-                    style={{
-                      background: colorMap[color.toLowerCase()]
-                    }}
-                  />
-                )
-              })
+              <>
+                {
+                  option.values.map((color: string, i: number) => {
+                    return (
+                      <span 
+                        key={i}
+                        onClick={() => updateOption(color, `option${index + 1}`)}
+                        className={cn("rounded-full inline-block cursor-pointer transition-opacity last:mr-0", {
+                          "border-black border opacity-100" : selectedVariant.name === color,
+                          "opacity-30 hover:opacity-100" : selectedVariant.name !== color,
+                          "w-2.5 h-2.5 md:w-5 md:h-5 mr-4" : displaySelected,
+                          "w-2.5 h-2.5 md:w-4 md:h-4 mr-2" : !displaySelected
+                        })}
+                        style={{
+                          background: colorMap[color.toLowerCase()]
+                        }}
+                      />
+                    )
+                  })
+                }
+
+                {
+                  displaySelected ? (
+                    <p className="ml-5 uppercase text-secondary font-header">
+                      Color: {selectedVariant.name}
+                    </p>
+                  ) : null
+                }
+              </>
             )
           } else {
             return (
@@ -104,6 +120,7 @@ const VariantSelector: React.FC<Props> = ({
             )
           }
         })
+
       }
     </div>
   ) 

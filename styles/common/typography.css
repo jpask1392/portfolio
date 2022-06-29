@@ -50,7 +50,8 @@ h4 {
   @apply
     uppercase
     font-header
-    text-4xl
+    text-base
+    md:text-4xl
     leading-tight;
 }
 

@@ -12,19 +12,13 @@ const PrimaryDetail: React.FC<Props> = ({
   selectedVariant
 }) => {
   return (
-    <>
-      {/* <Breadcrumbs /> */}
-      <h2 className="md:mt-8 h3">{product.title}</h2>
-      {
-        product.subtitle ? (
-          <h3 className="text-2xl mt-2.5 font-normal">
-            {product.subtitle}
-          </h3>
-        ) : null
-      }
+    <div className="flex">
+      <h1 className="h3">{product.title}</h1>
 
-      <div className="mt-16">
+      <div className="flex-1 text-right">
         <Price
+          align="right"
+          size="h3"
           originalPrice={(
             selectedVariant.compare_at_price && 
             selectedVariant.compare_at_price > selectedVariant.price
@@ -41,7 +35,7 @@ const PrimaryDetail: React.FC<Props> = ({
           }
         />
       </div>
-    </>
+    </div>
   )
 }
 

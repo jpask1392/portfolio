@@ -68,7 +68,7 @@ const Checkbox: React.FC<Props> = ({
       { 
         label && style === "sideLabel" && (
           <Label.Root 
-            className={cn("cursor-pointer", { "opacity-30" : disabled })}
+            className={cn("cursor-pointer h7 text-secondary", { "opacity-30" : disabled })}
             htmlFor={id}
           >{label}</Label.Root>
         ) 

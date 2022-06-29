@@ -2,6 +2,9 @@
 import cn from 'classnames';
 import FilterBlock from './FilterBlock';
 import { useEffect, useState, useRef } from 'react';
+import Skeleton from 'react-loading-skeleton'
+import { Checkbox, Slider } from '@/components/ui/Inputs';
+import { Sort } from "@/components/ecommerce/ProductFilters";
 
 interface Props {
   className?: string
@@ -16,25 +19,48 @@ const ProductFilters: React.FC<Props> = ({
   onDataChange,
   initialPriceFilters
 }) => {
-  const [activeFilters, setActiveFilters] = useState<any>(["{\"price\":{\"min\":0,\"max\":1000000}}"]);
+  // TODO: I don't like how I'm repeating the state here and in the [handle].tsx file
+  const [ activeFilters, setActiveFilters ] = useState<any>({filters: ["{\"price\":{\"min\":0,\"max\":1000000}}"]});
   const didMountRef = useRef(false);
+  const [ sortKey, setSortKey ] = useState({key: "COLLECTION_DEFAULT", reverse: false});
 
-  // add filter to state
-  const handleDataChange = (inputId: string) => {
-    let newArr = activeFilters;
-    
-    if (inputId.includes('price')) {
-      newArr[0] = inputId;
+  /**
+   * Run when a filter has been clicked
+   * 
+   * @param value 
+   */
+  const handleDataChange = (value: string) => {
+    let newArr = activeFilters.filters;
+    let formattedQuery = '';
+
+    if (Array.isArray(value)) {
+      // convert value to query for shopify
+      formattedQuery = JSON.stringify({ price: { min: value[0], max: value[1] } })
     } else {
-      (!activeFilters.includes(inputId))
-        ? newArr.push(inputId)
-        : newArr.splice(newArr.indexOf(inputId), 1);
+      formattedQuery = value;
+    }
+  
+    if (formattedQuery.includes('price')) {
+      newArr[0] = formattedQuery;
+    } else {
+      (!activeFilters.filters.includes(formattedQuery))
+        ? newArr.push(formattedQuery)
+        : newArr.splice(newArr.indexOf(formattedQuery), 1);
     }
 
-    setActiveFilters([...newArr])
+    setActiveFilters({filters: [...newArr], sortKey})
   }
 
-  // pass up the current state
+  /**
+   * Update filters if sortkey changes
+   */
+  useEffect(() => {
+    setActiveFilters({...activeFilters, sortKey})
+  }, [sortKey])
+
+  /**
+   * Pass the current state to parent component if changes
+   */
   useEffect(() => {
     if (didMountRef.current) {
       onDataChange && onDataChange(activeFilters)
@@ -57,19 +83,72 @@ const ProductFilters: React.FC<Props> = ({
           }
 
           return (
-            <FilterBlock
-              key={filter?.id || null}
-              style={filter?.style || null}
-              label={filter?.label || null}
-              type={filter?.type || null}
-              id={filter?.id || null}
-              values={filter?.values || null}
-              onDataChange={handleDataChange}
-              initialPriceFilters={initialPriceFilters}
-            />
+            <>
+              <FilterBlock
+                key={filter?.id || null}
+                style={filter?.style || null}
+                label={filter?.label || null}
+              >
+                <>
+                  {
+                    !filter?.values ? (
+                      <>
+                        <Skeleton width="16px" height="16px" inline className="mr-2"/>
+                        <Skeleton width="66%"/>
+                        <Skeleton width="16px" height="16px" inline className="mr-2"/>
+                        <Skeleton width="66%"/>
+                      </>
+                    ) : null
+                  }
+                  {
+                    filter?.type === 'LIST' && (
+                      filter?.values?.map((item: any ) => 
+                        <span 
+                          key={item.id}
+                          className={cn({
+                            "flex" : filter?.style === 'sideLabel'
+                          })}
+                        >
+                          <Checkbox 
+                            key={item.id}
+                            id={item.input}
+                            label={item.label}
+                            value={item.value}
+                            style={filter?.style}
+                            onValueChange={handleDataChange}
+                            disabled={item.count === 0}
+                          />
+                        </span>
+                      )
+                    )
+                  }
+                  {
+                    filter?.type === "PRICE_RANGE" && (
+                      <Slider 
+                        onValueChange={handleDataChange}
+                        id={filter?.id || ''}
+                        min={JSON.parse(initialPriceFilters.values[0].input).price.min}
+                        max={JSON.parse(initialPriceFilters.values[0].input).price.max}
+                        defaultValue={[
+                          JSON.parse(filter?.values[0].input).price.min, 
+                          JSON.parse(filter?.values[0].input).price.max
+                        ]}
+                      />
+                    )
+                  }
+                </>
+              </FilterBlock>
+            </>
           )
         })
       }
+
+      <FilterBlock label="Sort">
+        <Sort
+          setSortKey={setSortKey}
+          sortKey={sortKey}
+        />
+      </FilterBlock>
     </div>
   )
 }

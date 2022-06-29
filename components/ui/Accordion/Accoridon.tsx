@@ -49,7 +49,7 @@ const CustomAccordion: React.FC<Props> = ({
                     "justify-between",
                     "items-center"
                   ])}>
-                  <H4 className="p-secondary font-medium">
+                  <H4 className="font-medium">
                     {item.header}
                   </H4>
                   <DynamicIcon 

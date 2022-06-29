@@ -24,7 +24,6 @@ const Paragraph: FC<ParagraphProps> = ({
   className,
 }) => {
   const paragraphClassnames = cn(className, {
-    'p-secondary' : size === 'secondary',
     'p-tertiary' : size === 'tertiary',
     'caption' : size === 'caption',
   })

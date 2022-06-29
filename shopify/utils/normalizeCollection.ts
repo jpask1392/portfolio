@@ -7,6 +7,8 @@ export function normalizeCollection({
   products,
   handle,
   image,
+  collectionHeader,
+  ...rest
 } : {
   id: string
   title: string
@@ -14,6 +16,7 @@ export function normalizeCollection({
   products?: any
   handle: string
   image: any
+  collectionHeader: any
 }) {
   return {
     id,
@@ -36,5 +39,10 @@ export function normalizeCollection({
       filename: image.url,
       alt: image.altText, 
     } : null,
+    collectionHeader: collectionHeader?.reference.image ? {
+      ...collectionHeader?.reference.image,
+      filename: collectionHeader?.reference.image.url,
+      alt: collectionHeader?.reference.image.altText, 
+    } : null
   }
 }

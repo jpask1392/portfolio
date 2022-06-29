@@ -24,12 +24,12 @@ const VariantSelector: React.FC<Props> = ({
   });
 
   const colorMap: any = {
-    Brown: "#72605B",
-    Blue: "#6166D3",
-    Green: "#70A35D",
-    Yellow: "#EFD66E",
-    Red: "#D6613E",
-    Pink: "#EBBFBB"
+    brown: "#72605B",
+    blue: "#6166D3",
+    green: "#70A35D",
+    yellow: "#EFD66E",
+    red: "#D6613E",
+    pink: "#EBBFBB"
   }
 
   /**
@@ -88,7 +88,7 @@ const VariantSelector: React.FC<Props> = ({
                       "opacity-30 hover:opacity-100" : selectedVariant.name !== color
                     })}
                     style={{
-                      background: colorMap[color]
+                      background: colorMap[color.toLowerCase()]
                     }}
                   />
                 )

@@ -4,7 +4,7 @@ const TogglePlusMinus = ({
   open,
   className,
 }) => {
-  const lineClasses = cn("w-full bg-secondary h-1");
+  const lineClasses = cn("w-full bg-secondary h-0.5");
 
   return (
     <div className={cn(className, "w-3 h-3 lg:w-4 lg:h-4 flex flex-wrap items-center content-center justify-center")}>

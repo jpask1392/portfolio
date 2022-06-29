@@ -38,10 +38,10 @@ const Container: React.FC<ContainerProps> = ({
 }) => {
   const rootClassName = cn(className, {
     'section': el === 'section',
-    'mt-i-0': clearMargin.includes('top'),
-    'mb-i-0': clearMargin.includes('bottom'),
-    'pt-i-0': clearPadding.includes('top'),
-    'pb-i-0': clearPadding.includes('bottom'),
+    '!mt-0': clearMargin.includes('top'),
+    '!mb-0': clearMargin.includes('bottom'),
+    '!pt-0': clearPadding.includes('top'),
+    '!pb-0': clearPadding.includes('bottom'),
     'section--spacing-sm': spacing === 'sm',
     'section--spacing-lg': spacing === 'lg',
     [`has-bg bg-${backgroundColor}`] : backgroundColor,

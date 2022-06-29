@@ -47,11 +47,11 @@ h3:not([class]) {
 
 .h4,
 h4 {
-  @apply 
-    text-base
-    md:text-2xl
-    xl:text-4xl
-    leading-none;
+  @apply
+    uppercase
+    font-header
+    text-4xl
+    leading-tight;
 }
 
 /* h5,
@@ -78,11 +78,13 @@ ul,
   }
 }
 
-.p-secondary {
-  @apply 
-    text-sm
-    md:text-base
-    xl:text-2xl;
+.h7 {
+  @apply
+    font-sans
+    uppercase
+    text-base
+    leading-relaxed
+    font-semibold;
 }
 
 .text-highlight {

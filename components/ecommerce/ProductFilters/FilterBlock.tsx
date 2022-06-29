@@ -7,23 +7,14 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 interface Props {
   className?: string
-  id?: string
   label?: string
   style?: "sideLabel" | "radio" | string
-  type?: string
-  values?: any[]
-  onDataChange?: (inputId: any) => any
-  initialPriceFilters: any
 }
 
 const ProductFilters: React.FC<Props> = ({
   label,
-  id,
   style = "sideLabel",
-  type = "checkbox",
-  values = [],
-  onDataChange,
-  initialPriceFilters,
+  children
 }) => {
   const [open, setOpen] = useState(true);
 
@@ -34,88 +25,25 @@ const ProductFilters: React.FC<Props> = ({
     }
   );
 
-  // runs if child components state changes
-  const handleDataChange = (value: any) => {
-    let formattedQuery = '';
-    if (Array.isArray(value)) {
-      // convert value to query for shopify
-      formattedQuery = JSON.stringify({ price: { min: value[0], max: value[1] } })
-    } else {
-      formattedQuery = value;
-    }
-
-    onDataChange && onDataChange(formattedQuery)
-  }
-
   return (
-    <div className="filter-block pb-9 border-b border-gray2">
+    <div className="filter-block mb-8 last:mb-0">
       <h4 
-        className="caption relative cursor-pointer" 
+        className="caption relative cursor-pointer text-secondary flex items-center" 
         onClick={() => setOpen(!open)}
       >
-        <span>{label || <Skeleton width="50%"/>}</span>
-        <span className="absolute top-0 right-0">
+        <span className="h4 pr-4">{label || <Skeleton width="50%"/>}</span>
+        <span className="">
           <DynamicIcon 
             type='togglePlusMinus' 
             open={open}
           />
         </span>
       </h4>
-      <div className={cn("relative pr-12 mt-7", {
+      <div className={cn("relative mt-7", {
         'hidden' : !open
       })}>
-        <div className={moduleClassNames}>
-          {
-            !values ? (
-              <>
-                <Skeleton width="16px" height="16px" inline className="mr-2"/>
-                <Skeleton width="66%"/>
-                <Skeleton width="16px" height="16px" inline className="mr-2"/>
-                <Skeleton width="66%"/>
-              </>
-            ) : null
-          }
-          {
-            type === 'LIST' && (
-              values?.map((item: any ) => 
-                <span 
-                  key={item.id}
-                  className={cn({
-                    "flex" : style === 'sideLabel'
-                  })}
-                >
-                  <Checkbox 
-                    key={item.id}
-                    id={item.input}
-                    label={item.label}
-                    value={item.value}
-                    style={style}
-                    onValueChange={handleDataChange}
-                    disabled={item.count === 0}
-                  />
-                  {
-                    style === 'sideLabel' && item.count > 0 ? (
-                      <span className="ml-1"> ({item.count})</span>
-                    ) : null
-                  }
-                </span>
-              )
-            )
-          }
-          {
-            type === "PRICE_RANGE" && (
-              <Slider 
-                onValueChange={handleDataChange}
-                id={id || ''}
-                min={JSON.parse(initialPriceFilters.values[0].input).price.min}
-                max={JSON.parse(initialPriceFilters.values[0].input).price.max}
-                defaultValue={[
-                  JSON.parse(values[0].input).price.min, 
-                  JSON.parse(values[0].input).price.max
-                ]}
-              />
-            )
-          }
+        <div className={moduleClassNames + " pl-3"}>
+          {children}
         </div>
       </div>
     </div>

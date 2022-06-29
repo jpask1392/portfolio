@@ -34,7 +34,7 @@ const Header: React.FC<Props> = ({
   text,
   mobile_text,
   color = 'black',
-  size,
+  size = 'h2',
   sbEditable,
   disableAnimation = false,
   decoration

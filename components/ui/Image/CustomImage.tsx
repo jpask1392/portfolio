@@ -31,7 +31,7 @@ const CustomImage: React.FC<Props> = ({
    * TODO: replace with a standard image placeholder when an image doesnt exist
    * 
    */
-  if (!image?.filename) return (
+  if (!image?.filename || !image?.filename) return (
     <div className="bg-gray-300 aspect-video flex justify-center items-center text-gray-800">
       Image does not exist
     </div>

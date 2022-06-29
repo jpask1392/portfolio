@@ -13,9 +13,11 @@ interface Props {
   TopBlockComponent?: ReactNode | Component | any
   BottomBlockComponent?: ReactNode | Component | any
   image: storyBlokImage
-  imageTablet: storyBlokImage
-  imageMobile: storyBlokImage
-  asSeenOn: storyBlokImage
+  imageTablet?: storyBlokImage
+  imageMobile?: storyBlokImage
+  asSeenOn?: storyBlokImage
+  style?: "narrow" | "fullHeight"
+  overlay?: boolean
 }
 
 const Hero: React.FC<Props> = ({ 
@@ -26,6 +28,8 @@ const Hero: React.FC<Props> = ({
   imageTablet,
   imageMobile,
   asSeenOn,
+  style = "fullHeight",
+  overlay
  }) => {
   const headerRef = useRef<null | HTMLElement>(null);
   const contentRef = useRef<any>(null);
@@ -51,37 +55,46 @@ const Hero: React.FC<Props> = ({
 
   return (
     <section className="hero overflow-hidden" ref={headerRef}>
-      <div className="flex items-end xl:items-start relative h-[90vh] xl:h-auto xl:aspect-video max-h-[90vh] min-w-[100vw]">
+      <div className={cn("flex relative min-w-[100vw]", {
+        "h-[90vh] xl:h-auto xl:aspect-video max-h-[90vh] items-end xl:items-start " : style === "fullHeight",
+        "aspect-[9/2] items-center" : style === "narrow"
+      })}>
 
         {
-          (TopBlockComponent || BottomBlockComponent) && (
+          TopBlockComponent ? (
             <div 
-              className="w-full pb-44 xl:pt-40 opacity-0 z-10"
+              className={cn("w-full opacity-0 z-10", {
+                "" : style === "narrow",
+                "pb-44 xl:pt-40" : style === "fullHeight"
+              })}
               ref={contentRef}
             >
               <Container el="div">
-                <div className="w-full h-full flex flex-col" style={{ maxWidth: 940 }}>
-                  { TopBlockComponent && <div data-scroll data-scroll-speed="0"><TopBlockComponent /></div> }
-
-                  {
-                    BottomBlockComponent && (
-                      <div className="mt-auto pb-8 xl:pl-6 hidden lg:block">
-                        <BottomBlockComponent />
-                      </div>
-                    )
-                  }
-
+                <div className="w-full h-full flex flex-col">
+                  <div data-scroll data-scroll-speed="0">
+                    <TopBlockComponent />
+                  </div>
                 </div>
               </Container>
             </div>
-          )
+          ) : null
         }
 
         {/* Image Block */}
         <div className={cn([
           "absolute inset-0 py-0 z-0"
         ])}>
-          <div className="h-full w-screen relative" data-scroll data-scroll-speed="0.5">
+          <div 
+            className="h-full w-screen relative" 
+            data-scroll 
+            data-scroll-speed="0"
+          >
+            {
+              overlay ? (
+                <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
+              ) : null
+            }
+
             {/* 
               TODO: Move this into a separate repsonsive image component and make resuable
             */}

@@ -24,6 +24,23 @@ const getCollectionByHandle = gql`
         width
         altText
       }
+      collectionHeader: metafield(namespace: "custom", key: "collection_page_header") {
+        reference {
+          ... on MediaImage {
+            image {
+              id
+              url
+              thumbnail_url: url (transform: {
+                maxWidth: 10
+                maxHeight: 10
+              })
+              height
+              width
+              altText
+            }
+          }
+        }
+      }
       products(
         first: 200
         filters: $productFilters

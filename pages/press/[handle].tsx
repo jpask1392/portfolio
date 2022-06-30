@@ -10,10 +10,10 @@ import HeroImage from "@/components/modules/HeroImage";
 import getGlobalData from "@/utils/getGlobalData";
 import Layout from "@/components/templates/Layout";
 import Container from "@/components/ui/Container";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import ProductFilters from "@/components/ecommerce/ProductFilters";
 import ProductTile from "@/components/ecommerce/ProductTile";
 import cn from 'classnames';
-
 import type { Story } from '@/types/storyBlok';
 import { useEffect, useState, useRef } from "react";
 import useToast from "@/components/hooks/useToast";
@@ -106,7 +106,7 @@ export default function Collection({
         overlay
         TopBlockComponent={() => (
           <Column
-            hAlignContent="right"
+            hAlignContent="center"
           >
             <Header tag="h1" size="h1" color="primary">
               {collection.title}

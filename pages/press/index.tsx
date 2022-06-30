@@ -3,6 +3,7 @@
  * from Shopify. Uses a Shopify navigation menu to collect
  * the information needed for the list.
  */
+import PostTile from "@/components/modules/PressTile/PressTile";
 import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 import Column from "@/components/ui/Column";
 import Header from "@/components/ui/Header";
@@ -10,10 +11,7 @@ import HeroImage from "@/components/modules/HeroImage";
 import getGlobalData from "@/utils/getGlobalData";
 import Layout from "@/components/templates/Layout";
 import Container from "@/components/ui/Container";
-import ProductFilters from "@/components/ecommerce/ProductFilters";
-import ProductTile from "@/components/ecommerce/ProductTile";
 import cn from 'classnames';
-
 import type { Story } from '@/types/storyBlok';
 import { useEffect, useState, useRef } from "react";
 import useToast from "@/components/hooks/useToast";
@@ -24,22 +22,18 @@ import { getCollectionByHandle } from "@/shopify/operations";
 export default function Collection({
   global,
   preview,
-  initalCollection,
 } : {
   preview: boolean,
   global: Story | undefined
-  initalCollection: any
 }) {
-  /**
-  * Can set a default state of collection from 
-  * statically built pages. 
-  * 
-  * Note that if filters get updated within Shopify, 
-  * we will need to trigger a rebuild by either re-publishing
-  * a collection/product or manually triggering it in Vercel.
-  * 
-  */
-  const [ collection, setCollection ] = useState(initalCollection);
+  const [ posts, setPosts ] = useState([
+    {
+      title: "INC",
+      sub: "sub",
+      excerpt: "excerpt",
+      link: "link"
+    }
+  ]);
   const [ loading, setLoading ] = useState(false);
   const [ toasts, addToast ] = useToast();
   const [ currentFilters, setCurrentFilters ]  = useState({filters: [], sortKey: {key: "COLLECTION_DEFAULT", reverse: false}});
@@ -47,78 +41,78 @@ export default function Collection({
   const { scroll } : { scroll: any } = useSmoothScrollContext();
 
   // use initial filter from static props to maintain max price
-  const initialPriceFilters = initalCollection.filters.find((el: any) => el.label === 'Price');
+  // const initialPriceFilters = initalCollection.filters.find((el: any) => el.label === 'Price');
 
   // runs if childs state changes
-  const handleDataChange = (filters: any) => {
-    setCurrentFilters(filters);
-  }
+  // const handleDataChange = (filters: any) => {
+  //   setCurrentFilters(filters);
+  // }
 
-  useEffect(() => {
-    console.log('run')
-    if (didMountRef.current) {
-      (async () => {
-        setLoading(true);
+  // useEffect(() => {
+  //   if (didMountRef.current) {
+  //     (async () => {
+  //       setLoading(true);
   
-        try {
-          // send query to API
-          const res = await fetch(`/api/catalog/collections`, {
-            method: "POST",
-            headers: {
-              "content-type" : "application/json"
-            },
-            body: JSON.stringify({
-              handle: initalCollection.handle,
-              filters: currentFilters.filters,
-              sortKey: currentFilters.sortKey.key,
-              reverse: currentFilters.sortKey.reverse,
-            })
-          });
+  //       try {
+  //         // send query to API
+  //         const res = await fetch(`/api/catalog/collections`, {
+  //           method: "POST",
+  //           headers: {
+  //             "content-type" : "application/json"
+  //           },
+  //           body: JSON.stringify({
+  //             handle: initalCollection.handle,
+  //             filters: currentFilters.filters,
+  //             sortKey: currentFilters.sortKey.key,
+  //             reverse: currentFilters.sortKey.reverse,
+  //           })
+  //         });
     
-          const collection = await res.json();
+  //         const collection = await res.json();
     
-          if (collection) setCollection(collection);
-          scroll && scroll.update();
-        } catch (err) {
-          addToast({
-            message: "Something went wrong",
-            style: "error"
-          })
-        }
+  //         if (collection) setCollection(collection);
+  //         scroll && scroll.update();
+  //       } catch (err) {
+  //         addToast({
+  //           message: "Something went wrong",
+  //           style: "error"
+  //         })
+  //       }
     
-        setLoading(false)
-      })()
-    }
+  //       setLoading(false)
+  //     })()
+  //   }
 
-    didMountRef.current = true;
-  }, [currentFilters])
+  //   didMountRef.current = true;
+  // }, [currentFilters])
 
-  useEffect(() => {
-    // initial collection changes on page re-route
-    setCollection(initalCollection)
-  }, [initalCollection])
+  // useEffect(() => {
+  //   // initial collection changes on page re-route
+  //   setCollection(initalCollection)
+  // }, [initalCollection])
 
   return (
     <Layout global={global} preview={preview}>
-      <HeroImage 
-        image={collection.collectionHeader}
+      {/* <HeroImage 
+        image={{}}
         style="narrow"
         overlay
         TopBlockComponent={() => (
           <Column
-            hAlignContent="right"
+            hAlignContent="center"
           >
             <Header tag="h1" size="h1" color="primary">
-              {collection.title}
+              Press Coverage
             </Header>
           </Column>
         )}
-      />
+      /> */}
 
       <div className="relative">
         <aside className="hidden xl:block xl:w-[16rem] 2xl:w-[15%] bg-primary absolute inset-y-0 left-0 px-10 py-16 z-10 top-0">
           <div className="h-full overflow-auto">
-            {
+            Filters
+            {/* {
               collection.filters ? (
                 <ProductFilters 
                   collection={collection}
@@ -126,7 +120,7 @@ export default function Collection({
                   initialPriceFilters={initialPriceFilters}
                 />
               ) : null
-            }
+            } */}
           </div>
         </aside>
 
@@ -141,12 +135,12 @@ export default function Collection({
           >
             <div className={cn("grid gap-x-8 md:gap-x-14 xl:gap-x-28 gap-y-12 md:gap-y-20 grid-cols-2 md:grid-cols-3")}>
               {
-                collection && collection.products ? (
-                  collection.products.map((product: any, i: number) => 
-                    <ProductTile key={product.id} product={product}/>
+                posts ? (
+                  posts.map((post: any, i: number) => 
+                    <PostTile key={post.id} post={post}/>
                   )
                 ) : (
-                  <div>No Products Found</div>
+                  <div>No Posts Found</div>
                 )
               }
             </div> 
@@ -172,7 +166,7 @@ export async function getStaticProps({
   params: any
   preview: boolean,
 }) {
-  let handle = params.handle || "";
+  // let handle = params.handle || "";
 
   let sbParams: any = {
     version: preview ? "draft" : "published", // or "published"
@@ -187,13 +181,13 @@ export async function getStaticProps({
   try {
     // get global layout information for header, footer etc
     const global = await getGlobalData(sbParams);
-    const collection = await getCollectionByHandle(handle);
+    // const collection = await getCollectionByHandle(handle);
 
     return {
       props: {
         preview,
         global: global ? global.data.story : false,
-        initalCollection: collection || { filters: [], products: [] }
+        // initalCollection: collection || { filters: [], products: [] }
       },
       revalidate: 3600, // revalidate every hour
     };
@@ -202,51 +196,3 @@ export async function getStaticProps({
     throw new Error(error.message); // stop the build
   }
 }
-
-
-/**
-* Function generates an array of URL's to pass 
-* through to getStaticProps(). 
-* 
-* See here: https://nextjs.org/docs/basic-features/data-fetching/get-static-paths
-*/
-export async function getStaticPaths({ locales } : { locales: any }) {
-  let paths: any[] = [];
-
-  // get a list of the slugs
-  const res = await fetch('https://valentino-beauty-development.myshopify.com/api/2022-01/graphql.json', {
-    'method': 'POST',
-    'headers': {
-      'X-Shopify-Storefront-Access-Token': '2702b535ff14624f836147118cb2f315',
-      'Content-Type': 'application/graphql',
-    },
-    'body': `
-      {
-        collections(first: 250) {
-          edges {
-            node {
-              handle
-            }
-          }
-        }
-      }
-    `
-  });
-
-  const { data } = await res.json();
-
-  // normalize the data
-  const collectionUrls = data
-    .collections
-    .edges
-    .map(({ node }: {node: any}) => node.handle);
-
-  collectionUrls.forEach((pathSlug: string) => {
-    pathSlug && paths.push({ params: { handle: pathSlug } });
-  });
-
-  return {
-    paths: paths,
-    fallback: false,
-  };
-};

@@ -21,14 +21,8 @@ import Tabs from "@/components/ui/Tabs";
 import Marquee from "@/components/ui/Marquee";
 import { Input } from "@/components/ui/Inputs";
 
-import HeroVideo from "@/components/modules/HeroVideo";
 import HeroImage from "@/components/modules/HeroImage";
 import HeroSplit from "@/components/modules/HeroSplit";
-import TextImage from "@/components/modules/TextImage";
-import ThreeItemGrid from "@/components/modules/ThreeItemGrid";
-import ImmortalTools from "@/components/modules/ImmortalTools";
-import ContactForm from "@/components/modules/ContactForm";
-import SplitTiledImage from "@/components/modules/SplitTiledImage";
 import Form from "@/components/modules/Form";
 
 import FeaturedCollections from "@/components/ecommerce/FeaturedCollections";
@@ -53,12 +47,8 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     product: Product,
     featuredCollections: FeaturedCollections,
     featuredProducts: FeaturedProducts,
-    textImage: TextImage,
-    heroVideo: HeroVideo,
     heroImage: HeroImage,
     heroSplit: HeroSplit,
-    threeItemGrid: ThreeItemGrid,
-    immortalTools: ImmortalTools,
     container: Container,
     column: Column,
     header: Header,
@@ -71,7 +61,6 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     image: ImageModule,
     slideshow: Slideshow,
     accordion: Accordion,
-    splitTiledImage: SplitTiledImage,
     form: Form,
     formInput: Input,
     featuredCollectionWithProducts: FeaturedCollectionWithProducts,

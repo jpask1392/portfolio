@@ -1,16 +1,17 @@
 import { useGlobalContext } from "../context/globalContext";
 import Head from "@/components/common/Head";
 import Navigation from "@/components/common/Navbar";
-import SideNavigation from "@/components/common/SideNavigation";
 import Footer from "@/components/common/Footer";
 import Announcement from "@/components/common/Announcement";
-import dummyCollections from 'dummyData/collections.json';
 import { sbEditable } from "@storyblok/storyblok-editable";
 import { useStoryblok } from "../../utils/storyblok";
 import CartDrawer from "@/components/ecommerce/CartDrawer";
 import { useUIContext } from "@/components/context/uiContext";
 import cn from 'classnames';
-
+import { ReactNode, Component, useEffect } from 'react';
+import type { Story, Stories } from '@/types/storyBlok';
+import Toasts from "@/components/ui/Toasts";
+import useToast from "@/components/hooks/useToast";
 
 // import and register gsap with plugins
 import { gsap } from 'gsap';
@@ -18,12 +19,6 @@ import CustomEase from "gsap/dist/CustomEase";
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
-
-import { ReactNode, Component, useEffect } from 'react';
-import type { Story, Stories } from '@/types/storyBlok';
-
-import Toasts from "@/components/ui/Toasts";
-import useToast from "@/components/hooks/useToast";
 
 // dummy data - remove when going live
 import navigationList from 'dummyData/navigation.json';
@@ -37,14 +32,21 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ 
-  children, 
-  global,
+  children,
   editMode,
   preview,
 }) => {
   const [ toasts, addToast ] = useToast();
   const { UI, setUI } = useUIContext();
-  const pageData = useGlobalContext();
+
+  /**
+   * "story" is equivalent to page data,
+   * so it should return fields like 'handle', 'id' etc
+   */
+  let { 
+    global, 
+    story = {}
+  } = useGlobalContext();
 
   // use hook for live update connection in StoryBlok
   global = useStoryblok(global, editMode);
@@ -86,7 +88,8 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <Head seo={false} />
-      <div className={cn(`slug-${pageData.story?.slug || ''} relative right-0 transition-all duration-700`, {
+
+      <div className={cn(`slug-${story?.slug || ''} relative right-0 transition-all duration-700`, {
         "right-cart" : UI.cartActive
       })}>
         
@@ -107,15 +110,16 @@ const Layout: React.FC<Props> = ({
             "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
           })}>
             <div className="main-wrapper overflow-hidden">
-
-              {/* children will be pulled from storyblok */}
+              {/* 
+                children will be pulled from storyblok 
+              */}
               {children}
             </div>
-
           </main>
 
           <Footer {...footerProps} />
         </div>
+
         <CartDrawer />
       </div>
 

@@ -1,4 +1,3 @@
-export { default as getAllProducts } from './getAllProducts';
 export { default as getProductByHandle } from './getProductByHandle';
 export { default as createCheckout } from './createCheckout';
 export { default as getCheckout } from './getCheckout';

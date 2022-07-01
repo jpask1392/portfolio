@@ -34,7 +34,8 @@ const Footer: React.FC<Props> = ({
                   return (
                     <li 
                       key={i}
-                      className="md:[&:nth-child(3)]:hidden xl:[&:nth-child(3)]:block md:mr-8 xl:mr-20 last:mr-0"
+                      // className="md:[&:nth-child(3)]:hidden xl:[&:nth-child(3)]:block md:mr-8 xl:mr-20 last:mr-0"
+                      className="md:mr-8 xl:mr-20 last:mr-0"
                     >
                       <StoryBlokLink
                         className="text-base xl:text-4xl uppercase font-header text-secondary flex items-center"

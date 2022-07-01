@@ -3,6 +3,7 @@
  * from Shopify. Uses a Shopify navigation menu to collect
  * the information needed for the list.
  */
+import { useGlobalContext } from "@/components/context/globalContext";
 import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 import Column from "@/components/ui/Column";
 import Header from "@/components/ui/Header";
@@ -22,7 +23,6 @@ import useToast from "@/components/hooks/useToast";
 import { getCollectionByHandle } from "@/shopify/operations";
 
 export default function Collection({
-  global,
   preview,
   initalCollection,
 } : {
@@ -30,22 +30,13 @@ export default function Collection({
   global: Story | undefined
   initalCollection: any
 }) {
-  /**
-  * Can set a default state of collection from 
-  * statically built pages. 
-  * 
-  * Note that if filters get updated within Shopify, 
-  * we will need to trigger a rebuild by either re-publishing
-  * a collection/product or manually triggering it in Vercel.
-  * 
-  */
   const [ collection, setCollection ] = useState(initalCollection);
   const [ loading, setLoading ] = useState(false);
   const [ toasts, addToast ] = useToast();
   const [ currentFilters, setCurrentFilters ]  = useState({filters: [], sortKey: {key: "COLLECTION_DEFAULT", reverse: false}});
   const didMountRef = useRef(false);
   const { scroll } : { scroll: any } = useSmoothScrollContext();
-
+  
   // use initial filter from static props to maintain max price
   const initialPriceFilters = initalCollection.filters.find((el: any) => el.label === 'Price');
 
@@ -55,7 +46,7 @@ export default function Collection({
   }
 
   useEffect(() => {
-    if (didMountRef.current) {
+    if (didMountRef.current && scroll) {
       (async () => {
         setLoading(true);
   
@@ -67,16 +58,16 @@ export default function Collection({
               "content-type" : "application/json"
             },
             body: JSON.stringify({
-              handle: initalCollection.handle,
+              handle: collection.handle,
               filters: currentFilters.filters,
               sortKey: currentFilters.sortKey.key,
               reverse: currentFilters.sortKey.reverse,
             })
           });
     
-          const collection = await res.json();
-    
-          if (collection) setCollection(collection);
+          const collectionData = await res.json();
+          if (collectionData) setCollection(collectionData);
+
           scroll && scroll.update();
         } catch (err) {
           addToast({
@@ -90,7 +81,7 @@ export default function Collection({
     }
 
     didMountRef.current = true;
-  }, [currentFilters])
+  }, [currentFilters, scroll])
 
   useEffect(() => {
     // initial collection changes on page re-route
@@ -98,7 +89,7 @@ export default function Collection({
   }, [initalCollection])
 
   return (
-    <Layout global={global} preview={preview}>
+    <Layout preview={preview}>
       <HeroImage 
         image={collection.collectionHeader}
         style="narrow"
@@ -200,6 +191,10 @@ export async function getStaticProps({
       props: {
         preview,
         global: global ? global.data.story : false,
+        story: {
+          ...collection,
+          slug: collection?.handle
+        },
         initalCollection: collection || { filters: [], products: [] }
       },
       revalidate: 3600, // revalidate every hour

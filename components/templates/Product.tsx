@@ -19,7 +19,7 @@ const ProductTemplate: React.FC<Props> = ({
     <>
       <Container spacing="sm">
         <ProductMain 
-          product={product} 
+          product={product}
         >
           {
             story?.content?.additionalDesc.map((blok: SbEditableContent) => (

@@ -12,15 +12,11 @@ import { useEffect, useRef, useState } from 'react';
 interface Props {
   className?: string
   post: any
-  animate?: boolean
-  index?: number
 }
 
 const PostTile: React.FC<Props> = ({ 
   post,
   className,
-  animate,
-  index
 }) => {
   const { scroll } = useSmoothScrollContext();
   const hoverEffectRef = useRef(null);

@@ -21,7 +21,6 @@ export default function Page({
   // use the preview variable to enable the bridge only in preview mode
   // const enableBridge = preview;
   const enableBridge = true; // load the storyblok bridge everywhere
-
   story = useStoryblok(story, enableBridge);
 
   const seo = ('seo' in story?.content) && story?.content.seo[0]; // only one seo blok
@@ -32,6 +31,10 @@ export default function Page({
       editMode={story?.slug === 'global-template'}
       preview={preview}
     >
+      {/* 
+        This is a top level DynamicComponent and will usually be "Page".
+        It can be used for other content types coming from Storyblok too.
+      */}
       <DynamicComponent 
         blok={story?.content || {}}
       />

@@ -9,3 +9,5 @@ export { default as getProductRecommendations } from './getProductRecommendation
 export { default as checkoutAddDiscountCode } from './checkoutAddDiscountCode';
 export { default as checkoutRemoveDiscountCode } from './checkoutRemoveDiscountCode';
 export { default as customerCreateAccessToken } from './customerCreateAccessToken';
+export { default as getResourcePaths } from './getResourcePaths';
+export { default as getArticleByHandle } from './getArticleByHandle';

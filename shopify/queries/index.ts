@@ -3,3 +3,5 @@ export { default as GET_CHECKOUT } from './getCheckout';
 export { default as GET_COLLECTION_BY_HANDLE } from './getCollectionByHandle';
 export { default as GET_COLLECTIONS_BY_QUERY } from './getCollectionsByQuery';
 export { default as GET_PRODUCT_RECOMMENDATIONS } from './getProductRecommendations';
+export { default as GET_RESOURCE_PATHS } from './getResourcePaths';
+export { default as GET_ARTICLE_BY_HANDLE } from './getArticleByHandle';

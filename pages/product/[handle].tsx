@@ -14,7 +14,10 @@ import { NextSeo } from "next-seo";
 import type { Story } from '@/types/storyBlok';
 
 // make sure this only loads server side
-import { getProductByHandle } from "@/shopify/operations";
+import { 
+  getProductByHandle,
+  getResourcePaths
+} from "@/shopify/operations";
  
  export default function Product({
    global,
@@ -130,39 +133,7 @@ import { getProductByHandle } from "@/shopify/operations";
   * See here: https://nextjs.org/docs/basic-features/data-fetching/get-static-paths
   */
 export async function getStaticPaths({ locales } : { locales: any }) {
-  let paths: any[] = [];
-
-  // get a list of the slugs
-  const res = await fetch('https://valentino-beauty-development.myshopify.com/api/2022-01/graphql.json', {
-    'method': 'POST',
-    'headers': {
-      'X-Shopify-Storefront-Access-Token': '2702b535ff14624f836147118cb2f315',
-      'Content-Type': 'application/graphql',
-    },
-    'body': `
-      {
-        products(first: 250) {
-          edges {
-            node {
-              handle
-            }
-          }
-        }
-      }
-    `
-  });
- 
-  const { data } = await res.json();
- 
-  // normalize the data
-  const productURLs = data
-    .products
-    .edges
-    .map(({ node }: {node: any}) => node.handle);
- 
-  productURLs.forEach((pathSlug: string) => {
-    pathSlug && paths.push({ params: { handle: pathSlug } });
-  });
+  let paths: any[] = await getResourcePaths('products') || [];
  
   return {
     paths: paths,

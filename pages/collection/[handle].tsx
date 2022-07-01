@@ -3,7 +3,6 @@
  * from Shopify. Uses a Shopify navigation menu to collect
  * the information needed for the list.
  */
-import { useGlobalContext } from "@/components/context/globalContext";
 import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 import Column from "@/components/ui/Column";
 import Header from "@/components/ui/Header";
@@ -20,20 +19,28 @@ import { useEffect, useState, useRef } from "react";
 import useToast from "@/components/hooks/useToast";
 
 // make sure this only loads backend
-import { getCollectionByHandle } from "@/shopify/operations";
+import { 
+  getCollectionByHandle,
+  getResourcePaths
+} from "@/shopify/operations";
 
 export default function Collection({
   preview,
   initalCollection,
 } : {
   preview: boolean,
-  global: Story | undefined
   initalCollection: any
 }) {
   const [ collection, setCollection ] = useState(initalCollection);
   const [ loading, setLoading ] = useState(false);
   const [ toasts, addToast ] = useToast();
-  const [ currentFilters, setCurrentFilters ]  = useState({filters: [], sortKey: {key: "COLLECTION_DEFAULT", reverse: false}});
+  const [ currentFilters, setCurrentFilters ]  = useState({
+    filters: [], 
+    sortKey: {
+      key: "COLLECTION_DEFAULT", 
+      reverse: false
+    }
+  });
   const didMountRef = useRef(false);
   const { scroll } : { scroll: any } = useSmoothScrollContext();
   
@@ -213,39 +220,7 @@ export async function getStaticProps({
 * See here: https://nextjs.org/docs/basic-features/data-fetching/get-static-paths
 */
 export async function getStaticPaths({ locales } : { locales: any }) {
-  let paths: any[] = [];
-
-  // get a list of the slugs
-  const res = await fetch('https://valentino-beauty-development.myshopify.com/api/2022-01/graphql.json', {
-    'method': 'POST',
-    'headers': {
-      'X-Shopify-Storefront-Access-Token': '2702b535ff14624f836147118cb2f315',
-      'Content-Type': 'application/graphql',
-    },
-    'body': `
-      {
-        collections(first: 250) {
-          edges {
-            node {
-              handle
-            }
-          }
-        }
-      }
-    `
-  });
-
-  const { data } = await res.json();
-
-  // normalize the data
-  const collectionUrls = data
-    .collections
-    .edges
-    .map(({ node }: {node: any}) => node.handle);
-
-  collectionUrls.forEach((pathSlug: string) => {
-    pathSlug && paths.push({ params: { handle: pathSlug } });
-  });
+  let paths: any[] = await getResourcePaths('collections') || [];
 
   return {
     paths: paths,

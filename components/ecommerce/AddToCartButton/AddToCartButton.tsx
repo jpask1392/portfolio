@@ -9,6 +9,7 @@ import { useUIContext } from "@/components/context/uiContext";
 interface Props {
   buttonText: string
   className?: string
+  onDark?: boolean
   variants: {
     variantId: string,
     quantity: number,
@@ -19,6 +20,7 @@ const ProductMain: React.FC<Props> = ({
   variants,
   buttonText,
   className,
+  onDark
 }) => {
   const [ toasts, addToast ] = useToast();
   const { UI, setUI } = useUIContext();
@@ -68,6 +70,7 @@ const ProductMain: React.FC<Props> = ({
 
   return (
     <Button
+      onDark={onDark}
       className={className}
       text={buttonText}
       ajaxClick={handleAddToCart}

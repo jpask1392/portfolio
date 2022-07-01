@@ -1,67 +1,72 @@
-import Slideshow from "@/components/ui/Slideshow";
-import CustomImage from "@/components/ui/Image";
-import InfoPill from '@/components/ui/InfoPill';
-import cn from "classnames";
+// types
 import type { storyBlokImage } from "@/types/storyBlok";
 import type { Product } from "@/types/shopify";
 
+// dependencies
+import { useEffect, useState } from "react";
+import Slideshow from "@/components/ui/Slideshow";
+import CustomImage from "@/components/ui/Image";
+// import cn from "classnames";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y, Thumbs } from 'swiper';
+import { Thumbs } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-import { useEffect, useState } from "react";
 
 const ProductMain = ({ product } : { product: Product }) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  const [ thumbsSwiper, setThumbsSwiper ] = useState<any>(null);
 
   return (
     <div className="relative flex -mx-7 lg:-mx-10">
-      <div className="w-1/3 px-7 lg:px-10">
-        <div className="h-full">
-          <Swiper
-            className="h-full"
-            modules={[Thumbs]}
-            watchSlidesProgress
-            onSwiper={setThumbsSwiper}
-            slidesPerView={2}
-            direction="vertical"
-            spaceBetween={30}
-            breakpoints={{
-              768: {
-                slidesPerView: 3,
-              },
-              1440: {
-                slidesPerView: 4,
-              }
-            }}
-          >
-            {
-              product.images.map((image: storyBlokImage, i: number) => {
-                return (
-                  <SwiperSlide key={`${product.id}_${i}`}>
-                    <CustomImage 
-                      image={image}
-                      objectFit="cover"
-                      layout="fill"
-                    />
-                  </SwiperSlide>
-                )
-              })
+      <div 
+        className="w-1/3 px-7 lg:px-10 flex mb-[58px]"
+        style={{ height: thumbsSwiper?.el.offsetHeight }}
+      >
+        <Swiper
+          className="w-full h-full"
+          modules={[ Thumbs ]}
+          watchSlidesProgress
+          onSwiper={setThumbsSwiper}
+          slidesPerView={2}
+          direction="vertical"
+          spaceBetween={30}
+          breakpoints={{
+            768: {
+              slidesPerView: 2,
+            },
+            1440: {
+              slidesPerView: 4,
             }
-          </Swiper>
-        </div>
+          }}
+        >
+          {
+            product.images.map((image: storyBlokImage, i: number) => {
+              return (
+                <SwiperSlide key={`${product.id}_${i}`}>
+                  <CustomImage 
+                    image={image}
+                    objectFit="cover"
+                    layout="fill"
+                  />
+                </SwiperSlide>
+              )
+            })
+          }
+        </Swiper>
       </div>
 
       <div className="w-2/3 px-7 lg:px-10">
-        <Slideshow spaceBetween={0} className="overflow-hidden">
+        <Slideshow 
+          spaceBetween={0} 
+          className="overflow-hidden"
+          modules={[ Thumbs ]}
+          thumbs={{ swiper: thumbsSwiper }}
+        >
           {
             product.images.map((image: storyBlokImage, i: number) => {
               return (
                 <div 
                   key={`${product.id}_${i}`}
-                  className="relative aspect-square lg:aspect-[12/16]"
+                  className="relative aspect-square xl:aspect-[12/16]"
                 >
                   <CustomImage 
                     image={image}
@@ -73,28 +78,6 @@ const ProductMain = ({ product } : { product: Product }) => {
             })
           }
         </Slideshow>
-
-        {/* <Swiper
-          modules={[ Navigation, A11y, Thumbs ]}
-          thumbs={{ swiper: thumbsSwiper }}
-          draggable={true}
-        >
-            {
-              product.images.map((image: storyBlokImage, i: number) => {
-                return (
-                  <SwiperSlide key={`${product.id}_${i}`} className="bg-gray3">
-                    <div className="relative aspect-square lg:aspect-[12/16]">
-                      <CustomImage 
-                        image={image}
-                        objectFit="cover"
-                        layout="fill"
-                      />
-                    </div>
-                  </SwiperSlide>
-                )
-              })
-            }
-        </Swiper> */}
       </div>
     </div> 
   )

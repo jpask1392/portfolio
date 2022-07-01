@@ -3,16 +3,12 @@
  * Should also allow customization from within Storyblok
  */
 
+import ProductTemplate from "@/components/templates/Product";
+import ProductGiftCardsTemplate from "@/components/templates/ProductGiftCards";
+
 import getGlobalData from "@/utils/getGlobalData";
 import Layout from "@/components/templates/Layout";
-import DynamicComponent from "@/components/helpers/DynamicComponent";
 import Storyblok, { useStoryblok } from "@/utils/storyblok";
-import Container from "@/components/ui/Container";
-import ProductMain from "@/components/ecommerce/ProductMain";
-import FeaturedProducts from "@/components/ecommerce/FeaturedProducts";
-import Column from "@/components/ui/Column";
-import Header from "@/components/ui/Header";
-import { SbEditableContent } from "@/types/storyBlok";
 import { NextSeo } from "next-seo";
 
 import type { Story } from '@/types/storyBlok';
@@ -35,72 +31,32 @@ import { getProductByHandle } from "@/shopify/operations";
   const enableBridge = preview && story;
   // const enableBridge = true; // load the storyblok bridge everywhere
   story = useStoryblok(story, enableBridge);
+
+  // To be passed in to all templates
+  const templateDefaultProps = {
+    product: product,
+    story: story,
+  }
+
+  // Base the object on products productType.
+  const productTemplateMap: any = {
+    "Gift Cards" : <ProductGiftCardsTemplate {...templateDefaultProps} />
+  }
    
   return (
     <Layout global={global} preview={preview}>
-      <Container spacing="sm">
-        <ProductMain 
-          product={product} 
-        >
-          {
-            story?.content?.additionalDesc.map((blok: SbEditableContent) => (
-              <DynamicComponent 
-                blok={blok} 
-                key={blok._uid} 
-              />
-            ))
-          }
-        </ProductMain>
-      </Container>
 
       {
-        story && (
-          <DynamicComponent 
-            blok={story?.content || {}}
+        product.productType in productTemplateMap ? (
+          productTemplateMap[product.productType]
+        ) : (
+          <ProductTemplate 
+            product={product}
+            story={story}
           />
         )
       }
-
-      <Container backgroundColor="primary">
-        <Column>
-          <Header color="secondary">
-            MATCHES W/ THESE
-          </Header>
-        </Column>
-
-        <Column  padTop="sm">
-          <FeaturedProducts
-            collectionHandle="recommendations" 
-            productID={product.id}
-            showSlides={{
-              sm: 4,
-              lg: 4,
-              xl: 4,
-            }}
-          />
-        </Column>
-      </Container>
-
-      <Container>
-        <Column>
-          <Header color="secondary">
-            Explore More:
-          </Header>
-        </Column>
-
-        <Column  padTop="sm">
-          <FeaturedProducts
-            collectionHandle="recommendations" 
-            productID={product.id}
-            showSlides={{
-              sm: 4,
-              lg: 4,
-              xl: 4,
-            }}
-          />
-        </Column>
-      </Container>
-
+      
       <NextSeo
         title={product.seo.title}
         description={product.seo.description}

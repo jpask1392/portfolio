@@ -75,16 +75,16 @@ const VariantSelector: React.FC<Props> = ({
   }, [selectedOptions, variants])
 
   return (
-    <div className="variants flex items-center">
+    <div className="variants">
       {
         Array.isArray(options) && options.map((option, index) => {
           if (option.name.toLowerCase() === "color") {
             return (
-              <>
+              <ul className="flex items-center" key={index}>
                 {
                   option.values.map((color: string, i: number) => {
                     return (
-                      <span 
+                      <li 
                         key={i}
                         onClick={() => updateOption(color, `option${index + 1}`)}
                         className={cn("rounded-full inline-block cursor-pointer transition-opacity last:mr-0", {
@@ -108,7 +108,7 @@ const VariantSelector: React.FC<Props> = ({
                     </p>
                   ) : null
                 }
-              </>
+              </ul>
             )
           } else {
             return (

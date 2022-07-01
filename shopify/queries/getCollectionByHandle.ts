@@ -41,6 +41,9 @@ const getCollectionByHandle = gql`
           }
         }
       }
+      subHeader: metafield(namespace: "custom", key: "subHeader") {
+        value
+      }
       products(
         first: 200
         filters: $productFilters

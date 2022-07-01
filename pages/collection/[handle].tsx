@@ -55,7 +55,6 @@ export default function Collection({
   }
 
   useEffect(() => {
-    console.log('run')
     if (didMountRef.current) {
       (async () => {
         setLoading(true);
@@ -111,6 +110,14 @@ export default function Collection({
             <Header tag="h1" size="h1" color="primary">
               {collection.title}
             </Header>
+
+            {
+             collection.subHeader ? (
+              <Header tag="h2" size="p" color="primary">
+                {collection.subHeader.value}
+              </Header>
+              ) : null 
+            }
           </Column>
         )}
       />

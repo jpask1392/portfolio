@@ -108,11 +108,13 @@
   }
 }
 
+/*
 section ul:not(.no-gap) {
   li:not(:last-of-type) {
     @apply mb-2
   }
 }
+*/
 
 p + ul {
   @apply mt-7;

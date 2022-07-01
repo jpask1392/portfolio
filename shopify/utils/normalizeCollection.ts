@@ -43,6 +43,7 @@ export function normalizeCollection({
       ...collectionHeader?.reference.image,
       filename: collectionHeader?.reference.image.url,
       alt: collectionHeader?.reference.image.altText, 
-    } : null
+    } : null,
+    ...rest,
   }
 }

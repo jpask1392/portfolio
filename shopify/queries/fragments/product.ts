@@ -4,9 +4,6 @@ export const productDetailsFragment = gql`
   fragment productDetails on Product {
     id
     title
-    subTitle: metafield(namespace: "my_fields", key: "product_subtitle") {
-      value
-    }
     seo {
       description
       title

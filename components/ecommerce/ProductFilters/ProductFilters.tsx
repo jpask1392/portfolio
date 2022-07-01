@@ -74,7 +74,7 @@ const ProductFilters: React.FC<Props> = ({
   return (
     <div className={className}>
       {
-        collection.filters.map((filterRaw: any) => {
+        collection.filters.map((filterRaw: any, index: number) => {
           const filter = {
             ...filterRaw,
             style: 'sideLabel',
@@ -85,62 +85,60 @@ const ProductFilters: React.FC<Props> = ({
           }
 
           return (
-            <>
-              <FilterBlock
-                key={filter?.id || null}
-                style={filter?.style || null}
-                label={filter?.label || null}
-              >
-                <>
-                  {
-                    !filter?.values ? (
-                      <>
-                        <Skeleton width="16px" height="16px" inline className="mr-2"/>
-                        <Skeleton width="66%"/>
-                        <Skeleton width="16px" height="16px" inline className="mr-2"/>
-                        <Skeleton width="66%"/>
-                      </>
-                    ) : null
-                  }
-                  {
-                    filter?.type === 'LIST' && (
-                      filter?.values?.map((item: any ) => 
-                        <span 
+            <FilterBlock
+              key={index}
+              style={filter?.style || null}
+              label={filter?.label || null}
+            >
+              <>
+                {
+                  !filter?.values ? (
+                    <>
+                      <Skeleton width="16px" height="16px" inline className="mr-2"/>
+                      <Skeleton width="66%"/>
+                      <Skeleton width="16px" height="16px" inline className="mr-2"/>
+                      <Skeleton width="66%"/>
+                    </>
+                  ) : null
+                }
+                {
+                  filter?.type === 'LIST' && (
+                    filter?.values?.map((item: any ) => 
+                      <span 
+                        key={item.id}
+                        className={cn({
+                          "flex" : filter?.style === 'sideLabel'
+                        })}
+                      >
+                        <Checkbox 
                           key={item.id}
-                          className={cn({
-                            "flex" : filter?.style === 'sideLabel'
-                          })}
-                        >
-                          <Checkbox 
-                            key={item.id}
-                            id={item.input}
-                            label={item.label}
-                            value={item.value}
-                            style={filter?.style}
-                            onValueChange={handleDataChange}
-                            disabled={item.count === 0}
-                          />
-                        </span>
-                      )
+                          id={item.input}
+                          label={item.label}
+                          value={item.value}
+                          style={filter?.style}
+                          onValueChange={handleDataChange}
+                          disabled={item.count === 0}
+                        />
+                      </span>
                     )
-                  }
-                  {
-                    filter?.type === "PRICE_RANGE" && (
-                      <Slider 
-                        onValueChange={handleDataChange}
-                        id={filter?.id || ''}
-                        min={JSON.parse(initialPriceFilters.values[0].input).price.min}
-                        max={JSON.parse(initialPriceFilters.values[0].input).price.max}
-                        defaultValue={[
-                          JSON.parse(filter?.values[0].input).price.min, 
-                          JSON.parse(filter?.values[0].input).price.max
-                        ]}
-                      />
-                    )
-                  }
-                </>
-              </FilterBlock>
-            </>
+                  )
+                }
+                {
+                  filter?.type === "PRICE_RANGE" && (
+                    <Slider 
+                      onValueChange={handleDataChange}
+                      id={filter?.id || ''}
+                      min={JSON.parse(initialPriceFilters.values[0].input).price.min}
+                      max={JSON.parse(initialPriceFilters.values[0].input).price.max}
+                      defaultValue={[
+                        JSON.parse(filter?.values[0].input).price.min, 
+                        JSON.parse(filter?.values[0].input).price.max
+                      ]}
+                    />
+                  )
+                }
+              </>
+            </FilterBlock>
           )
         })
       }

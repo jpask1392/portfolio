@@ -1,9 +1,6 @@
-import { sbEditable } from "@storyblok/storyblok-editable";
 import SlideArrow from "./SlideArrow";
 import DynamicComponent from "@/components/helpers/DynamicComponent";
-import { SbEditableContent } from "@/types/storyBlok";
 import cn from "classnames";
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SwiperOptions, Navigation, A11y, Pagination } from 'swiper';
 import 'swiper/css';
@@ -21,6 +18,8 @@ interface Props {
   }
   spaceBetween?: number
   children: ReactNode[] | Component[] | any[]
+  thumbs?: any,
+  modules?: any[]
 }
 
 const Slideshow: React.FC<Props> = ({ 
@@ -32,11 +31,12 @@ const Slideshow: React.FC<Props> = ({
   },
   children,
   className,
-  spaceBetween = 0
+  spaceBetween = 0,
+  modules = [],
+  thumbs,
 }) => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
-  const scrollBarRef = useRef(null);
   const paginationContainerRef = useRef(null);
 
   const navigationArrowClasses = cn([
@@ -47,7 +47,7 @@ const Slideshow: React.FC<Props> = ({
     "transition-opacity",
     "duration-700",
     "focus:ring"
-  ])
+  ]);
 
   const handleRefConnection = (swiper: any) => {
     const { 
@@ -79,33 +79,35 @@ const Slideshow: React.FC<Props> = ({
     ["--slides-spaceBetween" as any]: (spaceBetween > 30 ? 22 : spaceBetween) + "px",
   } as React.CSSProperties;
 
+  const swiperProps = {
+    threshold: 10,
+    modules: [ Navigation, A11y, Pagination, ...modules ],
+    draggable: true,
+    enabled: children.length > 1,
+    slidesPerView: showSlides.sm || 1,
+    spaceBetween: spaceBetween > 30 ? 22 : spaceBetween,
+    onSwiper: handleRefConnection,
+    onBreakpoint: handleRefConnection,
+    thumbs: thumbs,
+    breakpoints: {
+      768: {
+        slidesPerView: showSlides.lg,
+        spaceBetween: spaceBetween === 90 ? 50 : spaceBetween,
+      },
+      1440: {
+        slidesPerView: showSlides.xl,
+        spaceBetween: spaceBetween,
+      }
+    }
+  }
+
   return (
     <div
       className={cn(className, "ui-slideshow w-full")}
       style={style}
     >
       
-      <Swiper
-        threshold={10}
-        modules={[Navigation, A11y, Pagination]}
-        draggable={true}
-        enabled={children.length > 1}
-        slidesPerView={showSlides.sm || 1}
-        spaceBetween={spaceBetween > 30 ? 22 : spaceBetween}
-        onSwiper={handleRefConnection}
-        // onBeforeInit={handleRefConnection}
-        onBreakpoint={handleRefConnection}
-        breakpoints={{
-          768: {
-            slidesPerView: showSlides.lg,
-            spaceBetween: spaceBetween === 90 ? 50 : spaceBetween,
-          },
-          1440: {
-            slidesPerView: showSlides.xl,
-            spaceBetween: spaceBetween,
-          }
-        }}
-      >
+      <Swiper {...swiperProps}>
         {
           children.flat().map((child, i) => {
             if (!child) return;

@@ -54,20 +54,22 @@ const FeaturedCollectionTile: React.FC<Props> = ({
         }
 
         <div className="bg-image absolute inset-0 z-0 overflow-hidden">
-          {
-            collection && (
-              <CustomImage 
-                image={collection.image} 
-                layout="fill" 
-                objectFit="cover"
-              />
-            )
-          }
+          <div className="relative h-full w-full">
+            {
+              collection && (
+                <CustomImage 
+                  image={collection.image} 
+                  layout="fill" 
+                  objectFit="cover"
+                />
+              )
+            }
+          </div>
         </div>
       </div>
 
       {
-        tileStyle === "secondary" ? (
+        collection && tileStyle === "secondary" ? (
           <div className="p-2 md:p-4 pb-0 md:pb-0 text-center w-full relative z-10">
             <Link href={'collection/' + collection?.handle}>
               <a className="font-header text-xs xl:text-xl uppercase underline text-secondary block">

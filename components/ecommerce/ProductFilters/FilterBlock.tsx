@@ -11,7 +11,7 @@ interface Props {
   style?: "sideLabel" | "radio" | string
 }
 
-const ProductFilters: React.FC<Props> = ({
+const ProductFilterBlock: React.FC<Props> = ({
   label,
   style = "sideLabel",
   children
@@ -50,4 +50,4 @@ const ProductFilters: React.FC<Props> = ({
   )
 }
 
-export default ProductFilters;
+export default ProductFilterBlock;

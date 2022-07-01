@@ -2,11 +2,13 @@ import cn from 'classnames';
 import ProductTile from '@/components/ecommerce/ProductTile';
 import Slideshow from '@/components/ui/Slideshow';
 import { useEffect, useState } from 'react';
+import useSWR from 'swr'
 
 interface Props {
   className?: string
   collectionHandle?: string
   productID?: string
+  onDark?: boolean
   showSlides?: {
     sm: number,
     lg: number,
@@ -18,6 +20,7 @@ const FeaturedProducts: React.FC<Props> = ({
   className,
   collectionHandle,
   productID,
+  onDark,
   showSlides = {
     sm: 2,
     lg: 3,
@@ -26,30 +29,22 @@ const FeaturedProducts: React.FC<Props> = ({
  }) => {
   const [products, setProducts] = useState([null, null, null, null]);
 
+  let url = `/api/catalog/collections?handle=${encodeURIComponent(collectionHandle || "")}`;
+  if (collectionHandle === 'recommendations' && productID) {
+    url = `/api/catalog/products?recommendationProductID=${encodeURIComponent(productID)}`;
+  }
+
+  const { data, error } = useSWR(url, async (url) => {
+    const res = await fetch(url);
+    return await res.json();
+  });
+
   useEffect(() => {
-    (async () => {
-      /**
-       * Get collection from Shopify API
-       * 
-       * - TODO: Stop re-running after tab container changes
-       */
-      if (collectionHandle && !productID) {
-        const res = await fetch(`/api/catalog/collections?handle=${encodeURIComponent(collectionHandle)}`);
-        const collection = await res.json();
-
-        setProducts(collection?.products || []);
-      }
-
-      /**
-       * Get product recommendations from Shopify
-       */
-      if (collectionHandle === 'recommendations' && productID) {
-        const res = await fetch(`/api/catalog/products?recommendationProductID=${encodeURIComponent(productID)}`);
-        const products = await res.json();
-        setProducts(products);
-      }
-    })();
-  }, [productID, collectionHandle])
+    if (!data) return;
+    // render the loaded collections
+    if ('products' in data) setProducts(data.products);
+    if (!('products' in data)) setProducts(data);
+  }, [data])
 
   return (
     <div className={cn(className, "w-full")}>
@@ -64,6 +59,7 @@ const FeaturedProducts: React.FC<Props> = ({
               key={i}
               animate
               index={i}
+              onDark={onDark}
             />
           )
         }

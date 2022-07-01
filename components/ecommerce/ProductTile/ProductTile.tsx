@@ -20,20 +20,22 @@ interface Props {
   product: any
   animate?: boolean
   index?: number
+  onDark?: boolean
 }
 
 const ProductTile: React.FC<Props> = ({ 
   product,
   className,
   animate,
-  index
+  index,
+  onDark
 }) => {
   const { scroll } = useSmoothScrollContext();
   const hoverEffectRef = useRef(null);
   const articleRef = useRef(null);
   const imageRef = useRef(null);
   const tl = useRef<any>(null);
-
+  
   const [ selectedVariant, setSelectedVariant ] = useState<any | boolean>(false);
 
   useIsomorphicLayoutEffect(() => {
@@ -94,9 +96,8 @@ const ProductTile: React.FC<Props> = ({
 
       <Link href={`/product${product?.path || '/'}`}>
         <a aria-label={`Go to ${product?.title || "product"} page`}>
-          <div className="aspect-square  relative overflow-hidden">
-            <div className="w-full h-full relative" ref={imageRef}>
-              <div className="">                
+          <div className="aspect-square flex overflow-hidden">
+            <div className="w-full relative" ref={imageRef}>        
                 {
                   product?.images.length > 1 ? (
                     <CustomImage 
@@ -107,7 +108,7 @@ const ProductTile: React.FC<Props> = ({
                   ) : null
                 }
 
-                <div className={cn({
+                <div className={cn("relative h-full w-full", {
                   "group-hover:opacity-0 transition-opacity duration-300" : product?.images.length > 1
                 })}>
                   <CustomImage 
@@ -127,7 +128,7 @@ const ProductTile: React.FC<Props> = ({
                 />
               ) : null
             }
-          </div>
+          
         </a>
       </Link>
 
@@ -147,18 +148,18 @@ const ProductTile: React.FC<Props> = ({
                 product ? (
                   <Price
                     originalPrice={(
-                      product.variants[0].compare_at_price && 
-                      product.variants[0].compare_at_price > product.variants[0].price
+                      selectedVariant.compare_at_price && 
+                      selectedVariant.compare_at_price > selectedVariant.price
                     )
-                      ? product.variants[0].compare_at_price
-                      : product.variants[0].price
+                      ? selectedVariant.compare_at_price
+                      : selectedVariant.price
                     }
                     salePrice={(
-                      product.variants[0].compare_at_price && 
-                      product.variants[0].compare_at_price > product.variants[0].price
+                      selectedVariant.compare_at_price && 
+                      selectedVariant.compare_at_price > selectedVariant.price
                     )
-                      ? product.variants[0].price
-                      : product.variants[0].compare_at_price || 0
+                      ? selectedVariant.price
+                      : selectedVariant.compare_at_price || 0
                     }
                   />
                 ) : <Skeleton />
@@ -178,6 +179,7 @@ const ProductTile: React.FC<Props> = ({
             }
 
             <AddToCartButton 
+              onDark={onDark}
               buttonText="ADD TO CART"
               className="mt-2.5 !max-w-none w-full"
               variants={[

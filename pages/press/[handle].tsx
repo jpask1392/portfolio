@@ -55,7 +55,6 @@ export default function Collection({
   }
 
   useEffect(() => {
-    console.log('run')
     if (didMountRef.current) {
       (async () => {
         setLoading(true);

@@ -11,3 +11,4 @@ export { default as checkoutRemoveDiscountCode } from './checkoutRemoveDiscountC
 export { default as customerCreateAccessToken } from './customerCreateAccessToken';
 export { default as getResourcePaths } from './getResourcePaths';
 export { default as getArticleByHandle } from './getArticleByHandle';
+export { default as getArticlesByBlogHandle } from './getArticlesByBlogHandle';

@@ -14,6 +14,7 @@ interface Props {
   text?: string
   sbEditable?: SbEditableContent
   animationDelay?: number
+  color?: string
 }
 
 const RichText: React.FC<Props> = ({ 
@@ -22,7 +23,8 @@ const RichText: React.FC<Props> = ({
   className,
   children,
   sbEditable,
-  animationDelay = 0.65
+  animationDelay = 0.65,
+  color
 }) => {
   const { scroll } = useSmoothScrollContext();
 
@@ -55,6 +57,7 @@ const RichText: React.FC<Props> = ({
     <div
       className={cn(className, "ui-richtext", { 
         [`text-${align}`] : align,
+        [`text-${color}`] : color,
       })}
       ref={componentRef}
       {...sbEditable}

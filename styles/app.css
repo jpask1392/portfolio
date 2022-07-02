@@ -21,6 +21,7 @@
 @import 'ui/inputs';
 @import 'ui/accordion';
 @import 'ui/tabs';
+@import 'ui/forms';
 
 @import 'ecommerce/collection';
 @import 'ecommerce/product-main';

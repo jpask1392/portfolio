@@ -12,3 +12,5 @@ export { default as customerCreateAccessToken } from './customerCreateAccessToke
 export { default as getResourcePaths } from './getResourcePaths';
 export { default as getArticleByHandle } from './getArticleByHandle';
 export { default as getArticlesByBlogHandle } from './getArticlesByBlogHandle';
+export { default as customerCreate } from './customerCreate';
+export { default as getCustomerByAccessToken } from './getCustomerByAccessToken';

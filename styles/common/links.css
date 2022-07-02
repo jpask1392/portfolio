@@ -1,5 +1,5 @@
 .button {
-  max-width: 260px;
+  /* max-width: 260px; */
 
   @apply 
     md:w-full
@@ -31,7 +31,7 @@
 }
 
 .button.on-dark {
-  @apply bg-secondary text-primary;
+  @apply bg-secondary text-primary border-secondary;
 
   &:hover {
     @apply bg-secondaryLight border-secondaryLight text-primary;

@@ -20,10 +20,7 @@ const Button: React.FC<button> = ({
   isSubmit
 }) => {
   const [loading, setLoading] = useState(false);
-  const { 
-    submitting, 
-    setSubmitting
-  } = useContext(FormContext);
+  const { submitting } = useContext<any>(FormContext);
 
   useEffect(() => {
     setLoading(submitting)

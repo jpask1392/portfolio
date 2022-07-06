@@ -52,6 +52,9 @@ export const productDetailsFragment = gql`
         }
       }
     }
+    ReviewsWidgetSnippet: metafield(namespace: "okendo", key: "ReviewsWidgetSnippet") {
+      value
+    }
     options {
       id
       name

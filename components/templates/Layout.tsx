@@ -98,9 +98,14 @@ const Layout: React.FC<Props> = ({
               key={script._uid}
               id={script._uid}
               src={script.src || undefined}
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
+              strategy={script.strategy || "afterInteractive"}
+              dangerouslySetInnerHTML={ script.inner ? {
                 __html: script.inner,
+              } : undefined}
+              onLoad={() => {
+                if (script.strategy === "lazyOnload") {
+                  // do some stuff here
+                }
               }}
             />
           )
@@ -108,7 +113,7 @@ const Layout: React.FC<Props> = ({
         ) || null
       }
 
-      <div className={cn(`slug-${story?.slug || ''} relative right-0 transition-all duration-700`, {
+      <div className={cn(`slug-${story?.slug || 'default'} relative right-0 transition-all duration-700`, {
         "right-cart" : UI.cartActive
       })}>
         

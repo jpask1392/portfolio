@@ -146,13 +146,13 @@ export default function Collection({
           >
             <div className={cn("grid gap-x-8 md:gap-x-14 xl:gap-x-28 gap-y-12 md:gap-y-20 grid-cols-2 md:grid-cols-3")}>
               {
-                collection && collection.products ? (
-                  collection.products.map((product: any, i: number) => 
-                    <ProductTile key={product.id} product={product}/>
-                  )
-                ) : (
-                  <div>No Products Found</div>
-                )
+                // collection && collection.products ? (
+                //   collection.products.map((product: any, i: number) => 
+                //     <ProductTile key={product.id} product={product}/>
+                //   )
+                // ) : (
+                //   <div>No Products Found</div>
+                // )
               }
             </div> 
           </div>

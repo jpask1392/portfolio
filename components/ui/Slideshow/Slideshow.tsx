@@ -18,8 +18,9 @@ interface Props {
   }
   spaceBetween?: number
   children: ReactNode[] | Component[] | any[]
-  thumbs?: any,
+  thumbs?: any
   modules?: any[]
+  navigationStyle?: "inset" | "protrude"
 }
 
 const Slideshow: React.FC<Props> = ({ 
@@ -34,6 +35,7 @@ const Slideshow: React.FC<Props> = ({
   spaceBetween = 0,
   modules = [],
   thumbs,
+  navigationStyle = "protrude"
 }) => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
@@ -103,7 +105,7 @@ const Slideshow: React.FC<Props> = ({
 
   return (
     <div
-      className={cn(className, "ui-slideshow w-full")}
+      className={cn(className, "ui-slideshow w-full", [navigationStyle])}
       style={style}
     >
       
@@ -123,7 +125,9 @@ const Slideshow: React.FC<Props> = ({
           })
         }
 
-        <div className="swiper-nav-container">
+        <div className={cn("swiper-nav-container", {
+          "" : navigationStyle === "protrude"
+        })}>
           <button ref={navigationPrevRef} className={cn(navigationArrowClasses)}>
             <SlideArrow direction="previous" className="text-primary" />
           </button>

@@ -60,6 +60,7 @@ const ProductMain = ({ product } : { product: Product }) => {
           className="overflow-hidden"
           modules={[ Thumbs ]}
           thumbs={{ swiper: thumbsSwiper }}
+          navigationStyle="inset"
         >
           {
             product.images.map((image: storyBlokImage, i: number) => {

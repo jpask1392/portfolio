@@ -100,11 +100,11 @@ const ProductTemplate: React.FC<Props> = ({
         <Column padTop="sm">
           <div 
             className="yotpo yotpo-main-widget"
-            data-product-id="SKU/Product_ID"
-            data-price="Product Price"
-            data-currency="Price Currency"
-            data-name="Product Title"
-            data-url="The url of your product page"
+            data-product-id={product.id}
+            data-price={product.price.amount} // min price
+            data-currency={product.price.currencyCode}
+            data-name={product.title}
+            data-url={`/product/${product.slug}`}
             data-image-url="The product image url"
           />
         </Column>

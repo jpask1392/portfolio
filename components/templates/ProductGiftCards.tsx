@@ -1,10 +1,10 @@
-import Grid from '../ui/Grid';
-import PrimaryDetail from '../ecommerce/ProductMain/PrimaryDetail';
-import AddToCartButton from '../ecommerce/AddToCartButton';
+import Gallery from '@/components/ecommerce/ProductMain/Gallery'
+import PrimaryDetail from '@/components/ecommerce/ProductMain/PrimaryDetail';
+import AddToCartButton from '@/components/ecommerce/AddToCartButton';
 import cn from 'classnames'
-import { VariantSelector } from "../ecommerce/Common";
+import { VariantSelector } from "@/components/ecommerce/Common";
 import { useState, useEffect } from "react";
-import HeroImage from "../modules/HeroImage";
+import HeroImage from "@/components/modules/HeroImage";
 import DynamicComponent from "@/components/helpers/DynamicComponent";
 import Container from "@/components/ui/Container";
 import ProductMain from "@/components/ecommerce/ProductMain";
@@ -56,18 +56,19 @@ const ProductGiftCardsTemplate: React.FC<Props> = ({
         )}
       />
 
-      <Container spacing="sm">
-        <div className="flex flex-wrap -mx-3 xl:-mx-10">
-          <div className="w-6/12 px-3 xl:px-10">
-            {/* { product.images.length ? <Gallery product={product} /> : null } */}
+      <Container spacing="sm" maxWidth="xl">
+        <div className="flex flex-wrap -mx-3 xl:-mx-28">
+          <div className="w-6/12 px-3 xl:px-28">
+            { product.images.length ? <Gallery product={product} /> : null }
           </div>
 
-          <div className="w-6/12 px-3 xl:px-10 mt-2 ld:mt-0">
+          <div className="w-6/12 px-3 xl:px-28 mt-2 ld:mt-0">
             <div className="">
-              <PrimaryDetail 
-                product={product}
-                selectedVariant={selectedVariant}
-              />
+              <Header 
+                tag="h2" 
+                size="h4" 
+                color="secondary"
+              >{product.title}</Header>
 
               {/* Product Description - Full */}
               <div className="product-description mt-7">

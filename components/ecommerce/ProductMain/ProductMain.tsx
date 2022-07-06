@@ -74,7 +74,7 @@ const ProductMain: React.FC<Props> = ({
                 variants={[
                   {
                     variantId: selectedVariant.id,
-                    quantity: 1,
+                    quantity: formData.quantity,
                   }
                 ]}
               />

@@ -76,7 +76,7 @@ export function normalizeProduct({
   description: string
   descriptionHtml: string
   handle: string
-  priceRange: string
+  priceRange: any
   options: any
 }, cursor?: string) {
 
@@ -85,10 +85,9 @@ export function normalizeProduct({
     title,
     subtitle: subTitle?.value || null,
     vendor,
-    path: `/${handle}`,
     slug: handle?.replace(/^\/+|\/+$/g, ''),
     cursor: cursor || false,
-    // price: priceRange?.minVariantPrice,
+    price: priceRange?.minVariantPrice,
     images: images.edges.length ? normalizeProductImages(images) : [],
     variants: variants ? normalizeProductVariants(variants) : [],
     options: options

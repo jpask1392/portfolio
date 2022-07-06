@@ -11,6 +11,16 @@ export const productDetailsFragment = gql`
     handle
     availableForSale
     vendor
+    priceRange {
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+    }
     compareAtPriceRange {
       maxVariantPrice {
         amount
@@ -24,16 +34,6 @@ export const productDetailsFragment = gql`
     createdAt
     description
     descriptionHtml
-    priceRange {
-      maxVariantPrice {
-        amount
-        currencyCode
-      }
-      minVariantPrice {
-        amount
-        currencyCode
-      }
-    }
     productType
     publishedAt
     tags

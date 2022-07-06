@@ -106,11 +106,7 @@ const ProductTile: React.FC<Props> = ({
       className={cn("relative group", className)}
       ref={articleRef}
     >
-      <div className="absolute top-3 left-3">
-        { product?.tags.length ? <InfoPill name={product?.tags}/> : null }
-      </div>
-
-      <Link href={`/product${product?.path || '/'}`}>
+      <Link href={`/product/${product?.slug || ''}`}>
         <a aria-label={`Go to ${product?.title || "product"} page`}>
           <div className="aspect-square flex overflow-hidden">
             <div className="w-full relative" ref={imageRef}>        
@@ -184,7 +180,7 @@ const ProductTile: React.FC<Props> = ({
 
             
             {
-              product && product.options?.length ? (
+              product && product.variants.length > 1 ? (
                 <div className="mt-2">
                   <VariantSelector 
                     product={product}

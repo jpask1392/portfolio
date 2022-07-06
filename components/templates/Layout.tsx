@@ -12,6 +12,7 @@ import { ReactNode, Component, useEffect } from 'react';
 import type { Story, Stories } from '@/types/storyBlok';
 import Toasts from "@/components/ui/Toasts";
 import useToast from "@/components/hooks/useToast";
+import Script from 'next/script'
 
 // import and register gsap with plugins
 import { gsap } from 'gsap';
@@ -44,7 +45,7 @@ const Layout: React.FC<Props> = ({
    * so it should return fields like 'handle', 'id' etc
    */
   let { 
-    global, 
+    global,
     story = {}
   } = useGlobalContext();
 
@@ -88,6 +89,24 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <Head seo={false} />
+
+      {
+        // Add global scripts
+        global?.settings?.content?.headerScripts?.map((script: any) => {
+          return (
+            <Script
+              key={script._uid}
+              id={script._uid}
+              src={script.src || undefined}
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={{
+                __html: script.inner,
+              }}
+            />
+          )
+        }
+        ) || null
+      }
 
       <div className={cn(`slug-${story?.slug || ''} relative right-0 transition-all duration-700`, {
         "right-cart" : UI.cartActive

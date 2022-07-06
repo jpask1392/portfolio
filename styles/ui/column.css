@@ -1,4 +1,4 @@
-.column > div {
+.column > * {
   max-width: var(--max-width-base);
 
   @screen md {

@@ -88,7 +88,7 @@ export default function Collection({
     }
 
     didMountRef.current = true;
-  }, [currentFilters, scroll])
+  }, [currentFilters])
 
   useEffect(() => {
     // initial collection changes on page re-route

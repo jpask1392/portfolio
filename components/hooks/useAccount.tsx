@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 import useToast from "@/components/hooks/useToast";
+import Cookies from 'js-cookie';
 
 const useAccount = () => {
   const [ account, setAccount ] = useState(null);
@@ -8,8 +9,9 @@ const useAccount = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(account)
-  }, [account]);
+    // run on mount
+    getAccount(Cookies.get( '_secure_session_id' ));
+  }, []);
 
   /**
    * Creates a customer account
@@ -35,8 +37,7 @@ const useAccount = () => {
         customer,
         customerUserErrors
       } = await res.json();
-  
-      // TODO: Redirect and login automatically?
+
       if (customerUserErrors.length) {
         addToast({
           title: "Error",
@@ -47,8 +48,11 @@ const useAccount = () => {
 
       if (customer) {
         setAccount(customer)
-        // TODO: save token to cookie
-        // router.push('/account/login');
+        
+        await handleAccountLogin({
+          email: data.email,
+          password: data.password
+        });
       }
 
     } catch (error) {
@@ -96,23 +100,15 @@ const useAccount = () => {
       }
 
       if (customerAccessToken) {
-        // TODO: save token to cookie
-
-        // get the customer with token
-        const test = await fetch(`/api/customer/account?action=getCustomer`, {
-          method: "POST",
-          headers: {
-            "content-type" : "application/json"
-          },
-          body: JSON.stringify({
-            customerAccessToken: customerAccessToken.accessToken || "",
-          })
+        Cookies.set('_secure_session_id', customerAccessToken.accessToken, {
+          // expires: customerAccessToken.expiresAt,
         });
 
-        const customer = await test.json();
+        // get the customer with token
+        await getAccount(customerAccessToken.accessToken);
 
-        console.log('setting customer')
-        setAccount(customer);
+        // Redirect here
+        router.push('/account')
       }
     } catch (error) {
       addToast({
@@ -125,10 +121,46 @@ const useAccount = () => {
     }
   }
 
+  /**
+   * Get the customer with access token
+   * 
+   * @param customerAccessToken 
+   */
+  const getAccount = async (customerAccessToken: string | undefined) => {
+    if (!customerAccessToken) return;
+
+    try {
+      const res = await fetch(`/api/customer/account?action=getCustomer`, {
+        method: "POST",
+        headers: {
+          "content-type" : "application/json"
+        },
+        body: JSON.stringify({
+          customerAccessToken: customerAccessToken || "",
+        })
+      });
+  
+      const customer = await res.json();
+      setAccount(customer);
+    } catch (err) {
+      // any errors return to login page
+      router.push('/account/login')
+    }
+  }
+
+  /**
+   * Handle logging the customer out
+   */
+  const handleAccountLogout = async () => {
+    Cookies.remove('_secure_session_id');
+    router.push('/')
+  }
+
   return {
     account,
     handleCreateAccount,
     handleAccountLogin,
+    handleAccountLogout,
   };
 } 
 

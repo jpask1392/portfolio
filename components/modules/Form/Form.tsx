@@ -40,7 +40,7 @@ const Form: React.FC<Props> = ({
    * Use this object to set up actions
    */
   const formActions: any = {
-    // contact: handleContactFormSubmit,
+    contact: handleContactFormSubmit,
     // newsletter: handleNewsletter,
     accountLogin: handleAccountLogin,
     createAccount: handleCreateAccount,
@@ -68,6 +68,7 @@ const Form: React.FC<Props> = ({
         action={action}
         onSubmit={handleSubmit}
         noValidate
+        className="w-full"
       >
         { children }
       </form>

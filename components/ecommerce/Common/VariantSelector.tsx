@@ -1,4 +1,4 @@
-import { RadioGroup } from "@/components/ui/Inputs";
+import { RadioGroup, Select } from "@/components/ui/Inputs";
 import { useEffect, useState, useCallback } from "react";
 import cn from "classnames";
 
@@ -112,7 +112,8 @@ const VariantSelector: React.FC<Props> = ({
             )
           } else {
             return (
-              <RadioGroup
+              <Select
+                key={index}
                 name={`option${index + 1}`}
                 items={option.values}
                 onChange={updateOption}

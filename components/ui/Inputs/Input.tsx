@@ -11,6 +11,7 @@ interface Props {
   required?: boolean
   wrapperClasses?: string
   inputClasses?: string
+  onDark?: boolean
 }
 
 const Input: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const Input: React.FC<Props> = ({
   required = false,
   wrapperClasses,
   inputClasses,
+  onDark,
 }) => {
   /**
    * Validation regex patterns for input types
@@ -53,12 +55,14 @@ const Input: React.FC<Props> = ({
         type={type === "textarea" ? undefined : type}
         className={cn("rounded-none py-3 px-3 w-full bg-transparent border", {
           "min-h-[100px]" : type === "textarea",
-          "border-primary placeholder-primary text-primary" : true,
+          "border-primary placeholder-primary text-primary" : onDark,
+          "border-secondary placeholder-secondary text-secondary" : !onDark,
         })}
         placeholder={placeholder + (required ? "*" : "")}
         onChange={handleChange}
         value={value}
         required={required}
+        autoComplete={type === "password" ? "current-password" : undefined}
       />
 
       {/* Errors */}

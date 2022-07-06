@@ -50,7 +50,7 @@ const ProductTemplate: React.FC<Props> = ({
           </Header>
         </Column>
 
-        <Column  padTop="sm">
+        <Column padTop="sm">
           <FeaturedProducts
             collectionHandle="recommendations"
             productID={product.id}
@@ -83,6 +83,29 @@ const ProductTemplate: React.FC<Props> = ({
               lg: 3,
               xl: 4,
             }}
+          />
+        </Column>
+      </Container>
+
+      <Container>
+        <Column>
+          <Header 
+            color="secondary" 
+            size="h3"
+          >
+            Reviews:
+          </Header>
+        </Column>
+
+        <Column padTop="sm">
+          <div 
+            className="yotpo yotpo-main-widget"
+            data-product-id="SKU/Product_ID"
+            data-price="Product Price"
+            data-currency="Price Currency"
+            data-name="Product Title"
+            data-url="The url of your product page"
+            data-image-url="The product image url"
           />
         </Column>
       </Container>

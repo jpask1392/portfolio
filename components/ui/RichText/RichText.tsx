@@ -57,6 +57,7 @@ const RichText: React.FC<Props> = ({
     <div
       className={cn(className, "ui-richtext", { 
         [`text-${align}`] : align,
+        "self-start" : align === 'left',
         [`text-${color}`] : color,
       })}
       ref={componentRef}

@@ -11,7 +11,6 @@ const cusomterCreate = async ({
   lastName = "",
   phone = ""
 }) => {
-  console.log(email)
   try {
     const { data } = await storefrontClient.mutate({
       mutation: CUSTOMER_CREATE,

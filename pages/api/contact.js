@@ -12,7 +12,7 @@ export const config = {
   },
 };
 
-const contact = async (req, res) => {
+export default async (req, res) => {
   const data = await new Promise((resolve, reject) => {
     const form = new formidable.IncomingForm()
     
@@ -24,11 +24,15 @@ const contact = async (req, res) => {
 
   let Message = ''
   let ignoreFields = ['FROM', 'SENDTO', 'SUBJECT']
-  for (const property in data.fields.formData) {
+  for (const property in data.fields) {
     if (ignoreFields.includes(property)) continue;
-    Message += `<strong>${property}:</strong>  ${data.fields.formData[property]} <br><br>`;
+    Message += `<strong>${property}:</strong>  ${data.fields[property]} <br><br>`;
   }
 
+  // read file from the temporary path
+  // const contents = await fs.readFile(data?.files?.Upload.path, {
+  //   encoding: 'base64',
+  // })
 
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   const msg = {
@@ -37,38 +41,24 @@ const contact = async (req, res) => {
     subject: data.fields.SUBJECT,
     text: Message,
     html: Message,
-  };
+    // attachments: [
+    //   {
+    //     content: contents,
+    //     filename: "attachment.pdf",
+    //     type: "application/pdf",
+    //     disposition: "attachment"
+    //   }
+    // ]
+  }
 
-  // read file from the temporary path
-  // const contents = await fs.readFile(data?.files?.Upload.path, {
-  //   encoding: 'base64',
-  // })
-
-  // if (contents) {
-  //   msg['attachments'] = [
-  //     {
-  //       content: contents,
-  //       filename: "attachment.pdf",
-  //       type: "application/pdf",
-  //       disposition: "attachment"
-  //     }
-  //   ]
-  // }
-
-  return new Promise((resolve, reject) => {
-    sgMail
-      .send(msg)
-      .then(() => {
-        console.log('Email sent');
-        res.json({ success: true });
-        resolve();
-      })
-      .catch((error) => {
-        console.error(error);
-        res.json({ success: false });
-        resolve();
-      })
-  });
+  sgMail
+    .send(msg)
+    .then(() => {
+      res.json({ success: true })
+      console.log('Email sent')
+    })
+    .catch((error) => {
+      res.json({ success: false })
+      console.error(error)
+    })
 }
-
-export default contact;

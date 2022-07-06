@@ -38,6 +38,10 @@ const ProductTile: React.FC<Props> = ({
   
   const [ selectedVariant, setSelectedVariant ] = useState<any | boolean>(false);
 
+  /**
+   * Set up animations ready for play()
+   * 
+   */
   useIsomorphicLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -69,6 +73,10 @@ const ProductTile: React.FC<Props> = ({
     }
   }, [])
 
+  /**
+   * Add animations
+   * 
+   */
   useEffect(() => {
     if (product) {
       ScrollTrigger.create({
@@ -83,12 +91,20 @@ const ProductTile: React.FC<Props> = ({
     }
   }, [product, scroll]);
 
+  /**
+   * Set a default variant only if product exists
+   * 
+   */
+  useEffect(() => {
+    if (product) {
+      setSelectedVariant(product.variants[0])
+    }
+  }, [product])
+
   return (
     <article 
       className={cn("relative group", className)}
       ref={articleRef}
-      data-scroll
-      // data-scroll-speed={`${index ? index*0.5 : 0}`}
     >
       <div className="absolute top-3 left-3">
         { product?.tags.length ? <InfoPill name={product?.tags}/> : null }

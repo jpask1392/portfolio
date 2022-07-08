@@ -1,15 +1,9 @@
-import DynamicIcon from "@/components/icons/DynamicIcon";
-
-export const FormFieldTypes = {
-  Text: 'text',
-  Email: 'email',
-  TextArea: 'textarea',
-  Select: 'select',
-  File: 'file',
-}
+import Icon from "@/components/ui/Icon"
 
 export const renderOptions = {
   blokResolvers: {
-    ['icon']: (props) => <DynamicIcon {...props} />
+    ['icon']: (props) => {
+      return <Icon {...props} />
+    }
   }
 }

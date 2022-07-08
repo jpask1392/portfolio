@@ -5,6 +5,7 @@
  * the icons? Something to look into.
  */
 
+import Logo from "../ui/Logo";
 import Account from "./Account";
 import AlertCircle from "./AlertCircle";
 import ArrowBack from "./ArrowBack";
@@ -57,7 +58,7 @@ const Components: {
   search: Search,
   add: Add,
   addCircle: AddCircle,
-  dollarSign: DollarSign,
+  'dollar-sign': DollarSign,
   bag: Bag,
   caretBackCircle: CaretBackCircle,
   caretDownCircle: CaretDownCircle,
@@ -66,7 +67,7 @@ const Components: {
   chevronRight: ChevronRight,
   close: Close,
   heart: Heart,
-  shoppingBag: ShoppingBag,
+  'shopping-bag': ShoppingBag,
   informationCircle: InformationCircle,
   identity: Identity,
   location: Location,
@@ -77,6 +78,7 @@ const Components: {
   tiktok: TikTok,
   youtube: Youtube,
   twitter: Twitter,
+  logo: Logo,
 };
 
 interface Props {

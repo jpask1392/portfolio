@@ -1,5 +1,9 @@
 [
   {
+    "name": "Logo",
+    "value": "logo"
+  },
+  {
     "name": "Facebook",
     "value": "facebook"
   },

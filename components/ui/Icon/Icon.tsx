@@ -1,17 +1,23 @@
+import cn from 'classnames';
 import DynamicIcon from "@/components/icons/DynamicIcon";
 
 interface Props {
   type: string
+  display: string
 }
 
 const Icon: React.FC<Props> = ({
-  type
+  type,
+  display = "block"
 }) => {
   return (
-    <div className="w-10 mx-auto mb-6">
+    <div className={cn("w-10", {
+      "inline-block ml-4" : display === "inline-block",
+      "mb-6 mx-auto" : display === "block"
+    })}>
       <DynamicIcon 
         type={type} 
-        className="text-secondary"
+        className="text-secondary mx-auto"
       />
     </div>
   )

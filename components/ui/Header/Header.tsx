@@ -1,3 +1,4 @@
+import {renderOptions} from '@/utils/constants'
 import { SbEditableContent } from "@/types/storyBlok";
 import Image from "next/image";
 
@@ -120,7 +121,10 @@ const Header: React.FC<Props> = ({
           mobile_text && text ? (
             <>
               <span className="lg:hidden">
-                { render(mobile_text, { nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver }}) }
+                { render(mobile_text, {
+                  ...renderOptions,
+                  nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver }
+                }) }
               </span>
               <span className="hidden lg:block">
                 { render(text, { nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver }}) }
@@ -144,7 +148,7 @@ const Header: React.FC<Props> = ({
                   </div>
                 ) : null
               }
-              {render(text, { nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver } }) }
+              {render(text, { ...renderOptions, nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver } }) }
             </>
             
           ) : children

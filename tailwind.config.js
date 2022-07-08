@@ -19,8 +19,10 @@ module.exports = {
     let displays = ['block', 'inline-block'];
     let bg = ['primary'];
     let textColors = ['white'];
+    let grids = [1, 2, 3, 4, 5];
 
     // non breakpoint
+    grids.forEach(grid => safeList.push('grid-cols-' + grid));
     bg.forEach(bg => safeList.push('bg-' + bg));
     textColors.forEach(textColor => safeList.push('text-' + textColor));
     displays.forEach(display => safeList.push(display));

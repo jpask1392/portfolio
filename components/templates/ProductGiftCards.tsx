@@ -42,7 +42,7 @@ const ProductGiftCardsTemplate: React.FC<Props> = ({
             hAlignContent="right"
           >
             <Header tag="h1" size="h1" color="primary">
-              {product.title}
+              Gift Cards
             </Header>
 
             {
@@ -66,7 +66,7 @@ const ProductGiftCardsTemplate: React.FC<Props> = ({
             <div className="">
               <Header 
                 tag="h2" 
-                size="h4" 
+                size="h3" 
                 color="secondary"
               >{product.title}</Header>
 

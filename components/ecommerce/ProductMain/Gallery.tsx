@@ -15,6 +15,17 @@ import 'swiper/css/navigation';
 const ProductMain = ({ product } : { product: Product }) => {
   const [ thumbsSwiper, setThumbsSwiper ] = useState<any>(null);
 
+  if (product.images.length === 1) {
+    return (
+      <div className="relative flex -mx-7 lg:-mx-10">
+        <CustomImage 
+          image={product.images[0]}
+          
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="relative flex -mx-7 lg:-mx-10">
       <div 

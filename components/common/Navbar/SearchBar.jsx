@@ -1,29 +1,38 @@
+import Form from "@/components/modules/Form";
+import { Input } from "@/components/ui/Inputs";
 import DynamicIcon from "@/components/icons/DynamicIcon";
+import { useState } from "react";
 
 const SearchBar = () => {
-  return (
-    <div>
-      <form action="">
-        {/* <div className="relative">
-          <label htmlFor="search-bar" className="hidden">Search bar</label>
-          <input 
-            id="search-bar"
-            type="search"
-            placeholder="Search for something"
-            className="flex bg-transparent items-center relative pr-8 py-1 w-36 xl:w-60 border-b border-black"
-          />
-          <button type="submit" className="block">
-            <span className="absolute right-3 opacity-70 top-1/2 transform -translate-y-1/2">
-              <DynamicIcon type="search" className="h-7"/>
-            </span>
-          </button>
-        </div> */}
+  const [active, setActive] = useState(false);
 
-        <span>
-          <DynamicIcon type="search"  className="h-7" />
-        </span>
-      </form>
-    </div>
+  return (
+    <form
+      action="search"
+      className="relative"
+    >
+      {
+        active ? (
+          <>
+            <div className="absolute right-full top-1/2 -translate-y-1/2 w-96">
+              <input 
+                className="border-b border-black bg-transparent w-full"
+                placeholder="Search for something..." 
+              />
+            </div>
+
+            <button type="submit" className="block">
+              <DynamicIcon type="search"  className="h-7" />
+            </button>
+          </>
+        ) : (
+          <button onClick={() => setActive(true)} className="block">
+            <DynamicIcon type="search"  className="h-7" />
+          </button>
+        )
+      }
+    </ form>
+    
   )
 }
 

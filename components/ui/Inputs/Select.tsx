@@ -1,7 +1,6 @@
-import * as RadixSlider from '@radix-ui/react-slider';
+import DynamicIcon from '@/components/icons/DynamicIcon';
 import cn from 'classnames';
-import { useState, useRef } from 'react';
-import { formatMoney } from '@/utils/formatMoney';
+import { useState } from 'react';
 import * as Select from '@radix-ui/react-select';
 
 interface Props {
@@ -31,7 +30,8 @@ const CustomSlider: React.FC<Props> = ({
     >
       <Select.Trigger className="w-full flex justify-between border-secondary border py-3 px-6">
         <Select.Value />
-        <Select.Icon />
+        <DynamicIcon type="chevronDown" />
+        
       </Select.Trigger>
 
       <Select.Content className="bg-white rounded-sm border border-secondary">

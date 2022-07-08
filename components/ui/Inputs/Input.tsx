@@ -47,7 +47,7 @@ const Input: React.FC<Props> = ({
 
   return (
     <div 
-      className={cn(wrapperClasses, "ui-input relative w-full mt-4")}
+      className={cn(wrapperClasses, "ui-input relative w-full mt-4 first-of-type:mt-0")}
     >
       {/* The input */}
       <Tag 

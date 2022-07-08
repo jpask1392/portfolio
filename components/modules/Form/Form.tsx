@@ -9,10 +9,11 @@ import {
 import cn from 'classnames';
 
 interface Props {
-  action: string
+  action: "contact" | "accountLogin" | "createAccount" | "search" | "newsletter"
   children: ReactNode[] | Component[] | any[] | ReactNode | Component | any
   stylePreset?: string
   initialState?: any
+  className?: string
 }
 
 /**
@@ -25,6 +26,7 @@ const Form: React.FC<Props> = ({
   children,
   action,
   initialState = {},
+  className
 }) => {
   const [ toasts, addToast ] = useToast();
   const [ formData, setFormData ] = useState(initialState);
@@ -68,7 +70,7 @@ const Form: React.FC<Props> = ({
         action={action}
         onSubmit={handleSubmit}
         noValidate
-        className="w-full"
+        className={`${className} w-full`}
       >
         { children }
       </form>

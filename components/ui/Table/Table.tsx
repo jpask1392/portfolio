@@ -1,7 +1,9 @@
+import cn from 'classnames';
 import TableheaderCell from './TableHeaderCell';
 import TableRowCell from './TableRowCell';
 
 interface Props {
+  extendHeaderColumn: boolean
   table: {
     fieldtype: string
     thead: {
@@ -19,17 +21,24 @@ interface Props {
 }
 
 const Table: React.FC<Props> = ({
-  table
+  table,
+  extendHeaderColumn = false
 }) => {
+  if (!table) return null;
+
   return (
     <div className="ui-table border border-secondary p">
-      <div className="grid grid-cols-5">
+      <div className={cn("grid", {
+        [`grid-cols-${table.thead.length}`] : !extendHeaderColumn,
+        [`grid-cols-${table.thead.length + 1}`] : extendHeaderColumn,
+      })}>
       {
         table.thead.map((headCell, index) => 
           <TableheaderCell
             key={headCell._uid}
             value={headCell.value}
             rowIndex={index}
+            extendHeaderColumn={extendHeaderColumn}
           />
         )
       }
@@ -40,14 +49,17 @@ const Table: React.FC<Props> = ({
           return (
             <div 
               key={row._uid}
-              className="grid grid-cols-5 -mb-px"
-            >
+              className={cn("grid -mb-px", {
+                [`grid-cols-${table.thead.length}`] : !extendHeaderColumn,
+                [`grid-cols-${table.thead.length + 1}`] : extendHeaderColumn,
+              })}>
               {
                 row.body.map((rowCell, index) => 
                   <TableRowCell
                     key={rowCell._uid}
                     value={rowCell.value}
                     rowIndex={index}
+                    extendHeaderColumn={extendHeaderColumn}
                   />
                 )
               }

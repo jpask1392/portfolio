@@ -45,6 +45,14 @@
   @apply mb-0;
 }
 
+/*  Table interactions */
+.ui-table + .ui-header,
+.ui-header + .ui-table,
+.ui-table + .ui-richtext,
+.ui-richtext + .ui-table {
+  @apply mt-6;
+}
+
 
 .ui-header + .ui-header,
 .ui-header + .ui-btn-group,

@@ -45,7 +45,7 @@ const Pagination: React.FC<Props> = ({
   }
 
   return (
-    <div className="text-center py-8 w-full mt-8">
+    <div className="text-center pt-8 w-full mt-8">
       <button 
         onClick={() => handlePageChange("previous")} 
         className={cn("px-4 py-3 rounded-l-md border border-secondary border-r-0", {

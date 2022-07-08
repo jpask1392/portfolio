@@ -109,7 +109,7 @@ const Header: React.FC<Props> = ({
   return (
     <div 
       ref={componentRef}
-      className={cn(className, "ui-header relative", {
+      className={cn(className, "ui-header relative", [size], {
         [`text-${align}`] : align,
         [`text-${color}`] : color,
       })} 

@@ -56,24 +56,22 @@ const Container: React.FC<ContainerProps> = ({
       className={rootClassName}
       {...sbEditable}
     >
-      <div>
-        { 
-          backgroundMedia && backgroundMedia.id && (
-            <BackgroundMedia
-              image={backgroundMedia}
-              bgColor={backgroundColor}
-              backgroundOverlay={backgroundOverlay}
-              priority
-            />
-          )
-        }
-        <div className={`w-full max-w-screen-${maxWidth} mx-auto relative z-10`}>
-          <div className={cn({
-            'container overflow-hidden md:overflow-visible' : contained && !extendRight,
-            'extend-right' : extendRight
-          })}>
-            {children}
-          </div>
+      { 
+        backgroundMedia && backgroundMedia.id && (
+          <BackgroundMedia
+            image={backgroundMedia}
+            bgColor={backgroundColor}
+            backgroundOverlay={backgroundOverlay}
+            priority
+          />
+        )
+      }
+      <div className={`w-full max-w-screen-${maxWidth} mx-auto relative z-10`}>
+        <div className={cn({
+          'container overflow-hidden md:overflow-visible' : contained && !extendRight,
+          'extend-right' : extendRight
+        })}>
+          {children}
         </div>
       </div>
     </Component>

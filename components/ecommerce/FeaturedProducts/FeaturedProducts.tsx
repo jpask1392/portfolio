@@ -37,7 +37,7 @@ const FeaturedProducts: React.FC<Props> = ({
   const { data, error } = useSWR(url, async (url) => {
     const res = await fetch(url);
     return await res.json();
-  });
+  }); 
 
   useEffect(() => {
     if (!data) return;

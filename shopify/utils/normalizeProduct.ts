@@ -78,15 +78,13 @@ export function normalizeProduct({
   handle: string
   priceRange: any
   options: any
-}, cursor?: string) {
-
+}) {
   return {
     id,
     title,
     subtitle: subTitle?.value || null,
     vendor,
     slug: handle?.replace(/^\/+|\/+$/g, ''),
-    cursor: cursor || false,
     price: priceRange?.minVariantPrice,
     images: images.edges.length ? normalizeProductImages(images) : [],
     variants: variants ? normalizeProductVariants(variants) : [],

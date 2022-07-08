@@ -14,7 +14,7 @@ export default async function collections(req: any, res: any) {
         handle: getCollectionByHandle,
         query: getCollectionsByQuery,
       }
-
+      
       const data = await fetcher[key](query[key]);
 
       if (data) {
@@ -30,11 +30,11 @@ export default async function collections(req: any, res: any) {
   if (req.method === 'POST') {
     try {
       const body = req.body;
-      const filters = body.filters?.map((filterString: string) => JSON.parse(filterString));
-      const sortBy = body.sortKey;
-      const reverse = body.reverse;
 
-      const data = await getCollectionByHandle(body.handle, filters, sortBy, reverse);
+      const data = await getCollectionByHandle(body.handle, {
+        ...body,
+        productFilters: body.productFilters?.map((filterString: string) => JSON.parse(filterString))
+      });
 
       if (data) {
         res.status(200).json(data);

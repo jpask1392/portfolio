@@ -7,6 +7,10 @@ const getCollectionByHandle = gql`
     $productFilters: [ProductFilter!]
     $sortKey: ProductCollectionSortKeys
     $reverse: Boolean
+    $after: String
+    $before: String
+    $first: Int
+    $last: Int
   ) {
     collectionByHandle(handle: $handle) {
       id
@@ -45,11 +49,20 @@ const getCollectionByHandle = gql`
         value
       }
       products(
-        first: 200
         filters: $productFilters
         sortKey: $sortKey
         reverse: $reverse
+        first: $first
+        last: $last
+        after: $after
+        before: $before
       ) {
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          endCursor
+          startCursor
+        }
         filters {
           id
           label

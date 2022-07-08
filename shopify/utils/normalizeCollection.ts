@@ -25,15 +25,18 @@ export function normalizeCollection({
     descriptionHtml,
     handle,
     filters: products?.filters || [],
-    products: products ? products
-      .edges
-      .map(({ 
-        node, 
-        cursor 
-      } : { 
-        node: any
-        cursor: string
-      }) => normalizeProduct(node, cursor)) : [],
+    pagination: {
+      ...products.pageInfo,
+    },
+    products: products ? (
+      products
+        .edges
+        .map(({ 
+          node, 
+        } : { 
+          node: any
+        }) => normalizeProduct(node))
+    ) : [],
     image: image ? {
       ...image,
       filename: image.url,

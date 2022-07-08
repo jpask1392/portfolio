@@ -1,11 +1,11 @@
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import * as Label from '@radix-ui/react-label';
 import cn from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DynamicIcon from '@/components/icons/DynamicIcon';
 
 interface Props {
-  value: string
+  value: string | boolean | any
   label: string
   id: string
   style: string
@@ -21,10 +21,10 @@ const Checkbox: React.FC<Props> = ({
   onValueChange,
   disabled
 }) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(value);
   const checkBoxStyles = cn("block border rounded-md flex justify-center items-center", {
-    "bg-primary" : style === "sideLabel" && checked,
-    "border-primary" : checked,
+    "bg-transparent" : style === "sideLabel" && checked,
+    "border-secondary" : checked,
     "border-black" : !checked,
     "h-6 w-6" : style === "sideLabel",
     "p-2 w-full" : style === "radio",
@@ -32,7 +32,7 @@ const Checkbox: React.FC<Props> = ({
   });
 
   const handleValueChange = (value: boolean) => {
-    setChecked(!checked);
+    setChecked(value);
 
     /**
      * Pass the value to parent component
@@ -42,20 +42,18 @@ const Checkbox: React.FC<Props> = ({
 
   return (
     <div className="flex space-x-3">
-      <RadixCheckbox.Root 
+      <RadixCheckbox.Root
+        defaultChecked={value}
         className={checkBoxStyles}
         onCheckedChange={handleValueChange}
-        value={value}
+        value={checked}
         id={id}
         disabled={disabled}
       >
-        {
-          label && style === "sideLabel" &&  (
-            <RadixCheckbox.Indicator>
-              <DynamicIcon type="checkmark" />
-            </RadixCheckbox.Indicator>
-          )
-        }
+        
+        <RadixCheckbox.Indicator>
+          <DynamicIcon type="checkmark" />
+        </RadixCheckbox.Indicator>
 
         {
           label && style === "radio" &&  (

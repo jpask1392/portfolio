@@ -11,16 +11,18 @@ interface Props {
   collection: any
   onDataChange?: (value: any) => void
   initialPriceFilters: any
+  currentFilters: any
+  setCurrentFilters: any
 }
 
 const ProductFilters: React.FC<Props> = ({ 
   className,
   collection,
   onDataChange,
-  initialPriceFilters
+  initialPriceFilters,
+  currentFilters,
+  setCurrentFilters,
 }) => {
-  // TODO: I don't like how I'm repeating the state here and in the [handle].tsx file
-  const [ activeFilters, setActiveFilters ] = useState<any>({filters: ["{\"price\":{\"min\":0,\"max\":1000000}}"]});
   const didMountRef = useRef(false);
   const [ sortKey, setSortKey ] = useState({key: "COLLECTION_DEFAULT", reverse: false});
 
@@ -30,7 +32,7 @@ const ProductFilters: React.FC<Props> = ({
    * @param value 
    */
   const handleDataChange = (value: string) => {
-    let newArr = activeFilters.filters;
+    let newArr = currentFilters.filters;
     let formattedQuery = '';
 
     if (Array.isArray(value)) {
@@ -43,12 +45,12 @@ const ProductFilters: React.FC<Props> = ({
     if (formattedQuery.includes('price')) {
       newArr[0] = formattedQuery;
     } else {
-      (!activeFilters.filters.includes(formattedQuery))
+      (!currentFilters.filters.includes(formattedQuery))
         ? newArr.push(formattedQuery)
         : newArr.splice(newArr.indexOf(formattedQuery), 1);
     }
 
-    setActiveFilters({filters: [...newArr], sortKey})
+    setCurrentFilters({filters: [...newArr], sortKey})
   }
 
   /**
@@ -56,7 +58,7 @@ const ProductFilters: React.FC<Props> = ({
    */
   useEffect(() => {
     if (didMountRef.current) {
-      setActiveFilters({...activeFilters, sortKey})
+      setCurrentFilters({...currentFilters, sortKey})
     }
   }, [sortKey])
 
@@ -65,11 +67,11 @@ const ProductFilters: React.FC<Props> = ({
    */
   useEffect(() => {
     if (didMountRef.current) {
-      onDataChange && onDataChange(activeFilters)
+      onDataChange && onDataChange(currentFilters)
     }
 
     didMountRef.current = true;
-  }, [activeFilters])
+  }, [currentFilters])
 
   return (
     <div className={className}>
@@ -110,11 +112,12 @@ const ProductFilters: React.FC<Props> = ({
                           "flex" : filter?.style === 'sideLabel'
                         })}
                       >
+                        
                         <Checkbox 
                           key={item.id}
                           id={item.input}
                           label={item.label}
-                          value={item.value}
+                          value={currentFilters.filters.includes(item.input)}
                           style={filter?.style}
                           onValueChange={handleDataChange}
                           disabled={item.count === 0}

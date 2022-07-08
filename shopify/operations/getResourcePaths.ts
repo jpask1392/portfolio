@@ -26,7 +26,6 @@ const getResourcePaths = async (
       handlesList = data[type].edges
         .map(({ node }: {node: any}) => ({ params: { handle: node.handle } }));
     }
-    
 
     return handlesList;
   } catch (err) {

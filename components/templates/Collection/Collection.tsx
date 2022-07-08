@@ -40,7 +40,7 @@ const CollectionTemplate: React.FC<Props> = ({
   });
   
   // use initial filter from static props to maintain max price
-  const initialPriceFilters = initalCollection.filters.find((el: any) => el.label === 'Price');
+  const initialPriceFilters = initalCollection?.filters.find((el: any) => el.label === 'Price');
 
   // runs if childs state changes
   const handleDataChange = (filters: any) => {
@@ -130,7 +130,7 @@ const CollectionTemplate: React.FC<Props> = ({
 
       <SideFilterLayout
         Filters={() => (
-          collection.filters ? (
+          collection?.filters ? (
             <ProductFilters
               currentFilters={currentFilters}
               setCurrentFilters={setCurrentFilters}

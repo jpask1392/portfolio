@@ -27,9 +27,13 @@ export default function Collection({
 }) {
   return (
     <Layout preview={preview}>
-      <CollectionTemplate 
-        initalCollection={initalCollection}
-      />
+      {
+        initalCollection ? (
+          <CollectionTemplate 
+            initalCollection={initalCollection}
+          />
+        ) : null
+      }
     </Layout>
   );
 }

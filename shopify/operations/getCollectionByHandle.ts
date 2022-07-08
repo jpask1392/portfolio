@@ -12,17 +12,21 @@ const getCollectionByHandle = async (
     after?: string | null,
     first?: number | null,
     last?: number | null
-  } = {
+  }
+) => {
+  
+  // set defaults
+  options = {
     productFilters: [],
     sortKey: null,
     reverse: false,
     before: null,
     after: null,
     first: 6,
-    last: 6
+    last: 6,
+    ...options,
   }
-) => {  
-  console.log(options)
+
   try {
     const { data } = await storefrontClient.query({
       query: GET_COLLECTION_BY_HANDLE,

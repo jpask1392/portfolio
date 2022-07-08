@@ -100,9 +100,9 @@ const ImageModule: React.FC<Props> = ({
               <div className="relative inset-0 w-full h-full" ref={imageContainerRef}>
                 <CustomImage
                   className={cn({
-                    "!hidden" : imageMobile && imageMobile.id || imageTablet && imageTablet.id,
+                    "!hidden" : imageTablet && imageTablet.id,
                     // "lg:block" : imageMobile && imageMobile.id,
-                    "lg:!block" : imageTablet && imageTablet.id,
+                    "xl:!block" : imageTablet && imageTablet.id,
                   })}
                   image={image}
                   preload={preload}
@@ -113,7 +113,7 @@ const ImageModule: React.FC<Props> = ({
                 {
                   imageTablet?.id ? (
                     <CustomImage
-                      className={cn("md:!block lg:!hidden", {
+                      className={cn("md:!block xl:!hidden", {
                         "!hidden" : imageMobile && imageMobile.id,
                       })}
                       image={imageTablet}

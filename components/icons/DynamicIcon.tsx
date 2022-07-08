@@ -17,7 +17,7 @@ import Instagram from "./Instagram";
 import Search from "./Search";
 import Add from "./Add";
 import AddCircle from "./AddCircle";
-import Apps from "./Apps";
+import DollarSign from "./DollarSign";
 import Bag from "./Bag";
 import CaretBackCircle from "./CaretBackCircle";
 import CaretDownCircle from "./CaretDownCircle";
@@ -26,15 +26,15 @@ import ChevronDown from "./ChevronDown";
 import ChevronRight from "./ChevronRight";
 import Close from "./Close";
 import Heart from "./Heart";
-import HelpCircle from "./HelpCircle";
+import ShoppingBag from "./ShoppingBag";
 import InformationCircle from "./InformationCircle";
-import List from "./List";
+import Identity from "./Identity";
 import Location from "./Location";
 import Checkmark from "./Checkmark";
 import Star from "./Star";
 import AnnouncementArrow from "./AnnouncementArrow";
 import TogglePlusMinus from "./TogglePlusMinus";
-import Drops from "./Drops";
+import Cake from "./Cake";
 import TikTok from "./Tiktok";
 import Youtube from "./Youtube";
 import Twitter from "./Twitter";
@@ -57,7 +57,7 @@ const Components: {
   search: Search,
   add: Add,
   addCircle: AddCircle,
-  apps: Apps,
+  dollarSign: DollarSign,
   bag: Bag,
   caretBackCircle: CaretBackCircle,
   caretDownCircle: CaretDownCircle,
@@ -66,14 +66,14 @@ const Components: {
   chevronRight: ChevronRight,
   close: Close,
   heart: Heart,
-  helpCircle: HelpCircle,
+  shoppingBag: ShoppingBag,
   informationCircle: InformationCircle,
-  list: List,
+  identity: Identity,
   location: Location,
   checkmark: Checkmark,
   star: Star,
   togglePlusMinus: TogglePlusMinus,
-  drops: Drops,
+  cake: Cake,
   tiktok: TikTok,
   youtube: Youtube,
   twitter: Twitter,

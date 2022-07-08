@@ -136,7 +136,7 @@ const Navigation: React.FC<NavProps> = ({
               <div className="px-2 md:px-4">
                 <Link href={'/account/login'}>
                   <a aria-label="Account Page Icon">
-                    <DynamicIcon type="account" />
+                    <DynamicIcon type="identity" />
                   </a>
                 </Link>
               </div>

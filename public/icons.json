@@ -18,5 +18,21 @@
   {
     "name": "Tiktok",
     "value": "tiktok"
+  },
+  {
+    "name": "Dollar Sign",
+    "value": "dollar-sign"
+  },
+  {
+    "name": "Cake",
+    "value": "cake"
+  },
+  {
+    "name": "Shopping Bag",
+    "value": "shopping-bag"
+  },
+  {
+    "name": "Identity",
+    "value": "identity"
   }
 ]

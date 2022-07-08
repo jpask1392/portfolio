@@ -31,6 +31,8 @@ import FeaturedCollections from "@/components/ecommerce/FeaturedCollections";
 import FeaturedProducts from "@/components/ecommerce/FeaturedProducts";
 import FeaturedCollectionWithProducts from "@/components/ecommerce/FeaturedCollectionWithProducts";
 
+import Icon from '@/components/ui/Icon';
+
 // helper
 import WithStoryBlok from '@/components/helpers/WithStoryBlok';
 
@@ -68,6 +70,7 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     featuredCollectionWithProducts: FeaturedCollectionWithProducts,
     tileGrid: TileGrid,
     table: Table,
+    icon: Icon
   };
 
   if (typeof Components[blok.component] !== "undefined") {

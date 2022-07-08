@@ -144,7 +144,7 @@ const ImageModule: React.FC<Props> = ({
 
               {
                 children ? (
-                  <div className={cn("absolute p-10 lg:p-20 xl:p-24 text-primary uppercase", {
+                  <div className={cn("absolute p-10 lg:p-20 xl:p-24 text-primary", {
                     "bottom-0 right-0 text-right" : alignOverlayContent === "bottom-right",
                     "bottom-0 left-0" : alignOverlayContent === "bottom-left",
                     "top-0 right-0 text-right" : alignOverlayContent === "top-right",

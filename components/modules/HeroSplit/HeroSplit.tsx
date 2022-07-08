@@ -20,7 +20,6 @@ const Hero: React.FC<Props> = ({
 
   const heroClassNames = cn(className, [
     "hero",
-    "lg:h-[50vh]",
     "relative",
     "overflow-hidden",
   ]);
@@ -30,11 +29,11 @@ const Hero: React.FC<Props> = ({
 
   return (
     <section className={heroClassNames} ref={headerRef}>
-      <div ref={scrollerRef} className="h-full">
+      <div ref={scrollerRef} className="h-full bg-primary py-20">
 
         {
           (TopBlockComponent) && (
-            <div className="pt-12">
+            <div className="w-1/2 flex justify-center">
               <Container el="div">
                 <TopBlockComponent />
               </Container>
@@ -48,7 +47,7 @@ const Hero: React.FC<Props> = ({
             <CustomImage 
               image={image} 
               layout="fill" 
-              objectFit="contain"
+              objectFit="cover"
               preload
             />
           </div>

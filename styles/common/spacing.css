@@ -56,7 +56,7 @@
 }
 
 .ui-header + .ui-slideshow,
-.ui-header + .ui-richtext,
+
 .ui-slideshow + .ui-btn-group {
   @apply mt-0;
 }
@@ -75,7 +75,7 @@
 
 .ui-header + .ui-richtext,
 .ui-header + .ui-accordion {
-  @apply mt-12;
+  /* @apply mt-12; */
 }
 
 .ui-richtext {

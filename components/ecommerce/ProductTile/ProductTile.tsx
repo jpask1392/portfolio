@@ -4,7 +4,6 @@ import AddToCartButton from '@/components/ecommerce/AddToCartButton';
 import Header from '@/components/ui/Header';
 import cn from 'classnames';
 import CustomImage from '@/components/ui/Image';
-import InfoPill from '@/components/ui/InfoPill';
 import Link from 'next/link';
 import { Price } from "@/components/ecommerce/Common";
 import Skeleton from 'react-loading-skeleton'
@@ -193,7 +192,7 @@ const ProductTile: React.FC<Props> = ({
             <AddToCartButton 
               onDark={onDark}
               buttonText="ADD TO CART"
-              className="mt-2.5 !max-w-none w-full"
+              className="mt-2.5 w-full"
               variants={[
                 {
                   variantId: selectedVariant.id,

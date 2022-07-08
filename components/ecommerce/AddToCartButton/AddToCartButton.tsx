@@ -74,6 +74,7 @@ const ProductMain: React.FC<Props> = ({
       className={className}
       text={buttonText}
       ajaxClick={handleAddToCart}
+      maxWidth={false}
     />
   )
 }

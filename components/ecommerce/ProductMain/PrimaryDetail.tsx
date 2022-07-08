@@ -1,5 +1,4 @@
 import { Price } from '@/components/ecommerce/Common';
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import type { Product, Variant } from '@/types/shopify';
 
 interface Props {

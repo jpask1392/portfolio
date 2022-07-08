@@ -1,6 +1,4 @@
 .button {
-  /* max-width: 260px; */
-
   @apply 
     md:w-full
     text-base
@@ -20,6 +18,10 @@
     /* tracking-widest */
     transition-colors
     duration-300;
+}
+
+.button.mw {
+  max-width: 260px;
 }
 
 .button.primary {

@@ -11,4 +11,5 @@ export type button = {
   ariaLabel?: string
   onClick?: (e: React.SyntheticEvent<EventTarget>) => void
   ajaxClick?: (e: React.SyntheticEvent<EventTarget>) => void
+  maxWidth?: boolean
 }

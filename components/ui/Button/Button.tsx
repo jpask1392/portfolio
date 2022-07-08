@@ -17,7 +17,8 @@ const Button: React.FC<button> = ({
   ariaLabel,
   onClick,
   ajaxClick,
-  isSubmit
+  isSubmit,
+  maxWidth = true,
 }) => {
   const [loading, setLoading] = useState(false);
   const { submitting } = useContext<any>(FormContext);
@@ -33,6 +34,7 @@ const Button: React.FC<button> = ({
       'on-dark' : onDark,
       'button' : ['primary', 'on-primary'].indexOf( buttonStyle ) !== -1,
       'link text-primary relative overflow-x-hidden' : buttonStyle === 'link',
+      "mw" : maxWidth,
     },
   ]);
 

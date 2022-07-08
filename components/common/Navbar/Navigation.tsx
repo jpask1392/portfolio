@@ -134,7 +134,7 @@ const Navigation: React.FC<NavProps> = ({
           {
             actionItems?.includes('account') ? (
               <div className="px-2 md:px-4">
-                <Link href={'/account'}>
+                <Link href={'/account/login'}>
                   <a aria-label="Account Page Icon">
                     <DynamicIcon type="account" />
                   </a>

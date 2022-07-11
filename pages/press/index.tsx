@@ -4,8 +4,12 @@
  * the information needed for the list.
  */
 import { getArticlesByBlogHandle } from "@/shopify/operations";
+import Column from "@/components/ui/Column";
+import Header from "@/components/ui/Header";
+import HeroImage from "@/components/modules/HeroImage";
 import ArticleTile from "@/components/modules/ArticleTile/ArticleTile";
 import getGlobalData from "@/utils/getGlobalData";
+import image from 'dummyData/image.json';
 import Layout from "@/components/templates/Layout";
 import Container from "@/components/ui/Container";
 import cn from 'classnames';
@@ -26,6 +30,21 @@ export default function Press({
 
   return (
     <Layout preview={preview}>
+      <HeroImage 
+        image={image}
+        style="narrow"
+        overlay
+        TopBlockComponent={() => (
+          <Column
+            hAlignContent="center"
+            vAlignContent="center"
+          >
+            <Header tag="h1" size="h1" color="primary">
+              {blog.title}
+            </Header>
+          </Column>
+        )}
+      />
       <Container 
         clearMargin={['top', 'bottom']} 
         maxWidth="2xl" 
@@ -42,6 +61,8 @@ export default function Press({
                   <ArticleTile 
                     key={article.id}
                     article={article}
+                    index={i}
+                    className={cn(i % 2 === 0 ? "bg-primary text-secondary" : "bg-secondary text-primary")}
                   />
                 )
               ) : (

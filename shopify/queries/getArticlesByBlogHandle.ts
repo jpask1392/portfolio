@@ -14,6 +14,7 @@ const getArticlesByBlogHandle = gql`
             title
             excerpt
             handle
+            tags
             blog {
               handle
             }

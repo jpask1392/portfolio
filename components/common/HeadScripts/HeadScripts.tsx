@@ -37,19 +37,7 @@ export function ContextProvider ({
       {children}
     </ContextTest.Provider>
   );
-}
-
-const Wrapper = ({
-  children
-}) => {
-  return (
-    <ContextProvider>
-      <div>
-        <HeadScripts />
-      </div>
-    </ContextProvider>
-  )
-}
+  }
 
 const HeadScripts = () => {
   // consume parents context
@@ -81,7 +69,7 @@ const HeadScripts = () => {
   // }
 
   useEffect(() => {
-    console.log('mount')
+    // console.log('mount')
     setLoadedScripts(["true"]);
     // setLoad(true);
 
@@ -102,7 +90,7 @@ const HeadScripts = () => {
     console.log("inner: ", loadedScripts)
   }, [loadedScripts])
 
-  const onLoad = (e) => {
+  const onLoad = (e: any) => {
     // console.log(e.currentTarget);
     // console.log(setLoadedScripts)
     // setLoadedScripts(false);

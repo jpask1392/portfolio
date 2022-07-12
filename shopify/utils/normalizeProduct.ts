@@ -84,7 +84,7 @@ export function normalizeProduct({
     title,
     subtitle: subTitle?.value || null,
     vendor,
-    slug: handle?.replace(/^\/+|\/+$/g, ''),
+    handle: handle?.replace(/^\/+|\/+$/g, ''),
     price: priceRange?.minVariantPrice,
     images: images.edges.length ? normalizeProductImages(images) : [],
     variants: variants ? normalizeProductVariants(variants) : [],

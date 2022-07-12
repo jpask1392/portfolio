@@ -12,7 +12,7 @@ export const config = {
   },
 };
 
-export default async (req, res) => {
+const Contact = async (req, res) => {
   const data = await new Promise((resolve, reject) => {
     const form = new formidable.IncomingForm()
     
@@ -62,3 +62,5 @@ export default async (req, res) => {
       console.error(error)
     })
 }
+
+export default Contact;

@@ -3,9 +3,9 @@ import TableheaderCell from './TableHeaderCell';
 import TableRowCell from './TableRowCell';
 
 interface Props {
-  extendHeaderColumn: boolean
+  extendHeaderColumn?: boolean
   table: {
-    fieldtype: string
+    fieldtype?: string
     thead: {
       _uid: string
       value: string // escaped

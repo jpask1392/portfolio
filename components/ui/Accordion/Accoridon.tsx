@@ -10,12 +10,18 @@ import { useState } from 'react';
 interface Props {
   blok?: SbEditableContent
   className?: string
-  accordion_items?: any[]
+  accordion_items?: {
+    _uid: string
+    header: string
+    content: any
+  }[]
+  hideLines?: boolean
 }
 
 const CustomAccordion: React.FC<Props> = ({
   accordion_items,
-  className
+  className,
+  hideLines = false
 }) => {
   const [ active, setActive ] = useState("");
 
@@ -32,6 +38,8 @@ const CustomAccordion: React.FC<Props> = ({
     >
       {
         accordion_items?.map((item) => {
+          const Component = item.content;
+
           return (
             <Accordion.Item 
               value={item._uid} 
@@ -40,29 +48,31 @@ const CustomAccordion: React.FC<Props> = ({
             >
               <Accordion.Header asChild>
                 <Accordion.Trigger 
-                  className={cn([
-                    "flex",
-                    "w-full",
-                    "border-b",
-                    "border-secondaryLight",
-                    "py-4",
-                    "justify-between",
-                    "items-center",
-                    "text-secondary",
-                    "text-left"
-                  ])}>
-                  <H4 className="font-medium">
-                    {item.header}
-                  </H4>
-                  <DynamicIcon 
-                    type="togglePlusMinus"
-                    open={item._uid === active}
-                  />
+                  className={cn("flex w-full py-4 items-center text-secondary text-left", {
+                    "border-b border-secondaryLight justify-between" : !hideLines,
+                  })}
+                >
+                  <H4>{item.header}</H4>
+
+                  <span className={cn("transition-all", {
+                    "rotate-180" : item._uid === active,
+                    "ml-6" : hideLines
+                  })}>
+                    <DynamicIcon 
+                      type="chevronDown"
+                    />
+                  </span>
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Content className='content'>
                 <div className="mb-8 pt-4">
-                  {render(item.content)}
+                  {
+                    (typeof item.content === 'function') ? (
+                      <Component />
+                    ) : (
+                      render(item.content)
+                    )
+                  }
                 </div>
               </Accordion.Content>
             </Accordion.Item>

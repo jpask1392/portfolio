@@ -32,8 +32,8 @@ export default function Press({
 
   return (
     <Layout preview={preview}>
-      <HeroImage 
-        image={false}
+      {/* <HeroImage 
+        image={null}
         style="narrow"
         overlay
         TopBlockComponent={() => (
@@ -46,7 +46,7 @@ export default function Press({
             </Header>
           </Column>
         )}
-      />
+      /> */}
 
       <SideFilterLayout 
         Filters={() => {

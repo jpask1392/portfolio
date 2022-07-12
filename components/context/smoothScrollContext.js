@@ -29,7 +29,7 @@ export const SmoothScrollProvider = ({ children, options }) => {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [])
+  }, [router.events])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);

@@ -10,6 +10,7 @@ const getCustomerByAccessToken = gql`
       createdAt
       defaultAddress {
         city
+        formatted(withName: true)
       }
       firstName
       lastName
@@ -26,6 +27,15 @@ const getCustomerByAccessToken = gql`
         edges {
           node {
             id
+            customerUrl
+            orderNumber
+            processedAt
+            fulfillmentStatus
+            financialStatus
+            totalPriceV2 {
+              amount
+              currencyCode
+            }
           }
         }
       }

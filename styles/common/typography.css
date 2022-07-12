@@ -74,9 +74,9 @@ ul,
     md:text-xl
     leading-relaxed;
 
-  &:last-of-type {
+  /* &:last-of-type {
     @apply mb-0;
-  }
+  } */
 }
 
 .h7 {

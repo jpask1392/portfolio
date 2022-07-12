@@ -105,7 +105,7 @@ const ProductTile: React.FC<Props> = ({
       className={cn("relative group", className)}
       ref={articleRef}
     >
-      <Link href={`/product/${product?.slug || ''}`}>
+      <Link href={`/product/${product?.handle || ''}`}>
         <a aria-label={`Go to ${product?.title || "product"} page`}>
           <div className="aspect-square flex overflow-hidden">
             <div className="w-full relative" ref={imageRef}>        

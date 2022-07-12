@@ -18,5 +18,7 @@ export type Product = {
   subtitle: string,
   updated_at: Date,
   variants: Variant[],
-  vendor: string
+  vendor: string,
+  details: string[],
+  moreinfo: string,
 }

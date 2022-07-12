@@ -91,16 +91,16 @@ const ProductMain: React.FC<Props> = ({
             <Accordion
               hideLines
               accordion_items={[
-                {
+                ... product?.details ? [{
                   _uid: "details",
                   header: "Details",
-                  content: () => <DetailsTab data={product} />
-                },
-                {
+                  content: () => <DetailsTab data={product.details} />
+                }] : [],
+                ... product?.moreinfo ? [{
                   _uid: "more-info",
                   header: "More Info",
-                  content: "content"
-                }
+                  content: () => <p>{product.moreinfo}</p>
+                }] : [],
               ]}
             />
 

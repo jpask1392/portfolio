@@ -86,5 +86,11 @@ export const productDetailsFragment = gql`
     ReviewsWidgetSnippet: metafield(namespace: "okendo", key: "ReviewsWidgetSnippet") {
       value
     }
+    details: metafield(namespace: "custom", key: "details") {
+      value
+    }
+    moreinfo: metafield(namespace: "custom", key: "moreinfo") {
+      value
+    }
   }
 `;

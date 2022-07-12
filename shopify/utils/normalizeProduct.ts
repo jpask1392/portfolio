@@ -78,8 +78,11 @@ export function normalizeProduct({
   handle: string
   priceRange: any
   options: any
+  details: any
+  moreinfo: any
 }) {
   return {
+    ...rest,
     id,
     title,
     subtitle: subTitle?.value || null,
@@ -95,6 +98,7 @@ export function normalizeProduct({
       : [],
     ...(description && { description }),
     ...(descriptionHtml && { descriptionHtml }),
-    ...rest,
+    details: rest.details && JSON.parse(rest.details?.value),
+    moreinfo: rest.moreinfo?.value,
   }
 }

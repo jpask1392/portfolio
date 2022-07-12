@@ -14,6 +14,8 @@ const normalizeCart = (checkout: any) => {
     subtotalPrice: +checkout.subtotalPriceV2?.amount,
     totalPrice: checkout.totalPriceV2?.amount,
     discounts: checkout.discountApplications?.edges.map((node: any) => node) || [],
+    ready: checkout.ready,
+    // ...checkout
   }
 }
 

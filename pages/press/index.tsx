@@ -3,17 +3,19 @@
  * from Shopify. Uses a Shopify navigation menu to collect
  * the information needed for the list.
  */
+import SideFilterLayout from '@/components/templates/SideFilterLayout'
 import { getArticlesByBlogHandle } from "@/shopify/operations";
 import Column from "@/components/ui/Column";
 import Header from "@/components/ui/Header";
 import HeroImage from "@/components/modules/HeroImage";
 import ArticleTile from "@/components/modules/ArticleTile/ArticleTile";
 import getGlobalData from "@/utils/getGlobalData";
-import image from 'dummyData/image.json';
 import Layout from "@/components/templates/Layout";
 import Container from "@/components/ui/Container";
 import cn from 'classnames';
 import { useEffect, useState, useRef } from "react";
+import Masonry from 'react-masonry-css'
+
 
 export default function Press({
   preview,
@@ -31,7 +33,7 @@ export default function Press({
   return (
     <Layout preview={preview}>
       <HeroImage 
-        image={image}
+        image={false}
         style="narrow"
         overlay
         TopBlockComponent={() => (
@@ -45,33 +47,39 @@ export default function Press({
           </Column>
         )}
       />
-      <Container 
-        clearMargin={['top', 'bottom']} 
-        maxWidth="2xl" 
-      >
-        <div 
-          className={cn("xl:ml-[16rem] 2xl:max-w-[calc(100% - 16rem)] 2xl:ml-[15%] 2xl:max-w-[calc(100% - 15%)] transition-opacity py-14 xl:py-24", {
-            "opacity-20" : loading
-          })}
-        >
-          <div className="grid gap-x-8 md:gap-x-14 xl:gap-x-28 gap-y-12 md:gap-y-20 grid-cols-2 md:grid-cols-3">
-            {
-              articles ? (
-                articles.map((article: any, i: number) => 
-                  <ArticleTile 
-                    key={article.id}
-                    article={article}
-                    index={i}
-                    className={cn(i % 2 === 0 ? "bg-primary text-secondary" : "bg-secondary text-primary")}
-                  />
+
+      <SideFilterLayout 
+        Filters={() => {
+          return (
+            <div>Filters</div>
+          )
+        }}
+
+        Content={() => (
+          <>
+            <Masonry
+              breakpointCols={3}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {
+                articles ? (
+                  articles.map((article: any, i: number) => 
+                    <ArticleTile 
+                      key={article.id}
+                      article={article}
+                      index={i}
+                    />
+                  )
+                ) : (
+                  <div>No Posts Found</div>
                 )
-              ) : (
-                <div>No Posts Found</div>
-              )
-            }
-          </div> 
-        </div>
-      </Container>
+              }
+            </Masonry>
+          </>
+        )}
+      />
+
     </Layout>
   );
 }

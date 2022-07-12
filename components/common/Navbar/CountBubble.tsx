@@ -1,7 +1,7 @@
 import useCart from "@/components/hooks/useCart";
 
 const CountBubble = () => {
-  const [ cart ] = useCart();
+  const { cart } = useCart();
 
   return (
     cart?.lineItems.length ? (

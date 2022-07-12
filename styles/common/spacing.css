@@ -60,7 +60,7 @@
 .ui-richtext + .ui-btn-group,
 .ui-image + .ui-richtext,
 .ui-image + .ui-header {
-  @apply mt-5;
+  /* @apply mt-5; */
 }
 
 .ui-header + .ui-slideshow,

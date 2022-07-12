@@ -16,13 +16,17 @@ interface Props {
 }
 
 const CartDrawer: React.FC<Props> = () => {
-  const [ cart, setCart ] = useCart();
+  const { 
+    cart, 
+    setCart 
+  } = useCart();
+
   const [ toasts, addToast ] = useToast();
   const { UI, setUI } = useUIContext();
 
-  useEffect(() => {
-    // console.log("cart:", cart);
-  }, [cart])
+  // useEffect(() => {
+  //   console.log("cart:", cart);
+  // }, [cart])
 
   const handleRemoveDiscount = async () => {
     try {
@@ -55,8 +59,6 @@ const CartDrawer: React.FC<Props> = () => {
       });
     }
   }
-
-  if (!cart) return null;
 
   return (
     <div className={cn([
@@ -115,7 +117,7 @@ const CartDrawer: React.FC<Props> = () => {
               <span className="mr-8">Totals:</span>
               <div>
                 <Price 
-                  originalPrice={cart?.subtotalPrice}
+                  originalPrice={cart?.subtotalPrice || 0}
                 />
               </div>
             </div>
@@ -126,7 +128,7 @@ const CartDrawer: React.FC<Props> = () => {
                   Discounts Applied:
 
                   {
-                    cart.discounts.map((discount, i) => {
+                    cart.discounts.map((discount: any, i: number) => {
                       return (
                         <span 
                           className="ml-4 border border-primary rounded-md px-5 py-2 inline-flex items-center" 
@@ -185,8 +187,9 @@ const CartDrawer: React.FC<Props> = () => {
             <Button 
               text="Checkout"
               link={{url: cart?.url}}
-              className="!max-w-none"
+              disabled={!cart?.url}
               onDark
+              maxWidth={false}
             />
           </ButtonGroup>
         </div>

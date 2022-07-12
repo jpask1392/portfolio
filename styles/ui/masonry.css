@@ -1,0 +1,13 @@
+.my-masonry-grid {
+  @apply flex w-auto -ml-16 -mb-16;
+}
+
+.my-masonry-grid_column {
+  @apply pl-16;
+
+  background-clip: padding-box;
+}
+
+.my-masonry-grid_column > article {
+  @apply mb-16;
+}

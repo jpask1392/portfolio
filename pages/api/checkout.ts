@@ -24,7 +24,9 @@ export default async function collections(req: any, res: any) {
 
     // creating a new checkout object
     if (action === 'create') {
-      checkout = await createCheckout();
+      checkout = await createCheckout({
+        lineItems: body.lineItems || [],
+      });
     }
 
     // get the current checkout object
@@ -50,7 +52,6 @@ export default async function collections(req: any, res: any) {
 
     // remove items from checkout object
     if (action === 'remove') {
-      // console.log(body.formData)
       checkout = await checkoutRemoveItem({
         checkoutId: body.checkoutId,
         lineItemIds: body.formData

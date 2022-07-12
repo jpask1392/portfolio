@@ -34,7 +34,7 @@ const Header: React.FC<Props> = ({
   children,
   text,
   mobile_text,
-  color = 'black',
+  color = 'inherit',
   size = 'h2',
   sbEditable,
   disableAnimation = false,

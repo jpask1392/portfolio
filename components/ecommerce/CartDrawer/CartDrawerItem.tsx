@@ -7,27 +7,11 @@ interface Props {
 }
 
 const CartDrawerItem: React.FC<Props> = ({ cartItem }) => {
-  const [ cart, setCart ] = useCart();
-
-  // remove item from list
-  const handleRemove = async () => {
-    const res = await fetch(`/api/checkout?action=remove`, {
-      'method': 'POST',
-      'body': JSON.stringify({
-        checkoutId: cart?.id,
-        formData: [ cartItem.id ],
-      })
-    });
-
-    if (res.status === 500) {
-      throw new Error("Error");
-    }
-
-    const checkout = await res.json();
-
-    // update UI
-    setCart(checkout)
-  }
+  const { 
+    cart, 
+    setCart,
+    removeItemsFromCart
+  } = useCart();
 
   if (!cart) return null;
 
@@ -59,7 +43,7 @@ const CartDrawerItem: React.FC<Props> = ({ cartItem }) => {
           <span className="block text-xs mt-1 text-right text-fadedText">Quantity: {cartItem.quantity}</span>
         </div>
 
-        <button className="ml-2" onClick={handleRemove}>
+        <button className="ml-2" onClick={() => removeItemsFromCart([ cartItem.id ])}>
           <DynamicIcon type="close" className="text-fadedText" />
         </button>
       </div>

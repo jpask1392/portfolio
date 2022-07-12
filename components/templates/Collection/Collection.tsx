@@ -20,7 +20,7 @@ const CollectionTemplate: React.FC<Props> = ({
 }) => {
   const [ collection, setCollection ] = useState(initalCollection);
   const [ loading, setLoading ] = useState(false);
-  const [ toasts, addToast ] = useToast();
+  // const [ toasts, addToast ] = useToast();
   const didMountRef = useRef(false);
   const { scroll } : { scroll: any } = useSmoothScrollContext();
 
@@ -73,10 +73,13 @@ const CollectionTemplate: React.FC<Props> = ({
 
           scroll && scroll.update();
         } catch (err) {
-          addToast({
-            message: "Something went wrong",
-            style: "error"
-          })
+          // TODO: addToast is causing a rerender in the UI context
+          // - need to review properly
+
+          // addToast({
+          //   message: "Something went wrong",
+          //   style: "error"
+          // })
         }
     
         setLoading(false)
@@ -97,6 +100,14 @@ const CollectionTemplate: React.FC<Props> = ({
    * @param pagination 
    */
   const onPageChange = (pagination: any)  => {
+    // scroll up
+    if (scroll) {
+      scroll.scrollTo("top", {
+        offset: 400,
+        duration: 300,
+      })
+    }
+
     setCurrentFilters({
       ...currentFilters, 
       pagination: {...pagination},

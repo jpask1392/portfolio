@@ -14,6 +14,7 @@ const AccountTemplate: React.FC<Props> = ({
   account,
   handleLogout,
 }) => {
+  console.log(account)
   return (
     <>
       <Script src="https://js.smile.io/v1/smile-shopify.js?shop=valentino-bp.myshopify.com" />
@@ -37,9 +38,12 @@ const AccountTemplate: React.FC<Props> = ({
       </Container>
 
       <Container>
-        <div className="flex">
-          <div className="flex-1">
-            <Header tag="h4" size="h4">Account Info</Header>
+        <div>
+          <Header 
+            tag="h4" 
+            size="h4"
+          >Profile</Header>
+          <div className="mt-8">
             <ul>
               <li>First Name: { account.firstName || "N/A" }</li>
               <li>Last Name: { account.lastName || "N/A" }</li>
@@ -48,14 +52,23 @@ const AccountTemplate: React.FC<Props> = ({
               text="Update Account"
             />
           </div>
-          <div className="flex-1">
-            <Header tag="h4" size="h4">Orders Info</Header>
+        </div>
+      </Container>
+
+      <Container>
+        <div>
+          <Header 
+            tag="h4" 
+            size="h4"
+          >Orders Info</Header>
+
+          <div className="mt-8">
             {
               account.orders.edges.length ? (
                 account.orders.edges.map(({ node: order } : { node: any }) => {
                   return order.id;
                 })
-              ) : "No orders"
+              ) : "You have not placed any orders yet."
             }
           </div>
         </div>

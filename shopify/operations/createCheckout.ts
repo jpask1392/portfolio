@@ -2,11 +2,15 @@ import { storefrontClient } from '@/shopify/client';
 import { CREATE_CHECKOUT } from '@/shopify/mutations';
 import normalizeCart from '../utils/normalizeCart';
 
-const createCheckout = async () => {
+const createCheckout = async ({
+  lineItems = []
+}) => {
   const { data } = await storefrontClient.mutate({
     mutation: CREATE_CHECKOUT,
     variables: {
-      input: {}
+      input: {
+        lineItems: lineItems
+      }
     }
   });
 

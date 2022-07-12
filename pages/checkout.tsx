@@ -13,7 +13,7 @@ import Header from "@/components/ui/Header";
 import RichText from "@/components/ui/RichText";
 
 export default function Checkout() {
-  const [ cart ] = useCart();
+  const { cart } = useCart();
   useEffect(() => {
     if (cart?.url) {
       window.location.href = cart?.url;

@@ -8,11 +8,12 @@ import NavigationLink from './NavigationLink';
 import MobileMenu from './MobileMenu';
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUIContext } from "@/components/context/uiContext";
 
 import { SbEditableContent } from "@/types/storyBlok";
 import type { storyBlokLink, storyBlokImage } from '@/types/storyBlok';
+import { useRouter } from "next/router";
 
 interface NavProps {
   className?: string
@@ -37,6 +38,11 @@ const Navigation: React.FC<NavProps> = ({
 }) => {
   const [ active, setActive ] = useState(false);
   const { UI, setUI } = useUIContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    setActive(false);
+  }, [router.asPath])
   
   return (
     <header

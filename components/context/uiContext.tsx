@@ -5,15 +5,19 @@ export const UIContext = createContext({
     toasts: [],
     cartActive: false,
   },
-  setUI: (data) => data
+  setUI: (data: any) => data
 });
 
 export function useUIContext() {
   return useContext(UIContext);
 }
 
-export function UIContextProvider({ children }) {
-  const [ UI, setUI ] = useState({
+export function UIContextProvider({ 
+  children 
+} : { 
+  children: any 
+}) {
+  const [ UI, setUI ] = useState<any>({
     toasts: [],
     cartActive: false,
   });

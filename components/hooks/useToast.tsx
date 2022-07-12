@@ -1,5 +1,6 @@
 import { useUIContext } from "@/components/context/uiContext";
 import type { ToastType } from "@/types/ui";
+import { useEffect, useCallback, memo } from "react";
 
 const useToast: () => [
   ToastType[],
@@ -8,7 +9,10 @@ const useToast: () => [
 ] = () => {
   const { UI, setUI } = useUIContext();
 
-  const addToast: (toast: ToastType) => void = ({
+  /**
+   * wrap in callback to only re-render when toasts change
+   */
+  const addToast: (toast: ToastType) => void = useCallback(({
     message = '',
     style = 'success',
     title = style
@@ -24,9 +28,12 @@ const useToast: () => [
         }
       ]
     });
-  }
+  }, [ UI.toasts ]);
 
-  const removeToast = (index: number) => {
+  /**
+   * wrap in callback to only re-render when toasts change
+   */
+  const removeToast = useCallback((index: number) => {
     const arrCopy = [...UI.toasts];
     arrCopy.splice(index, 1);
 
@@ -34,7 +41,11 @@ const useToast: () => [
       ...UI,
       toasts: arrCopy
     });
-  }
+  }, [ UI.toasts ])
+
+  // useEffect(() => {
+  //   console.log(UI.toasts)
+  // }, [ UI.toasts ])
 
   return [ UI.toasts, addToast, removeToast ];
 }

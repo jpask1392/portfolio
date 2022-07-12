@@ -64,4 +64,4 @@ const Pagination: React.FC<Props> = ({
 }
 
 
-export default Pagination
+export default Pagination;

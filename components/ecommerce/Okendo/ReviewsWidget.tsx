@@ -36,7 +36,7 @@ const ReviewsWidget: React.FC<Props> = ({
       // window.addEventListener('oke-script-loaded', initialiseReviewsWidget);
     }
 
-    document.getElementsByClassName('oke-showMore-button')[0].addEventListener('click', updateScroll);
+    // document.getElementsByClassName('oke-showMore-button')[0].addEventListener('click', updateScroll);
   }, []);
 
   return (
@@ -46,7 +46,7 @@ const ReviewsWidget: React.FC<Props> = ({
         data-oke-widget 
         data-oke-reviews-product-id={`shopify-${product.id}`}
         dangerouslySetInnerHTML={{
-          __html: product.ReviewsWidgetSnippet.value
+          __html: product.ReviewsWidgetSnippet?.value
         }}
       ></div>
       {/* 

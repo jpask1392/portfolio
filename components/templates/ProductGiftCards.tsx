@@ -1,5 +1,6 @@
+import Button from '@/components/ui/Button';
+import ProductShare from '@/components/ecommerce/ProductShare';
 import Gallery from '@/components/ecommerce/ProductMain/Gallery'
-import PrimaryDetail from '@/components/ecommerce/ProductMain/PrimaryDetail';
 import AddToCartButton from '@/components/ecommerce/AddToCartButton';
 import cn from 'classnames'
 import { VariantSelector } from "@/components/ecommerce/Common";
@@ -7,7 +8,6 @@ import { useState, useEffect } from "react";
 import HeroImage from "@/components/modules/HeroImage";
 import DynamicComponent from "@/components/helpers/DynamicComponent";
 import Container from "@/components/ui/Container";
-import ProductMain from "@/components/ecommerce/ProductMain";
 import Column from "@/components/ui/Column";
 import Header from "@/components/ui/Header";
 import { SbEditableContent } from "@/types/storyBlok";
@@ -58,11 +58,15 @@ const ProductGiftCardsTemplate: React.FC<Props> = ({
 
       <Container spacing="sm" maxWidth="xl">
         <div className="flex flex-wrap -mx-3 xl:-mx-28">
-          <div className="w-6/12 px-3 xl:px-28">
-            { product.images.length ? <Gallery product={product} /> : null }
+          <div className="w-full xl:w-6/12 px-3 xl:px-28">
+            { 
+              product.images.length 
+                ? <Gallery product={product} /> 
+                : null 
+            }
           </div>
 
-          <div className="w-6/12 px-3 xl:px-28 mt-2 ld:mt-0">
+          <div className="w-full xl:w-6/12 px-3 xl:px-28 mt-2 ld:mt-0">
             <div className="">
               <Header 
                 tag="h2" 
@@ -78,7 +82,7 @@ const ProductGiftCardsTemplate: React.FC<Props> = ({
               </div>
 
               <div className={cn({
-                "mt-4" : product.variants.length > 1
+                "mt-11" : product.variants.length > 1
               })}>
                 <VariantSelector 
                   product={product}
@@ -88,7 +92,7 @@ const ProductGiftCardsTemplate: React.FC<Props> = ({
               </div>
 
               <div className="mt-7">
-                <div className="flex space-x-4 md:space-x-8 mt-4">
+                <div className="mb-4">
                   <AddToCartButton 
                     buttonText="Add to cart"
                     className="flex-1 !max-w-none"
@@ -100,6 +104,19 @@ const ProductGiftCardsTemplate: React.FC<Props> = ({
                     ]}
                   />
                 </div>
+                <Button
+                  text="Send as gift"
+                  maxWidth={false}
+                  ajaxClick={async () => {
+                    alert('hey')
+                  }}
+                />
+                
+              </div>
+
+              <div className="mt-9 flex items-center">
+                <Header tag="h4" size="h5">Socials:</Header>
+                <ProductShare product={product} className="ml-4" />
               </div>
             </div>
           </div>

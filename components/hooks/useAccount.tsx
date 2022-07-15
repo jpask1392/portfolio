@@ -13,6 +13,10 @@ const useAccount = () => {
     getAccount(Cookies.get( '_secure_session_id' ));
   }, []);
 
+  useEffect(() => {
+    // console.log(account)
+  }, [account])
+
   /**
    * Creates a customer account
    * 
@@ -156,11 +160,122 @@ const useAccount = () => {
     router.push('/')
   }
 
+  /**
+   * Update address information
+   * 
+   * @param id 
+   */
+  const handleUpdateAddress = async (id: string) => {
+    const accessToken = account;
+
+    // required fields
+    // id
+    // customerAccessToken
+    // address - inputs
+ 
+  }
+
+  /**
+   * Creates a new address associated with customer
+   * 
+   */
+  const handleCreateAddress = async (address: {
+    firstName: string,
+    lastName: string,
+    address1: string,
+    address2: string,
+  }) => {
+    try {
+      const res = await fetch(`/api/customer/account?action=createAddress`, {
+        method: "POST",
+        headers: {
+          "content-type" : "application/json"
+        },
+        body: JSON.stringify({
+          customerAccessToken: Cookies.get( '_secure_session_id' ),
+          address: address
+        })
+      });
+  
+      const {
+        customerAddress,
+        customerUserErrors
+      } = await res.json();
+
+      if (customerUserErrors.length) {
+        addToast({
+          title: "Error",
+          message: customerUserErrors[0].message,
+          style: "error"
+        });
+      } else {
+        addToast({
+          title: "Success",
+          message: "Created new address.",
+          style: "success"
+        });
+
+        await getAccount(Cookies.get( '_secure_session_id' ));
+      }
+    } catch (err) {
+      // any errors return to login page
+      router.push('/account/login')
+    }
+  }
+
+  /**
+   * Deletes a customers address
+   * 
+   * @param id 
+   */
+  const handleDeleteAddress = async (id: string) => {
+    const customerAccessToken = Cookies.get( '_secure_session_id' );
+
+    try {
+      const res = await fetch(`/api/customer/account?action=deleteAddress`, {
+        method: "POST",
+        headers: {
+          "content-type" : "application/json"
+        },
+        body: JSON.stringify({
+          customerAccessToken: customerAccessToken,
+          id: id,
+        })
+      });
+  
+      const {
+        deletedCustomerAddressId,
+        customerUserErrors
+      } = await res.json();
+
+      if (customerUserErrors.length) {
+        addToast({
+          title: "Error",
+          message: customerUserErrors[0].message,
+          style: "error"
+        });
+      } else {
+        addToast({
+          title: "Success",
+          message: "Deleted the address.",
+          style: "success"
+        });
+
+        await getAccount(Cookies.get( '_secure_session_id' ));
+      }
+    } catch (err) {
+      // any errors return to login page
+      // router.push('/account/login')
+    }
+  }
+
   return {
     account,
     handleCreateAccount,
     handleAccountLogin,
     handleAccountLogout,
+    handleCreateAddress,
+    handleDeleteAddress,
   };
 } 
 

@@ -9,11 +9,12 @@ import {
 import cn from 'classnames';
 
 interface Props {
-  action: "contact" | "accountLogin" | "createAccount" | "search" | "newsletter"
+  action?: "contact" | "accountLogin" | "createAccount" | "search" | "newsletter"
   children: ReactNode[] | Component[] | any[] | ReactNode | Component | any
   stylePreset?: string
   initialState?: any
   className?: string
+  onSubmit?: (formData: any) => any
 }
 
 /**
@@ -26,7 +27,8 @@ const Form: React.FC<Props> = ({
   children,
   action,
   initialState = {},
-  className
+  className,
+  onSubmit,
 }) => {
   const [ toasts, addToast ] = useToast();
   const [ formData, setFormData ] = useState(initialState);
@@ -54,7 +56,14 @@ const Form: React.FC<Props> = ({
     setSubmitting(true);
 
     try {
-      await formActions[action](formData);
+      /**
+       * Perform either a preset submit
+       * action or a custom one.
+       */
+      action && (action in formActions)
+        ? await formActions[action](formData)
+        : onSubmit && await onSubmit(formData)
+
     } catch (error) {
       console.warn(error)
     } finally {

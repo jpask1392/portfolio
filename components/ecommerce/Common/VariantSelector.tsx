@@ -115,7 +115,7 @@ const VariantSelector: React.FC<Props> = ({
               <Select
                 key={index}
                 name={`option${index + 1}`}
-                items={option.values}
+                items={option.values.map((value: string) => `${option.name} : ${value}`)}
                 onChange={updateOption}
               />
             )

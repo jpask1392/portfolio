@@ -20,5 +20,6 @@ export type Product = {
   variants: Variant[],
   vendor: string,
   details: string[],
-  moreinfo: string,
+  moreinfo: string | boolean,
+  ReviewsWidgetSnippet: { value: string },
 }

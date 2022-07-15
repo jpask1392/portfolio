@@ -20,7 +20,7 @@ const Grid: React.FC<GridProps> = ({
     {
       'grid-l-a': layout === 'A',
       'grid-l-b': layout === 'B',
-      'grid-l-c': layout === 'C',
+      'grid-c': layout === 'C',
       'grid-l-d': layout === 'D',
       'grid-l-e': layout === 'E',
       "pt-12 md:pt-24": padTop === 'lg',

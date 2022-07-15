@@ -26,6 +26,7 @@ import HeroImage from "@/components/modules/HeroImage";
 import HeroSplit from "@/components/modules/HeroSplit";
 import Form from "@/components/modules/Form";
 import TileGrid from "@/components/modules/TileGrid";
+import Bubble from "@/components/modules/Bubble";
 
 import FeaturedCollections from "@/components/ecommerce/FeaturedCollections";
 import FeaturedProducts from "@/components/ecommerce/FeaturedProducts";
@@ -70,7 +71,8 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     featuredCollectionWithProducts: FeaturedCollectionWithProducts,
     tileGrid: TileGrid,
     table: Table,
-    icon: Icon
+    icon: Icon,
+    bubble: Bubble,
   };
 
   if (typeof Components[blok.component] !== "undefined") {

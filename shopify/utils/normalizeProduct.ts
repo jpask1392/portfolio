@@ -99,6 +99,6 @@ export function normalizeProduct({
     ...(description && { description }),
     ...(descriptionHtml && { descriptionHtml }),
     details: rest.details && JSON.parse(rest.details?.value),
-    moreinfo: rest.moreinfo?.value,
+    moreinfo: rest.moreinfo?.value || false,
   }
 }

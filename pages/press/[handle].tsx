@@ -1,3 +1,4 @@
+import Header from "@/components/ui/Header";
 import getGlobalData from "@/utils/getGlobalData";
 import Layout from "@/components/templates/Layout";
 import Container from "@/components/ui/Container";
@@ -17,26 +18,9 @@ export default function Collection({
 }) {
   return (
     <Layout preview={preview}>
-      <div className="relative">
-        <aside className="hidden xl:block xl:w-[16rem] 2xl:w-[15%] bg-primary absolute inset-y-0 left-0 px-10 py-16 z-10 top-0">
-          <div className="h-full overflow-auto">
-            
-          </div>
-        </aside>
-
-        <Container 
-          clearMargin={['top', 'bottom']} 
-          maxWidth="2xl" 
-        >
-          <div 
-            className={cn("xl:ml-[16rem] 2xl:max-w-[calc(100% - 16rem)] 2xl:ml-[15%] 2xl:max-w-[calc(100% - 15%)] transition-opacity py-14 xl:py-24")}
-          >
-            <div className={cn("grid gap-x-8 md:gap-x-14 xl:gap-x-28 gap-y-12 md:gap-y-20 grid-cols-2 md:grid-cols-3")}>
-              {article.title}
-            </div> 
-          </div>
-        </Container>
-      </div>
+      <Container maxWidth="lg">
+        <Header>{article.title}</Header>
+      </Container>
     </Layout>
   );
 }

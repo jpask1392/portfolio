@@ -6,7 +6,7 @@ interface Props {
   onValueChange?: (value: string, errors: any) => void
   id: string
   type?: string,
-  name: string
+  // name: string
   placeholder: string
   required?: boolean
   wrapperClasses?: string
@@ -18,7 +18,7 @@ const Input: React.FC<Props> = ({
   onValueChange,
   type = 'text',
   id,
-  name,
+  // name,
   placeholder,
   required = false,
   wrapperClasses,

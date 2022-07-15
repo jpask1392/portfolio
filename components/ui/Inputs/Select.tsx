@@ -48,7 +48,7 @@ const CustomSlider: React.FC<Props> = ({
                     "bg-primary" : item === value
                   })}
                 >
-                  <Select.ItemText>{item}</Select.ItemText>
+                  <Select.ItemText><span className="text-secondary uppercase font-header">{item}</span></Select.ItemText>
                   <Select.ItemIndicator />
                 </Select.Item>   
               )

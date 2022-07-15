@@ -1,3 +1,4 @@
+import Script from "next/script";
 import HeadScripts from "../common/HeadScripts";
 import { useGlobalContext } from "../context/globalContext";
 import Head from "@/components/common/Head";
@@ -89,7 +90,12 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <Head seo={false} />
-      <HeadScripts />
+      {/* <HeadScripts /> */}
+
+      <Script 
+        src="https://d3hw6dc1ow8pp2.cloudfront.net/reviews-widget-plus/js/okendo-reviews.js"
+        strategy="afterInteractive"
+      />
 
       <div className={cn(`slug-${story?.slug || 'default'} relative right-0 transition-all duration-700`, {
         "right-cart" : UI.cartActive

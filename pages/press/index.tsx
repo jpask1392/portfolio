@@ -58,7 +58,11 @@ export default function Press({
         Content={() => (
           <>
             <Masonry
-              breakpointCols={3}
+              breakpointCols={{
+                default: 3,
+                1100: 3,
+                500: 2
+              }}
               className="my-masonry-grid"
               columnClassName="my-masonry-grid_column"
             >

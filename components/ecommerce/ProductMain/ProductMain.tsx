@@ -1,3 +1,4 @@
+import ProductShare from '@/components/ecommerce/ProductShare';
 import DetailsTab from './DetailsTab';
 import Accordion from '@/components/ui/Accordion';
 import AddToCartButton from '@/components/ecommerce/AddToCartButton';
@@ -9,7 +10,6 @@ import PrimaryDetail from './PrimaryDetail';
 import cn from 'classnames';
 import type { Product } from '@/types/shopify';
 import { H4 } from "@/components/ui/Typography";
-import DynamicIcon from '@/components/icons/DynamicIcon';
 
 interface Props {
   product: Product
@@ -106,32 +106,10 @@ const ProductMain: React.FC<Props> = ({
 
             <div className="pt-4 flex text-secondary items-center">
               <H4>Socials:</H4>
-              <ul className="flex space-x-3 ml-6">
-                <li>
-                  <a 
-                    target="_blank" 
-                    href={`//www.facebook.com/sharer.php?u=https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/products/${product.handle}`}
-                    role="button" 
-                    title="Facebook share link" 
-                    aria-label="Facebook share link"
-                    rel="noreferrer"
-                  >
-                    <DynamicIcon type="facebook" className="w-6"/>
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    target="_blank" 
-                    href={`//twitter.com/share?text=${encodeURIComponent(product.title)}&amp;url=https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/products/${product.handle}`}
-                    role="button" 
-                    title="Twitter share link" 
-                    aria-label="Twitter share link"
-                    rel="noreferrer"
-                  >
-                    <DynamicIcon type="twitter" className="w-6"/>
-                  </a>
-                </li>
-              </ul>
+              <ProductShare 
+                className="ml-6"
+                product={product} 
+              />
             </div>
           </div>
         </div>

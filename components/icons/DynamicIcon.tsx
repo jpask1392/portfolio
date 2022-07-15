@@ -40,6 +40,13 @@ import TikTok from "./Tiktok";
 import Youtube from "./Youtube";
 import Twitter from "./Twitter";
 
+import Time from "./Time";
+import Pigments from "./Pigments";
+import Precision from "./Precision";
+import Mixable from "./Mixable";
+import Viscosity from "./Viscosity";
+import Size from "./Size";
+
 type Variant = string;
 
 const Components: {
@@ -79,6 +86,12 @@ const Components: {
   youtube: Youtube,
   twitter: Twitter,
   logo: Logo,
+  time : Time,
+  pigments : Pigments,
+  precision : Precision,
+  mixable : Mixable,
+  viscosity : Viscosity,
+  size : Size,
 };
 
 interface Props {

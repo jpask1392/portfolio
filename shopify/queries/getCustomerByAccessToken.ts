@@ -8,7 +8,9 @@ const getCustomerByAccessToken = gql`
       displayName
       email
       createdAt
+      updatedAt
       defaultAddress {
+        id
         city
         formatted(withName: true)
       }
@@ -20,6 +22,7 @@ const getCustomerByAccessToken = gql`
         edges {
           node {
             id
+            formatted(withName: true)
           }
         }
       }

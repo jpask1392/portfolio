@@ -21,7 +21,7 @@ const ArticleTile: React.FC<Props> = ({
     <article 
       className={cn("relative group p-5 lg:p-8 xl:p-10 2xl:p-12", className, {  
         "bg-primary text-secondary" : index && index % 2 !== 0,
-        "bg-secondary text-primary": index && index % 2 === 0
+        "bg-secondary text-primary": index && index % 2 === 0 || index === 0
       })}
     >
       <div className="mt-2 md:mt-6">

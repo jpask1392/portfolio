@@ -53,6 +53,9 @@ const AccountTemplate: React.FC<Props> = ({
 
           <Button 
             text="Edit Account"
+            link={{
+              cached_url: "/account/addresses"
+            }}
           />
         </div>
       </Container>

@@ -15,12 +15,12 @@ const DetailsTab: React.FC<Props> = ({
             let iconKey: string | undefined = "";
 
             const iconMap: any = {
-              time : "facebook",
-              viscosity : "facebook",
-              size : "facebook",
-              precision : "facebook",
-              mix : "facebook",
-              formula : "facebook",
+              time : "time",
+              viscosity : "viscosity",
+              size : "size",
+              precision : "precision",
+              mix : "mixable",
+              formula : "pigments",
             }
 
             /**

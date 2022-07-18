@@ -103,7 +103,7 @@ const CollectionTemplate: React.FC<Props> = ({
     // scroll up
     if (scroll) {
       scroll.scrollTo("top", {
-        offset: 400,
+        offset: 0,
         duration: 300,
       })
     }

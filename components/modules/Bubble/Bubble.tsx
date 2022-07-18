@@ -16,15 +16,17 @@ const Bubble: React.FC<Props> = ({
   textColor
 }) => {
   return (
-    <div 
-      className="rounded-full aspect-square flex justify-center items-center"
-      style={{
-        background: backgroundColor.color,
-        color: textColor.color
-      }}
-    >
-      <div className="text-center uppercase font-header [&>p]:text-4xl">
-        { render(text) }
+    <div>
+      <div 
+        className="rounded-full aspect-square flex justify-center items-center w-full max-w-[260px] mx-auto"
+        style={{
+          background: backgroundColor.color,
+          color: textColor.color
+        }}
+      >
+        <div className="text-center uppercase font-header [&>p]:text-4xl">
+          { render(text) }
+        </div>
       </div>
     </div>
   )

@@ -1,3 +1,4 @@
+import WishlistButton from '@/components/ecommerce/WishlistButton';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 import AddToCartButton from '@/components/ecommerce/AddToCartButton';
@@ -105,6 +106,9 @@ const ProductTile: React.FC<Props> = ({
       className={cn("relative group", className)}
       ref={articleRef}
     >
+      <div className="absolute right-3 top-3 z-10">
+        <WishlistButton />
+      </div>
       <Link href={`/product/${product?.handle || ''}`}>
         <a aria-label={`Go to ${product?.title || "product"} page`}>
           <div className="aspect-square flex overflow-hidden">

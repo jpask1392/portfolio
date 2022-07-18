@@ -1,9 +1,10 @@
+import { modulePadding } from "@/utils/modulePadding";
 import { SbEditableContent } from "@/types/storyBlok";
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import { render } from "storyblok-rich-text-react-renderer";
 import { renderOptions } from "utils/constants";
 import cn from "classnames";
-import {useLayoutEffect, useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
 import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
@@ -15,6 +16,7 @@ interface Props {
   sbEditable?: SbEditableContent
   animationDelay?: number
   color?: string
+  padding?: any
 }
 
 const RichText: React.FC<Props> = ({ 
@@ -24,7 +26,8 @@ const RichText: React.FC<Props> = ({
   children,
   sbEditable,
   animationDelay = 0.65,
-  color
+  color,
+  padding,
 }) => {
   const { scroll } = useSmoothScrollContext();
 
@@ -59,6 +62,7 @@ const RichText: React.FC<Props> = ({
         [`text-${align}`] : align,
         "self-start" : align === 'left',
         [`text-${color}`] : color,
+        [modulePadding(padding)] : padding,
       })}
       ref={componentRef}
       {...sbEditable}

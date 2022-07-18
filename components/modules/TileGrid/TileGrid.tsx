@@ -16,7 +16,7 @@ const TileGrid: React.FC<Props> = ({
         return (
           <div 
             key={i}
-            className={`bg-primary border border-secondary w-1/${columnCount} -mx-px -mb-px p-4`}
+            className={`bg-primary border border-secondary w-1/2 md:w-1/${columnCount} -mx-px -mb-px p-4`}
           >
             <DynamicComponent
               blok={tile}

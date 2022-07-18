@@ -1,11 +1,10 @@
+import { useState } from 'react';
+import Header from '@/components/ui/Header';
 import * as Accordion from '@radix-ui/react-accordion';
 import DynamicIcon from '@/components/icons/DynamicIcon';
-import { sbEditable } from "@storyblok/storyblok-editable";
-import { H4 } from "@/components/ui/Typography";
 import { SbEditableContent } from "@/types/storyBlok";
 import { render } from "storyblok-rich-text-react-renderer";
 import cn from 'classnames';
-import { useState } from 'react';
 
 interface Props {
   blok?: SbEditableContent
@@ -16,12 +15,14 @@ interface Props {
     content: any
   }[]
   hideLines?: boolean
+  largeTitles?: boolean
 }
 
 const CustomAccordion: React.FC<Props> = ({
   accordion_items,
   className,
-  hideLines = false
+  hideLines = false,
+  largeTitles = false,
 }) => {
   const [ active, setActive ] = useState("");
 
@@ -52,7 +53,12 @@ const CustomAccordion: React.FC<Props> = ({
                     "border-b border-secondaryLight justify-between" : !hideLines,
                   })}
                 >
-                  <H4>{item.header}</H4>
+                  
+                  <Header
+                    tag="h4"
+                    size={largeTitles ? "h3" : "h4"}
+                    color={largeTitles ? "black" : "secondary"}
+                  >{item.header}</Header>
 
                   <span className={cn("transition-all", {
                     "rotate-180" : item._uid === active,

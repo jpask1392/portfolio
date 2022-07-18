@@ -33,7 +33,7 @@ const Hero: React.FC<Props> = ({
 
         {
           (TopBlockComponent) && (
-            <div className="w-1/2 flex justify-center">
+            <div className="w-full md:w-1/2 flex justify-center">
               <Container el="div">
                 <TopBlockComponent />
               </Container>

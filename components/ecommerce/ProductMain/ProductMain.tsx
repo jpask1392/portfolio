@@ -1,3 +1,4 @@
+import Header from '@/components/ui/Header';
 import ProductShare from '@/components/ecommerce/ProductShare';
 import DetailsTab from './DetailsTab';
 import Accordion from '@/components/ui/Accordion';
@@ -9,7 +10,6 @@ import Gallery from './Gallery';
 import PrimaryDetail from './PrimaryDetail';
 import cn from 'classnames';
 import type { Product } from '@/types/shopify';
-import { H4 } from "@/components/ui/Typography";
 
 interface Props {
   product: Product
@@ -89,6 +89,7 @@ const ProductMain: React.FC<Props> = ({
           <div className="mt-9">
             {/* Details block */}
             <Accordion
+              largeTitles
               hideLines
               accordion_items={[
                 ... product?.details ? [{
@@ -105,7 +106,7 @@ const ProductMain: React.FC<Props> = ({
             />
 
             <div className="pt-4 flex text-secondary items-center">
-              <H4>Socials:</H4>
+              <Header color="black" size="h3">Share:</Header>
               <ProductShare 
                 className="ml-6"
                 product={product} 

@@ -1,11 +1,11 @@
 :root {
-  --section-spacing: 1.75rem;
-  --n-section-spacing: -1.75rem;
+  --section-spacing-sm: 2.125rem;
+  --section-spacing-md: 3rem;
+  --section-spacing-lg: 4.75rem;
 
-  @screen md {
+  /* @screen md {
     --section-spacing: 2.3rem;
-    --n-section-spacing: -2.3rem;
-  }
+  } */
 
   /* @screen xl {
     --section-spacing: 12.5rem;
@@ -13,32 +13,48 @@
   } */
 }
 
+/* Default section spacer */
 .section {
-  margin-top: var(--section-spacing);
-  margin-bottom: var(--section-spacing);
-}
-
-.section.section--spacing-sm {
-  @apply my-10 md:my-20;
-}
-
-.section-n {
-  margin-top: var(--n-section-spacing);
-  margin-bottom: var(--n-section-spacing);
+  margin-top: var(--section-spacing-md);
+  margin-bottom: var(--section-spacing-md);
 
   &.has-bg {
-    padding-top: var(--section-spacing);
-    padding-bottom: var(--section-spacing);  
+    padding-top: var(--section-spacing-md);
+    padding-bottom: var(--section-spacing-md);
   }
 }
 
-.section.has-bg {
-  padding-top: var(--section-spacing);
-  padding-bottom: var(--section-spacing);
+/* Small section spacer */
+.section.section--spacing-sm {
+  margin-top: var(--section-spacing-sm);
+  margin-bottom: var(--section-spacing-sm);
+
+  &.has-bg {
+    padding-top: var(--section-spacing-sm);
+    padding-bottom: var(--section-spacing-sm);
+  }
 }
 
-.section.has-bg + .section.has-bg {
-  margin-top: var(--n-section-spacing);
+/* Medium section spacer */
+.section.section--spacing-md {
+  margin-top: var(--section-spacing-md);
+  margin-bottom: var(--section-spacing-md);
+
+  &.has-bg {
+    padding-top: var(--section-spacing-md);
+    padding-bottom: var(--section-spacing-md);
+  }
+}
+
+/* Large section spacer */
+.section.section--spacing-lg {
+  margin-top: var(--section-spacing-lg);
+  margin-bottom: var(--section-spacing-lg);
+
+  &.has-bg {
+    padding-top: var(--section-spacing-lg);
+    padding-bottom: var(--section-spacing-lg);
+  }
 }
 
 .main-wrapper > section.has-bg:last-of-type {
@@ -126,22 +142,6 @@ section ul:not(.no-gap) {
 
 p + ul {
   @apply mt-7;
-}
-
-.pt-i-0 {
-  padding-top: 0 !important;
-}
-
-.pb-i-0 {
-  padding-bottom: 0 !important;
-}
-
-.mt-i-0 {
-  margin-top: 0 !important;
-}
-
-.mb-i-0 {
-  margin-bottom: 0 !important;
 }
 
 p.h3 + p.h3 {

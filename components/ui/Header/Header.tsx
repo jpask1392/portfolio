@@ -1,4 +1,5 @@
-import {renderOptions} from '@/utils/constants'
+import { modulePadding } from '@/utils/modulePadding'
+import { renderOptions } from '@/utils/constants'
 import { SbEditableContent } from "@/types/storyBlok";
 import Image from "next/image";
 
@@ -23,6 +24,7 @@ interface Props {
   sbEditable?: SbEditableContent
   disableAnimation?: boolean
   decoration?: string | "squiggle"
+  padding?: any
 }
 
 type Variant = 'h1' | 'h2' | 'h3' | 'h4';
@@ -38,7 +40,8 @@ const Header: React.FC<Props> = ({
   size = 'h2',
   sbEditable,
   disableAnimation = false,
-  decoration
+  decoration,
+  padding,
 }) => {
   const { scroll } = useSmoothScrollContext();
 
@@ -109,50 +112,49 @@ const Header: React.FC<Props> = ({
 
   return (
     <div 
+      {...sbEditable}
       ref={componentRef}
       className={cn(className, "ui-header relative", [size], {
         [`text-${align}`] : align,
         [`text-${color}`] : color,
-      })} 
-      {...sbEditable}
+        [modulePadding(padding)] : padding,
+      })}
     >
       <Component className={size}>
-        {
-          mobile_text && text ? (
-            <>
+        <>
+          {
+            decoration === "squiggle" ? (
+              <div className="absolute bottom-1/2 w-full left-1/3 ml-5">
+                <Image 
+                  src='/squiggle.png'
+                  width={1036}
+                  height={222}
+                  className="absolute left-full"
+                />
+              </div>
+            ) : null
+          }
+          {
+            mobile_text ? (
               <span className="lg:hidden">
                 { render(mobile_text, {
                   ...renderOptions,
                   nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver }
                 }) }
               </span>
-              <span className="hidden lg:block">
-                { render(text, { nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver }}) }
-              </span>
-            </> 
-          ) : null
-        }
-
-        {
-          !mobile_text && text ? (
-            <>
-              {
-                decoration === "squiggle" ? (
-                  <div className="absolute bottom-1/2 w-full left-1/3 ml-5">
-                    <Image 
-                      src='/squiggle.png'
-                      width={1036}
-                      height={222}
-                      className="absolute left-full"
-                    />
-                  </div>
-                ) : null
-              }
-              {render(text, { ...renderOptions, nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver } }) }
-            </>
+            ) : null
+          }
             
-          ) : children
-        }
+          <span className={cn({
+            "hidden lg:block" : mobile_text
+          })}>
+            { 
+              text 
+                ? render(text, { ...renderOptions, nodeResolvers: { [NODE_PARAGRAPH]: nodeResolver }}) 
+                : children 
+            }
+          </span>
+        </>
       </Component>
     </div>
   );

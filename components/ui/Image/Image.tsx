@@ -100,8 +100,8 @@ const ImageModule: React.FC<Props> = ({
               <div className="relative inset-0 w-full h-full" ref={imageContainerRef}>
                 <CustomImage
                   className={cn({
-                    "!hidden" : imageTablet && imageTablet.id,
-                    // "lg:block" : imageMobile && imageMobile.id,
+                    "!hidden" : imageTablet && imageTablet.id || imageMobile && imageMobile.id,
+                    "lg:!block" : imageMobile && imageMobile.id,
                     "xl:!block" : imageTablet && imageTablet.id,
                   })}
                   image={image}
@@ -113,8 +113,9 @@ const ImageModule: React.FC<Props> = ({
                 {
                   imageTablet?.id ? (
                     <CustomImage
-                      className={cn("md:!block xl:!hidden", {
-                        "!hidden" : imageMobile && imageMobile.id,
+                      className={cn({
+                        "!hidden lg:!block" : imageMobile && imageMobile.id,
+                        "xl:!hidden" : imageMobile && !imageMobile.id,
                       })}
                       image={imageTablet}
                       preload={preload}
@@ -124,22 +125,21 @@ const ImageModule: React.FC<Props> = ({
                   ) : null
                 }
 
-                {/* 
-                  {
-                    imageMobile?.id ? (
-                      <CustomImage
-                        className={cn({
-                          "xl:hidden" : imageTablet && imageTablet.id,
-                          // ":hidden" : !imageTablet || imageTablet && !imageTablet.id,
-                        })}
-                        image={imageMobile} 
-                        layout="fill" 
-                        objectFit="cover" 
-                        preload
-                      />
-                    ) : null
-                  } 
-                */}
+                {
+                  imageMobile?.id ? (
+                    <CustomImage
+                      className={cn({
+                        // "lg:!hidden" : imageTablet && imageTablet.id,
+                        "lg:!hidden" : imageTablet && !imageTablet.id,
+                      })}
+                      image={imageMobile} 
+                      preload={preload}
+                      layout={layout}
+                      objectFit={objectFit}
+                    />
+                  ) : null
+                } 
+               
               </div>
 
               {

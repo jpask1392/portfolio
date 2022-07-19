@@ -46,7 +46,6 @@ const Table: React.FC<Props> = ({
 
       {
         table.tbody.map((row, index) => {
-          console.log(row)
           return (
             <div 
               key={row._uid}

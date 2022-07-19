@@ -51,7 +51,7 @@ export function AccountProvider({ children } : { children: any }) {
     }
   }
 
-  const value = { account, setAccount, getAccount };
+  const value: any = { account, setAccount, getAccount };
 
   return (
     <AccountContext.Provider value={value}>

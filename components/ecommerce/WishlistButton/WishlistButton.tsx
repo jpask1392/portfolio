@@ -83,7 +83,7 @@ const WishlistButton: React.FC<Props> = ({
     </button>
 
     <button onClick={handleGetWishlist}></button>
-    <Script 
+    {/* <Script 
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `
@@ -91,7 +91,7 @@ const WishlistButton: React.FC<Props> = ({
         
       `,
       }}
-    />
+    /> */}
     </>
   )
 }

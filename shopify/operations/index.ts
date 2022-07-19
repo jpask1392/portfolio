@@ -16,3 +16,4 @@ export { default as customerCreate } from './customerCreate';
 export { default as getCustomerByAccessToken } from './getCustomerByAccessToken';
 export { default as customerCreateAddress } from './customerCreateAddress';
 export { default as customerDeleteAddress } from './customerDeleteAddress';
+export { default as searchStore } from './searchStore';

@@ -7,3 +7,4 @@ export { default as GET_RESOURCE_PATHS } from './getResourcePaths';
 export { default as GET_ARTICLE_BY_HANDLE } from './getArticleByHandle';
 export { default as GET_ARTICLES_BY_BLOG_HANDLE } from './getArticlesByBlogHandle';
 export { default as GET_CUSTOMER_BY_ACCESS_TOKEN } from './getCustomerByAccessToken';
+export { default as SEARCH_STORE_QUERY } from './searchStoreQuery';

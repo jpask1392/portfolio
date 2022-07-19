@@ -8,16 +8,6 @@ interface Props {
 const OrdersTable: React.FC<Props> = ({
   orders
 }) => {
-  // const columns = [
-  //   "orderNumber",
-  //   "processedAt",
-  //   "fulfillmentStatus",
-  //   "financialStatus",
-  //   "totalPrice",
-  // ]
-
-  console.log(orders)
-
   const columns = [
     {
       id: "1",

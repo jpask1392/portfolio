@@ -20,8 +20,6 @@ const AccountTemplate: React.FC<Props> = ({
   handleCreateAddress,
   handleDeleteAddress,
 }) => {
-  console.log(account);
-
   return (
     <>
       <Container maxWidth="lg">
@@ -73,7 +71,6 @@ const AccountTemplate: React.FC<Props> = ({
           <Form
             className="mt-4"
             onSubmit={async (formData) => {
-              console.log(formData)
               await handleCreateAddress({...formData});
             }}
           >

@@ -155,7 +155,7 @@ const CollectionTemplate: React.FC<Props> = ({
         Content={() => (
           <>
             <div className={cn("grid gap-x-8 md:gap-x-14 xl:gap-x-28 gap-y-12 md:gap-y-20 grid-cols-2 md:grid-cols-3 transition-opacity", {
-              'opacity-20': loading
+              'opacity-20 pointer-events-none': loading
             })}>
               {
                 collection && collection.products ? (

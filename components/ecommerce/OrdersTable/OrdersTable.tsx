@@ -16,24 +16,26 @@ const OrdersTable: React.FC<Props> = ({
   //   "totalPrice",
   // ]
 
+  console.log(orders)
+
   const columns = [
     {
-      id: "",
+      id: "1",
       title: "Order Number",
       orderKey: "orderNumber",
     },
     {
-      id: "",
+      id: "2",
       title: "Fulfillment Status",
       orderKey: "fulfillmentStatus",
     },
     {
-      id: "",
+      id: "3",
       title: "Financial Status",
       orderKey: "financialStatus",
     },
     {
-      id: "",
+      id: "4",
       title: "Total Price",
       orderKey: "totalPriceV2",
     }
@@ -45,8 +47,8 @@ const OrdersTable: React.FC<Props> = ({
       value: column.title,
     })),
 
-    tbody: orders.map((order) => ({
-      _uid: order.id,
+    tbody: orders.map((order, index) => ({
+      _uid: order.id + "_" + index,
       body: columns.map((column) => {
         let value;
 

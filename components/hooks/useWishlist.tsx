@@ -1,3 +1,4 @@
+import useAccount from './useAccount';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 import Cookies from 'js-cookie';
@@ -5,6 +6,14 @@ import Cookies from 'js-cookie';
 const useWishlist = () => {
   const [ wishlist, setWishlist ] = useState(null);
   const router = useRouter();
+
+  const {
+    account
+  } = useAccount();
+
+  // useEffect(() => {
+  //   console.log(account)
+  // }, [account])
 
   useEffect(() => {
     // run on mount

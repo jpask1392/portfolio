@@ -14,9 +14,6 @@ interface Props {
   style?: string
 }
 
-// TODO: Make sure this is not visible when the page loads
-// Current showing a little flash of the mega menu.
-
 const MegaMenu: React.FC<Props> = ({ 
   className,
   item,

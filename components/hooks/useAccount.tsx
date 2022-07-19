@@ -1,21 +1,17 @@
+import { useAccountContext } from '../context/accountContext';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 import useToast from "@/components/hooks/useToast";
 import Cookies from 'js-cookie';
 
 const useAccount = () => {
-  const [ account, setAccount ] = useState(null);
+  const { account, setAccount, getAccount } = useAccountContext();
   const [ toasts, addToast ] = useToast();
   const router = useRouter();
 
-  useEffect(() => {
-    // run on mount
-    getAccount(Cookies.get( '_secure_session_id' ));
-  }, []);
-
-  useEffect(() => {
-    // console.log(account)
-  }, [account])
+  // useEffect(() => {
+  //   console.log(account)
+  // }, [account])
 
   /**
    * Creates a customer account
@@ -122,33 +118,6 @@ const useAccount = () => {
       });
     } finally {
   
-    }
-  }
-
-  /**
-   * Get the customer with access token
-   * 
-   * @param customerAccessToken 
-   */
-  const getAccount = async (customerAccessToken: string | undefined) => {
-    if (!customerAccessToken) return;
-
-    try {
-      const res = await fetch(`/api/customer/account?action=getCustomer`, {
-        method: "POST",
-        headers: {
-          "content-type" : "application/json"
-        },
-        body: JSON.stringify({
-          customerAccessToken: customerAccessToken || "",
-        })
-      });
-  
-      const customer = await res.json();
-      setAccount(customer);
-    } catch (err) {
-      // any errors return to login page
-      router.push('/account/login')
     }
   }
 

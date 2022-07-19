@@ -18,7 +18,11 @@ const TableRow: React.FC<Props> = ({
         "uppercase font-header text-secondary" : rowIndex === 0,
         "col-span-2" : rowIndex === 0 && extendHeaderColumn,
       })}
-    >{value}</div>
+    >{
+      value === "[dot]"
+        ? <span className="text-secondary">&#9679;</span>
+        : value
+    }</div>
   )
 }
 

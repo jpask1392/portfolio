@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import useWishlist from "@/components/hooks/useWishlist";
 import type { Product } from "@/types/shopify";
 import DynamicIcon from "@/components/icons/DynamicIcon";
@@ -11,13 +12,18 @@ const WishlistButton: React.FC<Props> = ({
   product 
 }) => {
   const [adding, setAdding] = useState(false);
+
   const {
     handleCreateWishlist,
   } = useWishlist();
 
   return (
     <button>
-      <DynamicIcon type="heart" className="fill-transparent stroke-black" />
+      <DynamicIcon 
+        type="heart" 
+        className={cn("stroke-black fill-transparent", {
+
+        })} />
     </button>
   )
 }

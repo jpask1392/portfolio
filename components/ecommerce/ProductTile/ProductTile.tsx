@@ -107,7 +107,7 @@ const ProductTile: React.FC<Props> = ({
       ref={articleRef}
     >
       <div className="absolute right-3 top-3 z-10">
-        <WishlistButton />
+        <WishlistButton product={product} />
       </div>
       <Link href={`/product/${product?.handle || ''}`}>
         <a aria-label={`Go to ${product?.title || "product"} page`}>

@@ -67,9 +67,6 @@ export async function getStaticProps({
 
   let sbParams: any = {
     version: preview ? "draft" : "published",
-    resolve_relations: [
-      // "featured-posts.posts",
-    ],
     language: locale,
   };
 
@@ -94,7 +91,9 @@ export async function getStaticProps({
     };
 
   } catch (error) {
-    throw new Error(error.message); // stop the build
+    console.log("message:", error);
+
+    return {}
   }
 }
 

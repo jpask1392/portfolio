@@ -1,9 +1,0 @@
-.product-description {
-  ul {
-    @apply list-disc pl-8;
-  }
-}
-
-.swiper-slide-thumb-active {
-  @apply border-black border-2;
-}

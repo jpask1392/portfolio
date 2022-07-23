@@ -4,7 +4,7 @@ import Container from "@/components/ui/Container";
 
 import Storyblok, { useStoryblok } from "../utils/storyblok";
 
-export default function Page404({ global, preview, locale, locales, defaultLocale }) {
+export default function Page404({ global, preview, locale }) {
   const enableBridge = true; // load the storyblok bridge everywhere
   // const enableBridge = preview; // load only inside preview mode
   const storyLoaded = useStoryblok(null, enableBridge, locale);
@@ -15,7 +15,7 @@ export default function Page404({ global, preview, locale, locales, defaultLocal
     content = <DynamicComponent blok={storyLoaded.content} />;   
 
   return (
-    <Layout global={global}>
+    <Layout>
       <Container>
         {content}
       </Container>
@@ -32,9 +32,6 @@ export async function getStaticProps({
   try {
     let sbParams = {
       version: preview ? "draft" : "published", // or "published"
-      resolve_relations: [
-        "featured-posts.posts",
-      ],
       language: locale,
     };
   
@@ -45,6 +42,8 @@ export async function getStaticProps({
 
     // get global layout information for header, footer etc
     let global = await Storyblok.get(`cdn/stories/templates/global-template`, sbParams);
+
+    console.log(global)
 
     return {
       props: {

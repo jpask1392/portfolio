@@ -1,9 +1,7 @@
 import { SbEditableContent } from "@/types/storyBlok";
-import dynamic from 'next/dynamic';
 
 // templates
 import Page from "@/components/templates/Page";
-import Product from "@/components/templates/Product";
 
 // modules
 import Placeholder from "@/components/ui/Placeholder";
@@ -25,12 +23,6 @@ import { Input } from "@/components/ui/Inputs";
 import HeroImage from "@/components/modules/HeroImage";
 import HeroSplit from "@/components/modules/HeroSplit";
 import Form from "@/components/modules/Form";
-import TileGrid from "@/components/modules/TileGrid";
-import Bubble from "@/components/modules/Bubble";
-
-import FeaturedCollections from "@/components/ecommerce/FeaturedCollections";
-import FeaturedProducts from "@/components/ecommerce/FeaturedProducts";
-import FeaturedCollectionWithProducts from "@/components/ecommerce/FeaturedCollectionWithProducts";
 
 import Icon from '@/components/ui/Icon';
 
@@ -49,9 +41,6 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     [P in Variant]: React.ComponentType<any> | string
   } = {
     page: Page,
-    product: Product,
-    featuredCollections: FeaturedCollections,
-    featuredProducts: FeaturedProducts,
     heroImage: HeroImage,
     heroSplit: HeroSplit,
     container: Container,
@@ -68,11 +57,8 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     accordion: Accordion,
     form: Form,
     formInput: Input,
-    featuredCollectionWithProducts: FeaturedCollectionWithProducts,
-    tileGrid: TileGrid,
     table: Table,
     icon: Icon,
-    bubble: Bubble,
   };
 
   if (typeof Components[blok.component] !== "undefined") {

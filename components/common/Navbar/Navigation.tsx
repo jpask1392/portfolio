@@ -3,7 +3,6 @@ import Logo from "@/components/ui/Logo";
 import cn from "classnames";
 import DynamicIcon from "@/components/icons/DynamicIcon";
 import SearchBar from "@/components/common/Navbar/SearchBar";
-import CountBubble from './CountBubble';
 import NavigationLink from './NavigationLink';
 import MobileMenu from './MobileMenu';
 import { Squash as Hamburger } from 'hamburger-react'
@@ -122,19 +121,6 @@ const Navigation: React.FC<NavProps> = ({
               <div className="px-2 md:px-4">
                 <SearchBar />
               </div>
-            ) : null
-          }
-          {
-            actionItems?.includes('cart') ? (
-              <button className="px-2 md:px-4 relative" onClick={() => setUI({
-                ...UI,
-                cartActive: !UI.cartActive,
-              })}>
-                <DynamicIcon type="cart" className="h-9" />
-                <span className="absolute -top-2 right-2">
-                  <CountBubble />
-                </span>
-              </button>
             ) : null
           }
           {

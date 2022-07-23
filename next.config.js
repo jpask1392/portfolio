@@ -9,7 +9,7 @@ module.exports = withBundleAnalyzer({
     defaultLocale: "en",
   },
   images: {
-    domains: ['a.storyblok.com', 'cdn.shopify.com'],
+    domains: ['a.storyblok.com'],
   },
   compiler: {
     // ssr and displayName are configured by default

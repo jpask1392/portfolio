@@ -18,7 +18,6 @@
     "useUnknownInCatchVariables": false,
     "paths": {
       "@/types/*": ["types/*"],
-      "@/shopify/*": ["shopify/*"],
       "@/components/*": ["components/*"],
       "@/utils/*": ["utils/*"]
     }

@@ -7,7 +7,6 @@ import Footer from "@/components/common/Footer";
 import Announcement from "@/components/common/Announcement";
 import { sbEditable } from "@storyblok/storyblok-editable";
 import { useStoryblok } from "../../utils/storyblok";
-import CartDrawer from "@/components/ecommerce/CartDrawer";
 import { useUIContext } from "@/components/context/uiContext";
 import cn from 'classnames';
 import { ReactNode, Component, useEffect } from 'react';
@@ -21,10 +20,6 @@ import CustomEase from "gsap/dist/CustomEase";
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(CustomEase);
-
-// dummy data - remove when going live
-import navigationList from 'dummyData/navigation.json';
-import dummyFooter from 'dummyData/footerNavigation.json';
 
 interface Props {
   children: ReactNode | Component | any
@@ -67,14 +62,6 @@ const Layout: React.FC<Props> = ({
 
     // add editable data here to be used in Storyblok:
     navProps.sbEditable = { ...sbEditable(header[0]) }
-  } else {
-    // use dummy data if not connected to Storyblok
-    navProps = { navigationList : navigationList };
-    footerProps = { 
-      menuOne : dummyFooter[0],
-      menuTwo : dummyFooter[1],
-      menuThree : dummyFooter[2] 
-    }
   }
 
   useEffect(() => {
@@ -127,8 +114,6 @@ const Layout: React.FC<Props> = ({
 
           <Footer {...footerProps} />
         </div>
-
-        <CartDrawer />
       </div>
 
       <Toasts />

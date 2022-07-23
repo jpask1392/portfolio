@@ -1,4 +1,3 @@
-import useAccount from '@/components/hooks/useAccount';
 import { ReactNode, Component, createContext, useContext, useState } from 'react';
 import useToast from "@/components/hooks/useToast";
 import { 
@@ -35,19 +34,12 @@ const Form: React.FC<Props> = ({
 
   const [ submitting, setSubmitting ] = useState(false);
 
-  const {
-    handleCreateAccount,
-    handleAccountLogin,
-  } = useAccount();
-
   /**
    * Use this object to set up actions
    */
   const formActions: any = {
     contact: handleContactFormSubmit,
     // newsletter: handleNewsletter,
-    accountLogin: handleAccountLogin,
-    createAccount: handleCreateAccount,
   }
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {

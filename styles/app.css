@@ -23,9 +23,3 @@
 @import 'ui/tabs';
 @import 'ui/forms';
 @import 'ui/masonry';
-
-@import 'ecommerce/collection';
-@import 'ecommerce/product-main';
-@import 'ecommerce/featured-collection-tile';
-
-@import 'modules/immortaltools';

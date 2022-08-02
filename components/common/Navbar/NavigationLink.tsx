@@ -5,22 +5,18 @@ import { useState } from "react";
 import NextLink from 'next/link';
 import StoryBlokLink from "@/components/helpers/StoryBlokLink";
 
-import MegaMenu from "@/components/common/MegaMenu";
 import cn from 'classnames';
 
 interface NavigationLinkProps {
   className?: string
   nav_link: navLink
   topLevel?: boolean
-  hasMegaMenu?: boolean
-  withMegaMenuStyle?: string
 }
 
 const NavigationLink: React.FC<NavigationLinkProps> = ({ 
   nav_link, 
   className,
   topLevel = false,
-  withMegaMenuStyle,
 }) => {
   const {
     name,
@@ -40,13 +36,8 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
 
   const navLinkClasses = cn("", {
     "text-secondary active" : router.asPath === cached_url,
-    "font-header uppercase font-bold text-base md:text-4xl" : topLevel,
+    "font-header uppercase text-sm" : topLevel,
     "flex items-center" : subItems.length,
-    "py-4 md:py-7 px-5 xl:p-0 border-b border-secondaryLight xl:border-none" : subItems.length || topLevel && !subItems.length,
-    "text-secondary": topLevel || withMegaMenuStyle === "large",
-    "uppercase text-base" : withMegaMenuStyle,
-    "text-base md:text-4xl w-full" : !withMegaMenuStyle,
-    "text-white" : withMegaMenuStyle === "narrow",
   })
 
   return (
@@ -84,17 +75,7 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
       </StoryBlokLink>
 
       {
-        subItems.length && hasMegaMenu ? (
-          <MegaMenu 
-            item={nav_link} 
-            visible={hoverLink} 
-            style={megaMenuStyle}
-          />
-        ) : null
-      }
-
-      {
-        subItems.length && !hasMegaMenu ? (
+        subItems.length ? (
           <ul className="w-full">
             {
               subItems.map((item, i) => {

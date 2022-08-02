@@ -39,6 +39,7 @@ import Cake from "./Cake";
 import TikTok from "./Tiktok";
 import Youtube from "./Youtube";
 import Twitter from "./Twitter";
+import ArrowNewPage from "./ArrowNewPage";
 
 import Time from "./Time";
 import Pigments from "./Pigments";
@@ -65,6 +66,7 @@ const Components: {
   search: Search,
   add: Add,
   addCircle: AddCircle,
+  arrowNewPage: ArrowNewPage,
   'dollar-sign': DollarSign,
   bag: Bag,
   caretBackCircle: CaretBackCircle,

@@ -15,6 +15,8 @@ const StoryBlokLink: React.FC<Props> = ({
 }) => {
   if (!sbLink) return <>{children}</>;
 
+  console.log(sbLink)
+
   const {
     url = '',
     linktype,

@@ -1,6 +1,6 @@
 html,
 body {
-  /* @apply text-primary bg-black; */
+  @apply bg-background;
 }
 
 a {

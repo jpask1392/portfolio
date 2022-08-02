@@ -7,8 +7,7 @@ import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEff
 import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
 import { H1, H2, H3, H4 } from '@/components/ui/Typography';
 import cn from "classnames";
-import { JSXElementConstructor, useEffect, useLayoutEffect, useRef } from 'react';
-import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
+import { JSXElementConstructor, useRef } from 'react';
 
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
@@ -25,6 +24,7 @@ interface Props {
   disableAnimation?: boolean
   decoration?: string | "squiggle"
   padding?: any
+  children?: any
 }
 
 type Variant = 'h1' | 'h2' | 'h3' | 'h4';
@@ -43,8 +43,7 @@ const Header: React.FC<Props> = ({
   decoration,
   padding,
 }) => {
-  const { scroll } = useSmoothScrollContext();
-
+  const tl = useRef<any>(null);
   const componentsMap: {
     [P in Variant]: React.ComponentType<any> | string
   } = {
@@ -63,19 +62,18 @@ const Header: React.FC<Props> = ({
   const componentRef = useRef<null | HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (scroll && !disableAnimation) {
-      const tl = gsap.timeline({
+    if (!disableAnimation) {
+      tl.current = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,
           start: 'top bottom-=100',
           markers: false,
-          scroller: "[data-scroll-container]",
         },
       });
 
       let targets = gsap.utils.toArray(".animate", componentRef.current);
       if (targets.length) {
-        tl.fromTo(targets, { 
+        tl.current.fromTo(targets, { 
           opacity: 0,
           yPercent: 100,
         }, {
@@ -88,7 +86,7 @@ const Header: React.FC<Props> = ({
         });
       }
     }
-  }, [scroll])
+  }, [])
 
   const nodeResolver = (child: any) => {
     return Array.isArray(child) 

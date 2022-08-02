@@ -1,7 +1,7 @@
 :root {
   --section-spacing-sm: 2.125rem;
   --section-spacing-md: 3rem;
-  --section-spacing-lg: 4.75rem;
+  --section-spacing-lg: 10rem;
 
   /* @screen md {
     --section-spacing: 2.3rem;
@@ -25,7 +25,7 @@
 }
 
 /* Small section spacer */
-.section.section--spacing-sm {
+.section--spacing-sm {
   margin-top: var(--section-spacing-sm);
   margin-bottom: var(--section-spacing-sm);
 
@@ -36,7 +36,7 @@
 }
 
 /* Medium section spacer */
-.section.section--spacing-md {
+.section--spacing-md {
   margin-top: var(--section-spacing-md);
   margin-bottom: var(--section-spacing-md);
 
@@ -47,7 +47,7 @@
 }
 
 /* Large section spacer */
-.section.section--spacing-lg {
+.section--spacing-lg {
   margin-top: var(--section-spacing-lg);
   margin-bottom: var(--section-spacing-lg);
 

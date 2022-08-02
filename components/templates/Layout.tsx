@@ -34,7 +34,6 @@ const Layout: React.FC<Props> = ({
   preview,
 }) => {
   const [ toasts, addToast ] = useToast();
-  const { UI, setUI } = useUIContext();
 
   /**
    * "story" is equivalent to page data,
@@ -77,16 +76,8 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <Head seo={false} />
-      {/* <HeadScripts /> */}
 
-      <Script 
-        src="https://d3hw6dc1ow8pp2.cloudfront.net/reviews-widget-plus/js/okendo-reviews.js"
-        strategy="afterInteractive"
-      />
-
-      <div className={cn(`slug-${story?.slug || 'default'} relative right-0 transition-all duration-700`, {
-        "right-cart" : UI.cartActive
-      })}>
+      <div className={cn(`slug-${story?.slug || 'default'} relative`)}>
         
         {
           navProps.announcementDisplay ? (
@@ -100,20 +91,13 @@ const Layout: React.FC<Props> = ({
 
         <Navigation {...navProps} />
 
-        <div data-scroll-section>
-          <main className={cn("flex items-start", {
-            "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
-          })}>
-            <div className="main-wrapper overflow-hidden">
-              {/* 
-                children will be pulled from storyblok 
-              */}
-              {children}
-            </div>
-          </main>
+        <main className={cn({
+          "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
+        })}>
+          {children}
+        </main>
 
-          <Footer {...footerProps} />
-        </div>
+        <Footer {...footerProps} />
       </div>
 
       <Toasts />

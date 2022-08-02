@@ -77,14 +77,23 @@ module.exports = {
       padding: '1.25rem',
     },
     fontFamily: {
-      header: "'source-code-pro', monospace",
-      sans: "'hind', sans-serif",
+      header: "'DM Sans', sans-serif",
+      sans: "'DM Sans', sans-serif",
+    },
+    borderRadius: {
+      'none': '0',
+      'sm': '0.125rem',
+      DEFAULT: '4px',
+      'md': '0.375rem',
+      'lg': '1.875rem',
+      'full': '9999px',
+      'large': '12px',
     },
     fontSize: {
       'tiny': '.68rem', // 11px
       'xs': '.75rem', // 12px - YES
       'sm': '.875rem', // 14px
-      'base': '1rem', // 16px - base  - YES
+      'base': '0.93rem', // 16px - base  - YES
       'lg': '1.125rem', // 18px
       'xl': '1.25rem', // 20px  - YES
       '2xl': '1.375rem', // 22px  - YES
@@ -102,7 +111,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: '#EDE6DB',
+        primary: '#d0d5db',
         secondary: "#72605B",
         secondaryLight: "#A59082",
         tertiary: "#EBBFBB",
@@ -110,7 +119,8 @@ module.exports = {
         gray2: '#303030',
         gray3: '#161616',
         grayLight: '#E9E9E9',
-        fadedText: '#9F9F9F'
+        fadedText: '#9F9F9F',
+        background: '#F8F8F8',
       },
       spacing: {
         'screen-1/2': '50vw',

@@ -1,5 +1,5 @@
 import Ticker from 'react-ticker';
-import { render } from "storyblok-rich-text-react-renderer";
+import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
 import { renderOptions } from "utils/constants";
 
 interface Props {
@@ -12,10 +12,17 @@ const Marquee: React.FC<Props> = ({
   repeat = '2',
 }) => {
   return (
-    <div className="pb-5 lg:pb-8 ui-marquee">
-      <Ticker speed={15}>
+    <div className="ui-marquee">
+      <Ticker speed={10}>
         {({ index }) => (
-          <>{render(text, renderOptions)}</>
+          <div className="uppercase">
+            { render(text, {
+              ...renderOptions,
+              nodeResolvers: {
+                [NODE_PARAGRAPH]: (children) => <p className="font-medium text-2xl whitespace-nowrap">{children}</p>
+              }
+            }) }
+          </div>
         )}
     </Ticker>
       

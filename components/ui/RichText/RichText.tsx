@@ -7,7 +7,6 @@ import cn from "classnames";
 import { useRef } from 'react';
 import { gsap } from 'gsap';
 import CustomEase from "gsap/dist/CustomEase";
-import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 
 interface Props {
   align?: 'left' | 'center' | 'right'
@@ -29,8 +28,6 @@ const RichText: React.FC<Props> = ({
   color,
   padding,
 }) => {
-  const { scroll } = useSmoothScrollContext();
-
   const componentRef = useRef<null | HTMLDivElement>(null);
   useIsomorphicLayoutEffect(() => {
     if (componentRef.current != null) {
@@ -54,7 +51,7 @@ const RichText: React.FC<Props> = ({
         
       });
     }
-  }, [componentRef, scroll])
+  }, [componentRef])
 
   return (
     <div

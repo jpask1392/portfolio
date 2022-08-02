@@ -4,7 +4,6 @@ import Button from '@/components/ui/Button';
 import MobileNavigationLink from './MobileNavigationLink';
 import type { navLink } from '@/types/navigation';
 import { useEffect } from "react";
-import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 
 interface Props {
   menu: navLink[]
@@ -17,19 +16,6 @@ const MobileMenu: React.FC<Props> = ({
 }) => {
   // hook takes into account change in announcement bar.
   const visibleWindowHeight = useVisibleWindowHeight();
-
-  const { scroll } : { scroll: any } = useSmoothScrollContext();
-
-  useEffect(() => {
-    if (active) {
-      // disable scroll
-      scroll?.stop();
-    }
-
-    if (!active) {
-      scroll?.start();
-    }
-  }, [scroll, active])
 
   return (
     <div 

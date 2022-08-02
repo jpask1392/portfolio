@@ -6,7 +6,6 @@ import cn from "classnames";
 import type { storyBlokImage } from '@/types/storyBlok';
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { gsap } from 'gsap';
-import { useSmoothScrollContext } from "@/components/context/smoothScrollContext";
 
 interface Props {
   image: storyBlokImage | undefined
@@ -41,7 +40,6 @@ const ImageModule: React.FC<Props> = ({
   const tl = useRef<any>(null);
   const containerRef = useRef<null | HTMLDivElement>(null);
   const imageContainerRef = useRef<null | HTMLDivElement>(null);
-  const { scroll } = useSmoothScrollContext();
 
   useIsomorphicLayoutEffect(() => {
     if (scroll && animate) {

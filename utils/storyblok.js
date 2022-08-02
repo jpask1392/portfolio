@@ -19,7 +19,7 @@ export function useStoryblok(originalStory, preview, locale) {
     if (typeof StoryblokBridge !== "undefined") {
       // initialize the bridge with your token
       const storyblokInstance = new StoryblokBridge({
-        resolveRelations: ["featured-posts.posts", "selected-posts.posts"],
+        resolveRelations: ["featuredProjects.projects"],
         language: locale,
       });
 
@@ -39,7 +39,7 @@ export function useStoryblok(originalStory, preview, locale) {
         // loading the draft version on initial enter of editor
         Storyblok.get(`cdn/stories/${event.storyId}`, {
           version: "draft",
-          resolve_relations: ["featured-posts.posts", "selected-posts.posts"],
+          resolve_relations: ["featuredProjects.projects"],
           language: locale,
         })
           .then(({ data }) => {

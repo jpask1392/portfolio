@@ -22,7 +22,10 @@ import { Input } from "@/components/ui/Inputs";
 
 import HeroImage from "@/components/modules/HeroImage";
 import HeroSplit from "@/components/modules/HeroSplit";
+import HeroReel from "@/components/modules/HeroReel";
+import TextReveal from "@/components/modules/TextReveal";
 import Form from "@/components/modules/Form";
+import FeaturedProjects from "@/components/modules/FeaturedProjects";
 
 import Icon from '@/components/ui/Icon';
 
@@ -43,6 +46,9 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     page: Page,
     heroImage: HeroImage,
     heroSplit: HeroSplit,
+    heroReel: HeroReel,
+    textReveal: TextReveal,
+    featuredProjects: FeaturedProjects,
     container: Container,
     column: Column,
     header: Header,

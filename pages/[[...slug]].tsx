@@ -68,6 +68,7 @@ export async function getStaticProps({
   let sbParams: any = {
     version: preview ? "draft" : "published",
     language: locale,
+    resolve_relations: ["featuredProjects.projects"],
   };
 
   if (preview) {

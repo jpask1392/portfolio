@@ -1,51 +1,24 @@
 .button {
-  @apply 
-    md:w-full
-    text-base
-    xl:text-xl
+  @apply
+    relative
+    text-sm
     text-center
     inline-flex
     justify-center
     items-center
+    tracking-wide
     uppercase
     font-bold
     font-header
     py-2.5
-    px-4
-    xl:px-12
-    md:px-4
+    px-12
     leading-tight
-    /* tracking-widest */
     transition-colors
-    duration-300;
-}
-
-.button.mw {
-  max-width: 260px;
-}
-
-.button.primary {
-  @apply bg-primary border border-primary text-secondary;
-
-  &:hover {
-    @apply bg-secondary border-secondary text-primary;
-  }
-}
-
-.button.on-dark {
-  @apply bg-secondary text-primary border-secondary;
-
-  &:hover {
-    @apply bg-secondaryLight border-secondaryLight text-primary;
-  }
-}
-
-.button.on-primary {
-  @apply bg-white text-primary;
-
-  &:hover {
-    @apply bg-white border-white text-primary;
-  }
+    duration-300
+    border
+    border-black
+    rounded-full
+    bg-white;
 }
 
 .button[disabled] {
@@ -58,36 +31,4 @@
 
 a.link {
   @apply underline uppercase font-bold text-xs cursor-pointer;
-}
-
-.has-effect {
-  @apply transition-all;
-
-  background-repeat: no-repeat;
-  
-  /* background-size values will repeat so we only need to declare them once */
-  background-size: 
-    0 1px, /* top & bottom */
-    1px 100%; /* right & left */
-  
-  background-position: 
-    0px 0px, /* top */
-    100% 0px, /* right */
-    0px calc(100% + 1px), /* bottom */
-    0px 0px; /* left */
-  
-  /* Since we're sizing and positioning with the above properties, we only need to set up a simple solid-color gradients for each side */
-  background-image: 
-    linear-gradient(0deg, transparent, transparent),
-    linear-gradient(0deg, transparent, transparent),
-    linear-gradient(90deg, #0075FF, #0075FF),
-    linear-gradient(0deg, transparent, transparent);
-  
-  transition-property: background-size;
-
-  &:hover {
-    background-size: 
-      100% 1px, /* top & bottom */
-      1px 100%; /* right & left */
-  }
 }

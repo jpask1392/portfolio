@@ -1,3 +1,4 @@
+import Button from "@/components/ui/Button";
 import CustomImage from "@/components/ui/Image";
 import Logo from "@/components/ui/Logo";
 import cn from "classnames";
@@ -45,24 +46,31 @@ const Navigation: React.FC<NavProps> = ({
   
   return (
     <header
-      // data-scroll-sticky
-      // data-scroll-target="[data-scroll-container]"
       id="primary-header"
       className={cn(className, [
-        "bg-primary",
-        "h-20 xl:h-12",
-        "border-b border-secondaryLight",
         "z-20",
-        "sticky",
+        "absolute",
         "top-0",
+        "w-full"
       ])}
     >
       <nav 
-        className="h-full px-5 max-w-screen-2xl mx-auto flex justify-end relative" 
+        className="h-full px-5 py-5 mt-10 container  mx-auto flex justify-end relative items-center" 
         role="navigation"
       >
 
-        <div className="xl:hidden absolute top-full left-0 pointer-events-none w-full">
+        {/* Logo */}
+        <div className="">
+          <div className="text-secondary">
+            <Link href="/">
+              <a aria-label="Company logo">
+                <Logo className="fill-current h-10" />
+              </a>
+            </Link>
+          </div>
+        </div>
+
+        <div className="md:hidden absolute top-full left-0 pointer-events-none w-full">
           <MobileMenu 
             menu={navigationList} 
             active={active}
@@ -72,7 +80,7 @@ const Navigation: React.FC<NavProps> = ({
         {/* mobile Menu */}
         <button
           aria-label="Navigation Menu"
-          className="xl:hidden h-full bg-primary aspect-square flex items-center flex-1"
+          className="md:hidden h-full bg-primary aspect-square flex items-center flex-1"
         >
           <Hamburger 
             size={30} 
@@ -85,24 +93,13 @@ const Navigation: React.FC<NavProps> = ({
           />
         </button>
 
-        {/* Logo */}
-        <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
-          <div className="text-secondary">
-            <Link href="/">
-              <a aria-label="Company logo">
-                <Logo className="fill-current h-10" />
-              </a>
-            </Link>
-          </div>
-        </div>
-
         {/* Flexs size */}
-        <div className="h-full flex-1 hidden xl:block">
-          <ul className="h-full flex text-secondary">
+        <div className="h-full flex-1 hidden md:block">
+          <ul className="h-full flex text-secondary justify-end">
           {
             navigationList.map((link: any, i: number) => {
               return (
-                <li key={i} className="mx-5 h-full first:ml-0">
+                <li key={i} className="mx-5 h-full first:ml-0 last:mr-0">
                   <NavigationLink 
                     nav_link={link} 
                     topLevel
@@ -123,28 +120,19 @@ const Navigation: React.FC<NavProps> = ({
               </div>
             ) : null
           }
-          {
-            actionItems?.includes('account') ? (
-              <div className="px-2 md:px-4">
-                <Link href={'/account/login'}>
-                  <a aria-label="Account Page Icon">
-                    <DynamicIcon type="identity" />
-                  </a>
-                </Link>
-              </div>
-            ) : null
-          }
         </div>
 
         {/* CTA */}
-        <Link href={'/' + ctaLink?.cached_url}>
-          <a 
-            aria-label={ctaText}
-            className="font-medium text-base md:text-4xl h-full hidden xl:flex items-center pl-8 xl:pl-14 uppercase font-header text-secondary"
-          >
-            {ctaText}
-          </a>
-        </Link>
+        {
+          ctaText ? (
+            <Button
+              className="ml-20"
+              link={{ cached_url: '/' + ctaLink?.cached_url }}
+              text={ctaText}
+              icon={<DynamicIcon type="arrowNewPage" />}
+            />
+          ) : null
+        }
       </nav>
     </header>
   );

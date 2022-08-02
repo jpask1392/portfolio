@@ -2,14 +2,12 @@ import { FormContext } from "@/components/modules/Form";
 import StoryBlokLink from "@/components/helpers/StoryBlokLink";
 import cn from "classnames";
 import type { button } from '@/types/button';
-import Link from 'next/link';
 import { useEffect, useState, useContext } from "react";
 import { ThreeDots } from 'react-loading-icons';
 
 
 const Button: React.FC<button> = ({
   buttonStyle = 'primary',
-  onDark = false,
   className,
   disabled,
   text,
@@ -18,7 +16,7 @@ const Button: React.FC<button> = ({
   onClick,
   ajaxClick,
   isSubmit,
-  maxWidth = true,
+  icon,
 }) => {
   const [loading, setLoading] = useState(false);
   const { submitting } = useContext<any>(FormContext);
@@ -27,16 +25,11 @@ const Button: React.FC<button> = ({
     setLoading(submitting)
   }, [submitting]);
 
-  const buttonClasses = cn([
-    className,
-    { 
-      [buttonStyle] : buttonStyle,
-      'on-dark' : onDark,
-      'button' : ['primary', 'on-primary'].indexOf( buttonStyle ) !== -1,
-      'link text-primary relative overflow-x-hidden' : buttonStyle === 'link',
-      "mw" : maxWidth,
-    },
-  ]);
+  const buttonClasses = cn(className, { 
+    [buttonStyle] : buttonStyle,
+    'button' : buttonStyle !== 'link',
+    'link text-primary relative overflow-x-hidden' : buttonStyle === 'link',
+  });
 
   return (
     <>
@@ -44,7 +37,6 @@ const Button: React.FC<button> = ({
         sbLink={isSubmit ? false : link}
         className={cn({
           "pointer-events-none" : loading,
-          "md:w-full" : buttonStyle !== 'link'
         })}
       >
         <button
@@ -80,11 +72,7 @@ const Button: React.FC<button> = ({
           }}
         >
           <span className={cn({'opacity-0' : loading })}>{text}</span>
-          {/* {
-            buttonStyle === 'link' ? (
-              <span className="absolute top-full h-px w-full bg-primary left-0 -mt-px block" />
-            ) : null
-          } */}
+          <span className="absolute right-4">{icon}</span>
           <span className={cn('absolute', {'opacity-0' : !loading })}>
             <ThreeDots fill="black" height="10px"/>
           </span>

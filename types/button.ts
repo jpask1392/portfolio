@@ -12,4 +12,5 @@ export type button = {
   onClick?: (e: React.SyntheticEvent<EventTarget>) => void
   ajaxClick?: (e: React.SyntheticEvent<EventTarget>) => void
   maxWidth?: boolean
+  icon?: any
 }

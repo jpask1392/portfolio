@@ -54,31 +54,39 @@ const FeaturedProjects: React.FC<Props> = ({
   
   return (
     <div className="overflow-hidden">
-      {/* <div className="border border-black rounded-full relative w-16 flex-shrink-0 mr-5">
-        <Header className="!absolute transform rotate-90 origin-top-left whitespace-nowrap">
-          Featured Projects
-        </Header>
-      </div> */}
 
-      <Container el="div">
-        <div style={{ width: "calc(100% + (( 100vw - 100% ) / 2))" }}>
-          <ul
-            className="flex space-x-5 flex-1 select-none"  
-            ref={trackRef} 
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            onMouseMove={handleMouseMove}
+      <Container el="div" clearMargin={['top']}>
+        <div className="flex">
+          <div 
+            className="border border-black rounded-full relative mr-5 z-10 bg-white mb-[163px]"
           >
-            {
-              projects.map((project, i) => {
-                return (
-                  <li key={i} className="flex-shrink-0 w-3/12">
-                    <ProjectTile project={project} />
-                  </li>
-                )
-              })
-            }
-          </ul>
+            <Header 
+              className="uppercase [writing-mode:vertical-lr] rotate-180 py-10 px-4"
+              tag="h2"
+              size="h4"
+            >
+              Featured Projects
+            </Header>
+          </div>
+          <div style={{ width: "calc(100% + (( 100vw - 100% ) / 2))" }}>
+            <ul
+              className="flex space-x-5 flex-1 select-none"  
+              ref={trackRef} 
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+            >
+              {
+                projects.map((project, i) => {
+                  return (
+                    <li key={i} className="flex-shrink-0 w-3/12">
+                      <ProjectTile project={project} />
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
         </div>
 
         <div className="w-full h-0.5 bg-gray-200 mt-14 relative rounded-full">

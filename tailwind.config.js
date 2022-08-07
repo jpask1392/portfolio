@@ -67,7 +67,7 @@ module.exports = {
   theme: {
     screens: {
       'sm': '640px',
-      'md': '768px',
+      'md': '1060px',
       'lg': '1280px',
       'xl': '1560px',
       '2xl': '1772px',
@@ -102,7 +102,7 @@ module.exports = {
       '5xl': '1.6875rem', // 27px - YES
       '6xl': '1.875rem', // 30px
       '7xl': '2rem', // 32px
-      '8xl': '2.375rem', // 38px
+      '8xl': '2.5rem', // 40px
       '9xl': '2.75rem', // 44px - YES
       '10xl': '3.125rem', // 50px - YES
       '11xl': '4rem', // 64px - YES

@@ -28,14 +28,14 @@ const Footer: React.FC<Props> = ({
         </div>
 
         <div className="flex-1 text-center">
-          <ul className="inline-flex space-x-5">
+          <ul className="inline-flex space-x-7">
             {
               socials?.map((social, i) => (
                 <li key={i} className={`icon-${social.name}`}>
                   <StoryBlokLink sbLink={social.link}>
                     <DynamicIcon 
                       type={social['icon']} 
-                      className="text-secondary mx-auto h-3 w-3 lg:h-6 lg:w-6"
+                      className="text-secondary mx-auto h-3 w-3 lg:h-7 lg:w-7"
                     />
                   </StoryBlokLink>
                 </li>

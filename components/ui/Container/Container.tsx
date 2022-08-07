@@ -18,8 +18,9 @@ interface ContainerProps {
   clearPadding?: string[]
   sbEditable?: SbEditableContent
 }
-139
+
 const Container: React.FC<ContainerProps> = ({
+  sectionId,
   children,
   className,
   el = 'section',
@@ -48,10 +49,11 @@ const Container: React.FC<ContainerProps> = ({
   });
 
   let Component: React.ComponentType<React.HTMLAttributes<HTMLDivElement>> =
-    el as any
+    el as any;
 
   return (
     <Component 
+      id={sectionId || undefined}
       className={rootClassName}
       {...sbEditable}
     >
@@ -67,7 +69,7 @@ const Container: React.FC<ContainerProps> = ({
       }
       <div className={`w-full max-w-screen-${maxWidth} mx-auto relative z-10`}>
         <div className={cn({
-          'container overflow-hidden md:overflow-visible' : contained,
+          'container' : contained,
         })}>
           {children}
         </div>

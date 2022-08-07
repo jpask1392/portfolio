@@ -77,28 +77,25 @@ const Layout: React.FC<Props> = ({
     <>
       <Head seo={false} />
 
-      <div className={cn(`slug-${story?.slug || 'default'} relative`)}>
-        
-        {
-          navProps.announcementDisplay ? (
-            <Announcement 
-              announcementLink={navProps.announcementLink}
-              announcementText={navProps.announcementText}
-              announcementTitle={navProps.announcementTitle}
-            />
-          ) : null
-        }
+      {
+        navProps.announcementDisplay ? (
+          <Announcement 
+            announcementLink={navProps.announcementLink}
+            announcementText={navProps.announcementText}
+            announcementTitle={navProps.announcementTitle}
+          />
+        ) : null
+      }
 
-        <Navigation {...navProps} />
+      <Navigation {...navProps} />
 
-        <main className={cn({
-          "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
-        })}>
-          {children}
-        </main>
+      <main className={cn({
+        "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
+      })}>
+        {children}
+      </main>
 
-        <Footer {...footerProps} />
-      </div>
+      <Footer {...footerProps} />
 
       <Toasts />
     </>

@@ -6,7 +6,7 @@ import cn from 'classnames';
 
 interface Props {
   className?: string
-  children?: ReactNode[] | Component[] | any[] | ReactNode | Component
+  children?: ReactNode[] | Component[] | any[] | ReactNode | Component | any
   vAlignContent?: 'top' | 'center' | 'bottom'
   hAlignContent?: 'left' | 'center' | 'right'
   extendToEdge?: boolean

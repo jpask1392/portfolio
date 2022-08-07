@@ -5,7 +5,7 @@ import { ReactNode, Component } from 'react';
 interface Props {
   className?: string
   sbLink: storyBlokLink | false
-  children: ReactNode[] | Component[] | any[] | ReactNode | Component
+  children: ReactNode[] | Component[] | any[] | ReactNode | Component | any
 }
 
 const StoryBlokLink: React.FC<Props> = ({
@@ -14,8 +14,6 @@ const StoryBlokLink: React.FC<Props> = ({
   children,
 }) => {
   if (!sbLink) return <>{children}</>;
-
-  console.log(sbLink)
 
   const {
     url = '',
@@ -32,7 +30,7 @@ const StoryBlokLink: React.FC<Props> = ({
 
       {
         (!url.match(/^(https?:)?\/\//) && linktype !== 'email') ? (
-          <NextLink href={cached_url ? '/' + cached_url + (anchor ? `#${anchor}` : '') : '/'}>
+          <NextLink href={cached_url ? cached_url + (anchor ? `#${anchor != "#" ? anchor : ""}` : '') : '/'}>
             <a className={className} aria-label={`Link to ${cached_url}`}>
               {children}
             </a>

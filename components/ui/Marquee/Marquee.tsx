@@ -11,8 +11,14 @@ const Marquee: React.FC<Props> = ({
   text,
   repeat = '2',
 }) => {
+  /**
+   * TODO: Marquee causes a small bump on gsap start point detection
+   *  
+   * I think its rendering blank initially and then loading the content.
+   * The height on the UI element is overcomming that issue for now.
+   * */ 
   return (
-    <div className="ui-marquee">
+    <div className="ui-marquee h-[35.75px]">
       <Ticker speed={10}>
         {({ index }) => (
           <div className="uppercase">

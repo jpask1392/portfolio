@@ -43,8 +43,6 @@ export async function getStaticProps({
     // get global layout information for header, footer etc
     let global = await Storyblok.get(`cdn/stories/templates/global-template`, sbParams);
 
-    console.log(global)
-
     return {
       props: {
         preview,

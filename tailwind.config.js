@@ -68,13 +68,13 @@ module.exports = {
     screens: {
       'sm': '640px',
       'md': '768px',
-      'lg': '1024px',
+      'lg': '1280px',
       'xl': '1560px',
       '2xl': '1772px',
     },
     container: {
       center: true,
-      padding: '1.25rem',
+      padding: '2rem',
     },
     fontFamily: {
       header: "'DM Sans', sans-serif",

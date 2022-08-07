@@ -1,7 +1,9 @@
+import Container from '@/components/ui/Container';
 import Header from '@/components/ui/Header';
 import ProjectTile from '@/components/modules/ProjectTile';
 import type { Project } from '@/types/project';
-
+import { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
 
 interface Props {
   projects: Project[]
@@ -10,25 +12,79 @@ interface Props {
 const FeaturedProjects: React.FC<Props> = ({
   projects
 }) => {
-  // console.log(projects)
+  const trackRef = useRef(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const currentPos = useRef(0);
+
+  const handleMouseDown = (e: any) => {
+    isDragging.current = true;
+    startX.current = e.pageX;
+  }
+
+  const handleMouseUp = (e: any) => {
+    isDragging.current = false;
+    currentPos.current = currentPos.current + e.clientX - startX.current;
+  }
+
+  const handleMouseMove = (e: any) => {
+    if (!isDragging.current) return;
+
+    const transformPos = currentPos.current + e.clientX - startX.current;
+
+    // map transformPos
+    const transformer = gsap.utils.pipe(
+      // clamp between 0 and 100
+      gsap.utils.clamp(-1000, 0), 
+
+      // then map to the corresponding position on the width of the screen
+      // gsap.utils.mapRange(0, 100, 0, window.innerWidth),
+
+      // then snap to the closest increment of 20
+      gsap.utils.snap(1)
+    );
+
+    console.log(transformer(transformPos));
+
+    gsap.to(trackRef.current, {
+      x: `${(transformer(transformPos) * 3)}`
+    })
+  }
+
+  
   return (
-    <div className="flex relative">
-      <div className="border border-black rounded-full relative w-16 flex-shrink-0 mr-5">
+    <div className="overflow-hidden">
+      {/* <div className="border border-black rounded-full relative w-16 flex-shrink-0 mr-5">
         <Header className="!absolute transform rotate-90 origin-top-left whitespace-nowrap">
           Featured Projects
         </Header>
-      </div>
-      <ul className="flex space-x-5 flex-1">
-        {
-          projects.map((project) => {
-            return (
-              <li className="flex-shrink-0 w-[328px]">
-                <ProjectTile project={project} />
-              </li>
-            )
-          })
-        }
-      </ul>
+      </div> */}
+
+      <Container el="div">
+        <div style={{ width: "calc(100% + (( 100vw - 100% ) / 2))" }}>
+          <ul
+            className="flex space-x-5 flex-1 select-none"  
+            ref={trackRef} 
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+          >
+            {
+              projects.map((project, i) => {
+                return (
+                  <li key={i} className="flex-shrink-0 w-3/12">
+                    <ProjectTile project={project} />
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
+
+        <div className="w-full h-0.5 bg-gray-200 mt-14 relative rounded-full">
+          <div className="absolute inset-y-0 bg-black w-1/3 rounded-full"/>
+        </div>
+      </Container>
     </div>
   )
 }

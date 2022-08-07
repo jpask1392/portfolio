@@ -9,7 +9,7 @@ interface Props {
 }
 
 const TextReveal: React.FC<Props> = ({
-  text
+  text,
 }) => {
   const tl = useRef<any>(null);
   const containerRef = useRef<any>(null)
@@ -36,11 +36,11 @@ const TextReveal: React.FC<Props> = ({
       { render(text, {
         ...renderOptions,
         nodeResolvers: {
-          [NODE_PARAGRAPH]: (children) => {
+          [NODE_PARAGRAPH]: (children: any) => {
             return (
               <p className="h2" ref={containerRef}>
-                { children[0].split(" ").map((word, i) => 
-                  <span className="opacity-20">{i !== 0 ? ' ': ''}{word}</span>
+                { children[0].split(" ").map((word: string, i: number) => 
+                  <span key={i} className="opacity-20">{i !== 0 ? ' ': ''}{word}</span>
                 ) }
               </p>
             )

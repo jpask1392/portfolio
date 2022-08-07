@@ -26,6 +26,8 @@ import HeroReel from "@/components/modules/HeroReel";
 import TextReveal from "@/components/modules/TextReveal";
 import Form from "@/components/modules/Form";
 import FeaturedProjects from "@/components/modules/FeaturedProjects";
+import Services from "@/components/modules/Services";
+import AccordionTimed from "@/components/modules/AccordionTimed";
 
 import Icon from '@/components/ui/Icon';
 
@@ -49,6 +51,8 @@ const DynamicComponent: React.FC<Props> = ({ blok, index = 0 }) => {
     heroReel: HeroReel,
     textReveal: TextReveal,
     featuredProjects: FeaturedProjects,
+    accordionTimed: AccordionTimed,
+    services: Services,
     container: Container,
     column: Column,
     header: Header,

@@ -16,6 +16,7 @@ interface Props {
   animationDelay?: number
   color?: string
   padding?: any
+  children?: any
 }
 
 const RichText: React.FC<Props> = ({ 
@@ -30,27 +31,27 @@ const RichText: React.FC<Props> = ({
 }) => {
   const componentRef = useRef<null | HTMLDivElement>(null);
   useIsomorphicLayoutEffect(() => {
-    if (componentRef.current != null) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: componentRef.current,
-          start: 'top bottom-=100',
-          markers: false,
-          scroller: "[data-scroll-container]",
-        },
-      });
+    // if (componentRef.current != null) {
+    //   const tl = gsap.timeline({
+    //     scrollTrigger: {
+    //       trigger: componentRef.current,
+    //       start: 'top bottom-=100',
+    //       markers: false,
+    //       scroller: "[data-scroll-container]",
+    //     },
+    //   });
 
-      tl.fromTo(componentRef.current, { 
-        opacity: 0,
-      }, {
-        opacity: 1,
-        delay: animationDelay,
-        stagger: 0.2,
-        duration: 0.75,
-        ease: CustomEase.create("custom", "0.5,0,0,1"),
+    //   tl.fromTo(componentRef.current, { 
+    //     opacity: 0,
+    //   }, {
+    //     opacity: 1,
+    //     delay: animationDelay,
+    //     stagger: 0.2,
+    //     duration: 0.75,
+    //     ease: CustomEase.create("custom", "0.5,0,0,1"),
         
-      });
-    }
+    //   });
+    // }
   }, [componentRef])
 
   return (

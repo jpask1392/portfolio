@@ -1,10 +1,9 @@
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import CustomImage from "@/components/ui/Image";
 import { SbEditableContent } from "@/types/storyBlok";
-import NextImage from 'next/image';
 import cn from "classnames";
 import type { storyBlokImage } from '@/types/storyBlok';
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from 'gsap';
 
 interface Props {
@@ -20,6 +19,7 @@ interface Props {
   animate?: boolean
   alignOverlayContent?: any
   sbEditable?: SbEditableContent
+  children?: any
 }
 
 const ImageModule: React.FC<Props> = ({
@@ -42,13 +42,12 @@ const ImageModule: React.FC<Props> = ({
   const imageContainerRef = useRef<null | HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (scroll && animate) {
+    if (animate) {
       tl.current = gsap.timeline({
         scrollTrigger: {
           trigger: imageContainerRef.current,
           scrub: 1,
           markers: false,
-          scroller: "[data-scroll-container]",
         }
       });
 
@@ -63,7 +62,7 @@ const ImageModule: React.FC<Props> = ({
         tl.current.kill();
       }
     }
-  }, [scroll]);
+  }, []);
 
   /**
    * TODO: replace with a standard image placeholder when an image doesnt exist

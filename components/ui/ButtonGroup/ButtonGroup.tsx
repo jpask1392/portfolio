@@ -10,6 +10,7 @@ interface Props {
   className?: string
   align?: 'start' | 'center' | 'end' | undefined
   padTop?: 'lg' | 'md' | 'sm' | undefined
+  children: any
 }
 
 const ButtonGroup: React.FC<Props> = ({ 

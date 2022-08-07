@@ -34,8 +34,8 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
   const handleOnMouseOver = () => setHoverLink(true);
   const handleOnMouseLeave = () => setHoverLink(false);
 
-  const navLinkClasses = cn("", {
-    "text-secondary active" : router.asPath === cached_url,
+  const navLinkClasses = cn("text-white", {
+    "active" : router.asPath === cached_url,
     "font-header uppercase text-sm" : topLevel,
     "flex items-center" : subItems.length,
   })

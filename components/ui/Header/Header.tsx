@@ -62,30 +62,30 @@ const Header: React.FC<Props> = ({
   const componentRef = useRef<null | HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    if (!disableAnimation) {
-      tl.current = gsap.timeline({
-        scrollTrigger: {
-          trigger: componentRef.current,
-          start: 'top bottom-=100',
-          markers: false,
-        },
-      });
+    // if (!disableAnimation) {
+    //   tl.current = gsap.timeline({
+    //     scrollTrigger: {
+    //       trigger: componentRef.current,
+    //       start: 'top bottom-=100',
+    //       markers: false,
+    //     },
+    //   });
 
-      let targets = gsap.utils.toArray(".animate", componentRef.current);
-      if (targets.length) {
-        tl.current.fromTo(targets, { 
-          opacity: 0,
-          yPercent: 100,
-        }, {
-          opacity: 1,
-          yPercent: 0,
-          stagger: 0.2,
-          duration: 0.75,
-          ease: CustomEase.create("custom", "0.5,0,0,1"),
+    //   let targets = gsap.utils.toArray(".animate", componentRef.current);
+    //   if (targets.length) {
+    //     tl.current.fromTo(targets, { 
+    //       opacity: 0,
+    //       yPercent: 100,
+    //     }, {
+    //       opacity: 1,
+    //       yPercent: 0,
+    //       stagger: 0.2,
+    //       duration: 0.75,
+    //       ease: CustomEase.create("custom", "0.5,0,0,1"),
           
-        });
-      }
-    }
+    //     });
+    //   }
+    // }
   }, [])
 
   const nodeResolver = (child: any) => {

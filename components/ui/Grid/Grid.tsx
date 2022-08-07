@@ -3,7 +3,7 @@ import { ReactNode, Component } from 'react';
 
 interface GridProps {
   className?: string
-  children?: ReactNode[] | Component[] | any[]
+  children?: ReactNode[] | Component[] | any[] | any
   layout?: 'A' | 'B' | 'C' | 'D' | 'E'
   padTop?: 'lg' | 'md' | 'sm' | undefined
 }

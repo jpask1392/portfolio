@@ -28,7 +28,6 @@
 
 .h4 {
   @apply
-    uppercase
     font-header
     text-base
     md:text-4xl

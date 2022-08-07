@@ -4,39 +4,19 @@
     "value": "logo"
   },
   {
-    "name": "Facebook",
-    "value": "facebook"
+    "name": "Github",
+    "value": "github"
   },
   {
     "name": "Instagram",
     "value": "instagram"
   },
   {
-    "name": "Youtube",
-    "value": "youtube"
+    "name": "Linkedin",
+    "value": "linkedin"
   },
   {
     "name": "Twitter",
     "value": "twitter"
-  },
-  {
-    "name": "Tiktok",
-    "value": "tiktok"
-  },
-  {
-    "name": "Dollar Sign",
-    "value": "dollar-sign"
-  },
-  {
-    "name": "Cake",
-    "value": "cake"
-  },
-  {
-    "name": "Shopping Bag",
-    "value": "shopping-bag"
-  },
-  {
-    "name": "Identity",
-    "value": "identity"
   }
 ]

@@ -3,6 +3,7 @@ import { FC } from 'react'
 
 interface Props {
   className?: string
+  children?: any
 }
 
 const Display: FC<Props> = (props) => <span className="text-display">{props.children}</span>
@@ -16,6 +17,7 @@ const H6: FC<Props> = (props) => <h6 className={props.className}>{props.children
 interface ParagraphProps {
   size?: 'secondary' | 'tertiary' | 'caption' | undefined
   className?: string
+  children?: any
 }
 
 const Paragraph: FC<ParagraphProps> = ({

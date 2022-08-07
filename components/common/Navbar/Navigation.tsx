@@ -95,7 +95,7 @@ const Navigation: React.FC<NavProps> = ({
 
         {/* Flexs size */}
         <div className="h-full flex-1 hidden md:block">
-          <ul className="h-full flex text-secondary justify-end">
+          <ul className="h-full flex justify-end">
           {
             navigationList.map((link: any, i: number) => {
               return (
@@ -127,7 +127,7 @@ const Navigation: React.FC<NavProps> = ({
           ctaText ? (
             <Button
               className="ml-20"
-              link={{ cached_url: '/' + ctaLink?.cached_url }}
+              link={{ cached_url: ctaLink?.cached_url }}
               text={ctaText}
               icon={<DynamicIcon type="arrowNewPage" />}
             />

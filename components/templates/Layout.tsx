@@ -1,5 +1,3 @@
-import Script from "next/script";
-import HeadScripts from "../common/HeadScripts";
 import { useGlobalContext } from "../context/globalContext";
 import Head from "@/components/common/Head";
 import Navigation from "@/components/common/Navbar";
@@ -13,6 +11,7 @@ import { ReactNode, Component, useEffect } from 'react';
 import type { Story, Stories } from '@/types/storyBlok';
 import Toasts from "@/components/ui/Toasts";
 import useToast from "@/components/hooks/useToast";
+import Mouse from "@/components/ui/Mouse";
 
 // import and register gsap with plugins
 import { gsap } from 'gsap';
@@ -98,6 +97,7 @@ const Layout: React.FC<Props> = ({
       <Footer {...footerProps} />
 
       <Toasts />
+      <Mouse />
     </>
   )
 };

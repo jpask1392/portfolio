@@ -121,6 +121,7 @@ module.exports = {
         grayLight: '#E9E9E9',
         fadedText: '#9F9F9F',
         background: '#F8F8F8',
+        yellow: '#e0e0e0',
       },
       spacing: {
         'screen-1/2': '50vw',

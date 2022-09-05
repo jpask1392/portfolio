@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
 import { useRef } from 'react';
+import { useMouseContext } from '@/components/context/mouseContext';
 
 interface Props {
 
@@ -12,6 +13,7 @@ const HeroReel: React.FC<Props> = ({
   const tl = useRef<any>(null);
   const containerRef = useRef<any>(null);
   const videoRef = useRef(null);
+  const { setMouseState } = useMouseContext();
 
   useIsomorphicLayoutEffect(() => {
     tl.current = gsap.timeline({});
@@ -36,6 +38,8 @@ const HeroReel: React.FC<Props> = ({
       <div 
         ref={containerRef}
         className="bg-gray-300 absolute inset-0 overflow-hidden"
+        onMouseOver={() => setMouseState({ style: "action", innerText: "Play" })}
+        onMouseLeave={() => setMouseState({ style: "inactive", innerText: "" })}
       >
         <video 
           ref={videoRef}

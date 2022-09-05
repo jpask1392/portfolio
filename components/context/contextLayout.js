@@ -1,5 +1,6 @@
 import { UIContextProvider } from './uiContext';
 import { GlobalContextProvider } from './globalContext';
+import { MouseContextProvider } from './mouseContext';
 
 export const DefaultLayout = ({ children, pageProps }) => {
   return (
@@ -7,7 +8,9 @@ export const DefaultLayout = ({ children, pageProps }) => {
       pageData={pageProps}
     >
       <UIContextProvider>
-        {children}
+        <MouseContextProvider>
+          {children}
+        </MouseContextProvider>
       </UIContextProvider>
     </GlobalContextProvider>
   );

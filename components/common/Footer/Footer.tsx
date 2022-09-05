@@ -21,7 +21,7 @@ const Footer: React.FC<Props> = ({
   socials,
 }) => {
   return (
-    <footer className={cn(className, "footer py-16")}>
+    <footer className={cn(className, "footer py-6 border-y border-black")}>
       <div className="container flex items-center">
         <div className="">
           <DynamicIcon type="logo" />
@@ -48,9 +48,13 @@ const Footer: React.FC<Props> = ({
           <Button 
             text="Back to top"
             icon={<DynamicIcon type="arrowNewPage" />}
-            link={{
-              cached_url: "/",
-              anchor: "#"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+              })
             }}
           />
         </div>

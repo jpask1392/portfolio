@@ -60,14 +60,12 @@ const Navigation: React.FC<NavProps> = ({
       >
 
         {/* Logo */}
-        <div className="">
-          <div className="text-secondary">
-            <Link href="/">
-              <a aria-label="Company logo">
-                <Logo className="fill-current h-10" />
-              </a>
-            </Link>
-          </div>
+        <div className="text-white">
+          <Link href="/">
+            <a aria-label="Company logo">
+              <Logo className="fill-current h-10" />
+            </a>
+          </Link>
         </div>
 
         <div className="md:hidden absolute top-full left-0 pointer-events-none w-full">

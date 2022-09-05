@@ -17,6 +17,7 @@ interface ContainerProps {
   clearMargin?: string[]
   clearPadding?: string[]
   sbEditable?: SbEditableContent
+  sectionId?: string
 }
 
 const Container: React.FC<ContainerProps> = ({

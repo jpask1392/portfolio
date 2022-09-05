@@ -1,3 +1,6 @@
+import { useMouseContext } from '@/components/context/mouseContext';
+import Marquee from '@/components/ui/Marquee';
+import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
 import Container from '@/components/ui/Container';
 import Header from '@/components/ui/Header';
 import ProjectTile from '@/components/modules/ProjectTile';
@@ -12,10 +15,32 @@ interface Props {
 const FeaturedProjects: React.FC<Props> = ({
   projects
 }) => {
-  const trackRef = useRef(null);
+  const { setMouseState } = useMouseContext();
+
   const isDragging = useRef(false);
   const startX = useRef(0);
-  const currentPos = useRef(0);
+  const minMax = useRef({
+    current: 0,
+    min: 0,
+    max: 0,
+    speedFactor: 1.5,
+  }); // transforms
+
+  // elements
+  const containerRef = useRef(null);
+  const trackRef = useRef(null);
+  const navBarRef = useRef(null);
+
+  // calc max on page load
+  // will need to trigger this on a resize event
+  useIsomorphicLayoutEffect(() => {
+    // -( full width of carousel - container width + side header width with margin )
+    const maxTransform = (trackRef.current.scrollWidth - containerRef.current.clientWidth + 86.5);
+    minMax.current = {
+      ...minMax.current,
+      max: maxTransform,
+    }
+  }, [])
 
   const handleMouseDown = (e: any) => {
     isDragging.current = true;
@@ -24,30 +49,54 @@ const FeaturedProjects: React.FC<Props> = ({
 
   const handleMouseUp = (e: any) => {
     isDragging.current = false;
-    currentPos.current = currentPos.current + e.clientX - startX.current;
+    const totalDragDistance = minMax.current.current - ((e.clientX - startX.current) * minMax.current.speedFactor);
+
+    if (totalDragDistance >= minMax.current.max) {
+      minMax.current = {
+        ...minMax.current,
+        current: minMax.current.max
+      }
+    } else if (totalDragDistance <= minMax.current.min) {
+      minMax.current = {
+        ...minMax.current,
+        current: minMax.current.min
+      }
+    } else {
+      minMax.current = {
+        ...minMax.current,
+        current: Math.abs(totalDragDistance)
+      }
+    }
   }
 
   const handleMouseMove = (e: any) => {
     if (!isDragging.current) return;
 
-    const transformPos = currentPos.current + e.clientX - startX.current;
-
-    // map transformPos
+    // move carousel track
+    const transformPos = minMax.current.current - ((e.clientX - startX.current) * minMax.current.speedFactor);
+    // prevent from going past minMax points
     const transformer = gsap.utils.pipe(
-      // clamp between 0 and 100
-      gsap.utils.clamp(-1000, 0), 
-
-      // then map to the corresponding position on the width of the screen
-      // gsap.utils.mapRange(0, 100, 0, window.innerWidth),
-
-      // then snap to the closest increment of 20
+      gsap.utils.clamp(-(minMax.current.max), minMax.current.min), 
       gsap.utils.snap(1)
     );
 
-    console.log(transformer(transformPos));
-
     gsap.to(trackRef.current, {
-      x: `${(transformer(transformPos) * 3)}`
+      x: `${transformer(-(transformPos))}`,
+      duration: 0.3,
+    })
+
+    // move navigation bar
+    const barTransformer = gsap.utils.pipe(
+      gsap.utils.clamp(0, minMax.current.max), 
+      gsap.utils.snap(1)
+    );
+
+    // map the min and max points to a new min max
+    // transform max = container width - inner bar width
+
+    gsap.to(navBarRef.current, {
+      x: `${barTransformer(transformPos)}`,
+      duration: 0.3,
     })
   }
 
@@ -56,19 +105,24 @@ const FeaturedProjects: React.FC<Props> = ({
     <div className="overflow-hidden">
 
       <Container el="div" clearMargin={['top']}>
-        <div className="flex">
+        <div className="relative" ref={containerRef}>
           <div 
-            className="border border-black rounded-full relative mr-5 z-10 bg-white mb-[163px]"
+            className="border border-black rounded-full mr-5 z-10 bg-white shadow-md absolute w-[697px] transform -translate-y-full rotate-90 origin-bottom-left"
           >
             <Header 
-              className="uppercase [writing-mode:vertical-lr] rotate-180 py-10 px-4"
+              className="uppercase py-4 px-4 flex-shrink-0"
               tag="h2"
               size="h4"
             >
               Featured Projects
             </Header>
           </div>
-          <div style={{ width: "calc(100% + (( 100vw - 100% ) / 2))" }}>
+          <div 
+            className="flex-shrink-0 pl-24"
+            style={{ width: "calc(100% + (( 100vw - 100% ) / 2))" }}
+            onMouseEnter={() => setMouseState({ style: "drag", innerText: "Drag" })}
+            onMouseLeave={() => setMouseState({ style: "inactive", innerText: "" })}
+          >
             <ul
               className="flex space-x-5 flex-1 select-none"  
               ref={trackRef} 
@@ -89,8 +143,8 @@ const FeaturedProjects: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="w-full h-0.5 bg-gray-200 mt-14 relative rounded-full">
-          <div className="absolute inset-y-0 bg-black w-1/3 rounded-full"/>
+        <div className="w-full h-0.5 bg-gray-200 mt-14 relative rounded-full overflow-hidden">
+          <div ref={navBarRef} className="absolute inset-y-0 bg-black w-1/3 rounded-full"/>
         </div>
       </Container>
     </div>

@@ -19,7 +19,7 @@ const Marquee: React.FC<Props> = ({
    * The height on the UI element is overcomming that issue for now.
    * */ 
   return (
-    <div className="ui-marquee bg-yellow py-3 border-t border-b border-black">
+    <div className="ui-marquee bglow py-3 border-t border-b border-black">
       <div className="h-[35.75px]">
         <Ticker speed={10}>
           {({ index }) => (

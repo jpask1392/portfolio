@@ -79,7 +79,8 @@ const AccordionTimed: React.FC<Props> = ({
                     })}
                   >  
                     <Header size="h4">
-                      <span className="mr-3">Q{index + 1}.</span> {item.header}
+                      <span className="mr-3 w-10 inline-block">Q{index + 1}.</span> 
+                      <span className="text-2xl">{item.header}</span>
                     </Header>
 
                     <span className="w-full h-0.5 bg-grayLight block absolute top-full rounded-full">

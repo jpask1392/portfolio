@@ -107,7 +107,7 @@ const FeaturedProjects: React.FC<Props> = ({
       <Container el="div" clearMargin={['top']}>
         <div className="relative" ref={containerRef}>
           <div 
-            className="border border-black rounded-full mr-5 z-10 bg-white shadow-md absolute w-[697px] transform -translate-y-full rotate-90 origin-bottom-left"
+            className="border border-black rounded-full mr-5 z-10 bg-white absolute w-[697px] transform -translate-y-full rotate-90 origin-bottom-left"
           >
             <Header 
               className="uppercase py-4 px-4 flex-shrink-0"

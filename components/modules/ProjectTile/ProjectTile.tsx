@@ -40,8 +40,9 @@ const ProjectTile: React.FC<Props> = ({
           image={tileImage}
           objectFit="cover"
           layout="fill"
+          className="pointer-events-none"
         />
-        <div className="absolute inset-0 bg-[black] bg-opacity-40" />
+        {/* <div className="absolute inset-0 bg-[black] bg-opacity-40" /> */}
       </header>
       <footer className="pt-6 px-5">
         <Header tag="h3" size="h3">{project.name}</Header>

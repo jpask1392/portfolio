@@ -6,13 +6,15 @@ import { useState } from 'react';
 import { gsap } from 'gsap';
 import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
 import { useRef } from 'react';
+import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
 
 interface Props {
 
 }
 
 const Services: React.FC<Props> = ({
-
+  title,
+  serviceList: services,
 }) => {
   const [ active, setActive ] = useState(0);
 
@@ -21,24 +23,7 @@ const Services: React.FC<Props> = ({
   const backgroundRef = useRef<any>(null);
   const imagesRef = useRef([]);
   const serviceContentRefs = useRef([]);
-
-  const services = [
-    {
-      name: "PERFORMANCE",
-      content: "Looking to improve the performance of your site? Not sure? Enter your website in the link below to see how you stack up against the competition.",
-      color: 'red',
-    },
-    {
-      name: "Development",
-      content: "Need some help bringing your next big idea to life? Need to integrate a third party API to your existing API to your existingAPI to your existing.",
-      color: 'green',
-    },
-    {
-      name: "WEB3",
-      content: "Want to interact with the ethereum blockchain through your frontend via wallet connections with Web3?",
-      color: 'orange',
-    }
-  ]
+  const trackRef = useRef(null);
 
   useIsomorphicLayoutEffect(() => {
     // animate the background
@@ -72,12 +57,41 @@ const Services: React.FC<Props> = ({
       })
     })
 
-    serviceContentRefs.current.forEach((serviceContent, index) => {
-      if (index > 0) {
-        
-      }
+    
+    if (active !== 0) {
+      gsap.to(serviceContentRefs.current[active - 1], {
+        y: "-" + serviceContentRefs.current[active].offsetHeight,
+      })
+    }
+
+    gsap.to(serviceContentRefs.current[active + 1], {
+      y: serviceContentRefs.current[active].offsetHeight
     })
   }, [])
+
+  useIsomorphicLayoutEffect(() => {
+    if (active === 0) {
+      gsap.to(serviceContentRefs.current[active], {
+        y: "-" + serviceContentRefs.current[active].offsetHeight,
+        opacity: 0,
+      })
+    } else {
+      gsap.to(serviceContentRefs.current[active - 1], {
+        y: "-" + serviceContentRefs.current[active].offsetHeight,
+        opacity: 0,
+      })
+    }
+
+    gsap.to(serviceContentRefs.current[active], {
+      y: 0,
+      opacity: 1,
+    })
+
+    gsap.to(serviceContentRefs.current[active + 1], {
+      y: serviceContentRefs.current[active].offsetHeight,
+      opacity: 0,
+    });
+  }, [active])
 
   return (
     <div className="relative" ref={containerRef}>
@@ -92,18 +106,19 @@ const Services: React.FC<Props> = ({
               </Header>
 
               <div className="mt-auto max-w-[365px]">
-                <div className="track relative">
+                <div className="track relative" ref={trackRef}>
                   {
-                    services.map((service, i) => {
+                    services?.map((service, i) => {
                       return (
                         <div 
                           ref={el => serviceContentRefs.current[i] = el}
-                          className={cn("pt-8 transition-opacity absolute bottom-0", {
-                            "opacity-0": active !== i
+                          className={cn("pt-8 absolute bottom-0", {
+                            "opacity-0": i !== 0,
+                            // "relative": active  === i,
                           })}
                         >
                           <Header tag='h3' size='h3'>{service.name}</Header>
-                          <p className="mt-6">{service.content}</p>
+                          <p className="mt-6">{render(service.bodyText)}</p>
                         </div>
                       )
                     })
@@ -115,7 +130,7 @@ const Services: React.FC<Props> = ({
 
           <div className="w-1/2 section px-10">
             {
-              services.map((service, i) => {
+              services?.map((service, i) => {
                 return (
                   <div
                     key={i}

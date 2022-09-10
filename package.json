@@ -22,7 +22,7 @@
     "@radix-ui/react-tabs": "^0.1.5",
     "@sendgrid/mail": "^7.7.0",
     "@storyblok/storyblok-editable": "^1.0.0",
-    "axios": "^0.21.1",
+    "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "formidable": "^2.0.1",
     "graphql": "^16.3.0",

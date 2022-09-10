@@ -20,14 +20,14 @@ const Marquee: React.FC<Props> = ({
    * */ 
   return (
     <div className="ui-marquee bglow py-3 border-t border-b border-black">
-      <div className="h-[35.75px]">
+      <div className="h-[44px]">
         <Ticker speed={10}>
           {({ index }) => (
             <div className="uppercase">
               { render(text, {
                 ...renderOptions,
                 nodeResolvers: {
-                  [NODE_PARAGRAPH]: (children) => <p className="!font-normal text-2xl whitespace-nowrap]">{children}</p>
+                  [NODE_PARAGRAPH]: (children) => <p className="!font-bold text-5xl whitespace-nowrap">{children}</p>
                 }
               }) }
             </div>

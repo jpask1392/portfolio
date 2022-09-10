@@ -133,7 +133,7 @@ const Header: React.FC<Props> = ({
             ) : null
           }
           {
-            mobile_text ? (
+            render(mobile_text) ? (
               <span className="lg:hidden">
                 { render(mobile_text, {
                   ...renderOptions,
@@ -144,7 +144,7 @@ const Header: React.FC<Props> = ({
           }
             
           <span className={cn({
-            "hidden lg:block" : mobile_text
+            "hidden lg:block" : render(mobile_text)
           })}>
             { 
               text 

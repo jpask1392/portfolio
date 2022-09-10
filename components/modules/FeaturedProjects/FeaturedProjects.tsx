@@ -133,7 +133,7 @@ const FeaturedProjects: React.FC<Props> = ({
               {
                 projects.map((project, i) => {
                   return (
-                    <li key={i} className="flex-shrink-0 w-3/12">
+                    <li key={i} className="flex-shrink-0 w-4/12 lg:w-3/12">
                       <ProjectTile project={project} />
                     </li>
                   )

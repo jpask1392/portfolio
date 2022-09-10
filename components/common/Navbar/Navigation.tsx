@@ -8,8 +8,10 @@ import NavigationLink from './NavigationLink';
 import MobileMenu from './MobileMenu';
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
-import { useEffect, useState } from "react";
-import { useUIContext } from "@/components/context/uiContext";
+import { useEffect, useState, useRef } from "react";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
 
 import { SbEditableContent } from "@/types/storyBlok";
 import type { storyBlokLink, storyBlokImage } from '@/types/storyBlok';
@@ -37,8 +39,20 @@ const Navigation: React.FC<NavProps> = ({
   sbEditable,
 }) => {
   const [ active, setActive ] = useState(false);
-  const { UI, setUI } = useUIContext();
   const router = useRouter();
+  const [ scrolled, setScrolled ] = useState(false);
+
+  const navRef = useRef<any>(null)
+
+  useIsomorphicLayoutEffect(() => {
+    ScrollTrigger.create({
+      trigger: navRef.current,
+      markers: false,
+      start: 'top+=100 top',
+      onEnter: () => setScrolled(true),
+      onEnterBack: () => setScrolled(false)
+    })
+  }, [])
 
   useEffect(() => {
     setActive(false);
@@ -46,27 +60,25 @@ const Navigation: React.FC<NavProps> = ({
   
   return (
     <header
+      ref={navRef}
       id="primary-header"
-      className={cn(className, [
-        "z-20",
-        "absolute",
-        "top-0",
-        "w-full"
-      ])}
+      className={cn("z-20 fixed top-0 w-full transition-all duration-500 border-transparent", {
+        "pt-0 text-black border-b !border-black bg-white" : scrolled,
+        "pt-10 text-white " : !scrolled
+      })}
     >
       <nav 
-        className="h-full px-5 py-5 mt-10 container  mx-auto flex justify-end relative items-center" 
+        className="h-full px-12 py-5 mx-auto flex justify-end relative items-center max-w-screen-2xl" 
         role="navigation"
       >
 
         {/* Logo */}
-        <div className="text-white">
-          <Link href="/">
-            <a aria-label="Company logo">
-              <Logo className="fill-current h-10" />
-            </a>
-          </Link>
-        </div>
+        <Link href="/">
+          <a aria-label="Company logo">
+            <Logo className="fill-current h-10" />
+          </a>
+        </Link>
+        
 
         <div className="md:hidden absolute top-full left-0 pointer-events-none w-full">
           <MobileMenu 
@@ -110,7 +122,7 @@ const Navigation: React.FC<NavProps> = ({
         </div>
 
         {/*  Action items  */}
-        <div className="flex items-center text-secondary">
+        <div className="flex items-center">
           {
             actionItems?.includes('search') ? (
               <div className="px-2 md:px-4">
@@ -124,7 +136,7 @@ const Navigation: React.FC<NavProps> = ({
         {
           ctaText ? (
             <Button
-              className="ml-20"
+              className="ml-20 text-black"
               link={{ cached_url: ctaLink?.cached_url }}
               text={ctaText}
               icon={<DynamicIcon type="arrowNewPage" />}

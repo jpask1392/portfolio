@@ -31,22 +31,26 @@ const TextReveal: React.FC<Props> = ({
   }, [])
 
   return (
-    <div>
-      <div className="max-w-[850px]">
-      { render(text, {
-        ...renderOptions,
-        nodeResolvers: {
-          [NODE_PARAGRAPH]: (children: any) => {
-            return (
-              <p className="h2" ref={containerRef}>
-                { children[0].split(" ").map((word: string, i: number) => 
-                  <span key={i} className="opacity-20">{i !== 0 ? ' ': ''}{word}</span>
-                ) }
-              </p>
-            )
+    <div className="w-full relative">
+      <div className="w-3/4 absolute right-0 max-w-[1000px] top-1/2 -translate-y-1/2">
+        <div className="aspect-video bg-gray-300 rounded-md"/>
+      </div>
+      <div className="max-w-[850px] relative z-10">
+        
+        { render(text, {
+          ...renderOptions,
+          nodeResolvers: {
+            [NODE_PARAGRAPH]: (children: any) => {
+              return (
+                <p className="h2" ref={containerRef}>
+                  { children[0].split(" ").map((word: string, i: number) => 
+                    <span key={i} className="opacity-20">{i !== 0 ? ' ': ''}{word}</span>
+                  ) }
+                </p>
+              )
+            }
           }
-        }
-      }) }
+        }) }
       </div>
     </div>
   )

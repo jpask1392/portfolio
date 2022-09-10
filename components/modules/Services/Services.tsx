@@ -1,3 +1,4 @@
+import Image from '@/components/ui/Image';
 import cn from 'classnames';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Container from '@/components/ui/Container';
@@ -7,6 +8,7 @@ import { gsap } from 'gsap';
 import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
 import { useRef } from 'react';
 import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
+import Button from '@/components/ui/Button';
 
 interface Props {
 
@@ -50,6 +52,7 @@ const Services: React.FC<Props> = ({
           markers: false,
           scrub: 1,
           start: "top-=10px center", // half way between gap
+          end: "top top+=100",
           onEnter: () => setActive(index),
           onLeaveBack: () => setActive(index !== 0 ? index - 1 : 0)
         },
@@ -100,10 +103,17 @@ const Services: React.FC<Props> = ({
       <Container maxWidth='lg'>
         <div className="flex -mx-10">
           <div ref={contentRef} className="h-screen w-1/2 flex px-10">
-            <div className="section flex flex-col py-10">
+            <div className="flex flex-col py-10 my-auto h-full max-h-[800px]">
               <Header>
-                Services and specialities - Something you’re looking for not on this list? <span className='underline'>Reach out</span>
+                Services and specialities
               </Header>
+              <Header tag="h3" size="h3" className="mt-4">
+                <span className="!capitalize !font-medium">Something you’re looking for <br/>not on this list? <br/><br/></span>
+              </Header>
+
+              <Button 
+                text="Reach out"
+              />
 
               <div className="mt-auto max-w-[365px]">
                 <div className="track relative" ref={trackRef}>
@@ -130,13 +140,22 @@ const Services: React.FC<Props> = ({
 
           <div className="w-1/2 section px-10">
             {
-              services?.map((service, i) => {
+              services?.map((service: {
+                image: any
+                bodyText: string
+              }, i: number) => {
                 return (
                   <div
                     key={i}
-                    className="bg-white aspect-[9/13] w-full mb-5 rounded-lg max-w-[450px] mx-auto opacity-25 border border-black"
+                    className="bg-white aspect-[9/13] w-full mb-5 rounded-lg  mx-auto opacity-25 border border-black overflow-hidden relative"
                     ref={el => imagesRef.current[i] = el}
-                  />
+                  >
+                    <Image 
+                      image={service.image}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
                 )
               })
             }

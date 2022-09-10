@@ -21,7 +21,7 @@ const Footer: React.FC<Props> = ({
   socials,
 }) => {
   return (
-    <footer className={cn(className, "footer py-6 border-y border-black")}>
+    <footer className={cn(className, "footer py-12 border-y border-black")}>
       <div className="container flex items-center">
         <div className="">
           <DynamicIcon type="logo" />

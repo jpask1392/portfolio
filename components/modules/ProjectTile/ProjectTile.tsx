@@ -30,7 +30,7 @@ const ProjectTile: React.FC<Props> = ({
 
   return (
     <article 
-      className={cn(className)}
+      className={cn(className, "flex flex-col h-full")}
     >
       <header 
         className="aspect-[3/4] bg-gray-300 overflow-hidden rounded-lg relative cursor-pointer"
@@ -44,17 +44,19 @@ const ProjectTile: React.FC<Props> = ({
         />
         {/* <div className="absolute inset-0 bg-[black] bg-opacity-40" /> */}
       </header>
-      <footer className="pt-6 px-5">
+      <footer className="pt-6 px-5 flex flex-col flex-1">
         <Header tag="h3" size="h3">{project.name}</Header>
         <p className="mt-2.5">
           {excerpt}
         </p>
-        <Button
-          link={siteLink}
-          className="w-full mt-4"
-          text="View Website"
-          icon={<DynamicIcon type="arrowNewPage" />}
-        />
+        <p className="mt-auto pt-4">
+          <Button
+            link={siteLink}
+            className="w-full"
+            text="View Website"
+            icon={<DynamicIcon type="arrowNewPage" />}
+          />
+        </p>
       </footer>
 
       <Modal

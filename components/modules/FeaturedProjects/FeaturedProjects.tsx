@@ -40,6 +40,12 @@ const FeaturedProjects: React.FC<Props> = ({
       ...minMax.current,
       max: maxTransform,
     }
+
+    document.addEventListener('mouseup', function (e) {
+      if (isDragging.current) {
+        handleMouseUp(e);
+      }
+    })
   }, [])
 
   const handleMouseDown = (e: any) => {
@@ -105,8 +111,8 @@ const FeaturedProjects: React.FC<Props> = ({
     <div className="overflow-hidden">
 
       <Container el="div" clearMargin={['top']}>
-        <div className="relative" ref={containerRef}>
-          <div 
+        <div className="relative border-t border-black pt-20" ref={containerRef}>
+          {/* <div 
             className="border border-black rounded-full mr-5 z-10 bg-white absolute w-[697px] transform -translate-y-full rotate-90 origin-bottom-left"
           >
             <Header 
@@ -116,9 +122,14 @@ const FeaturedProjects: React.FC<Props> = ({
             >
               Featured Projects
             </Header>
+          </div> */}
+
+          <div className="text-center mb-16">
+            <Header size="h1">Featured Projects</Header>
+            <p className="mt-4">We’re proud to have received recognition across multiple <br/>categories and shows for</p>
           </div>
           <div 
-            className="flex-shrink-0 pl-24"
+            className="flex-shrink-0"
             style={{ width: "calc(100% + (( 100vw - 100% ) / 2))" }}
             onMouseEnter={() => setMouseState({ style: "drag", innerText: "Drag" })}
             onMouseLeave={() => setMouseState({ style: "inactive", innerText: "" })}
@@ -127,7 +138,7 @@ const FeaturedProjects: React.FC<Props> = ({
               className="flex space-x-5 flex-1 select-none"  
               ref={trackRef} 
               onMouseDown={handleMouseDown}
-              onMouseUp={handleMouseUp}
+              // onMouseUp={handleMouseUp}
               onMouseMove={handleMouseMove}
             >
               {

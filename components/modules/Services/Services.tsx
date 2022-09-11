@@ -1,3 +1,4 @@
+import DynamicIcon from '@/components/icons/DynamicIcon';
 import Image from '@/components/ui/Image';
 import cn from 'classnames';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -50,9 +51,8 @@ const Services: React.FC<Props> = ({
         scrollTrigger: {
           trigger: imageRef,
           markers: false,
-          scrub: 1,
-          start: "top-=10px center", // half way between gap
-          end: "top top+=100",
+          start: "top-=10px top+=25%", // half way between gap
+          // end: "top top+=100",
           onEnter: () => setActive(index),
           onLeaveBack: () => setActive(index !== 0 ? index - 1 : 0)
         },
@@ -105,14 +105,15 @@ const Services: React.FC<Props> = ({
           <div ref={contentRef} className="h-screen w-1/2 flex px-10">
             <div className="flex flex-col py-10 my-auto h-full max-h-[800px]">
               <Header>
-                Services and specialities
+                Services and specialities -
               </Header>
-              <Header tag="h3" size="h3" className="mt-4">
-                <span className="!capitalize !font-medium">Something you’re looking for <br/>not on this list? <br/><br/></span>
+              <Header>
+                Something you’re looking for <br/>not on this list? <span className="underline">Reach out</span>
               </Header>
-
               <Button 
-                text="Reach out"
+                className="mt-8"
+                text="Contact"
+                icon={<DynamicIcon type="arrowNewPage" />}
               />
 
               <div className="mt-auto max-w-[365px]">
@@ -127,7 +128,7 @@ const Services: React.FC<Props> = ({
                             // "relative": active  === i,
                           })}
                         >
-                          <Header tag='h3' size='h3'>{service.name}</Header>
+                          <Header tag='h3' size='h3'>{i + 1}. {service.name}</Header>
                           <p className="mt-6">{render(service.bodyText)}</p>
                         </div>
                       )
@@ -147,7 +148,7 @@ const Services: React.FC<Props> = ({
                 return (
                   <div
                     key={i}
-                    className="bg-white aspect-[9/13] w-full mb-5 rounded-lg  mx-auto opacity-25 border border-black overflow-hidden relative"
+                    className="bg-white aspect-[9/13] w-full mb-5 rounded-lg  mx-auto opacity-25 overflow-hidden relative"
                     ref={el => imagesRef.current[i] = el}
                   >
                     <Image 
@@ -159,6 +160,8 @@ const Services: React.FC<Props> = ({
                 )
               })
             }
+
+              <div className="aspect-[9/13] w-full mb-5 rounded-lg  mx-auto overflow-hidden relative"/>
           </div>
         </div>
       </Container>

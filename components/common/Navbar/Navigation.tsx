@@ -63,7 +63,7 @@ const Navigation: React.FC<NavProps> = ({
       ref={navRef}
       id="primary-header"
       className={cn("z-20 fixed top-0 w-full transition-all duration-500 border-transparent", {
-        "pt-0 text-black border-b !border-black bg-white" : scrolled,
+        "pt-0 text-black border-b !border-black bg-background shadow-sm" : scrolled,
         "pt-10 text-white " : !scrolled
       })}
     >
@@ -88,7 +88,7 @@ const Navigation: React.FC<NavProps> = ({
         </div>
 
         {/* mobile Menu */}
-        <button
+        {/* <button
           aria-label="Navigation Menu"
           className="md:hidden h-full bg-primary aspect-square flex items-center flex-1"
         >
@@ -101,7 +101,7 @@ const Navigation: React.FC<NavProps> = ({
               setActive(toggled)
             }}
           />
-        </button>
+        </button> */}
 
         {/* Flexs size */}
         <div className="h-full flex-1 hidden md:block">

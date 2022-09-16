@@ -154,7 +154,7 @@ const FeaturedProjects: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="w-full h-0.5 bg-gray-200 mt-14 relative rounded-full overflow-hidden">
+        <div className="w-full h-0.5 bg-secondary mt-14 relative rounded-full overflow-hidden">
           <div ref={navBarRef} className="absolute inset-y-0 bg-black w-1/3 rounded-full"/>
         </div>
       </Container>

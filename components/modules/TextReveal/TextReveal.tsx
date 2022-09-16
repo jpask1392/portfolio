@@ -32,8 +32,8 @@ const TextReveal: React.FC<Props> = ({
 
   return (
     <div className="w-full relative">
-      <div className="w-3/4 absolute right-0 max-w-[1000px] top-1/2 -translate-y-1/2">
-        <div className="aspect-video bg-gray-300 rounded-md"/>
+      <div className="w-3/4 absolute right-0 max-w-[1000px] top-1/2 -translate-y-1/2 hidden lg:block">
+        <div className="aspect-video bg-secondary rounded-lg"/>
       </div>
       <div className="max-w-[850px] relative z-10">
         

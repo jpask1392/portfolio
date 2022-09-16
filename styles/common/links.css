@@ -17,8 +17,9 @@
     duration-300
     border
     border-black
+    text-black
     rounded-full
-    bg-white;
+    bg-secondary;
 }
 
 .button[disabled] {

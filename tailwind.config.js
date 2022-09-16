@@ -66,7 +66,7 @@ module.exports = {
   jit: true,
   theme: {
     screens: {
-      'sm': '640px',
+      'sm': '840px',
       'md': '1060px',
       'lg': '1344px',
       'xl': '1560px',
@@ -112,15 +112,15 @@ module.exports = {
     extend: {
       colors: {
         primary: '#d0d5db',
-        secondary: "#72605B",
+        secondary: "#E7D6C4",
         secondaryLight: "#A59082",
         tertiary: "#EBBFBB",
-        black: '#282828',
+        black: '#242424',
         gray2: '#303030',
         gray3: '#161616',
         grayLight: '#E9E9E9',
         fadedText: '#9F9F9F',
-        background: '#F8F8F8',
+        background: '#F7F4E4',
         yellow: '#e0e0e0',
       },
       spacing: {

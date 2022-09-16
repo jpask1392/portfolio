@@ -74,7 +74,7 @@ const AccordionTimed: React.FC<Props> = ({
                     <span className="text-2xl">{item.header}</span>
                   </Header>
 
-                  <span className="w-full h-0.5 bg-grayLight block absolute top-full rounded-full">
+                  <span className="w-full h-0.5 bg-secondary block absolute top-full rounded-full">
                     <span 
                       ref={el => animationsRef.current[index] = el}
                       className="h-full bg-black block"

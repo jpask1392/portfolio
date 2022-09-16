@@ -97,13 +97,13 @@ const Services: React.FC<Props> = ({
   }, [active])
 
   return (
-    <div className="relative" ref={containerRef}>
-      <div className="absolute inset-0 bg-yellow border border-black" ref={backgroundRef} />
+    <div className="relative text-white" ref={containerRef}>
+      <div className="absolute inset-0 bg-black border border-black" ref={backgroundRef} />
 
       <Container maxWidth='lg'>
         <div className="flex -mx-10">
           <div ref={contentRef} className="h-screen w-1/2 flex px-10">
-            <div className="flex flex-col py-10 my-auto h-full max-h-[800px]">
+            <div className="flex flex-col pt-20 pb-10 my-auto h-full max-h-[800px]">
               <Header>
                 Services and specialities -
               </Header>

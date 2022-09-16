@@ -1,16 +1,15 @@
 :root {
   --section-spacing-sm: 2.125rem;
   --section-spacing-md: 4rem;
-  --section-spacing-lg: 10rem;
+  --section-spacing-lg: 4rem;
 
   /* @screen md {
     --section-spacing: 2.3rem;
   } */
 
-  /* @screen xl {
-    --section-spacing: 12.5rem;
-    --n-section-spacing: -12.5rem;
-  } */
+  @screen lg {
+    --section-spacing-lg: 10rem;
+  }
 }
 
 /* Default section spacer */

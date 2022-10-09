@@ -13,7 +13,8 @@
   @apply
     font-header
     leading-normal
-    text-8xl;
+    text-6xl
+    lg:text-8xl;
 }
 
 .h3 {

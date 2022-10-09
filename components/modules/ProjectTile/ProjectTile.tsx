@@ -49,13 +49,22 @@ const ProjectTile: React.FC<Props> = ({
         <p className="mt-2.5">
           {excerpt}
         </p>
-        <p className="mt-auto pt-4">
+        <p className="mt-auto pt-4 flex">
           <Button
             link={siteLink}
             className="w-full"
-            text="View Website"
+            text="Learn More"
             icon={<DynamicIcon type="arrowNewPage" />}
           />
+
+          {/* <a 
+            href={siteLink}
+            target="_blank"
+            rel="noopener"
+            className="bg-red-100"
+          >
+            <DynamicIcon type="arrowNewPage" />
+          </a> */}
         </p>
       </footer>
 

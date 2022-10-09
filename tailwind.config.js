@@ -115,7 +115,7 @@ module.exports = {
         secondary: "#E7D6C4",
         secondaryLight: "#A59082",
         tertiary: "#EBBFBB",
-        black: '#242424',
+        black: '#121212',
         gray2: '#303030',
         gray3: '#161616',
         grayLight: '#E9E9E9',

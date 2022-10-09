@@ -19,7 +19,7 @@
     border-black
     text-black
     rounded-full
-    bg-secondary;
+    bg-white;
 }
 
 .button[disabled] {

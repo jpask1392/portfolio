@@ -124,7 +124,7 @@ const FeaturedProjects: React.FC<Props> = ({
             </Header>
           </div> */}
 
-          <div className="text-center mb-16">
+          <div className="mb-16">
             <Header size="h1">Featured Projects</Header>
             <p className="mt-4">We’re proud to have received recognition across multiple <br/>categories and shows for</p>
           </div>

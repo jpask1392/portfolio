@@ -58,7 +58,8 @@ const AccordionTimed: React.FC<Props> = ({
           {
             accordionItems.map((item, index) => {
               return (
-                <li 
+                <li
+                  key={item._uid}
                   onMouseEnter={() => index === active && tls.current[index].pause()}
                   onMouseLeave={() => index === active && tls.current[index].play()}
                   onClick={() => {
@@ -92,10 +93,13 @@ const AccordionTimed: React.FC<Props> = ({
           {
             accordionItems.map((item, index) => {
               return (
-                <div className={cn("relative", {
-                  "" : index === active,
-                  "hidden" : index !== active
-                })}>
+                <div 
+                  key={item._uid}
+                  className={cn("relative", {
+                    "" : index === active,
+                    "hidden" : index !== active
+                  })}
+                >
                   <Header size="h4" className="mb-5">
                     A{index + 1}.
                   </Header>

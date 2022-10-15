@@ -11,7 +11,6 @@ const Marquee: React.FC<Props> = ({
   text,
   repeat = '2',
 }) => {
-  console.log(text)
   /**
    * TODO: Marquee causes a small bump on gsap start point detection
    *  

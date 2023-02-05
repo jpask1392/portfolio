@@ -32,6 +32,7 @@ const Navigation: React.FC<NavProps> = (props) => {
   const { scroll } = useScrollContext();
   
   return (
+<<<<<<< HEAD
     <>
       <header
         id="primary-header"
@@ -64,6 +65,34 @@ const Navigation: React.FC<NavProps> = (props) => {
               </ul>
             </nav>
           </div>
+=======
+    <header
+      ref={navRef}
+      id="primary-header"
+      className={cn("z-20 absolute top-0 w-full transition-all duration-500 border-transparent", {
+        "pt-0 text-black border-b !border-black bg-background shadow-sm" : scrolled,
+        "pt-10 text-white " : !scrolled
+      })}
+    >
+      <nav 
+        className="h-full px-12 py-5 mx-auto flex justify-end relative items-center max-w-screen-2xl" 
+        role="navigation"
+      >
+
+        {/* Logo */}
+        <Link href="/">
+          <a aria-label="Company logo">
+            <Logo className="fill-current h-10" />
+          </a>
+        </Link>
+        
+
+        <div className="md:hidden absolute top-full left-0 pointer-events-none w-full">
+          <MobileMenu 
+            menu={navigationList} 
+            active={active}
+          /> 
+>>>>>>> refactor
         </div>
 
         <div className="h-[var(--nav-height)] flex w-full">

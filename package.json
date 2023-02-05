@@ -1,10 +1,14 @@
 {
+  "name": "jamie-pask",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "https": "local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@plaiceholder/next": "^2.5.0",

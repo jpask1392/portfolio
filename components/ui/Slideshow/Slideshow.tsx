@@ -1,12 +1,17 @@
 import SlideArrow from "./SlideArrow";
+<<<<<<< HEAD
 // import DynamicComponent from "@/components/helpers/DynamicComponent";
+=======
+import { StoryblokComponent } from "@storyblok/react"
+>>>>>>> refactor
 import cn from "classnames";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { SwiperOptions, Navigation, A11y, Pagination } from 'swiper';
+import { SwiperOptions, Navigation, A11y, Pagination, EffectFade } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useRef } from "react";
 import { ReactNode, Component } from 'react';
+import type { SbBlokData } from "@storyblok/react"
 
 interface Props {
   className?: string
@@ -18,12 +23,14 @@ interface Props {
   }
   spaceBetween?: number
   children: ReactNode[] | Component[] | any[]
+  slides?: any
   thumbs?: any
   modules?: any[]
   navigationStyle?: "inset"
   onResize?: any
   showPagination?: boolean
   showNavigation?: boolean
+<<<<<<< HEAD
 }
 
 const Slideshow: React.FC<Props> = ({ 
@@ -54,13 +61,48 @@ const Slideshow: React.FC<Props> = ({
     "duration-700",
     "focus:ring"
   ]);
+=======
+  navigationLocation?: string | "bottom" | "sides"
+  centeredSlides?: boolean
+}
+
+interface Blok extends SbBlokData, Props {}
+
+interface SlideshowProps extends Props {
+  children: any
+  blok?: Blok
+}
+
+const Slideshow: React.FC<SlideshowProps> = (props) => {
+  const { 
+    effect = 'fade',
+    onResize,
+    showSlides = {
+      sm: 1,
+      lg: 1,
+      xl: 1
+    },
+    children,
+    slides,
+    className,
+    spaceBetween = 0,
+    modules = [],
+    thumbs,
+    showPagination = false,
+    showNavigation = true,
+    navigationLocation = "bottom",
+    centeredSlides = false
+  } = props.blok || props;
+
+  const paginationContainerRef = useRef(null);
+>>>>>>> refactor
 
   const handleRefConnection = (swiper: any) => {
     const { 
-      navigation = false, 
       pagination = false, 
     } = swiper.params;
 
+<<<<<<< HEAD
     if (typeof navigation === 'object' && showNavigation) {
       navigation.prevEl = navigationPrevRef.current;
       navigation.nextEl = navigationNextRef.current;
@@ -69,6 +111,8 @@ const Slideshow: React.FC<Props> = ({
       swiper.navigation.update();
     }
 
+=======
+>>>>>>> refactor
     if (typeof pagination === 'object' && showPagination) {
       pagination.el = paginationContainerRef.current;
       pagination.clickable = true;
@@ -88,6 +132,7 @@ const Slideshow: React.FC<Props> = ({
   const swiperProps = {
     threshold: 10,
     modules: [ Navigation, A11y, Pagination, ...modules ],
+<<<<<<< HEAD
     draggable: false,
     enabled: children.length > 1,
     slidesPerView: showSlides.sm || 1,
@@ -95,11 +140,23 @@ const Slideshow: React.FC<Props> = ({
     onSwiper: handleRefConnection,
     onBreakpoint: handleRefConnection,
     onResize: onResize,
+=======
+    draggable: true,
+    onSwiper: handleRefConnection,
+    onBreakpoint: handleRefConnection,
+    onResize: onResize,
+    loop: centeredSlides,
+    centeredSlides: centeredSlides,
+>>>>>>> refactor
     thumbs: thumbs,
     noSwiping: true,
     noSwipingClass: 'swiper-slide',
     breakpoints: {
-      768: {
+      320: {
+        slidesPerView: showSlides.sm,
+        spaceBetween: spaceBetween > 30 ? 22 : spaceBetween,
+      },
+      840: {
         slidesPerView: showSlides.lg,
         spaceBetween: spaceBetween === 90 ? 50 : spaceBetween,
       },
@@ -112,27 +169,32 @@ const Slideshow: React.FC<Props> = ({
 
   return (
     <div
-      className={cn(className, "ui-slideshow w-full", [navigationStyle])}
+      className={cn(className, "ui-slideshow w-full")}
       style={style}
     >
       
-      <Swiper {...swiperProps}>
+      <Swiper 
+        {...swiperProps}
+        slidesPerView="auto"
+      >
         {
-          children.flat().map((child, i) => {
+          children ? children?.flat().map((child: any, i: number) => {
             if (!child) return;
+
             return (
               <SwiperSlide key={child.key}>
                 {
                   ('blok' in child.props)
-                    ? <DynamicComponent blok={child.props.blok} />
+                    ? <StoryblokComponent blok={child.props.blok} />
                     : child
                 }
               </SwiperSlide>
             )
-          })
+          }) : null
         }
 
         {
+<<<<<<< HEAD
           showNavigation ? (
             <div className="text-center mt-12">
               <button ref={navigationPrevRef} className={cn(navigationArrowClasses, "mr-8")}>
@@ -149,6 +211,27 @@ const Slideshow: React.FC<Props> = ({
           showPagination ? (
             <div className="container mt-8 md:mt-12">
               <div ref={paginationContainerRef} className="pagination-container" />
+=======
+          !children && slides ? slides.map((blok: SbBlokData, i: number) => {
+            return (
+              <SwiperSlide key={i} className={cn({
+                "lg:px-20" : navigationLocation === "sides"
+              })}>
+                <StoryblokComponent blok={blok} />
+              </SwiperSlide>
+            )
+          }): null
+        }
+
+        {
+          showNavigation ? (
+            <div className={cn("text-center flex ", {
+              "mt-12 lg:mt-0 justify-center lg:justify-between lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:w-full z-10" : navigationLocation === "sides",
+              "justify-center mt-12" : navigationLocation !== "sides"
+            })}>
+              <SlideArrow direction="previous" className="mr-8"/>
+              <SlideArrow direction="next" />
+>>>>>>> refactor
             </div>
           ) : null
         }

@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import { motion } from "framer-motion";
 import PageProgress from '../common/PageProgress';
 import { ScrollContextProvider } from '../context/scroll';
 import Mouse from "@/components/ui/Mouse";
+=======
+import { Toaster } from 'react-hot-toast';
+import { StoryblokComponent } from "@storyblok/react";
+>>>>>>> refactor
 import { useGlobalContext } from "../context/globalContext";
 import Head from "@/components/common/Head";
 import cn from 'classnames';
 import { ReactNode, Component, useEffect } from 'react';
+<<<<<<< HEAD
 import toast, { Toaster } from 'react-hot-toast';
 import { StoryblokComponent } from "@storyblok/react"
 import type { StoryData } from "@storyblok/react"
@@ -22,12 +28,30 @@ const Layout: React.FC<Props> = ({ children, background = "background" }) => {
     story: page,
     // config,
     // template,
+=======
+
+interface Props {
+  children: ReactNode | Component | any
+  preview?: boolean
+  id?: string
+}
+
+const Layout: React.FC<Props> = ({ 
+  children,
+  id
+}) => {
+  let { 
+    template,
+    story = {},
+    config
+>>>>>>> refactor
   } = useGlobalContext();
 
   /**
    * Enable editable content using the connected story information
    */
   // const isGlobalEditPage = story.full_slug === "config";
+<<<<<<< HEAD
   // const header = isGlobalEditPage ? story.content.header[0] : config.content.header[0]; // header data
   // const footer = isGlobalEditPage ? story.content.footer[0] : config.content.footer[0]; // footer data
 
@@ -48,11 +72,16 @@ const Layout: React.FC<Props> = ({ children, background = "background" }) => {
       })
     )
   }, [preview])
+=======
+  // const header = isGlobalEditPage ? story.content.header[0] : config?.content.header[0]; // header data
+  // const footer = isGlobalEditPage ? story.content.footer[0] : config?.content.footer[0]; // footer data
+>>>>>>> refactor
 
   return (
     <>
       <Head seo={false} />
 
+<<<<<<< HEAD
       <ScrollContextProvider>
         <div 
           data-scroll-id="main-scroll-wrapper"
@@ -82,6 +111,15 @@ const Layout: React.FC<Props> = ({ children, background = "background" }) => {
         <Toaster />
         <Mouse />
       </ScrollContextProvider>
+=======
+      <main id={id} className={cn({
+        "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
+      })}>
+        {children}
+      </main>
+
+      <Toaster position="bottom-center" />
+>>>>>>> refactor
     </>
   )
 };

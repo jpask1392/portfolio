@@ -1,48 +1,32 @@
-// https://www.storyblok.com/tp/next-js-react-guide
-
-import getGlobalData from "@/utils/getGlobalData";
 import { NextSeo } from "next-seo";
 import Layout from "@/components/templates/Layout";
-import DynamicComponent from "@/components/helpers/DynamicComponent";
-
-import Storyblok, { useStoryblok } from "../utils/storyblok";
 
 import type { Story } from '@/types/storyBlok';
+import { 
+  getStoryblokApi, 
+  StoryblokComponent,
+  useStoryblokState,
+} from "@storyblok/react";
 
 export default function Page({
   story,
-  global,
-  preview,
+  preview
 } : {
   story: Story | any,
   preview: boolean,
-  global: Story | undefined
 }) {
-  // use the preview variable to enable the bridge only in preview mode
-  // const enableBridge = preview;
-  const enableBridge = true; // load the storyblok bridge everywhere
-  story = useStoryblok(story, enableBridge);
+  story = useStoryblokState(story);
 
   const seo = ('seo' in story?.content) && story?.content.seo[0]; // only one seo blok
 
   return (
-    <Layout 
-      global={global} 
-      editMode={story?.slug === 'global-template'}
-      preview={preview}
-    >
-      {/* 
-        This is a top level DynamicComponent and will usually be "Page".
-        It can be used for other content types coming from Storyblok too.
-      */}
-      <DynamicComponent 
-        blok={story?.content || {}}
-      />
+    <Layout id={story.slug}>
+      {/* Page/Product component etc */}
+      <StoryblokComponent blok={story?.content} />
 
       <NextSeo
         title={seo?.title || story.name}
         description={seo?.description || ''}
-        // noindex={true | false}
       />
     </Layout>
   );
@@ -67,8 +51,8 @@ export async function getStaticProps({
 
   let sbParams: any = {
     version: preview ? "draft" : "published",
+    resolve_relations: [ "page.template" ],
     language: locale,
-    resolve_relations: ["featuredProjects.projects"],
   };
 
   if (preview) {
@@ -76,26 +60,29 @@ export async function getStaticProps({
     sbParams.cv = Date.now();
   }
 
-  try {
-    // gets a single story's data from StoryBlok
-    let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
-    // get global layout information for header, footer etc
-    const global = await getGlobalData(sbParams);
+  // gets data stored in storyblok
+  const storyblokApi = getStoryblokApi();
 
-    return {
-      props: {
-        story: data ? data.story : false,
-        preview,
-        global: global ? global.data.story : false,
-      },
-      revalidate: 3600, // revalidate every hour
-    };
+  // get current page
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
 
-  } catch (error) {
-    console.log("message:", error);
+  // get global settings
+  let { data: globals } = await storyblokApi.get('cdn/stories/globals', sbParams);
 
-    return {}
-  }
+  // get page template
+  // let templateSlug = "templates/primary"; // default 
+  // if (data && data.story.content.template) templateSlug = data.story.content.template.full_slug;
+  // let { data: template } = await storyblokApi.get(`cdn/stories/${templateSlug}`, sbParams);
+
+  return {
+    props: {
+      preview,
+      story: data ? data.story : false,
+      globals: globals ? globals.story.content : false,
+      // template: template ? template.story : false,
+    },
+    revalidate: 3600, // revalidate every hour
+  };
 }
 
 
@@ -106,7 +93,8 @@ export async function getStaticProps({
  * See here: https://nextjs.org/docs/basic-features/data-fetching/get-static-paths
  */
 export async function getStaticPaths({ locales } : { locales: any }) {
-  let { data } = await Storyblok.get("cdn/links/");
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get("cdn/links/");
 
   let paths: any[] = [];
   Object.keys(data.links).forEach((linkKey) => {
@@ -120,10 +108,7 @@ export async function getStaticPaths({ locales } : { locales: any }) {
     if (slug === "home") splittedSlug = false;
 
     // remove 'product' paths - duplicates are not allowed    
-    if (
-      splittedSlug[0] === "product"
-      || splittedSlug[0] === "settings"
-    ) return;
+    if ( splittedSlug[0] === "settings" ) return;
 
     paths.push({ params: { slug: splittedSlug } });
   });

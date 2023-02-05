@@ -62,7 +62,7 @@ const Navigation: React.FC<NavProps> = ({
     <header
       ref={navRef}
       id="primary-header"
-      className={cn("z-20 fixed top-0 w-full transition-all duration-500 border-transparent", {
+      className={cn("z-20 absolute top-0 w-full transition-all duration-500 border-transparent", {
         "pt-0 text-black border-b !border-black bg-background shadow-sm" : scrolled,
         "pt-10 text-white " : !scrolled
       })}

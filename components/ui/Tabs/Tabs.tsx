@@ -1,7 +1,6 @@
+import { StoryblokComponent } from '@storyblok/react';
 import Header from '@/components/ui/Header';
-import DynamicComponent from '@/components/helpers/DynamicComponent';
 import * as Tabs from '@radix-ui/react-tabs';
-import { sbEditable } from "@storyblok/storyblok-editable";
 import { SbEditableContent } from "@/types/storyBlok";
 import cn from 'classnames';
 import { useState } from 'react';
@@ -31,7 +30,7 @@ const CustomTabs: React.FC<Props> = ({
     >
       <Tabs.List 
         aria-label="tabs"
-        className="mb-10 flex justify-center space-x-10"
+        className="mb-10 flex justify-center space-x-4 md:space-x-10"
       >
         {
           items.map((item) => {
@@ -45,7 +44,8 @@ const CustomTabs: React.FC<Props> = ({
               >
                 <Header
                   tag="h3"
-                  size="h3"
+                  size="h2"
+                  className="pb-3"
                 >
                   {item.title}
                 </Header>
@@ -63,7 +63,7 @@ const CustomTabs: React.FC<Props> = ({
           >
             {
               item.content.map((blok: any) => 
-                <DynamicComponent key={blok._uid} blok={blok} />
+                <StoryblokComponent key={blok._uid} blok={blok} />
               )
             }
           </Tabs.Content>

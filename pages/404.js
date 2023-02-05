@@ -1,5 +1,4 @@
 import Layout from "@/components/templates/Layout";
-import DynamicComponent from "@/components/helpers/DynamicComponent";
 import Container from "@/components/ui/Container";
 
 import Storyblok, { useStoryblok } from "../utils/storyblok";
@@ -9,16 +8,9 @@ export default function Page404({ global, preview, locale }) {
   // const enableBridge = preview; // load only inside preview mode
   const storyLoaded = useStoryblok(null, enableBridge, locale);
 
-  let content = <h1>Not found</h1>;
-
-  if (storyLoaded && storyLoaded.content)
-    content = <DynamicComponent blok={storyLoaded.content} />;   
-
   return (
     <Layout>
-      <Container>
-        {content}
-      </Container>
+      
     </Layout>
   );
 }

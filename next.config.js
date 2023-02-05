@@ -1,18 +1,12 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
-
-module.exports = withBundleAnalyzer({
-  i18n: {
-    localeDetection: false,
-    locales: ["en"],
-    defaultLocale: "en",
-  },
+module.exports = {
   images: {
-    domains: ['a.storyblok.com'],
-  },
-  compiler: {
-    // ssr and displayName are configured by default
-    // styledComponents: true,
-  },
-});
+    domains: [
+      'lh3.googleusercontent.com', 
+      'ipfs.io', 
+      'opensea.mypinata.cloud',
+      'openseauserdata.com',
+      'i.seadn.io',
+      'a.storyblok.com',
+    ],
+  }
+};

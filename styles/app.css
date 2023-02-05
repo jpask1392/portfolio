@@ -5,17 +5,28 @@
 @import "tailwindcss/utilities";
 
 @import 'common/globals';
+@import 'common/locomotive-scroll';
 @import 'common/typography';
 @import 'common/spacing';
 @import 'common/links';
 
+@import 'modules/roadmap';
+@import 'modules/teamPlane';
+@import 'modules/heros';
+
 @import 'ui/container';
-@import 'ui/grid';
 @import 'ui/column';
 @import 'ui/slideshow';
+@import 'ui/marquee';
 @import 'ui/skeleton';
+@import 'ui/mega-menu';
 @import 'ui/inputs';
 @import 'ui/accordion';
 @import 'ui/tabs';
 @import 'ui/forms';
 @import 'ui/masonry';
+@import 'ui/calendar';
+@import 'ui/navigation';
+@import 'ui/pulsing-circle';
+
+@import 'templates/pages';

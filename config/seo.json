@@ -1,26 +1,24 @@
 {
   "title": "Home",
-  "titleTemplate": "%s - Jamie Pask",
-  "description": "Next.js Commerce - https://www.nextjs.org/commerce",
+  "titleTemplate": "Strangers HQ",
+  "description": "Strangers HQ is a generative PFP project created by Collective Strangers and artist Nick Kuchar. 6500 Stranger collectibles, now boarding. Please prepare for takeoff!",
   "openGraph": {
-    "title": "ACME Storefront | Powered by Next.js Commerce",
-    "description": "Next.js Commerce - https://www.nextjs.org/commerce",
     "type": "website",
     "locale": "en_IE",
-    "url": "https://nextjs.org/commerce",
-    "site_name": "Next.js Commerce",
+    "url": "https://www.strangershq.com/",
+    "site_name": "Strangers HQ",
     "images": [
       {
-        "url": "/card.png",
-        "width": 800,
-        "height": 600,
-        "alt": "Next.js Commerce"
+        "url": "https://a.storyblok.com/f/187489/2376x1311/7ba384e6cb/image-31.jpg/m/1000x",
+        "width": 1000,
+        "height": 552,
+        "alt": "Strangers HQ"
       }
     ]
   },
   "twitter": {
-    "handle": "@nextjs",
-    "site": "@nextjs",
+    "handle": "@StrangersHQ",
+    "site": "@StrangersHQ",
     "cardType": "summary_large_image"
   }
 }

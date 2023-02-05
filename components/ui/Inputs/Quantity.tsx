@@ -1,6 +1,5 @@
 import cn from 'classnames';
-import { useEffect, useRef, useState } from 'react';
-import * as Label from '@radix-ui/react-label';
+import { useRef } from 'react';
 
 interface Props {
   className?: string
@@ -59,8 +58,9 @@ const Quantity: React.FC<Props> = ({
           "text-center",
           "bg-transparent",
           "appearance-none",
-          "border",
-          "px-10"
+          "border border-red",
+          "px-10",
+          "rounded-none",
          ])}
       />
 

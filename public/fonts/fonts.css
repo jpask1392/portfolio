@@ -1,6 +1,41 @@
 /* @font-face {
-  font-family: "Neue Haas";
+  font-family: "Greycliff";
+  font-weight: 100; // thin
+  font-style: normal;
+  src: url("GreycliffCF-Regular.woff2");
+}
+
+@font-face {
+  font-family: "Greycliff";
+  font-weight: 300; // light
+  font-style: normal;
+  src: url("GreycliffCF-Regular.woff2");
+}
+
+@font-face {
+  font-family: "Greycliff";
   font-weight: 500; // regular
   font-style: normal;
-  src: url("NHaasGroteskDSPro-55Rg.ttf");
+  src: url("GreycliffCF-Regular.woff2");
+}
+
+@font-face {
+  font-family: "Greycliff";
+  font-weight: 600; // medium
+  font-style: normal;
+  src: url("GreycliffCF-Medium.woff2");
+}
+
+@font-face {
+  font-family: "Greycliff";
+  font-weight: 800; // bold
+  font-style: normal;
+  src: url("GreycliffCF-Bold.woff2");
+}
+
+@font-face {
+  font-family: "Greycliff";
+  font-weight: 900; // black
+  font-style: normal;
+  src: url("GreycliffCF-Heavy.woff2");
 } */

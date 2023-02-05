@@ -1,13 +1,19 @@
 .my-masonry-grid {
-  @apply flex w-auto -ml-5 -mb-5 md:-ml-16 md:-mb-16;
+  @apply
+    flex 
+    w-auto 
+    -ml-5 md:-ml-8 xl:-ml-16
+    -mb-5 md:-mb-8 xl:-mb-16;
 }
 
 .my-masonry-grid_column {
-  @apply pl-5 md:pl-16;
+  @apply
+    pl-5 md:pl-8 xl:pl-16;
 
   background-clip: padding-box;
 }
 
 .my-masonry-grid_column > article {
-  @apply mb-5 md:mb-16;
+  @apply
+    mb-5 md:mb-8 xl:mb-16;
 }

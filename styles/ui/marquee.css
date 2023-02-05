@@ -1,0 +1,24 @@
+.ui-marquee {
+  * {
+    @apply whitespace-pre;
+  }
+
+  .marquee-large-text {
+    @apply
+      text-8xl
+      sm:text-11xl
+      lg:text-[100px]
+      font-bold
+      leading-none
+      tracking-widest
+  }
+
+  .marquee-xl-text {
+    @apply 
+      text-[90px]
+      sm:text-[130px]
+      lg:text-[20vw]
+      font-bold
+      leading-none
+ } 
+}

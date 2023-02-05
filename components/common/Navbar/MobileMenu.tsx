@@ -1,9 +1,7 @@
-import cn from "classnames";
-import useVisibleWindowHeight from '@/components/hooks/useVisibleWindowHeight';
-import Button from '@/components/ui/Button';
+import Flyout from "@/components/ui/Flyout";
+import Link from "next/link";
 import MobileNavigationLink from './MobileNavigationLink';
 import type { navLink } from '@/types/navigation';
-import { useEffect } from "react";
 
 interface Props {
   menu: navLink[]
@@ -14,18 +12,25 @@ const MobileMenu: React.FC<Props> = ({
   menu,
   active,
 }) => {
-  // hook takes into account change in announcement bar.
-  const visibleWindowHeight = useVisibleWindowHeight();
-
   return (
-    <div 
-      className={cn("bg-primary w-full max-w-[275px] md:max-w-[520px] border-b-4 transition-all pointer-events-auto", {
-        "translate-x-0" : active,
-        "-translate-x-full" : !active
-      })}
-      style={{ height: visibleWindowHeight + "px" }}
+    <Flyout 
+      active={active}
+      Header={() => (
+        <div className="flex h-full w-full">
+          <Link legacyBehavior={true} href="/account/login">
+            <a className="bg-white flex-1 flex justify-center items-center h3">
+              Sign In
+            </a>
+          </Link>
+          <Link legacyBehavior={true} href="/account/register">
+            <a className="flex-1 bg-red flex justify-center items-center h3">
+              Sign Up
+            </a>
+          </Link>
+        </div>
+      )}
     >
-      <ul className="w-full h-full">
+      <ul className="w-full min-h-full relative">
         {
           menu.map((link, i) => {
             return (
@@ -38,7 +43,7 @@ const MobileMenu: React.FC<Props> = ({
           })
         }
       </ul>
-    </div> 
+    </Flyout>
   )
 }
 

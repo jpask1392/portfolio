@@ -1,154 +1,42 @@
 :root {
-  --section-spacing-sm: 2.125rem;
-  --section-spacing-md: 4rem;
-  --section-spacing-lg: 4rem;
-
-  /* @screen md {
-    --section-spacing: 2.3rem;
-  } */
-
+  --section-spacing: 2rem;
+  
   @screen lg {
-    --section-spacing-lg: 10rem;
+    --section-spacing: 4.5rem;
   }
 }
 
 /* Default section spacer */
 .section {
-  margin-top: var(--section-spacing-md);
-  margin-bottom: var(--section-spacing-md);
-
-  &.has-bg {
-    padding-top: var(--section-spacing-md);
-    padding-bottom: var(--section-spacing-md);
+  &.section--spacing-sm {
+    --section-spacing: 2rem;
   }
-}
 
-/* Small section spacer */
-.section--spacing-sm {
-  margin-top: var(--section-spacing-sm);
-  margin-bottom: var(--section-spacing-sm);
-
-  &.has-bg {
-    padding-top: var(--section-spacing-sm);
-    padding-bottom: var(--section-spacing-sm);
+  &.section--spacing-lg {
+    --section-spacing: 11.25rem;
   }
-}
 
-/* Medium section spacer */
-.section--spacing-md {
-  margin-top: var(--section-spacing-md);
-  margin-bottom: var(--section-spacing-md);
-
-  &.has-bg {
-    padding-top: var(--section-spacing-md);
-    padding-bottom: var(--section-spacing-md);
-  }
-}
-
-/* Large section spacer */
-.section--spacing-lg {
-  margin-top: var(--section-spacing-lg);
-  margin-bottom: var(--section-spacing-lg);
-
-  &.has-bg {
-    padding-top: var(--section-spacing-lg);
-    padding-bottom: var(--section-spacing-lg);
-  }
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
 }
 
 .main-wrapper > section.has-bg:last-of-type {
   @apply mb-0;
 }
 
-/*  Table interactions */
-.ui-table + .ui-header,
-.ui-header + .ui-table,
-.ui-table + .ui-richtext,
-.ui-richtext + .ui-table {
+h2:not([class]) + p {
   @apply mt-6;
 }
 
-
-.ui-header + .ui-header,
-.ui-header + .ui-btn-group,
-.ui-richtext + .ui-richtext,
-.ui-richtext + .ui-btn-group,
-.ui-image + .ui-richtext,
-.ui-image + .ui-header {
-  /* @apply mt-5; */
+p + h2:not([class]),
+ul + h2:not([class]) {
+  @apply mt-10;
 }
 
-.ui-header + .ui-slideshow,
-
-.ui-slideshow + .ui-btn-group {
-  @apply mt-0;
+h3:not([class]) + p {
+  @apply mt-6;
 }
 
-.ui-header + .ui-grid {
-  @apply mt-8 lg:mt-16;
-}
-
-.ui-grid + .column {
-  @apply mt-12 md:mt-24;
-}
-
-.ui-grid + .column {
-  @apply mt-12 md:mt-24;
-}
-
-.ui-header + .ui-richtext,
-.ui-header + .ui-accordion {
-  /* @apply mt-12; */
-}
-
-.ui-richtext {
-  p + p {
-    @apply mt-4;
-  }
-
-  h4 + p {
-    @apply mt-4
-  }
-
-  p + h4,
-  ul + h4,
-  ol + h4, {
-    @apply mt-8
-  }
-
-  ul {
-    @apply list-disc pl-4;
-  }
-
-  ol {
-    @apply list-decimal pl-4;
-  }
-
-  ul + p,
-  h4 + ul,
-  h4 + ol {
-    @apply mt-4
-  }
-}
-
-/*
-section ul:not(.no-gap) {
-  li:not(:last-of-type) {
-    @apply mb-2
-  }
-}
-*/
-
-p + ul {
-  @apply mt-7;
-}
-
-p.h3 + p.h3 {
-  &:not(:first-of-type) {
-    @apply mt-16;
-  }
-}
-
-h1 + p {
-  @apply mt-8;
+p + p {
+  @apply mt-4;
 }

@@ -1,12 +1,10 @@
-import { SbEditableContent } from "@/types/storyBlok";
-
-import { ReactNode, Component } from 'react';
-
+import type { SbBlokData } from "@storyblok/react"
+import { storyblokEditable } from "@storyblok/react";
 import cn from 'classnames';
+import ChildrenOrBloks from '@/components/helpers/ChildrenOrBloks';
 
-interface Props {
+interface Blok extends SbBlokData {
   className?: string
-  children?: ReactNode[] | Component[] | any[] | ReactNode | Component | any
   vAlignContent?: 'top' | 'center' | 'bottom'
   hAlignContent?: 'left' | 'center' | 'right'
   extendToEdge?: boolean
@@ -18,19 +16,24 @@ interface Props {
     xl?: string
     xxl?: string
   }
-  sbEditable?: SbEditableContent
 }
 
-const Column: React.FC<Props> = ({ 
-  children,
-  className,
-  vAlignContent = 'top',
-  hAlignContent,
-  extendToEdge,
-  maxWidths,
-  padTop,
-  sbEditable,
-}) => {
+interface Props {
+  children: any
+  blok: Blok
+}
+
+const Column: React.FC<Props> = (props) => {
+  const {
+    children,
+    className,
+    vAlignContent = 'top',
+    hAlignContent,
+    extendToEdge,
+    maxWidths,
+    padTop,
+  } = props.blok || props;
+
   const colClassNames = cn(className, 'column flex flex-col', {
     "justify-start" : vAlignContent == 'top',
     "justify-center" : vAlignContent == 'center',
@@ -55,11 +58,14 @@ const Column: React.FC<Props> = ({
   return (
     <div 
       className={colClassNames}
-      {...sbEditable}
+      {...(props.blok && storyblokEditable(props.blok))}
       role="presentation"
       style={style}
     >
-      {children}
+      <ChildrenOrBloks 
+        children={children}
+        bloks={props.blok?.content}
+      />
     </div>
   )
 }

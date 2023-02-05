@@ -1,101 +1,159 @@
-import { SbEditableContent } from "@/types/storyBlok";
+// https://nextjs.org/docs/api-reference/next/image
+
 import NextImage from 'next/image';
 import cn from "classnames";
 import type { storyBlokImage } from '@/types/storyBlok';
-import { useEffect, useLayoutEffect, useRef } from "react";
-import { gsap } from 'gsap';
+import { useState } from 'react';
 
 interface Props {
   image: storyBlokImage | undefined
   maxWidth?: number
   preload?: boolean
-  align?: 'center' | 'start' | 'end'
   className?: string
-  layout?: 'fill' | undefined
-  objectFit?: 'contain' | 'cover' | undefined
-  pin?: boolean
-  alignOverlayContent?: any
-  sbEditable?: SbEditableContent
+  fill?: boolean
+  sizes?: {
+    sm?: string
+    md?: string
+    lg?: string
+  }
 }
 
 const CustomImage: React.FC<Props> = ({
   image,
-  maxWidth,
-  align = 'start',
   preload,
-  layout,
-  objectFit,
   className,
+  sizes,
+  maxWidth,
+  fill = false,
 }) => {
-  /**
-   * TODO: replace with a standard image placeholder when an image doesnt exist
-   * 
-   */
-  if (!image?.filename || !image?.filename) return (
-    <div className="bg-gray-300 aspect-video flex justify-center items-center text-gray-800">
-      Image does not exist
-    </div>
-  )
+  const [ loading, setLoading ] = useState(true);
+
+  // if image isn't supplied, return nothing.
+  if (!image || !image?.filename) return null;
+
+  let imageSourceCDN = "";
+  if (image.filename.includes('storyblok')) imageSourceCDN = "storyblok";
+  if (image.filename.includes('shopify')) imageSourceCDN = "shopify";
 
   const dimensions = {
     width: 0,
-    height: 0
+    height: 0,
+    aspect: 0,
   }
 
-  if (image.width || image.height) {
+  // TODO: set default if image is staticly imported
+  // dimensions['width'] = 0;
+  // dimensions['height'] = 0;
+
+  if (imageSourceCDN === "shopify") {
+    // these dimesions come through via the image object in Shopify
     dimensions['width'] = image.width || 0;
     dimensions['height'] = image.height || 0;
-  } else {
+  }
+
+  if (imageSourceCDN === "storyblok") {
     // storyblok solution
     dimensions['width'] = parseInt(image.filename?.split('/')[5].split('x')[0]);
     dimensions['height'] = parseInt(image.filename?.split('/')[5].split('x')[1]);
   }
 
-  const dataBlurURL = () => {
-    if (image.filename.includes('storyblok')) {
-      return `${image.filename}/m/10x10`;
-    }
+  // set aspect ratio of image
+  dimensions['aspect'] = dimensions['height'] /  dimensions['width'];
 
-    if (image.filename.includes('shopify')) {
-      return image.thumbnail_url;
-    }
-
-    return '/';
+  // alter dimensions if maxWidth set
+  if (maxWidth) {
+    dimensions['width'] = maxWidth;
+    dimensions['height'] = maxWidth * dimensions['aspect'];
   }
 
-  if (!image.filename) return null;
+  /**
+   * Data blur function to get the blurred 
+   * image URL for loading
+   * 
+   * @returns 
+   */
+  const getPlaceholderUrl = () => {
+    let placeholderUrl = ""
+    if (imageSourceCDN === "storyblok") placeholderUrl = `${image.filename}/m/10x10`;
+    if (imageSourceCDN === "shopify") placeholderUrl = `${image.filename}&width=10`;
+
+    return placeholderUrl;
+  }
+
+  
+  /**
+   * Using a loader to prevent unnecessary 
+   * requests to external CDN. Nextjs's image optimizer
+   * collects the full size image and morphs them on 
+   * their own server. Storyblok and Shopify already 
+   * do this so is not necessary to do again. It also
+   * causes bigger financial charges from Storyblok by
+   * pulling in their full size images.
+   * 
+   * @param param0 
+   * @returns 
+   */
+  const myLoader = ({ 
+    src, 
+    width,
+  }: {
+    src: string,
+    width: number,
+  }) => {
+    let morphedSrc = src;
+    let maxImageWidth = maxWidth ? maxWidth : width;
+
+    // reduce quality and resize
+    if (imageSourceCDN === "storyblok") morphedSrc = `${src}/m/${maxImageWidth}x0/filters:quality(75)`;
+    if (imageSourceCDN === "shopify") morphedSrc = `${src}&width=${maxImageWidth}`;
+    return `${morphedSrc}`
+  }
 
   return (
-    <ConditionalWrapper
-      layout={layout}
-      className={className}
-    >
+    <>
+      {
+        loading ? (
+          /**
+           * nextjs 13 image placeholder doesn't accept
+           * image urls anymore. It wants datablur base64 
+           * encoded images, using Plaiceholder but is 
+           * difficult to get these on the fly. This is a 
+           * workaround to show a blurred image while loading 
+           */ 
+          <div
+            className="inset-0"
+            style={{
+              // width: !fill ? dimensions.width : "100%",
+              // height: !fill ? dimensions.height : "100%",
+              backgroundImage: `url(${getPlaceholderUrl()})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: "cover",
+              position: "absolute"
+            }}
+          />
+        ) : null
+      }
+
       <NextImage
-        className={className}
+        className={cn(className, { "object-cover" : fill })}
         src={image.filename}
         alt={image.alt || 'Image'}
-        width={layout != 'fill' ? dimensions.width : undefined}
-        height={layout != 'fill' ? dimensions.height : undefined}
-        placeholder="blur"
-        blurDataURL={dataBlurURL()}
+        width={!fill ? dimensions.width : undefined}
+        height={!fill ? dimensions.height : undefined}
+        loader={myLoader}
+        onLoad={() => setLoading(false)}
+        // placeholder="empty"
+        // blurDataURL={dataBlurURL()}
         priority={preload}
-        layout={layout}
-        objectFit={objectFit}
+        fill={fill}
+        sizes={sizes ? `
+          (max-width: 768px) ${sizes.sm || '100vw'},
+          (max-width: 1200px) ${sizes.md || '100vw'},
+          ${sizes.lg || '100vw'}
+        ` : undefined}
       />
-    </ConditionalWrapper>
+    </>
   );
 };
 
 export default CustomImage;
-
-const ConditionalWrapper = ({children, layout, className} : {children: any, layout?: any, className?: any}) => {
-  if (layout === "fill") {
-    return children;
-  } else {
-    return (
-      <div className={cn(className, "text-[0] relative")}>
-        {children}
-      </div>
-    )
-  }
-}

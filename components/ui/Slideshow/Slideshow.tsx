@@ -1,5 +1,5 @@
 import SlideArrow from "./SlideArrow";
-import DynamicComponent from "@/components/helpers/DynamicComponent";
+// import DynamicComponent from "@/components/helpers/DynamicComponent";
 import cn from "classnames";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { SwiperOptions, Navigation, A11y, Pagination } from 'swiper';
@@ -20,11 +20,15 @@ interface Props {
   children: ReactNode[] | Component[] | any[]
   thumbs?: any
   modules?: any[]
-  navigationStyle?: "inset" | "protrude"
+  navigationStyle?: "inset"
+  onResize?: any
+  showPagination?: boolean
+  showNavigation?: boolean
 }
 
 const Slideshow: React.FC<Props> = ({ 
   effect = 'slide',
+  onResize,
   showSlides = {
     sm: 1,
     lg: 1,
@@ -35,15 +39,15 @@ const Slideshow: React.FC<Props> = ({
   spaceBetween = 0,
   modules = [],
   thumbs,
-  navigationStyle = "protrude"
+  navigationStyle = "inset",
+  showPagination = false,
+  showNavigation = false,
 }) => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
   const paginationContainerRef = useRef(null);
 
   const navigationArrowClasses = cn([
-    "bg-secondary",
-    "rounded-full",
     "aspect-square",
     "pointer-events-auto",
     "transition-opacity",
@@ -57,7 +61,7 @@ const Slideshow: React.FC<Props> = ({
       pagination = false, 
     } = swiper.params;
 
-    if (typeof navigation === 'object') {
+    if (typeof navigation === 'object' && showNavigation) {
       navigation.prevEl = navigationPrevRef.current;
       navigation.nextEl = navigationNextRef.current;
 
@@ -65,7 +69,7 @@ const Slideshow: React.FC<Props> = ({
       swiper.navigation.update();
     }
 
-    if (typeof pagination === 'object') {
+    if (typeof pagination === 'object' && showPagination) {
       pagination.el = paginationContainerRef.current;
       pagination.clickable = true;
 
@@ -84,13 +88,16 @@ const Slideshow: React.FC<Props> = ({
   const swiperProps = {
     threshold: 10,
     modules: [ Navigation, A11y, Pagination, ...modules ],
-    draggable: true,
+    draggable: false,
     enabled: children.length > 1,
     slidesPerView: showSlides.sm || 1,
     spaceBetween: spaceBetween > 30 ? 22 : spaceBetween,
     onSwiper: handleRefConnection,
     onBreakpoint: handleRefConnection,
+    onResize: onResize,
     thumbs: thumbs,
+    noSwiping: true,
+    noSwipingClass: 'swiper-slide',
     breakpoints: {
       768: {
         slidesPerView: showSlides.lg,
@@ -125,20 +132,26 @@ const Slideshow: React.FC<Props> = ({
           })
         }
 
-        <div className={cn("swiper-nav-container", {
-          "" : navigationStyle === "protrude"
-        })}>
-          <button ref={navigationPrevRef} className={cn(navigationArrowClasses)}>
-            <SlideArrow direction="previous" className="text-primary" />
-          </button>
-          <button ref={navigationNextRef} className={cn(navigationArrowClasses)}>
-            <SlideArrow direction="next" className="text-primary" />
-          </button>
-        </div>
+        {
+          showNavigation ? (
+            <div className="text-center mt-12">
+              <button ref={navigationPrevRef} className={cn(navigationArrowClasses, "mr-8")}>
+                <SlideArrow direction="previous"/>
+              </button>
+              <button ref={navigationNextRef} className={cn(navigationArrowClasses)}>
+                <SlideArrow direction="next" />
+              </button>
+            </div>
+          ) : null
+        }
 
-        <div className="container mt-4 md:mt-12">
-          <div ref={paginationContainerRef} className="pagination-container" />
-        </div>
+        {
+          showPagination ? (
+            <div className="container mt-8 md:mt-12">
+              <div ref={paginationContainerRef} className="pagination-container" />
+            </div>
+          ) : null
+        }
      </Swiper>
     </div>
   )

@@ -7,3 +7,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+input::placeholder,
+textarea::placeholder {
+  @apply uppercase text-black text-xs md:text-sm;
+}

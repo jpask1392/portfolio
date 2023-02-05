@@ -1,39 +1,60 @@
 import Ticker from 'react-ticker';
-import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
+import { render } from "storyblok-rich-text-react-renderer";
 import { renderOptions } from "utils/constants";
+import { storyblokEditable } from "@storyblok/react";
+import type { SbBlokData } from "@storyblok/react"
+import { SbEditableContent } from "@/types/storyBlok";
+import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
+import { useState } from 'react';
 
 interface Props {
-  text: string,
+  text?: string | any,
   repeat?: string,
+  speed?: number
 }
 
-const Marquee: React.FC<Props> = ({
-  text,
-  repeat = '2',
-}) => {
-  /**
-   * TODO: Marquee causes a small bump on gsap start point detection
-   *  
-   * I think its rendering blank initially and then loading the content.
-   * The height on the UI element is overcomming that issue for now.
-   * */ 
+interface Blok extends SbBlokData, Props {}
+
+interface MarqueeProps extends Props {
+  children?: any
+  blok?: Blok
+}
+
+const Marquee: React.FC<MarqueeProps> = (props) => {
+  const {
+    text,
+    repeat = '2',
+    speed = 5,
+  } = props.blok || props;
+
+  const [pageIsVisible, setPageIsVisible] = useState(true)
+
+  useIsomorphicLayoutEffect(() => {
+    document.addEventListener("visibilitychange", handlePageChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handlePageChange);
+    }
+  }, [])
+
+  const handlePageChange = () => {
+    setPageIsVisible(!document.hidden)
+  }
+
   return (
-    <div className="ui-marquee bglow py-3 border-t border-b border-black">
-      <div className="h-[44px]">
-        <Ticker speed={10}>
-          {({ index }) => (
-            <div className="uppercase">
-              { render(text, {
-                ...renderOptions,
-                nodeResolvers: {
-                  [NODE_PARAGRAPH]: (children) => <p className="!font-bold text-5xl whitespace-nowrap">{children}</p>
-                }
-              }) }
-            </div>
-          )}
-      </Ticker>
-      </div>
-      
+    <div 
+      {...(props.blok && storyblokEditable(props.blok))}
+      className="ui-marquee"
+    >
+      {
+        pageIsVisible ? (
+          <Ticker speed={speed}>
+            {({ index }) => (
+              <>{props.children ? props.children : render(text, renderOptions)}</>
+            )}
+          </Ticker>
+        ) : null
+      }
     </div>
   )
 }

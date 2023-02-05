@@ -1,53 +1,83 @@
-.h1 {
+.text-display {
   @apply
-    uppercase
-    font-header
-    font-bold
+    font-sans
     leading-none
-    text-7xl 
-    md:text-9xl
-    xl:text-11xl;
+    uppercase
+    font-black
+    text-10xl 
+    lg:text-12xl
+    xl:text-13xl
+    2xl:text-14xl;
 }
 
-.h2 {
+.h1:not(.text-display) {
   @apply
     font-header
-    leading-normal
-    text-6xl
+    font-bold
+    leading-[0.82]
+    uppercase
+    text-background;
+
+    text-shadow: -1px -1px 0 #2E2E2E, 1px -1px 0 #2E2E2E, -1px 1px 0 #2E2E2E, 1px 1px 0 #2E2E2E;
+}
+
+.h2,
+h2:not([class]) {
+  @apply
+    font-header
+    leading-none
+    uppercase
+    font-black
+    text-3xl
+    md:text-6xl
     lg:text-8xl;
 }
 
-.h3 {
-  @apply 
-    uppercase
-    font-header
-    font-bold
-    leading-tight
-    tracking-snug
-    text-xl;
-}
-
-.h4 {
+.h3,
+h3:not([class]) {
   @apply
     font-header
+    leading-none
+    uppercase
+    font-bold
     text-base
-    md:text-4xl
-    leading-tight;
+    md:text-xl
+    lg:text-4xl;
 }
 
-/* Body defined as H6 in typography guide */
+.h4,
+h4:not([class]) {
+  @apply
+    font-header
+    uppercase
+    leading-tight
+    text-tiny
+    lg:text-sm;
+}
+
 p,
 .p,
 ul,
 .ul {
   @apply 
     text-base
+    font-normal
     leading-relaxed;
 }
 
-.font-stroke {
-  color: white;
-  -webkit-text-fill-color: #F7F4E4; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
+blockquote p {
+  @apply text-3xl italic;
+}
+
+ol {
+  counter-reset: list;
+
+  li > *:first-child  {
+    &::before {
+      counter-increment: list;
+      content: counter(list) ".";
+
+      @apply mr-2;
+    }
+  }
 }

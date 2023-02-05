@@ -1,3 +1,4 @@
+import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 import { useEffect, useState } from "react"
 
 const useDevice = () => {
@@ -11,13 +12,19 @@ const useDevice = () => {
     }
   }
 
-  useEffect(() => {
-    const breakpoint = window.matchMedia( '(min-width: 1024px)' );
+  useIsomorphicLayoutEffect(() => {
+    const breakpoint = window.matchMedia( '(min-width: 1560px)' );
     breakpointChecker(breakpoint);
 
-    breakpoint.addEventListener('change', breakpointChecker);
-
-    return () => breakpoint.removeEventListener('change', breakpointChecker);
+    // added support for depreceated devices
+    try {
+      breakpoint.addEventListener('change', breakpointChecker);
+      return () => breakpoint.removeEventListener('change', breakpointChecker);
+    } catch (error) {
+      breakpoint.addListener(breakpointChecker);
+      return () => breakpoint.removeListener(breakpointChecker);
+    }
+    
   }, []);
 
   return device;

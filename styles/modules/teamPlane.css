@@ -1,0 +1,5 @@
+.ui-team-plane {
+  .team-member {
+    left: calc(5.8% * var(--offset));
+  }
+}

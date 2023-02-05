@@ -14,18 +14,9 @@ const Announcement: React.FC<Props> = ({
   announcementTitle
 }) => {
   return (
-    <div id="announcement-bar" className="bg-primary text-center py-3">
-      <div className="whitespace-nowrap items-center mx-auto text-xs md:text-base px-6 w-full overflow-auto">
-        <strong className="">{announcementTitle}</strong>
-        <span className="hidden md:inline ">{announcementText}</span>
-        <span className="pl-8">
-          <StoryBlokLink sbLink={announcementLink}>
-            <DynamicIcon 
-              type="announcementArrow" 
-              className="inline"
-            />
-          </StoryBlokLink>
-        </span>
+    <div id="announcement-bar" className="bg-red w-full">
+      <div className="px-8 container-bordered text-center justify-center text-white h-8 flex items-center">
+        <span className="h4">{announcementText}</span>
       </div>
     </div>
   )

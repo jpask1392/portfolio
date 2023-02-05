@@ -3,18 +3,22 @@ import React from 'react'
 export type storyBlokImage = {
   id: string,
   filename: string,
+  title?: string
   thumbnail_url?: string
   alt?: string,
   width?: number
   height?: number
+  source?: string
 }
 
 export type storyBlokLink = {
+  id?: string
   linktype?: string
   cached_url?: string
   url?: string
   email?: string
   anchor?: string
+  title?: string
 }
 
 export interface SbEditableContent {
@@ -23,21 +27,6 @@ export interface SbEditableContent {
     component: string
     [index: string]: any
 }
-
-interface SbEditableProps {
-    content: SbEditableContent
-}
-
-// declare class SbEditable extends React.PureComponent<SbEditableProps, {}> {
-//     constructor(props: SbEditableProps)
-//     componentDidMount(): void
-//     componentDidUpdate(): void
-//     addPropsOnChildren(): void
-//     addClass(el: HTMLElement, className: string): void
-//     render(): React.ReactNode
-// }
-
-// export default SbEditable
 
 export type Story = {
   alternates: string[]
@@ -59,6 +48,7 @@ export type Story = {
   tag_list: string[]
   uuid: string
   settings?: any
+  pageTemplate?: any
 }
 
 export type Stories = {
@@ -66,20 +56,3 @@ export type Stories = {
     stories: Story[]
   }
 }
-
-// export type SBParams = {
-//     token: string
-//     with_tag?: string
-//     is_startpage?: 0 | 1
-//     starts_with?: string
-//     by_uuids?: string
-//     excluding_ids?: string
-//     excluding_fields?: string
-//     version?: 'draft' | 'published'
-//     cv?: number
-//     sort_by?: string
-//     search_term?: string
-//     filter_query?: string
-//     per_page?: number
-//     page?: string
-// }

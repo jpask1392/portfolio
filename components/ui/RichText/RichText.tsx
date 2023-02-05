@@ -1,75 +1,75 @@
+
 import { modulePadding } from "@/utils/modulePadding";
-import { SbEditableContent } from "@/types/storyBlok";
-import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import { render } from "storyblok-rich-text-react-renderer";
 import { renderOptions } from "utils/constants";
 import cn from "classnames";
 import { useRef } from 'react';
+import { storyblokEditable } from "@storyblok/react";
+import type { SbBlokData } from "@storyblok/react"
+
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { useScrollContext } from "@/components/context/scroll";
 import { gsap } from 'gsap';
-import CustomEase from "gsap/dist/CustomEase";
+import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 
 interface Props {
   align?: 'left' | 'center' | 'right'
   className?: string
   text?: string
-  sbEditable?: SbEditableContent
   animationDelay?: number
   color?: string
   padding?: any
-  children?: any
+  disableAnimation?: boolean
 }
 
-const RichText: React.FC<Props> = ({ 
-  align = "left",
-  text, 
-  className,
-  children,
-  sbEditable,
-  animationDelay = 0.65,
-  color,
-  padding,
-}) => {
-  const componentRef = useRef<null | HTMLDivElement>(null);
-  useIsomorphicLayoutEffect(() => {
-    // if (componentRef.current != null) {
-    //   const tl = gsap.timeline({
-    //     scrollTrigger: {
-    //       trigger: componentRef.current,
-    //       start: 'top bottom-=100',
-    //       markers: false,
-    //       scroller: "[data-scroll-container]",
-    //     },
-    //   });
+interface Blok extends SbBlokData, Props {}
 
-    //   tl.fromTo(componentRef.current, { 
-    //     opacity: 0,
-    //   }, {
-    //     opacity: 1,
-    //     delay: animationDelay,
-    //     stagger: 0.2,
-    //     duration: 0.75,
-    //     ease: CustomEase.create("custom", "0.5,0,0,1"),
-        
-    //   });
-    // }
-  }, [componentRef])
+interface RichTextProps extends Props {
+  children?: any
+  blok?: Blok
+}
+
+const RichText: React.FC<RichTextProps> = (props) => {
+  const {
+    align = "left",
+    text, 
+    className,
+    color,
+    padding,
+    disableAnimation,
+  } = props.blok || props;
+
+  const componentRef = useRef<null | HTMLDivElement>(null);
+  const { scroll } = useScrollContext();
+  // const tl = useRef(null);
+
+  useIsomorphicLayoutEffect(() => {
+    if (!scroll || disableAnimation) return;
+
+    gsap.to(componentRef.current, {
+      opacity: 1,
+      scrollTrigger: {
+        trigger: componentRef.current,
+        markers: false,
+        start: "top bottom-=20%",
+        scroller: "[data-scroll-container]",
+      }
+    })
+  }, [scroll])
 
   return (
     <div
+      ref={componentRef}
+      {...(props.blok && storyblokEditable(props.blok))}
       className={cn(className, "ui-richtext", { 
         [`text-${align}`] : align,
-        "self-start" : align === 'left',
         [`text-${color}`] : color,
         [modulePadding(padding)] : padding,
+        "self-start" : align === 'left',
+        "opacity-0": !disableAnimation
       })}
-      ref={componentRef}
-      {...sbEditable}
     >  
-      { 
-        text 
-          ? render(text, renderOptions)
-          : children
-      }
+      { text ? render(text, renderOptions) : null }
     </div>
   );
 };

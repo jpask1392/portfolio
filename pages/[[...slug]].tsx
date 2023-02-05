@@ -1,48 +1,49 @@
-// https://www.storyblok.com/tp/next-js-react-guide
+/**
+ * NOTES:
+ * 
+ * This endpoint renders all pages from Storyblok. 
+ * 
+ * Pages not requiring any information from Storyblok's editor 
+ * will be loaded through different files and use the globalContext
+ * for collecting global information.
+ * 
+ */
 
-import getGlobalData from "@/utils/getGlobalData";
+// @see: https://www.storyblok.com/tp/add-a-headless-cms-to-next-js-in-5-minutes
+
 import { NextSeo } from "next-seo";
 import Layout from "@/components/templates/Layout";
-import DynamicComponent from "@/components/helpers/DynamicComponent";
+import type { StoryData } from "@storyblok/react";
+// import { getPlaiceholder } from "plaiceholder";
 
-import Storyblok, { useStoryblok } from "../utils/storyblok";
-
-import type { Story } from '@/types/storyBlok';
+import { 
+  getStoryblokApi, 
+  StoryblokComponent,
+  useStoryblokState,
+ } from "@storyblok/react"
 
 export default function Page({
   story,
-  global,
-  preview,
+  template,
 } : {
-  story: Story | any,
-  preview: boolean,
-  global: Story | undefined
+  story: StoryData,
+  template: StoryData,
 }) {
-  // use the preview variable to enable the bridge only in preview mode
-  // const enableBridge = preview;
-  const enableBridge = true; // load the storyblok bridge everywhere
-  story = useStoryblok(story, enableBridge);
+  // connect to storyblok
+  story = useStoryblokState(story, {
+    resolveRelations: ["teamPlane.members"],
+  });
 
-  const seo = ('seo' in story?.content) && story?.content.seo[0]; // only one seo blok
+  // get seo blok
+  const seo = story && ('seo' in story.content) && story?.content.seo[0]; // only one seo blok
 
   return (
-    <Layout 
-      global={global} 
-      editMode={story?.slug === 'global-template'}
-      preview={preview}
-    >
-      {/* 
-        This is a top level DynamicComponent and will usually be "Page".
-        It can be used for other content types coming from Storyblok too.
-      */}
-      <DynamicComponent 
-        blok={story?.content || {}}
-      />
+    <Layout story={story}>
+      <StoryblokComponent blok={story.content} />
 
       <NextSeo
         title={seo?.title || story.name}
         description={seo?.description || ''}
-        // noindex={true | false}
       />
     </Layout>
   );
@@ -67,8 +68,8 @@ export async function getStaticProps({
 
   let sbParams: any = {
     version: preview ? "draft" : "published",
+    resolve_relations: [],
     language: locale,
-    resolve_relations: ["featuredProjects.projects"],
   };
 
   if (preview) {
@@ -76,26 +77,22 @@ export async function getStaticProps({
     sbParams.cv = Date.now();
   }
 
-  try {
-    // gets a single story's data from StoryBlok
-    let { data } = await Storyblok.get(`cdn/stories/${slug}`, sbParams);
-    // get global layout information for header, footer etc
-    const global = await getGlobalData(sbParams);
+  // gets a single story's data from StoryBlok
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  // let { data: config } = await storyblokApi.get('cdn/stories/config', sbParams); // page/template
+  // let { data: settings } = await storyblokApi.get('cdn/stories/settings', sbParams); // global settings
 
-    return {
-      props: {
-        story: data ? data.story : false,
-        preview,
-        global: global ? global.data.story : false,
-      },
-      revalidate: 3600, // revalidate every hour
-    };
-
-  } catch (error) {
-    console.log("message:", error);
-
-    return {}
-  }
+  return {
+    props: {
+      story: data ? data.story : false,
+      // config: config ? config.story : false,
+      // settings: settings ? settings.story : false,
+      // template: template ? template.story : false,
+      preview,
+    },
+    revalidate: 3600, // revalidate every hour
+  };
 }
 
 
@@ -106,25 +103,19 @@ export async function getStaticProps({
  * See here: https://nextjs.org/docs/basic-features/data-fetching/get-static-paths
  */
 export async function getStaticPaths({ locales } : { locales: any }) {
-  let { data } = await Storyblok.get("cdn/links/");
-
-  let paths: any[] = [];
+  const storyblokApi = getStoryblokApi();
+  let { data } = await storyblokApi.get("cdn/links/");
+ 
+  let paths: any = [];
   Object.keys(data.links).forEach((linkKey) => {
     if (data.links[linkKey].is_folder) {
       return;
     }
-
-    // get array for slug because of catch all
+ 
     const slug = data.links[linkKey].slug;
     let splittedSlug = slug.split("/");
     if (slug === "home") splittedSlug = false;
-
-    // remove 'product' paths - duplicates are not allowed    
-    if (
-      splittedSlug[0] === "product"
-      || splittedSlug[0] === "settings"
-    ) return;
-
+ 
     paths.push({ params: { slug: splittedSlug } });
   });
 

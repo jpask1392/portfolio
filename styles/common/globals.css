@@ -1,6 +1,5 @@
-html,
-body {
-  @apply bg-background;
+html {
+  
 }
 
 a {
@@ -12,26 +11,35 @@ a {
   box-sizing: border-box;
 }
 
-.main-wrapper {
-  @apply w-full;
-}
-
 :root {
-  --container-size: 640px;
+  --nav-height: 50px;
 
-  @screen md {
-    --container-size: 768px;
+  @screen sm {
+    --nav-height: 60px;
   }
 
   @screen lg {
-    --container-size: 1024px;
+    --nav-height: 72px;
   }
+}
 
-  @screen xl {
-    --container-size: 1440px;
-  }
+.container-bordered {
+  @apply sm:mx-[24px] lg:mx-[80px] sm:border-x border-black;
+}
 
-  @screen 2xl {
-    --container-size: 1920px;
+.edge-to-edge {
+  @apply sm:-mx-[24px] lg:-mx-[80px] w-screen;
+}
+
+body {
+  overflow-anchor: none;
+}
+
+.clip-path {
+  clip-path: inset(calc(100% - 50px) 0px 0px 0px);
+  transition: all 0.1s;
+
+  &.active {
+    clip-path: inset(0px 0px 0px 0px);
   }
 }

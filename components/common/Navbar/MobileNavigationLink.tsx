@@ -1,3 +1,4 @@
+import Header from "@/components/ui/Header";
 import Button from "@/components/ui/Button";
 import DynamicIcon from "@/components/icons/DynamicIcon";
 import type { navLink } from "@/types/navigation";
@@ -21,10 +22,7 @@ const MobileNavigationLink: React.FC<MobileNavigationLinkProps> = ({
     subItems,
   } = nav_link;
 
-  const router = useRouter();
   const [ active, setActive ] = useState<boolean>(false);
-
-  const navLinkClasses = cn("py-4 md:py-7 px-8 xl:p-0 border-b border-secondaryLight xl:border-none w-full flex items-center");
 
   const handleClick = (e: any) => {
     if (subItems.length) {
@@ -36,57 +34,71 @@ const MobileNavigationLink: React.FC<MobileNavigationLinkProps> = ({
 
   return (
     <span
-      className={cn(className, "flex flex-wrap items-center h-full text-secondary")}
+      className={cn(className, "flex flex-wrap items-center h-full")}
     >
       <StoryBlokLink
-        className={navLinkClasses}
+        className={"border-b border-red w-full"}
         sbLink={link}
       >
         <span 
-          className="flex-1 font-header uppercase font-bold text-base md:text-4xl"
+          className="flex-1 h3 flex items-center py-4 md:py-7 px-8"
           onClick={handleClick}
         >
-          {name}
-        </span>
+          <span className="flex-1">
+            {name}
+          </span>
 
-        {
-          subItems.length ? (
-            <span className="pl-5">
-              <DynamicIcon 
-                className="h-4"
-                type="chevronRight"
-              />
-              </span>
-          ) : null
-        }
+          {
+            subItems.length ? (
+              <span className="bg-red rounded-full text-white p-1">
+                <DynamicIcon 
+                  className="w-4 h-4 -rotate-90"
+                  type="chevronDown"
+                />
+                </span>
+            ) : null
+          }
+        </span>
       </StoryBlokLink>
 
       {
         subItems.length ? (
-          <ul className={cn("w-full absolute inset-y-0 bg-primary transition-all overflow-auto", {
+          <div className={cn("w-full absolute inset-y-0 transition-all overflow-auto z-20", {
             "-left-full" : !active,
             "left-0" : active
           })}>
-            <div className="px-8 mb-4">
-              <Button 
-                text="Back"
-                onDark
-                className="w-full !max-w-none"
-                onClick={() => { setActive(false) }}
-              />
+            <div className="px-8 py-4 border-b border-red">
+              <a
+                href="#" 
+                onClick={(e) => { e.preventDefault(); setActive(false) }}
+                className="h3 flex items-center"
+              >
+                <span className="bg-red rounded-full text-white p-1 mr-4">
+                  <DynamicIcon 
+                    className="w-4 h-4 rotate-90"
+                    type="chevronDown"
+                  />
+                </span>
+                Back
+              </a>
             </div>
-            {
-              subItems.map((item, i) => {
-                return (
-                  <li key={i}>
-                    <MobileNavigationLink 
-                      nav_link={item} 
-                    />
-                  </li>
-                )
-              })
-            }
-          </ul>
+            <div className="px-8 py-4 border-b border-red">
+              <Header>{name}</Header>
+            </div>
+            <ul>
+              {
+                subItems.map((item, i) => {
+                  return (
+                    <li key={i}>
+                      <MobileNavigationLink 
+                        nav_link={item} 
+                      />
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
         ) : null
       }
     </span>

@@ -1,3 +1,7 @@
 .section {
   @apply relative z-0;
 }
+
+.container .container {
+  @apply !px-0;
+}

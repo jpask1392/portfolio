@@ -1,18 +1,43 @@
-## Storyblok Next.js Multi-language Blog
+## How to use
 
-This is the example repository for building a multi-language blog with Storyblok.
+- `git clone` the repo
+- run `npm install`
+- run `npm run dev`
+- Push to main to see on Vercel
 
-Follow our [The Complete Guide to Build a Full Blown Multilanguage Website with Next.js](https://www.storyblok.com/tp/next-js-react-guide) tutorial to set it up
+## Docs
 
-1. Clone the example space with this link: <https://app.storyblok.com/#!/build/95804>
-2. Enter your preview token in the `util/storyblok.js` file
-3. Install dependencies and start the development server `npm install && npm run dev`
-4. Add your [http://localhost:3000](http://localhost:3000) as the **default location URL** in your Storyblok space settings
+- [Figma file](https://www.figma.com/file/Pl4EVLaIU1wtv8izvxB90p/Collective-Strangers-Website-Design?node-id=50%3A107)
+- [Vercel Preview](https://website-mvuc37jhl-collective-strangers.vercel.app/)
 
-## Learn More
+## How to run tests
 
-To learn more about Next.js, take a look at the following resources:
+`npx hardhat test`
 
-- [Add a headless CMS to Next.js in 5 minutes](https://www.storyblok.com/tp/add-a-headless-cms-to-next-js-in-5-minutes) - Tutorial to get started with Next.js & Storyblok
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## How to deploy
+
+To deploy the contract to the test net, make sure that to update `hardhat.config.js` to have the private key of the wallet you'd like to deploy from, and an Infura project ID.
+
+You will also need to add the contract to the allowlist in the security settings for the project within Infura.
+
+Once all that is set up, you can run the following command to deploy to the Rinkeby test network:
+`npx hardhat run scripts/deploy.js --network rinkeby`
+
+## How to verify the contract
+
+Once the contract is deployed, you can also verify the contract. First, add the contract address to the allowlist in the security setting for the project in Infura.
+
+Then run the following command:
+`npx hardhat verify --network rinkeby --constructor-args arguments.js DEPLOYED_CONTRACT_ADDRESS`
+`npx hardhat verify --network rinkeby DEPLOYED_CONTRACT_ADDRESS https://csone.free.beeceptor.com`
+
+1. Deploy contract
+1. Set image URI
+1. Set animation URI
+1. Update claim merkle root
+1. Set isClaimActive to true
+1. Update community sale merkle root
+1. Set community sale active to true
+1. Set community sale active to false
+1. Update community sale merkle root to the waitlist merkle root
+1. Set wait list sale active to true

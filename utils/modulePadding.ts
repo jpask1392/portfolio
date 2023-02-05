@@ -24,9 +24,10 @@ export const modulePadding: (padding: padding) => string = (padding) => {
   Object.keys(padding).forEach((key: string) => {
     // sizes in tailwind units
     const sizes: any = {
+      xs: '4',
       sm: '5',
       md: '10',
-      lg: '12',
+      lg: '20',
     }
 
     padding[key].top && classes.push((key === 'base' ? "" : key + ":") + 'pt-' + sizes[padding[key].top]);

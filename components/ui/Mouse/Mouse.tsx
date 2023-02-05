@@ -1,11 +1,13 @@
-import { useMouseContext } from '@/components/context/mouseContext';
+import { useUIContext } from "@/components/context/uiContext";
 import cn from 'classnames';
 import { useEffect, useRef, useState } from "react";
 import { gsap } from 'gsap';
 
 const Mouse = () => {
   const mouseRef = useRef<HTMLDivElement | null>(null);
-  const { mouseState } = useMouseContext(); // inactive, drag, dragPress, anchor, anchorPress
+  const { UI: { mouse } } = useUIContext();
+
+  return null;
 
   useEffect(() => {
     document.onmousemove = handleMouseMove;
@@ -43,16 +45,16 @@ const Mouse = () => {
       ref={mouseRef}
     >
       <div 
-        className={cn("w-20 h-20 relative flex justify-center items-center mx-auto text-center origin-center", {
-          "rounded-full scale-[0.3]" : mouseState.style === 'inactive',
-          "bg-white rounded-full shadow-md" : mouseState.style === "drag" || mouseState.style === "action",
+        className={cn("w-10 h-10 relative flex justify-center items-center mx-auto text-center origin-center border border-black rounded-full", {
+          // "rounded-full scale-[0.3]" : mouse.style === 'inactive',
+          "bg-white rounded-full shadow-md" : mouse.style === "drag" || mouse.style === "action",
         })}
         style={{
           transition: "transform 0.3s, height 0.3s"
         }}
       >
         {
-          mouseState.style === "drag" 
+          mouse.style === "drag" 
             ? (
               <>
                 <span className="absolute right-full w-5 h-5 block mr-3 border-[16px] border-r-white border-transparent border-black" />
@@ -63,9 +65,9 @@ const Mouse = () => {
         }
 
         {
-          mouseState.innerText ? (
+          mouse.innerText ? (
             <span className="uppercase tracking-wider text-sm">
-              {mouseState.innerText}
+              {mouse.innerText}
             </span>
           ) : null
         }

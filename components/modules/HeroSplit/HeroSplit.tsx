@@ -20,6 +20,7 @@ const Hero: React.FC<Props> = ({
 
   const heroClassNames = cn(className, [
     "hero",
+    "hero-split",
     "relative",
     "overflow-hidden",
   ]);
@@ -29,7 +30,7 @@ const Hero: React.FC<Props> = ({
 
   return (
     <section className={heroClassNames} ref={headerRef}>
-      <div ref={scrollerRef} className="h-full bg-primary py-20">
+      <div ref={scrollerRef} className="h-full bg-red py-20">
 
         {
           (TopBlockComponent) && (
@@ -47,7 +48,6 @@ const Hero: React.FC<Props> = ({
             <CustomImage 
               image={image} 
               layout="fill" 
-              objectFit="cover"
               preload
             />
           </div>

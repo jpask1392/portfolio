@@ -1,150 +1,121 @@
-import Button from "@/components/ui/Button";
-import CustomImage from "@/components/ui/Image";
-import Logo from "@/components/ui/Logo";
+import { useScrollContext } from "@/components/context/scroll";
+import Link from 'next/link';
+import Logo, { LogoSmall } from "@/components/ui/Logo";
 import cn from "classnames";
-import DynamicIcon from "@/components/icons/DynamicIcon";
-import SearchBar from "@/components/common/Navbar/SearchBar";
 import NavigationLink from './NavigationLink';
-import MobileMenu from './MobileMenu';
-import { Squash as Hamburger } from 'hamburger-react'
-import Link from 'next/link'
-import { useEffect, useState, useRef } from "react";
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
+import { useEffect, useState } from "react";
+import type { SbBlokData } from "@storyblok/react"
+import { useGlobalContext } from "@/components/context/globalContext";
 
-import { SbEditableContent } from "@/types/storyBlok";
+import { storyblokEditable } from "@storyblok/react";
 import type { storyBlokLink, storyBlokImage } from '@/types/storyBlok';
 import { useRouter } from "next/router";
 
-interface NavProps {
+interface Blok extends SbBlokData {
   className?: string
   navigationList: any
-  actionItems?: string[]
-  logo: storyBlokImage
-  logoLink: storyBlokLink
-  ctaText?: string
-  ctaLink: storyBlokLink
-  sbEditable : SbEditableContent
 }
 
-const Navigation: React.FC<NavProps> = ({  
-  className,
-  navigationList,
-  actionItems,
-  logo,
-  logoLink,
-  ctaText,
-  ctaLink,
-  sbEditable,
-}) => {
+interface NavProps {
+  children: any
+  blok: Blok
+}
+
+const Navigation: React.FC<NavProps> = (props) => {
+  const {
+    className,
+    navigationList,
+  } = props.blok || props;
+
   const [ active, setActive ] = useState(false);
   const router = useRouter();
-  const [ scrolled, setScrolled ] = useState(false);
-
-  const navRef = useRef<any>(null)
-
-  useIsomorphicLayoutEffect(() => {
-    ScrollTrigger.create({
-      trigger: navRef.current,
-      markers: false,
-      start: 'top+=100 top',
-      onEnter: () => setScrolled(true),
-      onEnterBack: () => setScrolled(false)
-    })
-  }, [])
-
-  useEffect(() => {
-    setActive(false);
-  }, [router.asPath])
+  const { scroll } = useScrollContext();
   
   return (
-    <header
-      ref={navRef}
-      id="primary-header"
-      className={cn("z-20 fixed top-0 w-full transition-all duration-500 border-transparent", {
-        "pt-0 text-black border-b !border-black bg-background shadow-sm" : scrolled,
-        "pt-10 text-white " : !scrolled
-      })}
-    >
-      <nav 
-        className="h-full px-12 py-5 mx-auto flex justify-end relative items-center max-w-screen-2xl" 
-        role="navigation"
-      >
-
-        {/* Logo */}
-        <Link href="/">
-          <a aria-label="Company logo">
-            <Logo className="fill-current h-10" />
-          </a>
-        </Link>
-        
-
-        <div className="md:hidden absolute top-full left-0 pointer-events-none w-full">
-          <MobileMenu 
-            menu={navigationList} 
-            active={active}
-          /> 
+    <>
+      <header
+        id="primary-header"
+        {...storyblokEditable(props.blok)}
+        className={cn(className, "navigation-bar", {
+          "active" : active
+        })}
+      > 
+        <div className="w-full lg:hidden p-1">
+          <div className="text-white bg-red rounded-md p-1">
+            <nav 
+              className="" 
+              role="navigation"
+            > 
+              <ul className="flex flex-wrap">
+                {
+                  navigationList.map((link: any, i: number) => {
+                    return (
+                      <li key={i} className="w-full mb-1 last-of-type:mb-0">
+                        <div className="border-white border rounded-md text-center relative h-[44px]">
+                          <NavigationLink 
+                            nav_link={link}
+                            // className="h-[44px]"
+                          />
+                        </div>
+                      </li>
+                    )
+                  })
+                }
+              </ul>
+            </nav>
+          </div>
         </div>
 
-        {/* mobile Menu */}
-        {/* <button
-          aria-label="Navigation Menu"
-          className="md:hidden h-full bg-primary aspect-square flex items-center flex-1"
-        >
-          <Hamburger 
-            size={30} 
-            rounded
-            color="#72605B"
-            distance="sm"
-            onToggle={toggled => {
-              setActive(toggled)
-            }}
-          />
-        </button> */}
+        <div className="h-[var(--nav-height)] flex w-full">
+          <div className="py-1 pl-1 flex w-1/2 lg:min-w-[155px]">
+            <div className=" bg-[#000] flex items-center justify-center rounded-md px-8 w-full">
+              <Link href="/" onClick={(e) => {
+                if (router.asPath === '/') {
+                  e.preventDefault();
+                  scroll.scrollTo(0)
+                }
+              }}>
+                <LogoSmall className="max-w-[70px] w-full" />
+              </Link>
+            </div>
+          </div>
 
-        {/* Flexs size */}
-        <div className="h-full flex-1 hidden md:block">
-          <ul className="h-full flex justify-end">
-          {
-            navigationList.map((link: any, i: number) => {
-              return (
-                <li key={i} className="mx-5 h-full first:ml-0 last:mr-0">
-                  <NavigationLink 
-                    nav_link={link} 
-                    topLevel
-                  />
-                </li>
-              )
-            })
-          }
-          </ul>
+          <div className="p-1 flex w-1/2 lg:hidden">
+            <div className="text-white bg-red rounded-md w-full flex p-1">
+              <button 
+                className="border-white border uppercase text-sm w-full rounded-md"
+                onClick={() => setActive(!active)}
+              >
+                <span>
+                  {active ? "Close" : "Menu"}
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <nav 
+            className="py-1 px-1 shrink-0 hidden lg:flex" 
+            role="navigation"
+          > 
+            <ul className="h-full flex bg-red rounded-md text-white py-1 px-0.5">
+              {
+                navigationList.map((link: any, i: number) => {
+                  return (
+                    <li key={i} className="flex-1 min-w-[7.25rem] text-sm px-0.5">
+                      <div className="border-white border rounded-md h-full text-center relative">
+                        <NavigationLink 
+                          nav_link={link}
+                        />
+                      </div>
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </nav>
         </div>
-
-        {/*  Action items  */}
-        <div className="flex items-center">
-          {
-            actionItems?.includes('search') ? (
-              <div className="px-2 md:px-4">
-                <SearchBar />
-              </div>
-            ) : null
-          }
-        </div>
-
-        {/* CTA */}
-        {
-          ctaText ? (
-            <Button
-              className="ml-20 text-black"
-              link={{ cached_url: ctaLink?.cached_url }}
-              text={ctaText}
-              icon={<DynamicIcon type="arrowNewPage" />}
-            />
-          ) : null
-        }
-      </nav>
-    </header>
+      </header>
+    </>
   );
 };
 

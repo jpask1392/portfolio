@@ -1,35 +1,56 @@
 .button {
-  @apply
-    relative
+  @apply 
+    w-full
+    bg-red
+    text-white
     text-sm
-    text-center
-    inline-flex
-    justify-center
-    items-center
-    tracking-wide
     uppercase
-    font-bold
     font-header
-    py-2.5
-    px-12
-    leading-tight
-    transition-colors
-    duration-300
-    border
-    border-black
-    text-black
-    rounded-full
-    bg-white;
+    py-4
+    text-center
+    relative
+    block
+    outline
+    outline-1
+    outline-background
+    transition-all;
+    
+  outline-offset: -6px;
+}
+
+.button:hover {
+  @apply bg-opacity-80
+}
+
+.button.mw {
+  max-width: 229px;
 }
 
 .button[disabled] {
-  @apply bg-grayLight text-gray2 border-grayLight;
+  @apply bg-black text-white;
 
   &:hover {
-    @apply bg-grayLight border-grayLight text-gray2 cursor-not-allowed;
+    @apply bg-red border-red text-red cursor-not-allowed;
   }
 }
 
-a.link {
-  @apply underline uppercase font-bold text-xs cursor-pointer;
+.link {
+  @apply underline cursor-pointer text-left font-semibold;
+}
+
+.nav-hover-line {
+  @apply transition-all;
+}
+
+.nav-link:hover .nav-hover-line {
+  @apply w-full;
+}
+
+
+a.link button + span {
+  @apply transition-all duration-300;
+}
+
+a.link:hover button + span {
+  @apply ml-1;
 }

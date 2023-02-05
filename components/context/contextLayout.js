@@ -1,6 +1,8 @@
+import { ScrollContextProvider } from './scroll';
 import { UIContextProvider } from './uiContext';
 import { GlobalContextProvider } from './globalContext';
-import { MouseContextProvider } from './mouseContext';
+import { WagmiContextProvider } from './wagmiContext';
+import { AuthContextProvider } from './authContext';
 
 export const DefaultLayout = ({ children, pageProps }) => {
   return (
@@ -8,9 +10,13 @@ export const DefaultLayout = ({ children, pageProps }) => {
       pageData={pageProps}
     >
       <UIContextProvider>
-        <MouseContextProvider>
-          {children}
-        </MouseContextProvider>
+        
+          <WagmiContextProvider>
+            <AuthContextProvider>
+              {children}
+            </AuthContextProvider>
+          </WagmiContextProvider>
+        
       </UIContextProvider>
     </GlobalContextProvider>
   );

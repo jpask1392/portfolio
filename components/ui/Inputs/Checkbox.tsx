@@ -1,11 +1,12 @@
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import * as Label from '@radix-ui/react-label';
 import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext, useCallback } from 'react';
 import DynamicIcon from '@/components/icons/DynamicIcon';
+import { FormContext } from "@/components/modules/Form";
 
 interface Props {
-  value: string | boolean | any
+  value?: string | boolean | any
   label: string
   id: string
   style: string
@@ -21,12 +22,13 @@ const Checkbox: React.FC<Props> = ({
   onValueChange,
   disabled
 }) => {
+  const { formData, setFormData } = useContext<any>(FormContext);
   const [checked, setChecked] = useState(value);
-  const checkBoxStyles = cn("block border rounded-md flex justify-center items-center", {
+  const checkBoxStyles = cn("block border flex justify-center items-center", {
     "bg-transparent" : style === "sideLabel" && checked,
-    "border-secondary" : checked,
-    "border-black" : !checked,
-    "h-6 w-6" : style === "sideLabel",
+    // "border-red" : checked,
+    "border-red xl:border-red" : !checked,
+    "h-2.5 w-2.5" : style === "sideLabel",
     "p-2 w-full" : style === "radio",
     "opacity-30" : disabled
   });
@@ -34,17 +36,21 @@ const Checkbox: React.FC<Props> = ({
   const handleValueChange = (value: boolean) => {
     setChecked(value);
 
-    /**
-     * Pass the value to parent component
-     */
-    onValueChange && onValueChange(id, value)
+    // copy object for removing keys
+    const formDataCopy = {...formData};
+
+    value
+      ? formDataCopy[id] = value
+      : delete formDataCopy[id];
+
+    id && setFormData(formDataCopy);
   }
 
   return (
     <div className="flex space-x-3">
-      <RadixCheckbox.Root
+      <RadixCheckbox.Root        
         defaultChecked={value}
-        className={checkBoxStyles}
+        className={cn(checkBoxStyles, "mt-2.5 relative")}
         onCheckedChange={handleValueChange}
         value={checked}
         id={id}
@@ -52,7 +58,7 @@ const Checkbox: React.FC<Props> = ({
       >
         
         <RadixCheckbox.Indicator>
-          <DynamicIcon type="checkmark" />
+          <span className="absolute inset-0 bg-red xl:bg-red"></span>
         </RadixCheckbox.Indicator>
 
         {
@@ -66,7 +72,7 @@ const Checkbox: React.FC<Props> = ({
       { 
         label && style === "sideLabel" && (
           <Label.Root 
-            className={cn("cursor-pointer h7 text-secondary", { "opacity-30" : disabled })}
+            className={cn("cursor-pointer h3 xl:text-white", { "opacity-30" : disabled })}
             htmlFor={id}
           >{label}</Label.Root>
         ) 

@@ -1,0 +1,34 @@
+.navigation-bar {
+  clip-path: inset(calc(100% - 50px) 0px 0px 0px round 10px);
+
+  @screen sm {
+    clip-path: inset(calc(100% - 60px) 0px 0px 0px round 10px);
+  }
+
+  @screen lg {
+    clip-path: none;
+  }
+
+  @apply 
+    transition-all
+    duration-300
+    lg:w-auto
+    min-w-[300px]
+    fixed
+    bottom-6
+    z-50
+    left-1/2
+    -translate-x-1/2
+    bg-[#000]
+    bg-opacity-80
+    flex
+    flex-wrap
+    rounded-lg
+    shadow-md;
+
+  &.active {
+    clip-path: inset(0px 0px 0px 0px round 10px);
+    
+    @apply min-w-[90%] sm:min-w-[450px];
+  }
+}

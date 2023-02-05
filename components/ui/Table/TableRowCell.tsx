@@ -3,24 +3,25 @@ import cn from 'classnames';
 interface Props {
   value: string
   rowIndex: number
-  extendHeaderColumn?: boolean
+  totalRows: number
 }
 
 const TableRow: React.FC<Props> = ({
   value,
   rowIndex,
-  extendHeaderColumn
+  totalRows,
 }) => {
   return (
     <div 
-      className={cn("p-3 border-l border-secondary border-b -mx-px", {
-        "text-center" :  rowIndex > 0,
-        "uppercase font-header text-secondary" : rowIndex === 0,
-        "col-span-2" : rowIndex === 0 && extendHeaderColumn,
+      className={cn("p-3 w-full h-full", {
+        "rounded-b-sm" : rowIndex === totalRows - 1,
+        "rounded-t-sm" : rowIndex === 0,
+        "bg-[#E3DDCD]" : rowIndex % 2 === 0,
+        "bg-background" : rowIndex % 2 !== 0,
       })}
     >{
       value === "[dot]"
-        ? <span className="text-secondary">&#9679;</span>
+        ? <span className="text-4xl">&#9679;</span>
         : value
     }</div>
   )

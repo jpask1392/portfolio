@@ -1,0 +1,5 @@
+.index-hero-image .ui-image > div {
+  @screen md {
+    --aspect-ratio: 71% !important;
+  }
+}

@@ -27,7 +27,6 @@ const BackgroundMedia: React.FC<BackgroundMediaProps> = ({
         <CustomImage
           image={image}
           layout="fill"
-          objectFit="cover"
           preload={priority}
         />
       </div>

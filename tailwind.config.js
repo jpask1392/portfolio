@@ -12,12 +12,12 @@ module.exports = {
     let itemsAlign = ['start', 'center', 'end'];
     let order = ['none','1','2','3','4','5','6','7','8','9','10','11','12'];
     let align = ['left','center','right'];
-    let spacingPrefixes = ['-m','m','p','-p','pb','px','-mb','mb','mr','-mr','-mx','ml','pl'];
-    let spacing = ['auto','2','4','6','8', '10','12','16','24','32'];
+    let spacingPrefixes = ['-m','m','p','-p','pb','pt','px','py','-mb','mb','mr','-mr','-mx','ml','pl', '-my'];
+    let spacing = ['auto','1', '2','4','5','6','8', '10','12','16', '20','24','28','32','36','6-12','1-12'];
     let cursors = ['pointer'];
     let flexs = ['col', 'col-reverse', 'row', 'row-reverse'];
     let displays = ['block', 'inline-block'];
-    let bg = ['primary'];
+    let bg = [];
     let textColors = ['white'];
     let grids = [1, 2, 3, 4, 5];
 
@@ -59,84 +59,62 @@ module.exports = {
     });
 
     safeList.push('flex-1');
-    safeList.push('bg-gray-100');
   
     return safeList;
   })(),
   jit: true,
   theme: {
     screens: {
-      'sm': '840px',
-      'md': '1060px',
-      'lg': '1344px',
-      'xl': '1560px',
-      '2xl': '1772px',
+      'sm': '640px',
+      'md': '960px',
+      'lg': '1281px',
+      'xl': '1440px',
+      '2xl': '1920px',
     },
     container: {
       center: true,
-      padding: '2rem',
+      padding: '1.875rem',
     },
     fontFamily: {
-      header: "'DM Sans', sans-serif",
-      sans: "'DM Sans', sans-serif",
-    },
-    borderRadius: {
-      'none': '0',
-      'sm': '0.125rem',
-      DEFAULT: '4px',
-      'md': '0.375rem',
-      'lg': '1.875rem',
-      'full': '9999px',
-      'large': '12px',
+      header: "'Sofia Sans Extra Condensed', sans-serif",
+      sans: "'Inter', sans-serif",
     },
     fontSize: {
-      'tiny': '.68rem', // 11px
-      'xs': '.75rem', // 12px - YES
-      'sm': '.875rem', // 14px
-      'base': '0.93rem', // 16px - base  - YES
+      'tiny': '.625rem', // 10px
+      'xs': '.75rem', // 12px
+      'sm': '.8125rem', // 14px
+      'base': '0.9375rem', // 15px - base 
       'lg': '1.125rem', // 18px
-      'xl': '1.25rem', // 20px  - YES
-      '2xl': '1.375rem', // 22px  - YES
+      'xl': '1.25rem', // 20px 
+      '2xl': '1.375rem', // 22px 
       '3xl': '1.5rem', // 24px 
-      '4xl': '1.625rem', // 26px  - YES
-      '5xl': '1.6875rem', // 27px - YES
+      '4xl': '1.5625rem', // 25px 
+      '5xl': '1.6875rem', // 27px
       '6xl': '1.875rem', // 30px
-      '7xl': '2rem', // 32px
+      '7xl': '2.1875rem', // 35px
       '8xl': '2.5rem', // 40px
-      '9xl': '2.75rem', // 44px - YES
-      '10xl': '3.125rem', // 50px - YES
-      '11xl': '4rem', // 64px - YES
-      '12xl': '5.5625rem', // 89px - YES
-      '13xl': '7.875rem', // 126px - YES
+      '9xl': '2.75rem', // 44px
+      '10xl': '3.125rem', // 50px
+      '11xl': '4rem', // 64px
+      '12xl': '4.6875rem', // 75px
+      '13xl': '5.875rem', // 94px
+      '14xl': '6.625rem', // 108px
     },
     extend: {
       colors: {
-        primary: '#d0d5db',
-        secondary: "#E7D6C4",
-        secondaryLight: "#A59082",
-        tertiary: "#EBBFBB",
-        black: '#121212',
-        gray2: '#303030',
-        gray3: '#161616',
-        grayLight: '#E9E9E9',
-        fadedText: '#9F9F9F',
-        background: '#F7F4E4',
-        yellow: '#e0e0e0',
+        background: "#FFF",
+        accent: "#CAFF66",
+        black: "#1A1A1C",
+        white: "#FBF4E1",
+        yellow: "#E7BD56",
+        red: "#F15D4D",
+        green: "#B9CDB3"
       },
-      spacing: {
-        'screen-1/2': '50vw',
-        'cart': '28rem',
-      },
-      lineHeight: {
-        'tighter': '1.15',
-      },
-      letterSpacing: {
-        'snug': '-0.01em',
-        'narrow': '0.005em'
-      },
-      maxWidth: {
-        'cart': '28rem',
-      },
+      margin: {
+        '6-12': '50%',
+        '1-12': '8.33333%',
+        '3-12': '25%',
+      }
     },
   },
   plugins: [

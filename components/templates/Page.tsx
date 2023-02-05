@@ -1,6 +1,7 @@
-import DynamicComponent from "@/components/helpers/DynamicComponent";
+import Script from "next/script";
 import { SbEditableContent } from "@/types/storyBlok";
 import { NextSeo } from 'next-seo';
+import { getStoryblokApi, StoryblokComponent } from "@storyblok/react"
 
 interface Props {
   blok: SbEditableContent
@@ -9,9 +10,24 @@ interface Props {
 const Page: React.FC<Props> = ({ blok }) => {
   return (
     <>
+      {/* {
+        blok.scripts?.length ? (
+          blok.scripts.map((script: any) => (
+            <Script
+              key={script._uid}
+              id={script._uid}
+              src={script.src || undefined}
+              strategy="afterInteractive"
+              dangerouslySetInnerHTML={ script.inner ? {
+                __html: script.inner,
+              } : undefined}
+            />
+          ))
+        )  : null   
+      } */}
       {
         blok.hero?.length ? (
-          <DynamicComponent
+          <StoryblokComponent
             blok={blok.hero[0]} 
             key={blok.hero[0]._uid} 
           />
@@ -20,7 +36,7 @@ const Page: React.FC<Props> = ({ blok }) => {
       {
         blok.body ? (
           blok.body.map((blok: SbEditableContent) => (
-            <DynamicComponent 
+            <StoryblokComponent 
               blok={blok} 
               key={blok._uid} 
             />

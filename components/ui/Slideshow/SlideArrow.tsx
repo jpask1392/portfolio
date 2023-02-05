@@ -12,8 +12,8 @@ const SlideArrow: React.FC<Props> = ({
 }) => {
   const arrowClasses = cn([
     className,
-    'w-10',
-    'h-10',
+    'w-4',
+    'h-4',
     'flex',
     'items-center',
     'justify-center',
@@ -24,7 +24,7 @@ const SlideArrow: React.FC<Props> = ({
 
   return (
     <div className={arrowClasses}>
-      <DynamicIcon type="chevronBack" />
+      <DynamicIcon type="arrowLeft" />
     </div>
   )
 }

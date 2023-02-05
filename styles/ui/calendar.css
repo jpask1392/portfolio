@@ -1,0 +1,35 @@
+.react-calendar {
+  @apply font-header text-tiny lg:text-sm;
+
+  &__navigation__arrow {
+    @apply px-4;
+  }
+
+  &__navigation {
+    @apply text-center pb-6 flex text-red;
+  }
+
+  &__viewContainer {
+    
+  }
+
+  &__month-view {
+    &__weekdays {
+      @apply text-center pb-3 text-red;
+    }
+
+    &__days {
+      &__day {
+        @apply px-3 py-2 bg-red;
+
+        &--neighboringMonth {
+          @apply opacity-25
+        }
+      }
+    }
+  }
+
+  .react-calendar__tile--active {
+    @apply bg-red;
+  }
+}

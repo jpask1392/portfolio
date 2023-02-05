@@ -15,7 +15,7 @@ const H5: FC<Props> = (props) => <h5 className={props.className}>{props.children
 const H6: FC<Props> = (props) => <h6 className={props.className}>{props.children}</h6>
 
 interface ParagraphProps {
-  size?: 'secondary' | 'tertiary' | 'caption' | undefined
+  size?: 'secondary' | 'caption' | undefined
   className?: string
   children?: any
 }
@@ -26,7 +26,6 @@ const Paragraph: FC<ParagraphProps> = ({
   className,
 }) => {
   const paragraphClassnames = cn(className, {
-    'p-tertiary' : size === 'tertiary',
     'caption' : size === 'caption',
   })
 

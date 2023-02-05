@@ -17,7 +17,7 @@ const Icon: React.FC<Props> = ({
     })}>
       <DynamicIcon 
         type={type} 
-        className="text-secondary mx-auto"
+        className="text-red mx-auto"
       />
     </div>
   )

@@ -14,7 +14,6 @@ interface Props {
   image: storyBlokImage
   imageTablet?: storyBlokImage
   imageMobile?: storyBlokImage
-  asSeenOn?: storyBlokImage
   style?: "narrow" | "fullHeight"
   overlay?: boolean
 }
@@ -26,7 +25,6 @@ const Hero: React.FC<Props> = ({
   image,
   imageTablet,
   imageMobile,
-  asSeenOn,
   style = "fullHeight",
   overlay
  }) => {
@@ -50,9 +48,9 @@ const Hero: React.FC<Props> = ({
   }, [])
 
   return (
-    <section className="hero overflow-hidden" ref={headerRef}>
+    <section className="hero overflow-hidden ml-auto lg:-ml-16 xl:-ml-32" ref={headerRef}>
       <div className={cn("flex relative min-w-[100vw]", {
-        "h-[90vh] xl:h-auto xl:aspect-video max-h-[90vh] items-end xl:items-start " : style === "fullHeight",
+        "h-[90vh] xl:h-auto xl:aspect-video max-h-[90vh] items-end" : style === "fullHeight",
         "aspect-[9/4] md:aspect-[9/3] xl:aspect-[9/2] items-end xl:items-center pb-8" : style === "narrow"
       })}>
 
@@ -60,7 +58,7 @@ const Hero: React.FC<Props> = ({
           TopBlockComponent ? (
             <div 
               className={cn("w-full opacity-0 z-10", {
-                "pb-44 xl:pt-40" : style === "fullHeight"
+                "pb-28 md:pb-44 xl:pt-40" : style === "fullHeight"
               })}
               ref={contentRef}
             >
@@ -102,7 +100,6 @@ const Hero: React.FC<Props> = ({
               })}
               image={image} 
               layout="fill" 
-              objectFit="cover" 
               preload
             />
 
@@ -114,7 +111,6 @@ const Hero: React.FC<Props> = ({
                   })}
                   image={imageTablet} 
                   layout="fill" 
-                  objectFit="cover" 
                   preload
                 />
               ) : null
@@ -129,31 +125,12 @@ const Hero: React.FC<Props> = ({
                   })}
                   image={imageMobile} 
                   layout="fill" 
-                  objectFit="cover" 
                   preload
                 />
               ) : null
             }
           </div>
         </div>
-
-        {
-          asSeenOn && asSeenOn.id ? (
-            <div className="bg-secondaryLight absolute left-0 right-0 bottom-0 flex justify-center">
-              <div className="py-3 container">
-                <div className="flex items-center mx-auto max-w-screen-lg">
-                  <h3 className="text-secondary text-xs md:text-4xl mr-4 md:mr-12 shrink-0">As Seen on</h3>
-                  <div>
-                    <CustomImage 
-                      image={asSeenOn} 
-                      preload
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : null
-        }
       </div>
     </section>
   )

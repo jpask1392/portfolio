@@ -1,160 +1,96 @@
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import CustomImage from "@/components/ui/Image";
-import { SbEditableContent } from "@/types/storyBlok";
 import cn from "classnames";
 import type { storyBlokImage } from '@/types/storyBlok';
 import { useRef } from "react";
-import { gsap } from 'gsap';
+import { storyblokEditable } from "@storyblok/react";
+import type { SbBlokData } from "@storyblok/react"
+import { SbEditableContent } from "@/types/storyBlok";
 
 interface Props {
+  children?: any
+  preload?: boolean
   image: storyBlokImage | undefined
   imageTablet?: storyBlokImage | undefined
   imageMobile?: storyBlokImage | undefined
   maxWidth?: number
-  preload?: boolean
   align?: 'center' | 'start' | 'end'
   className?: string
-  layout?: 'fill' | undefined
-  objectFit?: 'contain' | 'cover' | undefined
-  animate?: boolean
   alignOverlayContent?: any
-  sbEditable?: SbEditableContent
-  children?: any
+  aspectRatio?: number
+  displayCaption?: boolean
+  insetCaption?: boolean
+  animate?: boolean
+  sizes?: {
+    sm?: string
+    md?: string
+    lg?: string
+  }
 }
 
-const ImageModule: React.FC<Props> = ({
-  image,
-  imageTablet,
-  imageMobile,
-  maxWidth,
-  align = 'start',
-  preload,
-  layout,
-  objectFit,
-  className,
-  animate,
-  sbEditable,
-  children,
-  alignOverlayContent,
-}) => {
-  const tl = useRef<any>(null);
-  const containerRef = useRef<null | HTMLDivElement>(null);
-  const imageContainerRef = useRef<null | HTMLDivElement>(null);
+interface Blok extends SbBlokData, Props {}
 
-  useIsomorphicLayoutEffect(() => {
-    if (animate) {
-      tl.current = gsap.timeline({
-        scrollTrigger: {
-          trigger: imageContainerRef.current,
-          scrub: 1,
-          markers: false,
-        }
-      });
+interface ImageProps extends Props {
+  children?: any
+  blok?: Blok
+}
 
-      tl.current.fromTo(imageContainerRef.current, {
-        scale: 1.2,
-      }, {
-        scale: 1,
-      })
+const ImageModule: React.FC<ImageProps> = ( props ) => {
+  const {
+    image,
+    imageTablet,
+    imageMobile,
+    maxWidth,
+    preload,
+    className,
+    sizes = {
+      sm: "100vw",
+      md: "100vw",
+      lg: "100vw",
+    },
+    animate = false,
+    aspectRatio = 0,
+    displayCaption = false,
+    insetCaption = false,
+  } = props.blok || props;
 
-      return () => {
-        tl.current.scrollTrigger?.kill();
-        tl.current.kill();
-      }
-    }
-  }, []);
-
-  /**
-   * TODO: replace with a standard image placeholder when an image doesnt exist
-   * 
-   */
-  if (!image?.filename) return (
-    <div className="bg-gray-300 aspect-video flex justify-center items-center text-gray-800">
-      Image does not exist
-    </div>
-  )
-
-  const containerClasses = cn(className, [
-    'relative ui-image',
-    { 
-      'mx-auto' : align === 'center',
-      'ml-0' : align === 'start',
-      'ml-auto' : align === 'end',
-      'h-full' : layout === 'fill',
-    }
-  ]);
+  const mobileImageExists = imageMobile && imageMobile.id;
+  const tabletImageExists = imageTablet && imageTablet.id;
 
   return (
     <div
-      className={containerClasses}
-      style={maxWidth ? { maxWidth: maxWidth + 'px' } : {}}
-      {...sbEditable}
+      className={cn(className, "ui-image relative")}
+      {...(props.blok && storyblokEditable(props.blok))}
     >
       {
-        image.filename && (
-          <>
-            <div className={`z-10 flex justify-${align} h-full overflow-hidden`} ref={containerRef}>
-              <div className="relative inset-0 w-full h-full" ref={imageContainerRef}>
-                <CustomImage
-                  className={cn({
-                    "!hidden" : imageTablet && imageTablet.id || imageMobile && imageMobile.id,
-                    "lg:!block" : imageMobile && imageMobile.id,
-                    "xl:!block" : imageTablet && imageTablet.id,
-                  })}
-                  image={image}
-                  preload={preload}
-                  layout={layout}
-                  objectFit={objectFit}
-                />
-
-                {
-                  imageTablet?.id ? (
-                    <CustomImage
-                      className={cn({
-                        "!hidden lg:!block" : imageMobile && imageMobile.id,
-                        "xl:!hidden" : imageMobile && !imageMobile.id,
-                      })}
-                      image={imageTablet}
-                      preload={preload}
-                      layout={layout}
-                      objectFit={objectFit}
-                    />
-                  ) : null
-                }
-
-                {
-                  imageMobile?.id ? (
-                    <CustomImage
-                      className={cn({
-                        // "lg:!hidden" : imageTablet && imageTablet.id,
-                        "lg:!hidden" : imageTablet && !imageTablet.id,
-                      })}
-                      image={imageMobile} 
-                      preload={preload}
-                      layout={layout}
-                      objectFit={objectFit}
-                    />
-                  ) : null
-                } 
-               
-              </div>
-
-              {
-                children ? (
-                  <div className={cn("absolute p-10 lg:p-20 xl:p-24 text-primary", {
-                    "bottom-0 right-0 text-right" : alignOverlayContent === "bottom-right",
-                    "bottom-0 left-0" : alignOverlayContent === "bottom-left",
-                    "top-0 right-0 text-right" : alignOverlayContent === "top-right",
-                    "top-0 left-0" : alignOverlayContent === "top-left",
-                  })}>
-                    {children}
-                  </div>
-                ) : null
-              }
-            </div>
-          </>
+        image?.filename && (
+          <div 
+            style={{ "--aspect-ratio": `${Math.floor((1 / aspectRatio) * 100)}%` } as React.CSSProperties}
+            className={cn("relative w-full overflow-hidden", {
+              "h-0 pb-[var(--aspect-ratio)]" : aspectRatio > 0
+            })}
+          >
+            <CustomImage
+              image={image}
+              animate={animate}
+              // tabletImage={tabletImageExists && imageTablet}
+              // mobileImage={mobileImageExists && imageMobile}
+              preload={preload}
+              layout={aspectRatio ? "fill" : undefined}
+              sizes={sizes}
+            />
+          </div>
         )
       }
+
+      {
+        displayCaption ? (
+          <span className={cn("h4 py-1 border-y border-black inset-x-0 md:absolute top-full mt-2 block", {
+            "mx-2" : insetCaption
+          })}>{image?.title}</span>
+        ) : null
+      }
+
     </div>
   );
 };

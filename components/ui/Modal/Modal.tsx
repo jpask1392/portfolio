@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import ReactModal from 'react-modal';
+import { useEffect } from "react";
 
 interface Props {
   children: any
@@ -17,8 +18,8 @@ const Modal: React.FC<Props> = ({
   return (
     <ReactModal
       isOpen={modalIsOpen}
-      overlayClassName="fixed inset-0 z-50 flex items-start justify-end bg-white bg-opacity-60 backdrop-blur-sm overflow-scroll"
-      className="my-auto w-full"
+      overlayClassName="fixed inset-0 z-50 flex items-start justify-center bg-background bg-opacity-60 backdrop-blur-sm overflow-scroll"
+      className="my-auto focus-visible:outline-none"
       onRequestClose={() => setModalIsOpen(false)}
       contentLabel="Example Modal"
       ariaHideApp={false}
@@ -48,9 +49,8 @@ const Modal: React.FC<Props> = ({
           />
         </svg>
       </button>
-
-      <div className={cn(contentClassNames, "py-10 w-full max-w-[100vw]")}>
-        { children }
+      <div className={cn(contentClassNames, "py-10")}>
+      { children }
       </div>
     </ReactModal>
   )

@@ -9,15 +9,11 @@ interface Props {
 const TableHeader: React.FC<Props> = ({
   value,
   rowIndex,
-  extendHeaderColumn,
 }) => {
   return (
-    <div className={cn("py-4 px-4 text-center whitespace-pre-wrap border-x border-secondary border-b -mx-px", {
-      "bg-red-100" : !value,
-      "bg-primary" : value,
-      "col-span-2" : rowIndex === 0 && extendHeaderColumn,
+    <div className={cn("py-4 px-4 text-center whitespace-pre-wrap border border-white h-full w-full bg-[#000] text-white rounded-sm", {
     })}>
-      <p className="first-line:font-header first-line:uppercase text-secondary">{value}</p>
+      <p className="uppercase font-medium">{value}</p>
     </div>
   )
 }

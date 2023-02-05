@@ -5,29 +5,27 @@
  * the icons? Something to look into.
  */
 
-import Logo from "../ui/Logo";
 import Account from "./Account";
 import AlertCircle from "./AlertCircle";
 import ArrowBack from "./ArrowBack";
 import ArrowDown from "./ArrowDown";
+import ArrowLeft from "./ArrowLeft";
+import ArrowRight from "./ArrowRight";
 import ArrowBackCircle from "./ArrowBackCircle";
 import ArrowDownCircle from "./ArrowDownCircle";
+import Logo from "../ui/Logo";
 import Cart from "./Cart";
 import Facebook from "./Facebook";
 import Instagram from "./Instagram";
 import Search from "./Search";
 import Add from "./Add";
 import AddCircle from "./AddCircle";
-import DollarSign from "./DollarSign";
-import Bag from "./Bag";
 import CaretBackCircle from "./CaretBackCircle";
 import CaretDownCircle from "./CaretDownCircle";
 import ChevronBack from "./ChevronBack";
 import ChevronDown from "./ChevronDown";
 import ChevronRight from "./ChevronRight";
 import Close from "./Close";
-import Heart from "./Heart";
-import ShoppingBag from "./ShoppingBag";
 import InformationCircle from "./InformationCircle";
 import Identity from "./Identity";
 import Location from "./Location";
@@ -35,13 +33,18 @@ import Checkmark from "./Checkmark";
 import Star from "./Star";
 import AnnouncementArrow from "./AnnouncementArrow";
 import TogglePlusMinus from "./TogglePlusMinus";
-import Cake from "./Cake";
-import TikTok from "./Tiktok";
-import Youtube from "./Youtube";
+import Filters from "./Filters";
+import Select from "./Select";
+import Error from "./Error"
+import User from "./User"
 import Twitter from "./Twitter";
-import ArrowNewPage from "./ArrowNewPage";
-import Linkedin from "./Linkedin";
-import Github from "./Github";
+import Check from "./Check";
+
+// Collective Strangers Specific
+import Discord from "./ProjectIcons/Discord";
+import Opensea from "./ProjectIcons/Opensea";
+import Puzzle from "./ProjectIcons/Puzzle";
+import Image from "./ProjectIcons/Image";
 
 type Variant = string;
 
@@ -51,6 +54,8 @@ const Components: {
   account: Account,
   alertCircle: AlertCircle,
   arrowBack: ArrowBack,
+  arrowLeft: ArrowLeft,
+  arrowRight: ArrowRight,
   arrowBackCircle: ArrowBackCircle,
   arrowDown: ArrowDown,
   arrowDownCircle: ArrowDownCircle,
@@ -61,30 +66,29 @@ const Components: {
   search: Search,
   add: Add,
   addCircle: AddCircle,
-  arrowNewPage: ArrowNewPage,
-  'dollar-sign': DollarSign,
-  bag: Bag,
   caretBackCircle: CaretBackCircle,
   caretDownCircle: CaretDownCircle,
   chevronBack: ChevronBack,
   chevronDown: ChevronDown,
   chevronRight: ChevronRight,
   close: Close,
-  heart: Heart,
-  'shopping-bag': ShoppingBag,
+  check: Check,
   informationCircle: InformationCircle,
   identity: Identity,
   location: Location,
   checkmark: Checkmark,
   star: Star,
   togglePlusMinus: TogglePlusMinus,
-  cake: Cake,
-  tiktok: TikTok,
-  youtube: Youtube,
-  twitter: Twitter,
   logo: Logo,
-  github: Github,
-  linkedin: Linkedin,
+  select : Select,
+  error : Error,
+  filters: Filters,
+  user: User,
+  twitter: Twitter,
+  discord: Discord,
+  opensea: Opensea,
+  puzzle: Puzzle,
+  image: Image,
 };
 
 interface Props {

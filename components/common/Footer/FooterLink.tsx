@@ -67,7 +67,7 @@ const FooterLink: React.FC<Props> = ({
   } {
     return (
       <StoryBlokLink
-        className="text-base uppercase font-header text-secondary"
+        className="text-base uppercase font-header text-red"
         sbLink={item.link}
       >
         {item.name}

@@ -32,40 +32,6 @@ const Navigation: React.FC<NavProps> = (props) => {
   const { scroll } = useScrollContext();
   
   return (
-<<<<<<< HEAD
-    <>
-      <header
-        id="primary-header"
-        {...storyblokEditable(props.blok)}
-        className={cn(className, "navigation-bar", {
-          "active" : active
-        })}
-      > 
-        <div className="w-full lg:hidden p-1">
-          <div className="text-white bg-red rounded-md p-1">
-            <nav 
-              className="" 
-              role="navigation"
-            > 
-              <ul className="flex flex-wrap">
-                {
-                  navigationList.map((link: any, i: number) => {
-                    return (
-                      <li key={i} className="w-full mb-1 last-of-type:mb-0">
-                        <div className="border-white border rounded-md text-center relative h-[44px]">
-                          <NavigationLink 
-                            nav_link={link}
-                            // className="h-[44px]"
-                          />
-                        </div>
-                      </li>
-                    )
-                  })
-                }
-              </ul>
-            </nav>
-          </div>
-=======
     <header
       ref={navRef}
       id="primary-header"
@@ -92,7 +58,6 @@ const Navigation: React.FC<NavProps> = (props) => {
             menu={navigationList} 
             active={active}
           /> 
->>>>>>> refactor
         </div>
 
         <div className="h-[var(--nav-height)] flex w-full">

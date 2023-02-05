@@ -105,7 +105,7 @@ module.exports = {
         background: "#FFF",
         accent: "#CAFF66",
         black: "#1A1A1C",
-        white: "#FBF4E1",
+        white: "#FFFFFF",
         yellow: "#E7BD56",
         red: "#F15D4D",
         green: "#B9CDB3"

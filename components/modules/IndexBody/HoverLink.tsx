@@ -2,7 +2,11 @@ import Modal from "@/components/ui/Modal";
 import { useRef, useState } from "react";
 
 const HoverLink = ({
-  name
+  name,
+  action = {
+    type: "link",
+    data: {}
+  },
 }) => {
   const [ active, setActive ] = useState(false);
   const hoverAnimation = useRef(null);

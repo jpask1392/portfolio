@@ -67,7 +67,7 @@ export function ScrollContextProvider({ children } : { children: any }) {
         }}
         exit={{ opacity: 0, top: -200, zIndex: -1, }}
         transition={{ 
-          ease: "easeInOut",
+          ease: [0.2, 0.99, 0.11, 0.99],
           duration: pageTransitionDuration / 1000,
           
         }}

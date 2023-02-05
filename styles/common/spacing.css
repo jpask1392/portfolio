@@ -1,42 +1,31 @@
 :root {
-  --section-spacing: 2rem;
+  --section-spacing: 4.5rem;
   
   @screen lg {
     --section-spacing: 4.5rem;
   }
 }
 
-/* Default section spacer */
+/* Small section spacer */
+.section.section--spacing-sm {
+  --section-spacing: 2rem;
+}
+
+.section.section--spacing-md {
+  --section-spacing: 6.8rem;
+}
+
+.section.section--spacing-lg {
+  --section-spacing: 11.25rem;
+}
+
+/* Medium section spacer */
 .section {
-  &.section--spacing-sm {
-    --section-spacing: 2rem;
+  margin-top: var(--section-spacing);
+  margin-bottom: var(--section-spacing);
+
+  &.has-bg {
+    padding-top: var(--section-spacing);
+    padding-bottom: var(--section-spacing);
   }
-
-  &.section--spacing-lg {
-    --section-spacing: 11.25rem;
-  }
-
-  padding-top: var(--section-spacing);
-  padding-bottom: var(--section-spacing);
-}
-
-.main-wrapper > section.has-bg:last-of-type {
-  @apply mb-0;
-}
-
-h2:not([class]) + p {
-  @apply mt-6;
-}
-
-p + h2:not([class]),
-ul + h2:not([class]) {
-  @apply mt-10;
-}
-
-h3:not([class]) + p {
-  @apply mt-6;
-}
-
-p + p {
-  @apply mt-4;
 }

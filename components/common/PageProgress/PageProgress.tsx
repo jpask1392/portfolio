@@ -11,8 +11,9 @@ const PageProgress = ({
   
   useEffect(() => {
     if (!scroll) return;
-    scroll.on("scroll", ({limit, scroll}) => {
-      setProgress((scroll.y / limit.y) * 100)
+
+    scroll.on("scroll", ({ limit, scroll, delta }) => {
+      setProgress((delta.y / limit.y) * 100)
     })
   }, [scroll])
 
@@ -26,14 +27,10 @@ const PageProgress = ({
       data-scroll-target="main-scroll-wrapper"
     >
       <motion.span 
-        className="bg-black absolute bottom-0 w-full" 
-        animate={{ height: `${progress}%`}} 
-        // transition={{ 
-        //   type: 'spring',
-        //   damping: 10,
-        //   stiffness: 5,
-        //   restDelta: 0.001
-        // }}
+        className="bg-black absolute bottom-0 w-full h-full origin-bottom" 
+        animate={{ 
+          scaleY: `${progress}%`
+        }} 
       />
     </span>
   )

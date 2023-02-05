@@ -81,7 +81,8 @@ export default function Page() {
         }
         </ul>
       </section>
-      <section className="px-5 section section--spacing-lg !mb-0" data-scroll-section>
+
+      <section className="px-5 section section--spacing-lg !mb-0 text-background" data-scroll-section>
         <IndexBody />
       </section>
 

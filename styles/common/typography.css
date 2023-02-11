@@ -25,6 +25,12 @@
   text-shadow: -1px -1px 0 #2E2E2E, 1px -1px 0 #2E2E2E, -1px 1px 0 #2E2E2E, 1px 1px 0 #2E2E2E;
 }
 
+.text-outlined-dark {
+  @apply text-black;
+
+  text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF;
+}
+
 .h2,
 h2:not([class]) {
   @apply
@@ -60,7 +66,7 @@ h4:not([class]) {
 }
 
 p,
-.p,
+.p
 ul,
 .ul {
   @apply 
@@ -68,6 +74,7 @@ ul,
     md:text-sm
     lg:text-base
     font-normal
+    /* font-light */
     leading-relaxed;
 }
 

@@ -6,7 +6,7 @@ import type { storyBlokImage } from '@/types/storyBlok';
 import { useState } from 'react';
 
 interface Props {
-  image: storyBlokImage | undefined
+  image: storyBlokImage | undefined 
   maxWidth?: number
   preload?: boolean
   className?: string
@@ -28,12 +28,14 @@ const CustomImage: React.FC<Props> = ({
 }) => {
   const [ loading, setLoading ] = useState(true);
 
+  let url: string | undefined;
+  if (image && "filename" in image) url = image.filename;
+
   // if image isn't supplied, return nothing.
-  if (!image || !image?.filename) return null;
+  if (!url || !image) return null;
 
   let imageSourceCDN = "";
-  if (image.filename.includes('storyblok')) imageSourceCDN = "storyblok";
-  if (image.filename.includes('shopify')) imageSourceCDN = "shopify";
+  if (url.includes('storyblok')) imageSourceCDN = "storyblok";
 
   const dimensions = {
     width: 0,
@@ -53,8 +55,8 @@ const CustomImage: React.FC<Props> = ({
 
   if (imageSourceCDN === "storyblok") {
     // storyblok solution
-    dimensions['width'] = parseInt(image.filename?.split('/')[5].split('x')[0]);
-    dimensions['height'] = parseInt(image.filename?.split('/')[5].split('x')[1]);
+    dimensions['width'] = parseInt(url.split('/')[5].split('x')[0]);
+    dimensions['height'] = parseInt(url.split('/')[5].split('x')[1]);
   }
 
   // set aspect ratio of image
@@ -74,8 +76,7 @@ const CustomImage: React.FC<Props> = ({
    */
   const getPlaceholderUrl = () => {
     let placeholderUrl = ""
-    if (imageSourceCDN === "storyblok") placeholderUrl = `${image.filename}/m/10x10`;
-    if (imageSourceCDN === "shopify") placeholderUrl = `${image.filename}&width=10`;
+    if (imageSourceCDN === "storyblok") placeholderUrl = `${url}/m/10x10`;
 
     return placeholderUrl;
   }
@@ -105,14 +106,13 @@ const CustomImage: React.FC<Props> = ({
 
     // reduce quality and resize
     if (imageSourceCDN === "storyblok") morphedSrc = `${src}/m/${maxImageWidth}x0/filters:quality(75)`;
-    if (imageSourceCDN === "shopify") morphedSrc = `${src}&width=${maxImageWidth}`;
     return `${morphedSrc}`
   }
 
   return (
     <>
       {
-        loading ? (
+        loading && !preload ? (
           /**
            * nextjs 13 image placeholder doesn't accept
            * image urls anymore. It wants datablur base64 
@@ -136,8 +136,8 @@ const CustomImage: React.FC<Props> = ({
 
       <NextImage
         className={cn(className, { "object-cover" : fill })}
-        src={image.filename}
-        alt={image.alt || 'Image'}
+        src={url}
+        alt={'Image'}
         width={!fill ? dimensions.width : undefined}
         height={!fill ? dimensions.height : undefined}
         loader={myLoader}

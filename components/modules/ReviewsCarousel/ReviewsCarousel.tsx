@@ -1,11 +1,25 @@
+import type { SbBlokData } from "@storyblok/react";
 import ReviewTile from "./ReviewTile";
 
-
 interface Props {
-  
+  reviews: {
+    content: {
+      author: string
+      body: string
+      jobTitle: string
+      rating: number
+    }
+  }[]
 }
 
-const ReviewsCarousel: React.FC<Props> = (props) => {
+interface Blok extends SbBlokData, Props {}
+
+interface ReviewsProps extends Props {
+  children?: any
+  blok?: Blok
+}
+
+const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
   const {
     reviews
   } = props.blok || props;

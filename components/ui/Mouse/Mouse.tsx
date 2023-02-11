@@ -1,7 +1,6 @@
 import { useUIContext } from "@/components/context/uiContext";
 import cn from 'classnames';
 import { useEffect, useRef, useState } from "react";
-import { gsap } from 'gsap';
 
 const Mouse = () => {
   const mouseRef = useRef<HTMLDivElement | null>(null);
@@ -18,25 +17,25 @@ const Mouse = () => {
   const handleMouseMove = (e: MouseEvent) => {
     if (!mouseRef.current) return;
 
-    gsap.to(mouseRef.current, {
-      x: e.clientX - (mouseRef.current.clientWidth / 2),
-      y: e.clientY - (mouseRef.current.clientHeight / 2),
-      duration: 0.2,
-    });
+    // gsap.to(mouseRef.current, {
+    //   x: e.clientX - (mouseRef.current.clientWidth / 2),
+    //   y: e.clientY - (mouseRef.current.clientHeight / 2),
+    //   duration: 0.2,
+    // });
   }
 
   const handleMouseDown = () => {
-    gsap.to(mouseRef.current, {
-      scale: 0.8,
-      duration: 0.2,
-    })
+    // gsap.to(mouseRef.current, {
+    //   scale: 0.8,
+    //   duration: 0.2,
+    // })
   }
 
   const handleMouseUp = () => {
-    gsap.to(mouseRef.current, {
-      scale: 1,
-      duration: 0.2,
-    })
+    // gsap.to(mouseRef.current, {
+    //   scale: 1,
+    //   duration: 0.2,
+    // })
   }
 
   return (

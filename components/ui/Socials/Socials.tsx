@@ -20,7 +20,7 @@ const Socials: React.FC<Props> = ({
         }, i) => {
           return (
             <StoryBlokLink 
-              sbLink={link || false}
+              sbLink={link}
               className={`icon-${name}`}
               key={i}
             >

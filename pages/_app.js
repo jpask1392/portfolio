@@ -19,14 +19,10 @@ import { ImageModule } from "@/components/ui/Image";
 import Header from "@/components/ui/Header";
 import Slideshow from "@/components/ui/Slideshow";
 import Accordion from "@/components/ui/Accordion";
-// import Tabs from "@/components/ui/Tabs";
-// import Marquee from "@/components/ui/Marquee";
-// import Table from "@/components/ui/Table";
 import Icon from '@/components/ui/Icon';
 import Select from "@/components/modules/Form";
 
 // modules
-import HeroImage from "@/components/modules/HeroImage";
 import Form from "@/components/modules/Form";
 import CustomComponent from "@/components/modules/CustomComponent";
 import ReviewsCarousel from "@/components/modules/ReviewsCarousel";
@@ -34,16 +30,12 @@ import IndexBody from "@/components/modules/IndexBody";
 import AboutMe from "@/components/modules/AboutMe";
 import ProjectsList from "@/components/modules/ProjectsList";
 
-
 const components = {
   page: Page,
-  heroImage: HeroImage,
   container: Container,
   column: Column,
   header: Header,
   grid: Grid,
-  // tabs: Tabs,
-  // marquee: Marquee,
   richText: RichText,
   button: Button,
   image: ImageModule,
@@ -51,7 +43,6 @@ const components = {
   accordion: Accordion,
   form: Form,
   formInput: Select,
-  // table: Table,
   icon: Icon,
   customComponent: CustomComponent,
   reviewsCarousel: ReviewsCarousel,
@@ -64,7 +55,6 @@ storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_SB_PREVIEW_ACCESS_TOKEN,
   apiOptions: {},
   use: [apiPlugin],
-  // bridge: false,
   components
 });
 

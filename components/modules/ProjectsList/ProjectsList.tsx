@@ -1,16 +1,28 @@
 import ProjectTile from "./ProjectTile";
-import { render } from "storyblok-rich-text-react-renderer";
+import type { SbBlokData } from "@storyblok/react";
+import type { storyBlokLink, storyBlokImage } from "@/types/storyBlok";
 
 interface Props {
-  
+  projects: {
+    content: {
+      name: string
+      siteLink: storyBlokLink
+      images: storyBlokImage[]
+    }
+  }[]
 }
 
-const ProjectsList: React.FC<Props> = (props) => {
+interface Blok extends SbBlokData, Props {}
+
+interface ProjectsProps extends Props {
+  children?: any
+  blok?: Blok
+}
+
+const ProjectsList: React.FC<ProjectsProps> = (props) => {
   const {
     projects
   } = props.blok || props;
-
-  console.log(projects)
 
   return (
     <div>

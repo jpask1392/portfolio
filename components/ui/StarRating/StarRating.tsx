@@ -1,6 +1,10 @@
 import cn from 'classnames';
 
-const StarRating = ({
+interface Props {
+  className?: string
+}
+
+const StarRating: React.FC<Props> = ({
   className,
 }) => {
   return (

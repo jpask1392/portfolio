@@ -1,4 +1,3 @@
-
 import { modulePadding } from "@/utils/modulePadding";
 import { render } from "storyblok-rich-text-react-renderer";
 import { renderOptions } from "utils/constants";

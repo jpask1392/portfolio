@@ -1,10 +1,35 @@
+import type { SbBlokData } from "@storyblok/react";
+import { render, NODE_PARAGRAPH } from "storyblok-rich-text-react-renderer";
 import Link from "next/link"
 import HoverLink from "./HoverLink"
 
-const IndexBody = () => {
+interface Props {
+  body: string
+}
+
+interface Blok extends SbBlokData, Props {}
+
+interface IndexBodyProps extends Props {
+  children: any
+  blok?: Blok
+}
+
+const IndexBody: React.FC<IndexBodyProps> = (props) => {
+  const {
+    body
+  } = props.blok || props;
   return (
     <>
-     <h1 className="!text-[6vw] h1 w-8/12 text-outlined">living in <HoverLink name="Los Angeles" action={{ type: "link", data: { link: "/about"} }} />, working as a web engineer. seeking opportunities to collaborate with a lively, forward thinking team. I  work with technologies like <HoverLink name="nextjs" />, <Link href="/work">Shopify</Link> & web3 to create engaging, performant digital experiences for clients & brands. also I’m <HoverLink name="welsh" /> and I think thats pretty cool. but enough about me, <HoverLink name="reach out" /> to chat through your next big project. </h1>
+     <h1 className="!text-[6vw] h1 w-8/12 text-outlined">
+      {render(body, {
+        nodeResolvers: { 
+          [NODE_PARAGRAPH]: (children) => <>{children}</>
+        },
+        blokResolvers: {
+          ['hoverLink']: (props: any) => <HoverLink {...props} />
+        }
+      })}
+    </h1>
     </>
   )
 }

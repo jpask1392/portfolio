@@ -1,11 +1,21 @@
-
+import type { storyBlokImage } from "@/types/storyBlok";
+import type { SbBlokData } from "@storyblok/react";
 import { render } from "storyblok-rich-text-react-renderer";
 
 interface Props {
-  
+  content: string
+  images: storyBlokImage[]
 }
 
-const AboutMe: React.FC<Props> = (props) => {
+
+interface Blok extends SbBlokData, Props {}
+
+interface AboutProps extends Props {
+  children?: any
+  blok?: Blok
+}
+
+const AboutMe: React.FC<AboutProps> = (props) => {
   const {
     content,
     images,

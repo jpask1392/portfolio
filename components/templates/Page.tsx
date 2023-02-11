@@ -4,8 +4,6 @@ import Link from "next/link";
 import CustomImage from "@/components/ui/Image"
 import cn from "classnames";
 import { NextSeo } from "next-seo";
-import Image from 'next/image';
-import Placeholder from '@/public/images/placeholder.png';
 import { SbEditableContent } from "@/types/storyBlok";
 import { StoryblokComponent } from "@storyblok/react"
 import { useGlobalContext } from "../context/globalContext";
@@ -44,8 +42,8 @@ const Page: React.FC<Props> = (props) => {
       }
 
       <main
-        className={`page-${page.slug} min-h-screen`}
-        id="main-scroll-wrapper"
+        id={`page-${page.slug}`}
+        className="min-h-screen"
         style={{
           backgroundColor: backgroundColor.value,
           color: isDarkBackground ? "#fff" : ""

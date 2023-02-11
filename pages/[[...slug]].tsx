@@ -106,9 +106,23 @@ export async function getStaticPaths({ locales } : { locales: any }) {
     let splittedSlug = slug.split("/");
     if (slug === "home") splittedSlug = false;
 
-    // remove 'product' paths - duplicates are not allowed    
-    if ( splittedSlug[0] === "settings" ) return;
+    /**
+     * Do not try and get static paths for these elements.
+     * Product pages are generated differently.
+     * Settings content types do not need paths.
+     *
+     */
+     const ignoredPaths = [
+      "project",
+      "reviews",
+      "settings",
+      "global-template",
+      "config",
+      "login",
+      "templates"
+    ];
 
+    if (ignoredPaths.some((item) => slug.includes(item))) return;
     paths.push({ params: { slug: splittedSlug } });
   });
 

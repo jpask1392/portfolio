@@ -3,7 +3,11 @@ import { motion, useMotionValue } from "framer-motion"
 import { use, useEffect, useState } from "react";
 import { useScrollContext } from "@/components/context/scroll";
 
-const PageProgress = ({
+interface Props {
+  location: string 
+}
+
+const PageProgress: React.FC<Props> = ({
   location
 }) => {
   const { scroll } = useScrollContext();
@@ -12,7 +16,7 @@ const PageProgress = ({
   useEffect(() => {
     if (!scroll) return;
 
-    scroll.on("scroll", ({ limit, scroll, delta }) => {
+    scroll.on("scroll", ({ limit, scroll, delta }: any) => {
       setProgress((delta.y / limit.y) * 100)
     })
   }, [scroll])

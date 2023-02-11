@@ -3,18 +3,20 @@ import type { storyBlokLink } from "@/types/storyBlok";
 
 interface Props {
   className?: string
-  sbLink: storyBlokLink | false
+  sbLink: storyBlokLink | undefined
   children: any
   onClick?: any
   isSubmit?: boolean
+  onMouseEnter?: any
+  onMouseLeave?: any
 }
 
 const StoryBlokLink: React.FC<Props> = ({
   className,
   sbLink,
   children,
-  onClick,
   isSubmit = false,
+  ...rest
 }) => {
   if (!sbLink) return <>{children}</>;
 
@@ -37,7 +39,7 @@ const StoryBlokLink: React.FC<Props> = ({
           href={cached_url ? '/' + cached_url + (anchor ? `#${anchor}` : '') : '/'}
           className={className}
           aria-label={`Link to ${cached_url}`}
-          onClick={onClick}
+          {...rest}
         >
           {children}
         </NextLink>)
@@ -51,7 +53,7 @@ const StoryBlokLink: React.FC<Props> = ({
           type="submit"
           className={className}
           aria-label={`Link to ${cached_url}`}
-          onClick={onClick}
+          {...rest}
         >
           {children}
         </button>)

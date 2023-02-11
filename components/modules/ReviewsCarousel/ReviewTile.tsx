@@ -2,7 +2,10 @@ import StarRating from "@/components/ui/StarRating";
 import { render } from "storyblok-rich-text-react-renderer";
 
 interface Props {
-  
+  author: string
+  body: string
+  jobTitle: string
+  rating: number
 }
 
 const ReviewTile: React.FC<Props> = ({

@@ -58,9 +58,9 @@ export function ScrollContextProvider({ children } : { children: any }) {
       scroll: scroll,
     }}>
       <motion.div 
-        data-scroll-container 
+        data-scroll-container
         ref={containerRef} 
-        className="min-h-[100vh] w-full absolute bg-white"
+        className="min-h-[100vh] w-full absolute"
         initial={{ opacity: 1, top: 1100, zIndex: 1 }}
         animate={{ 
           top: 0,

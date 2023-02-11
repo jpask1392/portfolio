@@ -64,7 +64,9 @@ p,
 ul,
 .ul {
   @apply 
-    text-base
+    text-xs
+    md:text-sm
+    lg:text-base
     font-normal
     leading-relaxed;
 }

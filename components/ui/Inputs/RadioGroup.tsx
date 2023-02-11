@@ -35,7 +35,7 @@ const RadioGroup: React.FC<Props> = ({
       {
         items.map((item, i) => {
           const RadioButtonStyles = cn("block border rounded-md p-2 w-full", {
-            "border-red" : value === item,
+            "border-primary" : value === item,
             "border-white" : value !== item,
           })
 

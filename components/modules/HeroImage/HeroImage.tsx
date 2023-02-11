@@ -5,7 +5,6 @@ import { ReactNode, Component } from 'react';
 import { useRef, useEffect } from 'react';
 import CustomImage from '@/components/ui/Image';
 import type { storyBlokImage } from '@/types/storyBlok';
-import { gsap } from 'gsap';
 
 interface Props {
   className?: string
@@ -30,22 +29,6 @@ const Hero: React.FC<Props> = ({
  }) => {
   const headerRef = useRef<null | HTMLElement>(null);
   const contentRef = useRef<any>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline({});
-
-    tl.fromTo(contentRef.current, { 
-      opacity: 0,
-      y: 100,
-    }, {
-      opacity: 1,
-      y: 0,
-      // stagger: 0.15,
-      duration: 0.9,
-      ease: "power4.out",
-      delay: 0.4,
-    });
-  }, [])
 
   return (
     <section className="hero overflow-hidden ml-auto lg:-ml-16 xl:-ml-32" ref={headerRef}>

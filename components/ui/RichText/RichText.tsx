@@ -7,11 +7,6 @@ import { useRef } from 'react';
 import { storyblokEditable } from "@storyblok/react";
 import type { SbBlokData } from "@storyblok/react"
 
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { useScrollContext } from "@/components/context/scroll";
-import { gsap } from 'gsap';
-import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
-
 interface Props {
   align?: 'left' | 'center' | 'right'
   className?: string
@@ -36,26 +31,9 @@ const RichText: React.FC<RichTextProps> = (props) => {
     className,
     color,
     padding,
-    disableAnimation,
   } = props.blok || props;
 
   const componentRef = useRef<null | HTMLDivElement>(null);
-  const { scroll } = useScrollContext();
-  // const tl = useRef(null);
-
-  useIsomorphicLayoutEffect(() => {
-    if (!scroll || disableAnimation) return;
-
-    gsap.to(componentRef.current, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: componentRef.current,
-        markers: false,
-        start: "top bottom-=20%",
-        scroller: "[data-scroll-container]",
-      }
-    })
-  }, [scroll])
 
   return (
     <div
@@ -66,7 +44,6 @@ const RichText: React.FC<RichTextProps> = (props) => {
         [`text-${color}`] : color,
         [modulePadding(padding)] : padding,
         "self-start" : align === 'left',
-        "opacity-0": !disableAnimation
       })}
     >  
       { text ? render(text, renderOptions) : null }

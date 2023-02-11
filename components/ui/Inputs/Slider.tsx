@@ -22,7 +22,7 @@ const Slider: React.FC<Props> = ({
   const thumbClassNames = cn([
     "w-6",
     "h-6",
-    "bg-red-800",
+    "bg-primary-800",
     "block",
     "absolute",
     "top-1/2",
@@ -59,7 +59,7 @@ const Slider: React.FC<Props> = ({
         max={max}
       >
         <RadixSlider.Track className="h-px bg-red-100 w-full block">
-          <RadixSlider.Range className="absolute h-full inline-block bg-red" />
+          <RadixSlider.Range className="absolute h-full inline-block bg-primary" />
         </RadixSlider.Track>
 
         <RadixSlider.Thumb className={thumbClassNames} />
@@ -67,7 +67,7 @@ const Slider: React.FC<Props> = ({
         
       </RadixSlider.Root>
 
-      <div className="mt-6 flex justify-end text-sm text-red">
+      <div className="mt-6 flex justify-end text-sm text-primary">
         {formatMoney(internalValue[0])} <span className="mx-2">-</span>
         {formatMoney(internalValue[1])}
       </div>

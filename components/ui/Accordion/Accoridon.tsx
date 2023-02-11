@@ -1,4 +1,3 @@
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useScrollContext } from "@/components/context/scroll";
 import { useState } from 'react';
 import Header from '@/components/ui/Header';
@@ -6,9 +5,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import DynamicIcon from '@/components/icons/DynamicIcon';
 import { render } from "storyblok-rich-text-react-renderer";
 import cn from 'classnames';
-import { storyblokEditable } from "@storyblok/react";
 import type { SbBlokData } from "@storyblok/react"
-import { SbEditableContent } from "@/types/storyBlok";
 
 interface Props {
   className?: string

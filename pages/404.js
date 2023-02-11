@@ -1,12 +1,10 @@
 import Layout from "@/components/templates/Layout";
 import Container from "@/components/ui/Container";
 
-import Storyblok, { useStoryblok } from "../utils/storyblok";
-
 export default function Page404({ global, preview, locale }) {
   const enableBridge = true; // load the storyblok bridge everywhere
   // const enableBridge = preview; // load only inside preview mode
-  const storyLoaded = useStoryblok(null, enableBridge, locale);
+  
 
   return (
     <Layout>
@@ -33,7 +31,7 @@ export async function getStaticProps({
     }
 
     // get global layout information for header, footer etc
-    let global = await Storyblok.get(`cdn/stories/templates/global-template`, sbParams);
+    // let global = await Storyblok.get(`cdn/stories/templates/global-template`, sbParams);
 
     return {
       props: {
@@ -41,7 +39,7 @@ export async function getStaticProps({
         locale,
         locales,
         defaultLocale,
-        global: global ? global.data.story : false,
+        // global: global ? global.data.story : false,
       },
     };
 

@@ -47,7 +47,7 @@ const HoverLink = ({
       <Modal setModalIsOpen={setActive} modalIsOpen={active}>
         <div>
           <h1 
-            className="text-[6vw] h1 absolute"
+            className="!text-[6vw] h1 absolute"
             style={{
               left: pos.current.x,
               top: pos.current.y

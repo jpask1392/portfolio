@@ -1,63 +1,84 @@
-import Script from "next/script";
+import tinycolor from "tinycolor2";
+import DynamicIcon from "@/components/icons/DynamicIcon";
+import Link from "next/link";
+import CustomImage from "@/components/ui/Image"
+import cn from "classnames";
+import { NextSeo } from "next-seo";
+import Image from 'next/image';
+import Placeholder from '@/public/images/placeholder.png';
 import { SbEditableContent } from "@/types/storyBlok";
 import { StoryblokComponent } from "@storyblok/react"
+import { useGlobalContext } from "../context/globalContext";
 
 interface Props {
   blok: SbEditableContent
 }
 
-const Page: React.FC<Props> = ({ blok }) => {
+const Page: React.FC<Props> = (props) => {
+  const {
+    body,
+    seo,
+    scripts,
+    backgroundColor,
+    fixedImage,
+  } = props.blok || props;
+
+  const { story: page } = useGlobalContext();
+  const isDarkBackground = tinycolor(backgroundColor.value).isDark();
+
   return (
     <>
-      {/* {
-        blok.scripts?.length ? (
-          blok.scripts.map((script: any) => (
-            <Script
-              key={script._uid}
-              id={script._uid}
-              src={script.src || undefined}
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={ script.inner ? {
-                __html: script.inner,
-              } : undefined}
-            />
-          ))
-        )  : null   
-      } */}
+      <NextSeo
+        title={seo && seo.length ? seo[0].title : page.name}
+        description={seo && seo.length ? seo[0].description : ""}
+      />
+
       {
-        blok.scripts?.length ? (
-          blok.scripts.map((script: any) => (
-            <Script
-              key={script._uid}
-              id={script._uid}
-              src={script.src || undefined}
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={ script.inner ? {
-                __html: script.inner,
-              } : undefined}
-            />
-          ))
-        )  : null   
-      }
-      {
-        blok.hero?.length ? (
-          <StoryblokComponent
-            blok={blok.hero[0]} 
-            key={blok.hero[0]._uid} 
-          />
+        page.slug !== "home" ? (
+          <div className="absolute top-12 right-12 z-50">
+            <Link href="/">
+              <DynamicIcon type="close" className="w-5 text-accent" />
+            </Link>
+          </div>
         ) : null
       }
-      {
-        blok.body ? (
-          blok.body.map((blok: SbEditableContent) => (
-            <StoryblokComponent
-              blok={blok} 
-              key={blok._uid} 
-            />
-          ))
-        ) : null
-      }
-      
+
+      <main
+        className={`page-${page.slug} min-h-screen`}
+        id="main-scroll-wrapper"
+        style={{
+          backgroundColor: backgroundColor.value,
+          color: isDarkBackground ? "#fff" : ""
+        }}
+      >
+        <div className="relative z-10">
+          {
+            body ? (
+              body.map((blok: SbEditableContent) => (
+                <StoryblokComponent
+                  blok={blok} 
+                  key={blok._uid} 
+                />
+              ))
+            ) : null
+          }
+        </div>
+
+        {
+          fixedImage ? (
+            <div className="absolute inset-x-2.5 top-0 z-0" data-scroll-sticky data-scroll-target="#main-scroll-wrapper">
+              <div className="h-screen flex items-end">
+                <div className="w-4/12 ml-auto mr-[8.333%] px-5 relative">
+                  <CustomImage 
+                    image={fixedImage}
+                    preload 
+                  />
+                </div>
+              </div>
+            </div>
+          ) : null
+        }
+      </main>
     </>
   )
 };

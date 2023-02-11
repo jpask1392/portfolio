@@ -1,30 +1,21 @@
-import { useRouter } from 'next/router'
-import { useScrollContext } from "@/components/context/scroll";
 import NextLink from 'next/link';
 import type { storyBlokLink } from "@/types/storyBlok";
-import { ReactNode, Component } from 'react';
-import useIsomorphicLayoutEffect from '../hooks/useIsomorphicLayoutEffect';
 
 interface Props {
   className?: string
   sbLink: storyBlokLink | false
-  children: ReactNode[] | Component[] | any[] | ReactNode | Component | any
-  onMouseOver?: any
-  onMouseLeave?: any
+  children: any
   onClick?: any
+  isSubmit?: boolean
 }
 
 const StoryBlokLink: React.FC<Props> = ({
   className,
   sbLink,
   children,
-  onMouseOver,
-  onMouseLeave,
   onClick,
+  isSubmit = false,
 }) => {
-  const { scroll } = useScrollContext();
-  const router = useRouter();
-
   if (!sbLink) return <>{children}</>;
 
   const {
@@ -35,48 +26,35 @@ const StoryBlokLink: React.FC<Props> = ({
     anchor,
   } = sbLink;
 
-  // handle scroll with scrolljacking
-  const handleAnchorClick = (e: any) => {
-    if (anchor) {
-      e.preventDefault();
-      const target = document.querySelector(`#${anchor}`);
-
-      if (router.asPath !== "/") {
-        // go to home page
-        router.push('/')
-
-        setTimeout(() => {
-          scroll.scrollTo(target)
-        }, 1000)
-      }
-
-      scroll.scrollTo(target)
-    }
-
-    // run the click event from props
-    onClick && onClick();
-  }
-
   return <>
     { (linktype === 'email') && <a className={className} href={`mailto:${email}`}>{children}</a> }
     { (url.match(/^(https?:)?\/\//)) && <a href={url} className={className} target="_blank" rel="noreferrer">{children}</a> }
 
     {
-      (!url.match(/^(https?:)?\/\//) && linktype !== 'email') ? (
-        (<NextLink
-          onMouseOver={onMouseOver}
-          onMouseLeave={onMouseLeave}
-          onClick={handleAnchorClick}
-          href={
-            cached_url
-              ? '/' + cached_url.replace("home", "") + (anchor ? `#${anchor}` : '') 
-              : '/'
-          }
+      (!url.match(/^(https?:)?\/\//) && linktype !== 'email' && !isSubmit) ? (
+        (
+        <NextLink
+          href={cached_url ? '/' + cached_url + (anchor ? `#${anchor}` : '') : '/'}
           className={className}
           aria-label={`Link to ${cached_url}`}
+          onClick={onClick}
         >
           {children}
         </NextLink>)
+      ) : null
+    }
+
+    {
+      isSubmit ? (
+        (
+        <button
+          type="submit"
+          className={className}
+          aria-label={`Link to ${cached_url}`}
+          onClick={onClick}
+        >
+          {children}
+        </button>)
       ) : null
     }
   </>;

@@ -3,6 +3,7 @@ import "../styles/app.css";
 import "../public/fonts/fonts.css";
 import { DefaultLayout } from '../components/context/contextLayout';
 import { storyblokInit, apiPlugin } from "@storyblok/react";
+import { AnimatePresence } from 'framer-motion'
 
 // templates
 import Page from "@/components/templates/Page";
@@ -13,7 +14,6 @@ import Container from "@/components/ui/Container";
 import Column from "@/components/ui/Column";
 import Grid from "@/components/ui/Grid";
 import RichText from "@/components/ui/RichText";
-import ButtonGroup from "@/components/ui/ButtonGroup";
 import Button from "@/components/ui/Button";
 import { ImageModule } from "@/components/ui/Image";
 import Header from "@/components/ui/Header";
@@ -29,6 +29,10 @@ import Select from "@/components/modules/Form";
 import HeroImage from "@/components/modules/HeroImage";
 import Form from "@/components/modules/Form";
 import CustomComponent from "@/components/modules/CustomComponent";
+import ReviewsCarousel from "@/components/modules/ReviewsCarousel";
+import IndexBody from "@/components/modules/IndexBody";
+import AboutMe from "@/components/modules/AboutMe";
+import ProjectsList from "@/components/modules/ProjectsList";
 
 
 const components = {
@@ -41,7 +45,6 @@ const components = {
   // tabs: Tabs,
   // marquee: Marquee,
   richText: RichText,
-  buttonGroup: ButtonGroup,
   button: Button,
   image: ImageModule,
   slideshow: Slideshow,
@@ -51,13 +54,15 @@ const components = {
   // table: Table,
   icon: Icon,
   customComponent: CustomComponent,
+  reviewsCarousel: ReviewsCarousel,
+  indexBody: IndexBody,
+  aboutMe: AboutMe,
+  projectsList: ProjectsList,
 };
 
 storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_SB_PREVIEW_ACCESS_TOKEN,
-  apiOptions: { 
-    resolve_relations: []
-  },
+  apiOptions: {},
   use: [apiPlugin],
   // bridge: false,
   components

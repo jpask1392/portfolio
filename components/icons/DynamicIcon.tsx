@@ -39,12 +39,7 @@ import Error from "./Error"
 import User from "./User"
 import Twitter from "./Twitter";
 import Check from "./Check";
-
-// Collective Strangers Specific
-import Discord from "./ProjectIcons/Discord";
-import Opensea from "./ProjectIcons/Opensea";
-import Puzzle from "./ProjectIcons/Puzzle";
-import Image from "./ProjectIcons/Image";
+import NewTab from "./NewTab";
 
 type Variant = string;
 
@@ -85,10 +80,8 @@ const Components: {
   filters: Filters,
   user: User,
   twitter: Twitter,
-  discord: Discord,
-  opensea: Opensea,
-  puzzle: Puzzle,
-  image: Image,
+  newTab: NewTab,
+  
 };
 
 interface Props {

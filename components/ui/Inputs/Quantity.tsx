@@ -4,16 +4,18 @@ import { useRef } from 'react';
 interface Props {
   className?: string
   onChange?: (quantity: number) => void
+  defaultValue?: number
 }
 
 const Quantity: React.FC<Props> = ({ 
   className,
+  defaultValue = 1,
   onChange
 }) => {
   const inputRef = useRef<null | HTMLInputElement>(null);
 
   const buttonClassNames = cn([
-    'absolute top-1/2 transform -translate-y-1/2 h-full w-10 z-20'
+    'z-20'
    ])
 
   const handleClick = (step: string) => {
@@ -39,13 +41,7 @@ const Quantity: React.FC<Props> = ({
   }
 
   return (
-    <div className={cn(className, 'text-sm inline-flex relative w-full h-full')}>
-
-      <button 
-        className={buttonClassNames} 
-        onClick={() => handleClick('minus')}
-      >-</button>
-
+    <div className={cn(className, 'text-sm inline-flex relative w-full h-full border border-[var(--primary-color)] rounded-full')}>
       <input 
         ref={inputRef}
         name="quantity"
@@ -53,21 +49,20 @@ const Quantity: React.FC<Props> = ({
         max={999}
         type="number"
         onChange={handleOnChange}
-        defaultValue={1} 
-        className={cn([
-          "text-center",
-          "bg-transparent",
-          "appearance-none",
-          "border border-red",
-          "px-10",
-          "rounded-none",
-         ])}
+        defaultValue={defaultValue} 
+        className={cn("bg-transparent appearance-none pl-5 rounded-full w-full min-w-[50px]")}
       />
 
-      <button 
-        className={`${buttonClassNames} right-0`} 
-        onClick={() => handleClick('plus')}
-      >+</button>
+      <div className="flex flex-col pr-5">
+        <button 
+          className={`${buttonClassNames} right-0`} 
+          onClick={() => handleClick('plus')}
+        >+</button>
+        <button 
+          className={buttonClassNames} 
+          onClick={() => handleClick('minus')}
+        >-</button>
+      </div>
     </div>
   )
 }

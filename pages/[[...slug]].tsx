@@ -1,4 +1,3 @@
-import { NextSeo } from "next-seo";
 import Layout from "@/components/templates/Layout";
 
 import type { Story } from '@/types/storyBlok';
@@ -15,20 +14,17 @@ export default function Page({
   story: Story | any,
   preview: boolean,
 }) {
-  story = useStoryblokState(story);
-
-  // get seo blok
-  const seo = story && ('seo' in story.content) && story?.content.seo[0]; // only one seo blok
+  story = useStoryblokState(story, {
+    resolveRelations: [
+      "reviewsCarousel.reviews",
+      "projectsList.projects"
+    ],
+  });
 
   return (
     <Layout id={story.slug}>
       {/* Page/Product component etc */}
       <StoryblokComponent blok={story?.content} />
-
-      <NextSeo
-        title={seo?.title || story.name}
-        description={seo?.description || ''}
-      />
     </Layout>
   );
 }
@@ -52,7 +48,10 @@ export async function getStaticProps({
 
   let sbParams: any = {
     version: preview ? "draft" : "published",
-    resolve_relations: [ "page.template" ],
+    resolve_relations: [ 
+      "reviewsCarousel.reviews",
+      "projectsList.projects"
+    ],
     language: locale,
   };
 

@@ -1,152 +1,128 @@
-import cn from 'classnames';
-import { ReactNode, Component, createContext, useRef, useState, useEffect } from 'react';
-import { 
-  handleContactFormSubmit,
-  handleNewsletter,
-} from './actions';
-import { string, number, date } from 'yup';
+import type { FormInput } from "@/types/storyBlok";
+import type { SbBlokData } from "@storyblok/react";
+import Select from "./Select";
+import SubmitButton from "@/components/ui/Inputs/SubmitButton";
+import Input from "./Input";
+import { Formik, Form, Field } from "formik";
+import cn from "classnames";
 
 interface Props {
-  action?: "contact" 
-    | "search" 
-    | "newsletter"
-  children: ReactNode[] | Component[] | any[] | ReactNode | Component | any
-  initialState?: {}
-  stylePreset?: string
+  onSubmit?: (values: any, actions: any) => any
+  onSuccess?: any
+  submitButton?: any
   className?: string
-  onSubmit?: (formData: any) => any
-  onChange?: (formData: any) => any
+  fields: FormInput[]
+  alignSubmit?: string
 }
 
-/**
- * Context used to trigger ajax 
- * loading icon in submit button
- */
-export const FormContext = createContext({});
+interface Blok extends SbBlokData, Props {}
 
-const Form: React.FC<Props> = ({
-  children,
-  action,
-  initialState : initialStateCopy = {},
-  className,
-  onSubmit,
-  onChange,
-}) => {
-  // if coming from SB, initial state is an array
-  let initialState: any = {};
-  Array.isArray(initialStateCopy)
-    ? initialStateCopy.forEach((state) => initialState[state.id] = state.initialValue || "")
-    : initialState = initialStateCopy;
+interface FormProps extends Props {
+  children?: any
+  blok?: Blok
+}
 
-  const [ formData, setFormData ] = useState(initialState); // stores key values of form data
-  const [ submitting, setSubmitting ] = useState(false); // used to trigger any ajax features
-  const [ submitted, setSubmitted ] = useState(false); // used to trigger submit in children
-  const didMountRef = useRef(false); // used to prevent running on first mount
-  const validations = useRef<any>({}); // used to store validation data without re-rendering
+const FormWrapper: React.FC<FormProps> = (props) => {
+  const {
+    submitButton,
+    onSuccess,
+    fields = [],
+    className,
+    onSubmit,
+    alignSubmit = "center"
+  } = props.blok || props;
 
-  /**
-   * Use this object to set up actions.
-   * 
-   * Used as a shortcut to running preset actions
-   */
-  const formActions: any = {
-    contact: handleContactFormSubmit,
-  } 
+  let initialValues: any = {};
+  fields.forEach(({ name, initialValue }) => initialValues[name] = initialValue)
 
-  /**
-   * Function runs when form has been submitted
-   * 
-   * @param e 
-   */
-  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setSubmitting(true);
-    setSubmitted(true);
-
-    // run through all inputs and run validations
-    // only show the first error so it doesn't look overwhelming to the user
-    if( !Object.values(validations.current).every(item => item) ) {
-      setSubmitting(false);
-      return;
+  const handleSubmit = async (values: string[], actions: any) => {
+    if (onSubmit) {
+      const response = await onSubmit(values, actions);
+      onSuccess && onSuccess(response, values)
+    } else {
+      // simulate response for testing
+      await new Promise((r, reject) => setTimeout(reject, 1000))
     }
-
-    try {
-      /**
-       * Perform either a preset submit
-       * action or a custom one.
-       */
-      action && (action in formActions)
-        ? await formActions[action](formData)
-        : onSubmit && (await onSubmit(formData))
-    } catch (error) {
-      console.warn(error)
-    } finally {
-      setSubmitting(false);
-      setSubmitted(false);
-    }
-  }
-
-  /**
-   * Run a callback if the formdata changes
-   */
-  useEffect(() => {
-    if (didMountRef.current) {
-      (async() => {
-        onChange && (await onChange(formData));
-      })()
-    }
-
-    didMountRef.current = true;
-  }, [formData])
-
-  /**
-   * 
-   * 
-   * @param input {} 
-   * @returns 
-   */
-  const validate = async (input: {
-    id: string,
-    value: string,
-    required: boolean,
-    type: string,
-  }) => {
-    // Build validation schema per input type
-    let inputSchema = string();
-    if (input.required) { inputSchema = inputSchema.required() }
-    // if (!input.required) { inputSchema = inputSchema.nullable() }
-    if (input.type === 'email') { inputSchema = inputSchema.email() } 
-
-    // this assertion throws an error if any are found
-    // it will return the first error in the chain as an exception
-    try {
-      await inputSchema.validate(input.value, { strict: true });
-      validations.current[input.id] = true;
-    } catch (error) {
-      // can customize error messages here if needed
-      validations.current[input.id] = false;
-      return error.message;
-    }
-
-    // return false if no errors found
-    return false;
   }
 
   return (
-    <FormContext.Provider 
-      value={{ formData, setFormData, submitting, validate, submitted }}
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
     >
-      <form
-        action={action}
-        onSubmit={handleSubmit}
-        noValidate
-        className={cn(className, "w-full")}
-      >
-        { children }
-      </form>
-    </FormContext.Provider>
+      {({ 
+        errors, 
+        touched, 
+        isValidating,
+        isSubmitting 
+      }) => (
+        <Form className={cn(className, "w-full")}>
+          <div className={cn("flex flex-wrap -mx-2 -mb-4", {
+            "pb-6" : submitButton && submitButton.length
+          })}>
+            {
+              fields.map(({
+                name = "",
+                placeholder = "",
+                inputType = "input",
+                width = "full",
+                required = false,
+                options,
+                onChangeFunction,
+                ...rest
+              }, index) => {
+                let codeBlock = false;
+                if (onChangeFunction && onChangeFunction.content[0].type === "code_block") {
+                  codeBlock = onChangeFunction.content[0].content[0].text;
+                }
+
+                const defaultProps = {
+                  ...rest,
+                  className: "px-2 mb-4",
+                  name: name,
+                  errors: errors,
+                  touched: touched,
+                  placeholder: `${placeholder}${required ? "*" : ""}`,
+                  as: inputType,
+                  required: required,
+                  width: width || "full",
+                  codeBlock: codeBlock,
+                }
+
+                if (inputType === "input" || inputType === "textarea") {
+                  return (
+                    <Input
+                      key={index}
+                      {...defaultProps}
+                    />
+                  )
+                }
+
+                if (inputType === "select") {
+                  return (
+                    <Field
+                      key={index}
+                      {...defaultProps}
+                      component={Select} 
+                      options={options?.items || [{ name: "", value: "" }]}  
+                    />
+                  )
+                }
+              })
+            }            
+          </div>
+          
+          <div className={`w-full text-${alignSubmit}`}>
+            {
+              submitButton && submitButton.length ? (
+                <SubmitButton {...submitButton[0]} />
+              ) : null
+            }
+          </div>       
+        </Form>
+      )}
+    </Formik>
   )
 }
 
-export default Form;
+export default FormWrapper;

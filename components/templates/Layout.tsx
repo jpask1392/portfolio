@@ -1,3 +1,4 @@
+import { ScrollContextProvider } from '../context/scroll';
 import { Toaster } from 'react-hot-toast';
 import { StoryblokComponent } from "@storyblok/react";
 import { useGlobalContext } from "../context/globalContext";
@@ -30,15 +31,20 @@ const Layout: React.FC<Props> = ({
 
   return (
     <>
-      <Head seo={false} />
+      <ScrollContextProvider>
+        <Head seo={false} />
 
-      <main id={id} className={cn({
-        "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
-      })}>
+        <div 
+          style={{
+            backgroundImage: `url(/images/noise.png)`
+          }}
+          className="absolute z-50 inset-0 pointer-events-none bg-[length:200px_200px]"
+        />
+
         {children}
-      </main>
 
-      <Toaster position="bottom-center" />
+        <Toaster position="bottom-center" />
+      </ScrollContextProvider>
     </>
   )
 };

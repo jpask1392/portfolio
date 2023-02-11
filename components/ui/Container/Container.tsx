@@ -7,7 +7,6 @@ import { storyblokEditable } from "@storyblok/react";
 import type { SbBlokData } from "@storyblok/react"
 import { SbEditableContent } from "@/types/storyBlok";
 import useIsomorphicLayoutEffect from '@/components/hooks/useIsomorphicLayoutEffect';
-import { gsap } from 'gsap';
 import { useEffect, useRef } from 'react';
 import { useUIContext } from "@/components/context/uiContext";
 
@@ -49,8 +48,9 @@ const Container: React.FC<ContainerProps> = (props) => {
     backgroundOverlay,
     maxWidth = '2xl',
     contained = true,
-    spacing,
+    spacing = "md",
     clearPadding = [],
+    clearMargin = [],
     sectionId,
     children = "",
     borders = []
@@ -60,39 +60,19 @@ const Container: React.FC<ContainerProps> = (props) => {
     el as any;
 
   const containerRef = useRef<any>(null);
-  const tween = useRef<any>(null);
-  const { UI, dispatch } = useUIContext();
-  const { scroll } = useScrollContext();
-
-  useIsomorphicLayoutEffect(() => {
-    if (!scroll) return;
-
-    tween.current = gsap.to(containerRef.current, {
-      scrollTrigger: {
-        trigger: containerRef.current,
-        markers: false,
-        scroller: "[data-scroll-container]",
-        onEnter: () => {
-          if (containerRef.current?.id) 
-            dispatch({type: "updateSection", payload: containerRef.current?.id});
-        },
-        onEnterBack: () => {
-          if (containerRef.current?.id) 
-            dispatch({type: "updateSection", payload: containerRef.current.id});
-        }
-      }
-    })
-  }, [scroll])
 
   return (
     <Component
       id={sectionId}
+      data-scroll-section
       {...(props.blok && storyblokEditable(props.blok))}
-      className={cn(className, {
+      className={cn(className, `section section--spacing-${spacing}`, {
         [`has-bg bg-${backgroundColor}`] : backgroundColor,
         [`text-${textColor}`] : textColor,
-        'border-t border-black': borders.includes('top'),
-        'border-b border-black': borders.includes('bottom'),
+        '!pt-0': clearPadding.includes('top'),
+        '!pb-0': clearPadding.includes('bottom'),
+        '!mt-0': clearMargin.includes('top'),
+        '!mb-0': clearMargin.includes('bottom'),
       })}
     >
       { 
@@ -106,23 +86,13 @@ const Container: React.FC<ContainerProps> = (props) => {
         )
       }
 
-      <div ref={containerRef} className={cn("section", {
-        'container-bordered': el === 'section',
-        'section--spacing-lg': spacing === 'lg',
-        'section--spacing-sm': spacing === 'sm',
-        '!pt-0': clearPadding.includes('top'),
-        '!pb-0': clearPadding.includes('bottom'),
+      <div className={cn({
+        "mx-[8.33333%]" : contained,
+        "px-10" : !contained,
       })}>
-        <div className={cn(`w-full max-w-screen-${maxWidth} mx-auto relative z-10`)}>
-          <div className={cn({
-            'container overflow-hidden lg:overflow-visible' : contained,
-          })}>
-            <ChildrenOrBloks 
-              children={children}
-              bloks={props.blok?.content}
-            />
-          </div>
-        </div>
+        <ChildrenOrBloks 
+          bloks={props.blok?.content}
+        >{children}</ChildrenOrBloks>
       </div>
     </Component>
   )

@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
@@ -9,7 +10,9 @@ export default function Document() {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </Head>
-      <body className="bg-background text-black">
+      <body className={cn({
+        "debug-screens" : process.env.NEXT_PUBLIC_ENVIRONMENT === "development"
+      })}>
         <Main />
         <NextScript />
       </body>

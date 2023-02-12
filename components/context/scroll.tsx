@@ -20,13 +20,6 @@ export function ScrollContextProvider({ children } : { children: any }) {
   const pageTransitionDuration = 800; // miliseconds
 
   useEffect(() => {
-    // if (scroll) {
-    //   // update framer motion scroll
-    //   scroll.on("scroll", (args) => {
-    //     // console.log(args)
-    //   })
-    // }
-
     if (!scroll) {
       (async () => {
         try {

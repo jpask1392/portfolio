@@ -46,7 +46,7 @@ const Page: React.FC<Props> = (props) => {
         className="min-h-screen"
         style={{
           backgroundColor: backgroundColor.value,
-          color: isDarkBackground ? "#fff" : ""
+          color: isDarkBackground ? "#fff" : "currentcolor"
         }}
       >
         <div className="relative z-10">
@@ -64,7 +64,7 @@ const Page: React.FC<Props> = (props) => {
 
         {
           fixedImage ? (
-            <div className="absolute inset-x-2.5 top-0 z-0" data-scroll-sticky data-scroll-target="#main-scroll-wrapper">
+            <div className="hidden md:block absolute inset-x-2.5 top-0 z-0" data-scroll-sticky data-scroll-target="#main-scroll-wrapper">
               <div className="h-screen flex items-end">
                 <div className="w-4/12 ml-auto mr-[8.333%] px-5 relative">
                   <CustomImage 

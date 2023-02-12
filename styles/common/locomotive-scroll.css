@@ -1,6 +1,6 @@
 /*! locomotive-scroll v4.1.3 | MIT License | https://github.com/locomotivemtl/locomotive-scroll */
 html:not(.has-scroll-smooth) {
-  overflow: hidden;
+  @apply lg:overflow-hidden;
 }
 
 html.has-scroll-dragging {
@@ -13,7 +13,7 @@ html.has-scroll-dragging {
 
 .has-scroll-smooth [data-scroll-container] {
   min-height: 100vh; 
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .c-scrollbar {

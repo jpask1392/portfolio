@@ -89,7 +89,7 @@ function MyApp({ Component, pageProps, router }) {
         }}
       /> */}
 
-      <AnimatePresence mode="popLayout" initial={false}>
+      <AnimatePresence initial={false}>
         {
           getLayout(
             <Component 

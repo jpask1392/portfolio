@@ -84,19 +84,19 @@ module.exports = {
       'xs': '.75rem', // 12px
       'sm': '.8125rem', // 14px
       'base': '0.9375rem', // 15px - base 
-      'lg': '1.125rem', // 18px
+      'lg': '1.0625rem', // 17px
       'xl': '1.25rem', // 20px 
       '2xl': '1.375rem', // 22px 
       '3xl': '1.5rem', // 24px 
       '4xl': '1.5625rem', // 25px 
       '5xl': '1.6875rem', // 27px
       '6xl': '1.875rem', // 30px
-      '7xl': '2.1875rem', // 35px
+      '7xl': '2.375rem', // 38px
       '8xl': '2.5rem', // 40px
       '9xl': '2.75rem', // 44px
       '10xl': '3.125rem', // 50px
       '11xl': '4rem', // 64px
-      '12xl': '4.6875rem', // 75px
+      '12xl': '5rem', // 80px
       '13xl': '5.875rem', // 94px
       '14xl': '6.625rem', // 108px
     },
@@ -114,6 +114,9 @@ module.exports = {
         '6-12': '50%',
         '1-12': '8.33333%',
         '3-12': '25%',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(circle closest-side, var(--tw-gradient-stops))',
       }
     },
   },

@@ -1,4 +1,4 @@
-.text-display {
+/* .text-display {
   @apply
     font-sans
     leading-none
@@ -8,7 +8,7 @@
     lg:text-12xl
     xl:text-13xl
     2xl:text-14xl;
-}
+} */
 
 .h1:not(.text-display) {
   @apply
@@ -16,11 +16,15 @@
     font-bold
     leading-[0.82]
     uppercase
-    text-14xl;
+    text-12xl
+    lg:text-14xl;
 }
 
 .text-outlined {
   @apply text-background;
+
+  /* -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #2E2E2E; */
 
   text-shadow: -1px -1px 0 #2E2E2E, 1px -1px 0 #2E2E2E, -1px 1px 0 #2E2E2E, 1px 1px 0 #2E2E2E;
 }
@@ -28,19 +32,21 @@
 .text-outlined-dark {
   @apply text-black;
 
-  text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+
+  /* text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF; */
 }
 
 .h2,
 h2:not([class]) {
   @apply
     font-header
-    leading-none
+    /* leading-none */
+    leading-[0.9]
     uppercase
     font-black
-    text-3xl
-    md:text-6xl
-    lg:text-8xl;
+    text-8xl;
 }
 
 .h3,
@@ -49,10 +55,9 @@ h3:not([class]) {
     font-header
     leading-none
     uppercase
-    font-bold
-    text-base
-    md:text-xl
-    lg:text-4xl;
+    font-semibold
+    text-4xl
+    lg:text-7xl;
 }
 
 .h4,
@@ -63,6 +68,15 @@ h4:not([class]) {
     leading-tight
     text-tiny
     lg:text-sm;
+}
+
+.h5,
+h5:not([class]) {
+  @apply
+    font-header
+    uppercase
+    leading-tight
+    text-lg;
 }
 
 p,

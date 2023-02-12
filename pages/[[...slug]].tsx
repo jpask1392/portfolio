@@ -116,7 +116,7 @@ export async function getStaticPaths({ locales } : { locales: any }) {
       "project",
       "reviews",
       "settings",
-      "global-template",
+      "globals",
       "config",
       "login",
       "templates"

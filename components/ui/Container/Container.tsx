@@ -87,7 +87,7 @@ const Container: React.FC<ContainerProps> = (props) => {
       }
 
       <div className={cn({
-        "mx-[8.33333%]" : contained,
+        "px-10 lg:px-0 lg:mx-[8.33333%]" : contained,
         "px-10" : !contained,
       })}>
         <ChildrenOrBloks 

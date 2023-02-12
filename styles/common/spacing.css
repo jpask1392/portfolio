@@ -16,7 +16,11 @@
 }
 
 .section.section--spacing-lg {
-  --section-spacing: 11.25rem;
+  --section-spacing: 5rem;
+
+  @screen lg {
+    --section-spacing: 11.25rem;
+  }
 }
 
 /* Medium section spacer */

@@ -22,7 +22,7 @@ const ReviewTile: React.FC<Props> = ({
           <StarRating className="absolute top-1/2 left-full -translate-y-1/2 ml-4" />
         </span>
         
-        <h4>{jobTitle}</h4>
+        <h4 className="h5">{jobTitle}</h4>
         
       </hgroup>
       

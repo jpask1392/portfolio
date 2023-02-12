@@ -1,3 +1,5 @@
+import Gallery from "./Gallery";
+import CustomImage from "@/components/ui/Image/CustomImage";
 import cn from "classnames";
 import type { storyBlokLink } from "@/types/storyBlok";
 import StoryBlokLink from "@/components/helpers/StoryBlokLink";
@@ -69,24 +71,22 @@ const HoverLink: React.FC<Props> = ({
         </a>
   
         <Modal setModalIsOpen={setActive} modalIsOpen={active}>
-          <h1 
-            className="!text-[6vw] h1 absolute"
+          <div
+            className="absolute z-10"
             style={{
               left: pos.current.x,
               top: pos.current.y
             }}
           >
-            <a 
-              className="text-background cursor-pointer inline-block relative"
-            >
-              <span className="relative z-10">{name}</span>
-              <span className="absolute -inset-x-5 -inset-y-2 bg-black transition-all duration-300"/>
-            </a>
-          </h1>
-          
-          <div className="flex">
-
+            <h1 className="!text-[6vw] h1 text-background inline-block relative">
+              
+                <span className="relative z-10">{name}</span>
+                <span className="absolute -inset-x-5 -inset-y-2 bg-black transition-all duration-300"/>
+              
+            </h1>
           </div>
+
+          { gallery ? <Gallery images={gallery} /> : null }
         </Modal>
       </>
     )

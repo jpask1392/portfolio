@@ -35,10 +35,11 @@ const Layout: React.FC<Props> = ({
         <Head seo={false} />
 
         <div 
+          data-scroll-section
           style={{
             backgroundImage: `url(/images/noise.png)`
           }}
-          className="absolute z-50 inset-0 pointer-events-none bg-[length:200px_200px]"
+          className="absolute z-50 w-full h-full !pointer-events-none bg-[length:200px_200px]"
         />
 
         {children}

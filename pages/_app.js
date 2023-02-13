@@ -1,4 +1,3 @@
-// import "tailwindcss/tailwind.css";
 import "../styles/app.css";
 import "../public/fonts/fonts.css";
 import { DefaultLayout } from '../components/context/contextLayout';
@@ -17,8 +16,8 @@ import RichText from "@/components/ui/RichText";
 import Button from "@/components/ui/Button";
 import { ImageModule } from "@/components/ui/Image";
 import Header from "@/components/ui/Header";
-import Slideshow from "@/components/ui/Slideshow";
-import Accordion from "@/components/ui/Accordion";
+// import Slideshow from "@/components/ui/Slideshow";
+// import Accordion from "@/components/ui/Accordion";
 import Icon from '@/components/ui/Icon';
 import Select from "@/components/modules/Form";
 
@@ -32,23 +31,23 @@ import ProjectsList from "@/components/modules/ProjectsList";
 
 const components = {
   page: Page,
-  container: Container,
-  column: Column,
-  header: Header,
-  grid: Grid,
-  richText: RichText,
-  button: Button,
-  image: ImageModule,
-  slideshow: Slideshow,
-  accordion: Accordion,
-  form: Form,
-  formInput: Select,
-  icon: Icon,
-  customComponent: CustomComponent,
-  reviewsCarousel: ReviewsCarousel,
-  indexBody: IndexBody,
-  aboutMe: AboutMe,
-  projectsList: ProjectsList,
+  // container: Container,
+  // column: Column,
+  // header: Header,
+  // grid: Grid,
+  // richText: RichText,
+  // button: Button,
+  // image: ImageModule,
+  // // slideshow: Slideshow,
+  // // accordion: Accordion,
+  // form: Form,
+  // formInput: Select,
+  // icon: Icon,
+  // customComponent: CustomComponent,
+  // reviewsCarousel: ReviewsCarousel,
+  // indexBody: IndexBody,
+  // aboutMe: AboutMe,
+  // projectsList: ProjectsList,
 };
 
 storyblokInit({
@@ -87,7 +86,14 @@ function MyApp({ Component, pageProps, router }) {
             gtag('config', '${process.env.GA_TRACKING_ID}');
           `,
         }}
-      /> */}
+      /> */}  
+
+      <div 
+        style={{
+          backgroundImage: `url(/images/noise.png)`
+        }}
+        className="absolute z-50 w-full h-full !pointer-events-none bg-[length:200px_200px]"
+      />
 
       <AnimatePresence initial={false}>
         {

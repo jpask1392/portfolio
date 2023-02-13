@@ -1,6 +1,5 @@
 import { UIContextProvider } from './uiContext';
 import { GlobalContextProvider } from './globalContext';
-import { AuthContextProvider } from './authContext';
 
 export const DefaultLayout = ({ children, pageProps }) => {
   return (
@@ -8,9 +7,7 @@ export const DefaultLayout = ({ children, pageProps }) => {
       pageData={pageProps}
     >
       <UIContextProvider>    
-        <AuthContextProvider>
-          {children}
-        </AuthContextProvider>
+        {children}
       </UIContextProvider>
     </GlobalContextProvider>
   );

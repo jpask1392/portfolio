@@ -1,6 +1,6 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useMotionValueEvent, useMotionValue } from "framer-motion"
+import { motion } from "framer-motion"
 
 export const ScrollContext = createContext<any>({
   scroll: null,
@@ -55,11 +55,11 @@ export function ScrollContextProvider({ children } : { children: any }) {
         id="main-scroll-wrapper"
         ref={containerRef} 
         className="min-h-[100vh] w-full absolute"
-        initial={{ opacity: 1, top: 1100, zIndex: 1 }}
+        initial={{ opacity: 1, top: 1100 }}
         animate={{ 
           top: 0,
         }}
-        exit={{ opacity: 0, top: -200, zIndex: -1, }}
+        exit={{ opacity: 0, top: -200 }}
         transition={{ 
           ease: [0.2, 0.99, 0.11, 0.99],
           duration: pageTransitionDuration / 1000,

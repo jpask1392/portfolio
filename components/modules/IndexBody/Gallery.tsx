@@ -76,9 +76,9 @@ const Gallery: React.FC<Props> = ({
  
   return (
     <div className="h-screen w-screen flex items-center" ref={carouselRef}>
-      <section data-scroll-section className="min-w-[100vw] flex-shrink-0">
+      <section data-scroll-section className="min-w-[100vw] flex-shrink-0 h-[90vh]">
         <motion.div 
-          className="flex p-12 space-x-20 items-start" 
+          className="flex p-12 space-x-20 items-start h-full" 
           variants={container}
           initial="hidden"
           animate={scroll ? "show" : "hidden"}
@@ -90,13 +90,21 @@ const Gallery: React.FC<Props> = ({
                   data-scroll 
                   variants={item}
                   key={i} 
-                  className={cn("flex-shrink-0 relative z-0 max-w-[500px] bg-gray-400 rounded-lg ", {
-                    "w-[380px]": i === 0,
-                    "w-[469px] self-end": i > 0 && (i === 1 || i % 3 === 0 || i % 5 === 0),
-                    "w-[457px]": i === 2
+                  className={cn("flex-shrink-0 relative z-0 h-full", {
+                    // "w-[380px]": i === 0,
+                    // "w-[469px] self-end": i > 0 && (i === 1 || i % 3 === 0 || i % 5 === 0),
+                    // "w-[457px]": i === 2
                   })}
                 >
-                  <CustomImage image={image} className="relative z-10" />
+                  <CustomImage 
+                    image={image} 
+                    className="relative z-10 rounded-lg overflow-hidden h-full w-auto" 
+                    sizes={{
+                      sm: "100vw",
+                      md: "40vw",
+                      lg: "40vw",
+                    }}
+                  />
                   <span className="blur-lg absolute top-full left-1/2 -translate-x-1/2 -translate-y-[70%] w-[80%] aspect-square bg-gradient-radial from-black"/>
                 </motion.div>
               )

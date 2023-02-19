@@ -95,7 +95,7 @@ module.exports = {
       '8xl': '2.5rem', // 40px
       '9xl': '2.75rem', // 44px
       '10xl': '3.125rem', // 50px
-      '11xl': '4rem', // 64px
+      '11xl': '3.625rem', // 58px
       '12xl': '5rem', // 80px
       '13xl': '5.875rem', // 94px
       '14xl': '6.625rem', // 108px

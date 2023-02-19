@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Gallery from "./Gallery";
 import CustomImage from "@/components/ui/Image/CustomImage";
 import cn from "classnames";
@@ -60,7 +61,7 @@ const HoverLink: React.FC<Props> = ({
   if (action === "overlay") {
     return (
       <>
-        <a 
+        <a
           className="text-black cursor-pointer relative inline-block transition-all duration-300" 
           onClick={handleClick}
           onMouseEnter={handleMouseEnter}
@@ -78,12 +79,16 @@ const HoverLink: React.FC<Props> = ({
               top: pos.current.y
             }}
           >
-            <h1 className="!text-[6vw] h1 text-background inline-block relative">
-              
-                <span className="relative z-10">{name}</span>
-                <span className="absolute -inset-x-5 -inset-y-2 bg-black transition-all duration-300"/>
-              
-            </h1>
+            <motion.h1 
+              drag 
+              className="!text-[6vw] h1 text-background inline-block relative"
+              dragMomentum={false}
+              whileHover={{ cursor: "grab" }}
+              whileDrag={{ cursor: "grabbing" }}
+            >  
+              <span className="relative z-10">{name}</span>
+              <span className="absolute -inset-x-5 -inset-y-2 bg-black transition-all duration-300"/> 
+            </motion.h1>
           </div>
 
           { gallery ? <Gallery images={gallery} /> : null }

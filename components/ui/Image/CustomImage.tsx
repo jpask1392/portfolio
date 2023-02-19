@@ -109,17 +109,24 @@ const CustomImage: React.FC<Props> = ({
     return `${morphedSrc}`
   }
 
+  const keyStr =
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/='
+
+  const triplet = (e1: number, e2: number, e3: number) =>
+    keyStr.charAt(e1 >> 2) +
+    keyStr.charAt(((e1 & 3) << 4) | (e2 >> 4)) +
+    keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
+    keyStr.charAt(e3 & 63)
+
+  const rgbDataURL = (r: number, g: number, b: number) =>
+    `data:image/gif;base64,R0lGODlhAQABAPAA${
+      triplet(0, r, g) + triplet(b, 255, 255)
+    }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`
+
   return (
     <>
-      {
+      {/* {
         loading && !preload ? (
-          /**
-           * nextjs 13 image placeholder doesn't accept
-           * image urls anymore. It wants datablur base64 
-           * encoded images, using Plaiceholder but is 
-           * difficult to get these on the fly. This is a 
-           * workaround to show a blurred image while loading 
-           */ 
           <div
             className="inset-0"
             style={{
@@ -132,7 +139,7 @@ const CustomImage: React.FC<Props> = ({
             }}
           />
         ) : null
-      }
+      } */}
 
       <NextImage
         className={cn(className, { "object-cover" : fill })}
@@ -141,9 +148,9 @@ const CustomImage: React.FC<Props> = ({
         width={!fill ? dimensions.width : undefined}
         height={!fill ? dimensions.height : undefined}
         loader={myLoader}
-        onLoad={() => setLoading(false)}
-        // placeholder="empty"
-        // blurDataURL={dataBlurURL()}
+        // onLoad={() => setLoading(false)}
+        placeholder="blur"
+        blurDataURL={rgbDataURL(237, 181, 6)}
         priority={preload}
         fill={fill}
         sizes={sizes ? `

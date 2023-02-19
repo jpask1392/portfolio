@@ -29,8 +29,8 @@ const StoryBlokLink: React.FC<Props> = ({
   } = sbLink;
 
   return <>
-    { (linktype === 'email') && <a className={className} href={`mailto:${email}`}>{children}</a> }
-    { (url.match(/^(https?:)?\/\//)) && <a href={url} className={className} target="_blank" rel="noreferrer">{children}</a> }
+    { (linktype === 'email') && <a className={className} {...rest} href={`mailto:${email}`}>{children}</a> }
+    { (url.match(/^(https?:)?\/\//)) && <a href={url} {...rest} className={className} target="_blank" rel="noreferrer">{children}</a> }
 
     {
       (!url.match(/^(https?:)?\/\//) && linktype !== 'email' && !isSubmit) ? (

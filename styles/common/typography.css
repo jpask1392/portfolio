@@ -16,7 +16,8 @@
     font-bold
     leading-[0.82]
     uppercase
-    text-12xl
+    text-10xl
+    md:text-12xl
     lg:text-14xl;
 }
 
@@ -46,7 +47,8 @@ h2:not([class]) {
     leading-[0.9]
     uppercase
     font-black
-    text-8xl;
+    text-8xl
+    lg:text-11xl;
 }
 
 .h3,

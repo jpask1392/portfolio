@@ -9,6 +9,7 @@ interface Props {
       siteLink: storyBlokLink
       images: storyBlokImage[]
       categories?: string[]
+      meta: string
     }
   }[]
 }
@@ -37,7 +38,7 @@ const ProjectsList: React.FC<ProjectsProps> = (props) => {
         {
           projects.map(({ content }, i) => {
             return (
-              <li className="py-3 border-b" key={i}>
+              <li className="py-1 border-b" key={i}>
                 <ProjectTile {...content} />
               </li>
             )

@@ -1,6 +1,6 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { motion } from "framer-motion"
+import { motion, useIsomorphicLayoutEffect } from "framer-motion"
 
 export const ScrollContext = createContext<any>({
   scroll: null,
@@ -19,7 +19,7 @@ export function ScrollContextProvider({ children } : { children: any }) {
   const containerRef = useRef(null);
   const pageTransitionDuration = 800; // miliseconds
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!scroll) {
       (async () => {
         try {

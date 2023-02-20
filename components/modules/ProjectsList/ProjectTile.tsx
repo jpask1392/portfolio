@@ -60,8 +60,8 @@ const ProjectTile: React.FC<Props> = ({
   }
 
   return (
-    <article className="flex flex-wrap -mx-10 relative" ref={sectionRef}>
-      <div className="w-full md:w-5/12 px-10 flex flex-col md:absolute inset-y-0 z-10">
+    <article className="flex flex-wrap md:-mx-10 relative" ref={sectionRef}>
+      <div className="w-full md:w-5/12 md:px-10 flex flex-col md:absolute inset-y-0 z-10">
         <h3 className="h3 mb-1 md:hidden">Project</h3>
         <ConditionalLink link={siteLink}> 
           <h2 className={cn("h1 flex items-start transition-all duration-700", {
@@ -75,7 +75,7 @@ const ProjectTile: React.FC<Props> = ({
           </h2>
         </ConditionalLink>
 
-        <div className={cn("mt-auto pt-10 max-w-[533px] transition-all", {
+        <div className={cn("mt-auto pt-6 max-w-[533px] transition-all", {
           "opacity-0 pointer-events-none" : expanded,
           "opacity-100" : !expanded
         })}>
@@ -83,11 +83,11 @@ const ProjectTile: React.FC<Props> = ({
           <div className="opacity-60">{render(excerpt)}</div>
         </div>
       </div>
-      <div className={cn("w-full md:w-2/12 px-10 flex flex-wrap md:flex-nowrap md:absolute md:left-[41.666%] transition-all", {
+      <div className={cn("w-full md:w-2/12 md:px-10 flex flex-wrap md:flex-nowrap md:absolute md:left-[41.666%] transition-all", {
         "opacity-0" : expanded,
         "opacity-100" : !expanded
       })}>
-        <h3 className="h3 mt-20 mb-1 md:hidden">Highlights</h3>
+        <h3 className="h3 mt-8 mb-1 md:hidden">Highlights</h3>
         {
           categories && categories.length ? (
             <ul className="w-full md:w-auto">
@@ -100,7 +100,7 @@ const ProjectTile: React.FC<Props> = ({
           ) : null
         }
       </div>
-      <div className={cn("h-full  mt-6 md:mt-0 transition-all md:px-10 duration-700 relative", {
+      <div className={cn("h-full mt-1 md:mt-0 transition-all md:px-10 duration-700 relative", {
         "md:left-[58.3333%] md:w-5/12" : !expanded,
         "left-0 w-full" : expanded
       

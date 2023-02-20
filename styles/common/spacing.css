@@ -12,7 +12,11 @@
 }
 
 .section.section--spacing-md {
-  --section-spacing: 6.8rem;
+  --section-spacing: 3rem;
+
+  @screen md {
+    --section-spacing: 6.8rem;
+  }
 }
 
 .section.section--spacing-lg {

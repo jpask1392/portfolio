@@ -45,7 +45,7 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
   }, [])
 
   return (
-    <div className="relative" ref={constraintsRef}>
+    <div className="relative overflow-x-hidden pb-2" ref={constraintsRef}>
       {/* <div className="absolute inset-0 flex z-10">
         <button onClick={() => handleClick("prev")} className="w-1/2 bg-slate-300">Prev</button>
         <button onClick={() => handleClick("next")} className="w-1/2 bg-slate-800">Next</button>

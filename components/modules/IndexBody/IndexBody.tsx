@@ -27,7 +27,7 @@ const IndexBody: React.FC<IndexBodyProps> = (props) => {
 
   return (
     <>  
-     <h1 className="md:!text-[6vw] h1 w-full md:w-8/12 text-outlined">
+     <h1 className="!text-[12vw] md:!text-[6vw] h1 w-full md:w-8/12 text-outlined">
         {render(body, {
           nodeResolvers: { 
             [NODE_PARAGRAPH]: (children) => <>{children}</>
@@ -40,7 +40,7 @@ const IndexBody: React.FC<IndexBodyProps> = (props) => {
 
       {
         socials && socials.length ? (
-          <ul className="section section--spacing-md flex flex-wrap w-full md:w-7/12 -mx-5 space-y-6 md:space-y-0">
+          <ul className="section section--spacing-md flex flex-wrap w-full md:w-7/12 md:-mx-5 space-y-6 md:space-y-0">
             {
               socials.map(({
                 link,
@@ -49,7 +49,7 @@ const IndexBody: React.FC<IndexBodyProps> = (props) => {
                 handle,
               }: any, i: number) => {
                 return (
-                  <li key={i} className="w-full md:w-auto md:flex-1 px-5">
+                  <li key={i} className="w-full md:w-auto md:flex-1 md:px-5">
                     <StoryBlokLink sbLink={link}>
                       <div className="border-t border-black pt-4 flex justify-between">
                         <header>

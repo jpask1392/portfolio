@@ -86,6 +86,13 @@ function MyApp({ Component, pageProps, router }) {
         }}
       /> */}  
 
+      <div 
+        style={{
+          backgroundImage: `url(/images/noise.png)`
+        }}
+        className="absolute z-50 w-full h-full !pointer-events-none bg-[length:200px_200px]"
+      />
+
       <AnimatePresence initial={false}>
         {
           getLayout(

@@ -18,12 +18,7 @@ const Layout: React.FC<Props> = ({
       <ScrollContextProvider>
         <Head seo={false} />
 
-        <div 
-        style={{
-          backgroundImage: `url(/images/noise.png)`
-        }}
-        className="absolute z-50 w-full h-full !pointer-events-none bg-[length:200px_200px]"
-      />
+        
         {children}
 
         <Toaster position="bottom-center" />

@@ -16,7 +16,7 @@ const Layout: React.FC<Props> = ({
   return (
     <>
       <ScrollContextProvider>
-        {/* <Head seo={false} /> */}
+        <Head seo={false} />
 
         <div 
         style={{

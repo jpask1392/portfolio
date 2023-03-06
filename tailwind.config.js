@@ -77,7 +77,7 @@ module.exports = {
     },
     fontFamily: {
       header: "'Sofia Sans Extra Condensed', sans-serif",
-      sans: "'Crimson Text', sans-serif",
+      sans: "Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji",
     },
     fontSize: {
       'tiny': '.625rem', // 10px

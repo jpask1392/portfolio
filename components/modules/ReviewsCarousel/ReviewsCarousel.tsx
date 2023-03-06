@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { motion } from "framer-motion";
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import type { SbBlokData } from "@storyblok/react";
@@ -46,6 +47,17 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
 
   return (
     <div className="relative overflow-x-hidden pb-2 md:pb-0 md:overflow-visible" ref={constraintsRef}>
+
+      <nav className="mb-6 flex space-x-1">
+        <Link 
+          href="/about" 
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium mr-2 px-2.5 py-0.5 border border-gray-200 rounded font-header"
+        >About me</Link>
+        <Link
+          href="/work" 
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium mr-2 px-2.5 py-0.5 border border-gray-200 rounded font-header"
+        >Projects</Link>
+      </nav>
       <motion.ul
         ref={trackRef} 
         className="flex -mx-3 cursor-grab" 
@@ -62,6 +74,8 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
           })
         }
       </motion.ul>
+      
+
     </div>
   )
 }

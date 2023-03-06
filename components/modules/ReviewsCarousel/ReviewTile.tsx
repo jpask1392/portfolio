@@ -26,7 +26,7 @@ const ReviewTile: React.FC<Props> = ({
         
       </hgroup>
       
-      <div className="opacity-50">
+      <div className="text-gray-500 font-light">
         { render(body) }
       </div>
     </article>

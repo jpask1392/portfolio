@@ -8,8 +8,8 @@ import { storyBlokImage } from "@/types/storyBlok";
 
 interface Props {
   images: storyBlokImage[]
-  exapnded: boolean
-  expanded: any
+  expanded: boolean
+  setExpanded: any
   sectionRef: any
 }
 
@@ -23,7 +23,7 @@ const ImageGallery: React.FC<Props> = ({
   const [ hasExpanded, setHasExpanded ] = useState(false);
   const [ x, setX ] = useState(0);
   const [ activeImageIndex, setActiveImageIndex ] = useState(0);
-  const imageRefs = useRef([]);
+  const imageRefs = useRef<HTMLDivElement[] | null[]>([]);
   
 
   const handleClick = () => {
@@ -33,7 +33,11 @@ const ImageGallery: React.FC<Props> = ({
     setExpanded(!expanded);
     setX(0);
     setActiveImageIndex(0);
-    document.querySelector(".page-change-button")?.style.display = expandedCopy ? "none" : "block"
+
+    const pageChangeButton: HTMLDivElement | null = document.querySelector(".page-change-button");
+    if (pageChangeButton) {
+      pageChangeButton.style.display = expandedCopy ? "none" : "block"
+    }
 
     setTimeout(() => {
       scroll.update()
@@ -55,19 +59,17 @@ const ImageGallery: React.FC<Props> = ({
     }, 700)
   }
 
-  const handleArrowClick = (e, direction) => {
+  const handleArrowClick = (e: React.SyntheticEvent, direction: "prev" | "next") => {
     e.preventDefault();
-
-    console.log(imageRefs.current[activeImageIndex])
 
     if (direction === "prev" && activeImageIndex > 0) {
       setActiveImageIndex(activeImageIndex - 1);
-      setX(x + imageRefs.current[activeImageIndex - 1].clientWidth);
+      setX(x + (imageRefs.current[activeImageIndex - 1]?.clientWidth || 0));
     }
 
     if (direction === "next" && activeImageIndex < imageRefs.current.length - 1) {
       setActiveImageIndex(activeImageIndex + 1);  
-      setX(x - imageRefs.current[activeImageIndex].clientWidth);
+      setX(x - (imageRefs.current[activeImageIndex]?.clientWidth || 0));
     }
   }
 
@@ -92,12 +94,14 @@ const ImageGallery: React.FC<Props> = ({
                 >
                   {
                     hasExpanded ? (
-                      <CustomImage 
+                      <CustomImage
+                        key={`image_${i}`}
                         className="h-full w-auto"
                         image={image}
                       />
                     ) : (
                       <CustomImage 
+                        key={`thumbnail_image_${i}`}
                         className="h-full w-auto"
                         image={image} 
                         maxWidth={600}

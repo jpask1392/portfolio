@@ -91,9 +91,7 @@ ul,
     text-xs
     md:text-sm
     lg:text-base
-    font-normal
-    /* font-light */
-    leading-relaxed;
+    /* font-light */;
 }
 
 blockquote p {

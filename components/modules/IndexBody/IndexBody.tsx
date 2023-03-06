@@ -50,7 +50,7 @@ const IndexBody: React.FC<IndexBodyProps> = (props) => {
               }: any, i: number) => {
                 return (
                   <li key={i} className="w-full md:w-auto md:flex-1 md:px-5">
-                    <StoryBlokLink sbLink={link}>
+                    <StoryBlokLink sbLink={link} className="block hover:bg-gray-100 hover:border-gray-200 border border-transparent p-3 -m-3 rounded-md transition-all">
                       <div className="border-t border-black pt-4 flex justify-between">
                         <header>
                           <h3 className="h3">{name}</h3>

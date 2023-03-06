@@ -40,6 +40,8 @@ import User from "./User"
 import Twitter from "./Twitter";
 import Check from "./Check";
 import NewTab from "./NewTab";
+import Github from "./Github";
+import Linkedin from "./Linkedin";
 
 type Variant = string;
 
@@ -81,7 +83,8 @@ const Components: {
   user: User,
   twitter: Twitter,
   newTab: NewTab,
-  
+  github: Github,
+  linkedin: Linkedin,
 };
 
 interface Props {

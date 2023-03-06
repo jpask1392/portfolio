@@ -72,24 +72,26 @@ const HoverLink: React.FC<Props> = ({
         </a>
   
         <Modal setModalIsOpen={setActive} modalIsOpen={active}>
-          <div
+          <motion.div
             className="absolute z-10"
+            drag 
+            dragMomentum={false}
+            whileHover={{ cursor: "grab" }}
+            whileDrag={{ cursor: "grabbing" }}
             style={{
               left: pos.current.x,
               top: pos.current.y
             }}
           >
-            <motion.h1 
-              drag 
-              className="!text-[6vw] h1 text-background inline-block relative"
-              dragMomentum={false}
-              whileHover={{ cursor: "grab" }}
-              whileDrag={{ cursor: "grabbing" }}
+            <h2 
+              className="!text-[6vw] h1 text-background relative flex flex-col"
             >  
               <span className="relative z-10">{name}</span>
               <span className="absolute -inset-x-5 -inset-y-2 bg-black transition-all duration-300"/> 
-            </motion.h1>
-          </div>
+            </h2>
+
+            
+          </motion.div>
 
           { gallery ? <Gallery images={gallery} /> : null }
         </Modal>

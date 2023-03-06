@@ -1,3 +1,4 @@
+import CustomImage from "@/components/ui/Image/CustomImage";
 import type { storyBlokImage } from "@/types/storyBlok";
 import type { SbBlokData } from "@storyblok/react";
 import { render } from "storyblok-rich-text-react-renderer";
@@ -45,7 +46,9 @@ const AboutMe: React.FC<AboutProps> = (props) => {
             images.map((image) => {
               return (
                 <li className="bg-[#000] mb-2">
-                  <div className="aspect-square"></div>
+                  <div className="aspect-square relative">
+                    <CustomImage image={image} fill />
+                  </div>
                 </li>
               )
             })

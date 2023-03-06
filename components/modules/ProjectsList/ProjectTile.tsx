@@ -1,3 +1,4 @@
+import ImageGallery from "./ImageGallery";
 import { useScrollContext } from "@/components/context/scroll";
 import cn from "classnames";
 import CustomImage from "@/components/ui/Image/CustomImage";
@@ -24,43 +25,16 @@ const ProjectTile: React.FC<Props> = ({
   excerpt,
   meta = "ROLE: lead developer and designer"
 }) => {
-  const { scroll } = useScrollContext();
   const [ expanded, setExpanded ] = useState(false);
-  const [ hasExpanded, setHasExpanded ] = useState(false);
   const sectionRef = useRef(null)
 
-  // useEffect(() => {
-    
-  // }, [expanded])
-
-  const handleClick = () => {
-    if (!scroll) return;
-    if (window.innerWidth < 1068) return;
-    let expandedCopy = !expanded;
-    setExpanded(!expanded);
-
-    setTimeout(() => {
-      scroll.update()
-
-      if (expandedCopy) {
-        scroll.scrollTo(sectionRef.current, {
-          duration: 700,
-          callback: () => {
-            scroll.stop()
-          }
-        })
-      };
-
-      if (!expandedCopy) {
-        scroll.start()
-      }
-
-      setHasExpanded(expandedCopy)
-    }, 700)
-  }
-
   return (
-    <article className="flex flex-wrap md:-mx-10 relative" ref={sectionRef}>
+    <article 
+      className={cn(" flex flex-wrap md:-mx-10 relative opacity-50 hover:opacity-100 transition-opacity duration-500", {
+        "z-20": expanded
+      })}
+      ref={sectionRef}
+    >
       <div className="w-full md:w-5/12 md:px-10 flex flex-col md:absolute inset-y-0 z-10">
         <h3 className="h3 mb-1 md:hidden">Project</h3>
         <ConditionalLink link={siteLink}> 
@@ -80,7 +54,7 @@ const ProjectTile: React.FC<Props> = ({
           "opacity-100" : !expanded
         })}>
           <h5 className="h5 text-white">{meta}</h5>
-          <div className="opacity-60">{render(excerpt)}</div>
+          <div>{render(excerpt)}</div>
         </div>
       </div>
       <div className={cn("w-full md:w-2/12 md:px-10 flex flex-wrap md:flex-nowrap md:absolute md:left-[41.666%] transition-all", {
@@ -103,42 +77,13 @@ const ProjectTile: React.FC<Props> = ({
       <div className={cn("h-full mt-1 md:mt-0 transition-all md:px-10 duration-700 relative", {
         "md:left-[58.3333%] md:w-5/12" : !expanded,
         "left-0 w-full" : expanded
-      
       })}>
-        <div className={cn(" overflow-scroll flex items-start space-x-1"
-          
-        )}>
-          {
-            images?.map((image, i) => {
-              return (
-                <div 
-                  key={i} 
-                  className={cn("flex-shrink-0 cursor-pointer transition-all duration-700", {
-                    "h-[350px]": !expanded,
-                    "h-screen": expanded
-                  })}
-                  onClick={handleClick}
-                >
-                  {
-                    hasExpanded ? (
-                      <CustomImage 
-                        className="h-full w-auto"
-                        image={image}
-                      />
-                    ) : (
-                      <CustomImage 
-                        className="h-full w-auto"
-                        image={image} 
-                        maxWidth={600}
-                      />
-                    )
-                  }
-                  
-                </div>
-              )
-            })
-          }
-        </div>
+        <ImageGallery 
+          images={images}
+          expanded={expanded}
+          setExpanded={setExpanded}
+          sectionRef={sectionRef}
+        />
       </div>
     </article>
   )

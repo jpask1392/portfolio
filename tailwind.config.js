@@ -77,7 +77,7 @@ module.exports = {
     },
     fontFamily: {
       header: "'Sofia Sans Extra Condensed', sans-serif",
-      sans: "'Inter', sans-serif",
+      sans: "'Crimson Text', sans-serif",
     },
     fontSize: {
       'tiny': '.625rem', // 10px
@@ -108,7 +108,8 @@ module.exports = {
         white: "#FFFFFF",
         yellow: "#E7BD56",
         red: "#F15D4D",
-        green: "#B9CDB3"
+        green: "#B9CDB3",
+        darkGrey: "#000"
       },
       margin: {
         '6-12': '50%',

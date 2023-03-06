@@ -54,7 +54,7 @@ export function ScrollContextProvider({ children } : { children: any }) {
         data-scroll-container
         id="main-scroll-wrapper"
         ref={containerRef} 
-        className="min-h-[100vh] w-full absolute"
+        className="min-h-[100vh] w-full absolute will-change-auto"
         initial={{ opacity: 1, top: 1100 }}
         animate={{ 
           top: 0,

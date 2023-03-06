@@ -34,6 +34,8 @@ a {
 
 body {
   overflow-anchor: none;
+
+  @apply text-black;
 }
 
 .clip-path {

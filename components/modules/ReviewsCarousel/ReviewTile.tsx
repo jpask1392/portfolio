@@ -15,7 +15,7 @@ const ReviewTile: React.FC<Props> = ({
   rating
 }) => {
   return (
-    <article className="rounded-md shadow flex-1 p-6 bg-white">
+    <article className="rounded-md flex-1 p-6 bg-white hover:bg-gray-100 border-gray-200 border transition-colors">
       <hgroup className="mb-6 inline-block">
         <span className="relative">
           <h3 className="h3">{author}</h3>

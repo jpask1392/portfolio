@@ -150,7 +150,7 @@ const CustomImage: React.FC<Props> = ({
         loader={myLoader}
         // onLoad={() => setLoading(false)}
         placeholder="blur"
-        blurDataURL={rgbDataURL(237, 181, 6)}
+        blurDataURL={rgbDataURL(245, 245, 245)}
         priority={preload}
         fill={fill}
         sizes={sizes ? `

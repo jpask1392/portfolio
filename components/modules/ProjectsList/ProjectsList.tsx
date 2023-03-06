@@ -27,14 +27,19 @@ const ProjectsList: React.FC<ProjectsProps> = (props) => {
   } = props.blok || props;
 
   return (
-    <div>
-      <header className="hidden md:block border-y border-white">
+    <div id="project-list" data-scroll>
+      <header 
+        className="hidden md:block border-y border-white relative z-20 bg-black"
+        data-scroll
+        data-scroll-sticky
+        data-scroll-target="#project-list"
+      >
         <div className="flex -mx-10 py-0.5">
           <div className="w-5/12 px-10"><h3 className="h3">Project</h3></div>
           <div className="w-7/12 px-10"><h3 className="h3">Highlights</h3></div>
         </div>
       </header>
-      <ul className="border-t border-white md:border-none">
+      <ul  className="border-t border-white md:border-none">
         {
           projects.map(({ content }, i) => {
             return (

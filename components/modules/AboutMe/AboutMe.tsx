@@ -31,7 +31,7 @@ const AboutMe: React.FC<AboutProps> = (props) => {
               return (
                 <li className="bg-[#000] mb-2 w-[90%] md:w-full flex-shrink-0">
                   <div className="aspect-square relative">
-                    <CustomImage image={image} fill />
+                    <CustomImage image={image} fill preload />
                   </div>
                 </li>
               )

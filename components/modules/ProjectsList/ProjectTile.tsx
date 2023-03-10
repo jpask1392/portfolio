@@ -30,7 +30,7 @@ const ProjectTile: React.FC<Props> = ({
 
   return (
     <article 
-      className={cn(" flex flex-wrap md:-mx-10 relative opacity-50 hover:opacity-100 transition-opacity duration-500", {
+      className={cn(" flex flex-wrap md:-mx-10 relative md:opacity-50 hover:opacity-100 transition-opacity duration-500", {
         "z-20": expanded
       })}
       ref={sectionRef}

@@ -24,6 +24,7 @@ const ImageGallery: React.FC<Props> = ({
   const [ x, setX ] = useState(0);
   const [ activeImageIndex, setActiveImageIndex ] = useState(0);
   const imageRefs = useRef<HTMLDivElement[] | null[]>([]);
+  const trackRef = useRef<HTMLDivElement | null>(null);
   
 
   const handleClick = () => {
@@ -61,6 +62,9 @@ const ImageGallery: React.FC<Props> = ({
 
   const handleArrowClick = (e: React.SyntheticEvent, direction: "prev" | "next") => {
     e.preventDefault();
+    console.log(trackRef.current?.scrollWidth)
+    console.log(x)
+    console.log(window.innerWidth)
 
     if (direction === "prev" && activeImageIndex > 0) {
       setActiveImageIndex(activeImageIndex - 1);
@@ -76,7 +80,8 @@ const ImageGallery: React.FC<Props> = ({
   return (
     <div className="relative group/menu">
       <div className="overflow-hidden">
-        <motion.div 
+        <motion.div
+          ref={trackRef}
           className="flex items-start space-x-1" 
           animate={{ x }}
           transition={{ duration: 0.3 }}

@@ -67,7 +67,7 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
         {
           reviews.map(({ content }, i) => {
             return (
-              <li className="w-full md:w-1/2 2xl:w-1/3 flex-shrink-0 px-3" key={i}>
+              <li className="w-[90%] md:w-1/2 2xl:w-1/3 flex-shrink-0 px-3" key={i}>
                 <ReviewTile {...content} />
               </li>
             )

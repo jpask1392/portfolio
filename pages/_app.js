@@ -90,7 +90,7 @@ function MyApp({ Component, pageProps, router }) {
         style={{
           backgroundImage: `url(/images/noise.png)`
         }}
-        className="absolute z-50 w-full h-full !pointer-events-none bg-[length:200px_200px]"
+        className="fixed z-50 w-full h-full !pointer-events-none bg-[length:250px_250px] md:bg-[length:200px_200px]"
       />
 
       <AnimatePresence initial={false}>

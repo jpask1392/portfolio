@@ -27,7 +27,7 @@ const IndexBody: React.FC<IndexBodyProps> = (props) => {
 
   return (
     <>  
-     <h1 className="!text-[12vw] md:!text-[6vw] h1 w-full md:w-8/12 text-outlined">
+     <h1 className="!text-[12vw] md:!text-[6vw] h1 w-full md:w-8/12 text-outlined-light">
         {render(body, {
           nodeResolvers: { 
             [NODE_PARAGRAPH]: (children) => <>{children}</>

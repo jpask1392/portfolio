@@ -48,7 +48,7 @@ const HoverLink: React.FC<Props> = ({
     return (
       <StoryBlokLink 
         sbLink={link} 
-        className="text-black cursor-pointer relative inline-block transition-all duration-300"
+        className="text-black text-outlined cursor-pointer relative inline-block transition-all duration-300"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

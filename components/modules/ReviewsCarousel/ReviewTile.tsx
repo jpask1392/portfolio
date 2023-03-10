@@ -15,15 +15,14 @@ const ReviewTile: React.FC<Props> = ({
   rating
 }) => {
   return (
-    <article className="rounded-md flex-1 p-6 bg-white hover:bg-gray-100 border-gray-200 border transition-colors">
-      <hgroup className="mb-6 inline-block">
-        <span className="relative">
+    <article className="rounded-md flex-1 p-4 md:p-6 bg-white hover:bg-gray-100 border-gray-200 border transition-colors">
+      <hgroup className="mb-3 md:mb-6 inline-block">
+        <span className="relative block">
           <h3 className="h3">{author}</h3>
           <StarRating className="absolute top-1/2 left-full -translate-y-1/2 ml-4" />
         </span>
         
         <h4 className="h5">{jobTitle}</h4>
-        
       </hgroup>
       
       <div className="text-gray-500 font-light">

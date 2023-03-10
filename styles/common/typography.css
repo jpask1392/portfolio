@@ -22,21 +22,31 @@
 }
 
 .text-outlined {
+  text-shadow: 
+    -1px -1px 0 #1A1A1C,
+    1px -1px 0 #1A1A1C,
+    -1px 1px 0 #1A1A1C,
+    1px 1px 0 #1A1A1C;
+}
+
+.text-outlined-light {
   @apply text-background;
 
   text-shadow: 
-    -1px -1px 0 #2E2E2E, 
-    1px -1px 0 #2E2E2E, 
-    -1px 1px 0 #2E2E2E, 
-    1px 1px 0 #2E2E2E;
-  
+    -1px -1px 0 #1A1A1C,
+    1px -1px 0 #1A1A1C,
+    -1px 1px 0 #1A1A1C,
+    1px 1px 0 #1A1A1C;
 }
 
 .text-outlined-dark {
   @apply text-black;
 
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
+  text-shadow: 
+    -1px -1px 0 #FFFFFF,
+    1px -1px 0 #FFFFFF,
+    -1px 1px 0 #FFFFFF,
+    1px 1px 0 #FFFFFF;
 
   /* text-shadow: -1px -1px 0 #FFFFFF, 1px -1px 0 #FFFFFF, -1px 1px 0 #FFFFFF, 1px 1px 0 #FFFFFF; */
 }

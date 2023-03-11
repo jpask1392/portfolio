@@ -101,7 +101,7 @@ ul,
     text-xs
     md:text-sm
     lg:text-base
-    /* font-light */;
+    font-light;
 }
 
 blockquote p {

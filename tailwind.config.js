@@ -104,12 +104,14 @@ module.exports = {
       colors: {
         background: "#FFF",
         accent: "#CAFF66",
-        black: "#1A1A1C",
+        // black: "#1A1A1C",
+        black: "#101011",
         white: "#FFFFFF",
         yellow: "#E7BD56",
         red: "#F15D4D",
         green: "#B9CDB3",
-        darkGrey: "#000"
+        darkGrey: "#000",
+        greyText: "#A7A7A7",
       },
       margin: {
         '6-12': '50%',

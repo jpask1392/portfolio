@@ -13,14 +13,14 @@ const GalleryNav: React.FC<Props> = ({
     <div className="absolute z-50 w-full h-14 max-w-[200px] -translate-x-1/2 bg-black border border-[#000] rounded-full bottom-4 left-1/2 ">
       <div className="grid h-full max-w-lg grid-cols-3 mx-auto">
         <button onClick={(e) => handleArrowClick(e, "prev")} type="button" className="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-          <svg className="w-6 h-6 text-gray-500 group-hover:text-blue-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg className="w-6 h-6 text-gray-500 group-hover:text-greyText" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"></path>
           </svg>
           <span className="sr-only">Previous</span>
         </button>
         
         <div className="flex items-center justify-center">
-          <button onClick={() => setHasExpanded(!hasExpanded)} type="button" className="inline-flex items-center justify-center w-10 h-10 font-medium bg-white rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none">
+          <button onClick={() => setHasExpanded(!hasExpanded)} type="button" className="inline-flex items-center justify-center w-10 h-10 font-medium bg-greyText rounded-full hover:bg-white group focus:ring-4 focus:ring-blue-300 focus:outline-none">
             {
               hasExpanded ? (
                 <>
@@ -42,7 +42,7 @@ const GalleryNav: React.FC<Props> = ({
           </button>
         </div>
         <button onClick={(e) => handleArrowClick(e, "next")} type="button" className="inline-flex flex-col items-center justify-center px-5 rounded-r-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
-          <svg className="w-6 h-6 mb-0 text-gray-500  group-hover:text-blue-600" fill="currentcolor" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg className="w-6 h-6 mb-0 text-gray-500  group-hover:text-greyText" fill="currentcolor" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
           </svg>
           <span className="sr-only">Next</span>

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import useIsomorphicLayoutEffect from "@/components/hooks/useIsomorphicLayoutEffect";
 import type { SbBlokData } from "@storyblok/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReviewTile from "./ReviewTile";
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
       body: string
       jobTitle: string
       rating: number
+      title: string
     }
   }[]
 }
@@ -32,12 +33,16 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
   const constraintsRef = useRef<HTMLDivElement | null>(null)
   const [ drag, setDrag ] = useState(0);
 
-  const handleResize = () => {
-    if (!trackRef.current || !constraintsRef.current) return;
-    setDrag(0 - Math.abs(trackRef.current.scrollWidth - constraintsRef.current.clientWidth))
-  }
+  useEffect(() => {
+    let timeoutId: any = null;
+    const handleResize = () => {
+      if (!constraintsRef.current) return;
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => 
+        setDrag(trackRef.current.scrollWidth - (constraintsRef.current?.clientWidth || 0)), 
+      500);
+    }
 
-  useIsomorphicLayoutEffect(() => {
     handleResize();
     window.addEventListener("resize", handleResize)
     return () => {
@@ -46,8 +51,10 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
   }, [])
 
   return (
-    <div className="relative overflow-x-hidden pb-2 md:pb-0 md:overflow-visible" ref={constraintsRef}>
-
+    <div 
+      ref={constraintsRef}
+      className="relative overflow-x-hidden pb-2 md:pb-0 md:overflow-visible" 
+    >
       <nav className="mb-6 flex space-x-1">
         <Link 
           href="/about" 
@@ -59,10 +66,13 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
         >Projects</Link>
       </nav>
       <motion.ul
-        ref={trackRef} 
+        ref={trackRef}
         className="flex -mx-3 cursor-grab" 
         drag="x"
-        dragConstraints={{ left: drag, right: 0 }}
+        dragConstraints={{ 
+          left: - drag, 
+          right: 0 
+        }}
       >
         {
           reviews.map(({ content }, i) => {

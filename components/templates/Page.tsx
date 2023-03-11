@@ -33,7 +33,7 @@ const Page: React.FC<Props> = (props) => {
 
       {
         page.slug !== "home" ? (
-          <div className="absolute top-12 right-12 z-50">
+          <div className="absolute top-6 right-6 md:top-12 md:right-12 z-50">
             <Link href="/" className="page-change-button bg-black w-10 h-10 flex items-center justify-center rounded-full p-3 hover:bg-opacity-90 transition-all hover:bg-darkGrey focus:ring-4 focus:ring-blue-300 focus:outline-none">
               <DynamicIcon type="close" className="w-full text-accent" />
             </Link>
@@ -67,10 +67,10 @@ const Page: React.FC<Props> = (props) => {
             <div className="hidden md:block absolute inset-x-2.5 top-0 z-0" data-scroll-sticky data-scroll-target="#main-scroll-wrapper">
               <div className="h-screen flex items-end">
                 <div className="w-5/12 ml-auto mr-[8.333%] px-5 relative">
-                  <CustomImage 
+                  {/* <CustomImage 
                     image={fixedImage}
                     preload 
-                  />
+                  /> */}
                 </div>
               </div>
             </div>

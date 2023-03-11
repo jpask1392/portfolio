@@ -25,6 +25,7 @@ const ImageGallery: React.FC<Props> = ({
   const [ activeImageIndex, setActiveImageIndex ] = useState(0);
   const imageRefs = useRef<HTMLDivElement[] | null[]>([]);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const constraintsRef = useRef(null);
   
 
   const handleClick = () => {
@@ -62,9 +63,9 @@ const ImageGallery: React.FC<Props> = ({
 
   const handleArrowClick = (e: React.SyntheticEvent, direction: "prev" | "next") => {
     e.preventDefault();
-    console.log(trackRef.current?.scrollWidth)
-    console.log(x)
-    console.log(window.innerWidth)
+  
+    // console.log(trackRef.current?.scrollWidth - (constraintsRef.current?.clientWidth || 0))
+    // trackRef.current.scrollWidth - (constraintsRef.current?.clientWidth || 0)
 
     if (direction === "prev" && activeImageIndex > 0) {
       setActiveImageIndex(activeImageIndex - 1);
@@ -78,8 +79,8 @@ const ImageGallery: React.FC<Props> = ({
   }
 
   return (
-    <div className="relative group/menu">
-      <div className="overflow-hidden">
+    <div className="relative group/menu" ref={constraintsRef}>
+      <div className="overflow-auto md:overflow-hidden">
         <motion.div
           ref={trackRef}
           className="flex items-start space-x-1" 
@@ -103,6 +104,11 @@ const ImageGallery: React.FC<Props> = ({
                         key={`image_${i}`}
                         className="h-full w-auto"
                         image={image}
+                        sizes={{
+                          sm: "100vw",
+                          md: "70vw",
+                          lg: "70vw"
+                        }}
                       />
                     ) : (
                       <CustomImage 
@@ -121,7 +127,7 @@ const ImageGallery: React.FC<Props> = ({
         </motion.div>
       </div>
       
-      <div className="transition-opacity group-hover/menu:opacity-100 opacity-0">
+      <div className="hidden md:block transition-opacity group-hover/menu:opacity-100 opacity-0">
         <GalleryNav
           handleArrowClick={handleArrowClick}
           hasExpanded={hasExpanded}

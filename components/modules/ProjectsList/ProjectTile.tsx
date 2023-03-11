@@ -54,7 +54,7 @@ const ProjectTile: React.FC<Props> = ({
           "opacity-100" : !expanded
         })}>
           <h5 className="h5 text-white">{meta}</h5>
-          <div>{render(excerpt)}</div>
+          <div className="text-greyText">{render(excerpt)}</div>
         </div>
       </div>
       <div className={cn("w-full md:w-2/12 md:px-10 flex flex-wrap md:flex-nowrap md:absolute md:left-[41.666%] transition-all", {

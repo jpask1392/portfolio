@@ -67,10 +67,10 @@ const Page: React.FC<Props> = (props) => {
             <div className="hidden md:block absolute inset-x-2.5 top-0 z-0" data-scroll-sticky data-scroll-target="#main-scroll-wrapper">
               <div className="h-screen flex items-end">
                 <div className="w-5/12 ml-auto mr-[8.333%] px-5 relative">
-                  {/* <CustomImage 
+                  <CustomImage 
                     image={fixedImage}
                     preload 
-                  /> */}
+                  />
                 </div>
               </div>
             </div>

@@ -25,7 +25,7 @@ const ImageGallery: React.FC<Props> = ({
   const [ activeImageIndex, setActiveImageIndex ] = useState(0);
   const imageRefs = useRef<HTMLDivElement[] | null[]>([]);
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const constraintsRef = useRef(null);
+  const constraintsRef = useRef<HTMLDivElement | null>(null);
   
 
   const handleClick = () => {
@@ -63,18 +63,23 @@ const ImageGallery: React.FC<Props> = ({
 
   const handleArrowClick = (e: React.SyntheticEvent, direction: "prev" | "next") => {
     e.preventDefault();
-  
-    // console.log(trackRef.current?.scrollWidth - (constraintsRef.current?.clientWidth || 0))
-    // trackRef.current.scrollWidth - (constraintsRef.current?.clientWidth || 0)
+
+    if (!trackRef.current || !constraintsRef.current) return;
 
     if (direction === "prev" && activeImageIndex > 0) {
       setActiveImageIndex(activeImageIndex - 1);
-      setX(x + (imageRefs.current[activeImageIndex - 1]?.clientWidth || 0));
+      let newX = Math.abs(x + (imageRefs.current[activeImageIndex - 1]?.clientWidth || 0));
+      (activeImageIndex - 1 === 0) ? setX(0) : setX(- newX);
     }
 
     if (direction === "next" && activeImageIndex < imageRefs.current.length - 1) {
       setActiveImageIndex(activeImageIndex + 1);  
-      setX(x - (imageRefs.current[activeImageIndex]?.clientWidth || 0));
+      let newX = Math.abs(x - (imageRefs.current[activeImageIndex]?.clientWidth || 0));
+      if (newX > Math.abs(trackRef.current?.scrollWidth - (constraintsRef.current?.clientWidth || 0))) {
+        setX(- Math.abs(trackRef.current?.scrollWidth - (constraintsRef.current?.clientWidth || 0)));  
+      } else {
+        setX(- newX);
+      }
     }
   }
 

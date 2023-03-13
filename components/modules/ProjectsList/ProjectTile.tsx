@@ -49,7 +49,7 @@ const ProjectTile: React.FC<Props> = ({
           </h2>
         </ConditionalLink>
 
-        <div className={cn("mt-auto pt-6 max-w-[533px] transition-all", {
+        <div className={cn("mt-auto pt-6 max-w-[600px] transition-all", {
           "opacity-0 pointer-events-none" : expanded,
           "opacity-100" : !expanded
         })}>

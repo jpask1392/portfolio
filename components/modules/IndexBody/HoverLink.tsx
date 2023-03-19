@@ -40,7 +40,7 @@ const HoverLink: React.FC<Props> = ({
   }
 
   const handleMouseLeave = (e: React.SyntheticEvent<HTMLSpanElement>) => {
-    e.currentTarget.style.color = "#2E2E2E";
+    e.currentTarget.style.color = "#1a1a1c";
     if (hoverAnimation.current) hoverAnimation.current.style.width = "0";
   }
 
@@ -48,7 +48,7 @@ const HoverLink: React.FC<Props> = ({
     return (
       <StoryBlokLink 
         sbLink={link} 
-        className="text-black text-outlined cursor-pointer relative inline-block transition-all duration-300"
+        className="text-black text-outlined cursor-pointer relative inline-block transition-colors duration-300"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -62,10 +62,10 @@ const HoverLink: React.FC<Props> = ({
     return (
       <>
         <a
-          className="text-black cursor-pointer relative inline-block transition-all duration-300" 
-          onClick={handleClick}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          className="text-black relative inline-block transition-colors duration-300" 
+          // onClick={handleClick}
+          // onMouseEnter={handleMouseEnter}
+          // onMouseLeave={handleMouseLeave}
         >
           <span className="relative z-10">{name}</span>
           <span className="absolute -inset-x-5 -inset-y-2 bg-black w-0 transition-all duration-300" ref={hoverAnimation} />

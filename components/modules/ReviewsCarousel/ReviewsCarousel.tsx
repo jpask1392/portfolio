@@ -36,7 +36,7 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
   useEffect(() => {
     let timeoutId: any = null;
     const handleResize = () => {
-      if (!constraintsRef.current) return;
+      if (!constraintsRef.current || !trackRef.current) return;
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => 
         setDrag(trackRef.current.scrollWidth - (constraintsRef.current?.clientWidth || 0)), 
@@ -55,15 +55,19 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
       ref={constraintsRef}
       className="relative overflow-x-hidden pb-2 md:pb-0 md:overflow-visible" 
     >
-      <nav className="mb-6 flex space-x-1">
+      <nav className="mb-6 flex space-x-2">
         <Link 
           href="/about" 
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium mr-2 px-2.5 py-0.5 border border-gray-200 rounded font-header"
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-gray-200 rounded font-header"
         >About me</Link>
         <Link
           href="/work" 
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium mr-2 px-2.5 py-0.5 border border-gray-200 rounded font-header"
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-gray-200 rounded font-header"
         >Projects</Link>
+        <a 
+          href="mailto:contact@jamiepask.com"
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-gray-200 rounded font-header"
+        >Contact Me</a>
       </nav>
       <motion.ul
         ref={trackRef}

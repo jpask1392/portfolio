@@ -3,7 +3,9 @@ import "../styles/app.css";
 import "../public/fonts/fonts.css";
 import { DefaultLayout } from '../components/context/contextLayout';
 import { storyblokInit, apiPlugin } from "@storyblok/react";
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion';
+import { pageview } from '@/utils/gtag';
+import { useEffect } from "react";
 
 // templates
 import Page from "@/components/templates/Page";
@@ -57,6 +59,13 @@ storyblokInit({
 });
 
 function MyApp({ Component, pageProps, router }) {
+  useEffect(() => {
+    router.events.on('routeChangeComplete', pageview)
+    return () => {
+      router.events.off('routeChangeComplete', pageview)
+    }
+  }, [router.events])
+
   const getLayout = Component.getLayout || (
     page => (
       <DefaultLayout

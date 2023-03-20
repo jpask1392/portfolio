@@ -1,3 +1,4 @@
+import Script from "next/script";
 import "../styles/app.css";
 import "../public/fonts/fonts.css";
 import { DefaultLayout } from '../components/context/contextLayout';

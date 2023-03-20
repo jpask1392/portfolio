@@ -68,7 +68,7 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      {/* <Script
+      <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`}
       />
@@ -84,7 +84,7 @@ function MyApp({ Component, pageProps, router }) {
             gtag('config', '${process.env.GA_TRACKING_ID}');
           `,
         }}
-      /> */}  
+      /> 
 
       <div 
         style={{

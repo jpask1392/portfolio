@@ -27,9 +27,9 @@ const AboutMe: React.FC<AboutProps> = (props) => {
       <div className="w-full md:w-1/2 md:order-2">
         <ul className="flex overflow-scroll md:overflow-auto md:block">
           {
-            images.map((image) => {
+            images.map((image, i) => {
               return (
-                <li className="bg-[#000] mb-2 w-[90%] md:w-full flex-shrink-0">
+                <li key={i} className="bg-[#000] mb-2 w-[90%] md:w-full flex-shrink-0">
                   <div className="aspect-square relative">
                     <CustomImage image={image} fill preload />
                   </div>

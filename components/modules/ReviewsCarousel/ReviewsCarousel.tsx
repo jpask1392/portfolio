@@ -58,15 +58,15 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
       <nav className="mb-6 flex space-x-2">
         <Link 
           href="/about" 
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-gray-200 rounded font-header"
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-black rounded font-header"
         >About me</Link>
         <Link
           href="/work" 
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-gray-200 rounded font-header"
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-black rounded font-header"
         >Projects</Link>
         <a 
           href="mailto:contact@jamiepask.com"
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-gray-200 rounded font-header"
+          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-black rounded font-header"
         >Contact Me</a>
       </nav>
       <motion.ul

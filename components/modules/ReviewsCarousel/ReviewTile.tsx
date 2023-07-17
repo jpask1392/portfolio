@@ -1,3 +1,4 @@
+import { useOnClickOutside } from "usehooks-ts";
 import cn from "classnames";
 import StarRating from "@/components/ui/StarRating";
 import { useEffect, useRef, useState } from "react";
@@ -22,6 +23,7 @@ const ReviewTile: React.FC<Props> = ({
   const ref = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const reviewBodyRef = useRef<HTMLDivElement | null>(null);
+  useOnClickOutside(ref, () => setActive(false))
 
   const updateVariables = () => {
     if (!ref.current || !headerRef.current || !reviewBodyRef.current) return;

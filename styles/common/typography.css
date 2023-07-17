@@ -1,3 +1,11 @@
+body {
+  @apply 
+    text-xs
+    md:text-sm
+    lg:text-base
+    font-light;
+}
+
 /* .text-display {
   @apply
     font-sans
@@ -91,17 +99,6 @@ h5:not([class]) {
     uppercase
     leading-tight
     text-lg;
-}
-
-p,
-.p
-ul,
-.ul {
-  @apply 
-    text-xs
-    md:text-sm
-    lg:text-base
-    font-light;
 }
 
 blockquote p {

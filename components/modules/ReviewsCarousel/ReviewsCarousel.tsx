@@ -53,20 +53,20 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
   return (
     <div 
       ref={constraintsRef}
-      className="relative overflow-x-hidden pb-2 md:pb-0 md:overflow-visible" 
+      className="relative pb-2 md:pb-0" 
     >
-      <nav className="mb-6 flex space-x-2">
+      <nav className="mb-4 flex space-x-6">
         <Link 
           href="/about" 
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-black rounded font-header"
+          className="font-header underline uppercase"
         >About me</Link>
         <Link
           href="/work" 
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-black rounded font-header"
+          className="font-header underline uppercase"
         >Projects</Link>
         <a 
           href="mailto:contact@jamiepask.com"
-          className="bg-white hover:bg-black hover:text-white text-black uppercase font-medium px-2.5 py-0.5 border border-black rounded font-header"
+          className="font-header underline uppercase"
         >Contact Me</a>
       </nav>
       <motion.ul
@@ -81,7 +81,7 @@ const ReviewsCarousel: React.FC<ReviewsProps> = (props) => {
         {
           reviews.map(({ content }, i) => {
             return (
-              <li className="w-[90%] md:w-1/2 2xl:w-1/3 flex-shrink-0 px-3" key={i}>
+              <li className="w-[90%] md:w-full max-w-[450px] flex-shrink-0 px-3" key={i}>
                 <ReviewTile {...content} />
               </li>
             )

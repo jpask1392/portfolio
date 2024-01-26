@@ -42,7 +42,8 @@ const ReviewTile: React.FC<Props> = ({
 
   return (
     <article 
-      onClick={() => setActive(!active)}
+      onMouseOver={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
       ref={ref}
       style={{ "--review-header-height": `100%`, "--review-height": "auto" } as React.CSSProperties}
       className={cn("bg-white relative")}

@@ -18,7 +18,6 @@ const Layout: React.FC<Props> = ({
       <ScrollContextProvider>
         <Head seo={false} />
 
-        
         {children}
 
         <Toaster position="bottom-center" />
